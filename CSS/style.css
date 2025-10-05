@@ -1,0 +1,273 @@
+/* Custom Styles for St. Vincent's Preschool */
+body {
+    font-family: 'Patrick Hand', cursive;
+    letter-spacing: 0.5px;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'Patrick Hand', cursive;
+}
+
+.font-body {
+    font-family: 'Lora', serif;
+}
+
+.crayon-border {
+    border: 3px solid #2d3748;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+}
+
+.crayon-button {
+    border: 3px solid #2d3748;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 2px 4px 0px #2d3748;
+}
+
+.crayon-button:hover {
+    transform: translateY(2px) translateX(1px);
+    box-shadow: 1px 2px 0px #2d3748;
+}
+
+.crayon-button:active {
+    transform: translateY(4px) translateX(2px);
+    box-shadow: 0px 0px 0px #2d3748;
+}
+
+.bg-paper {
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fde68a' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* FAQ Styles */
+.faq-item .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.faq-item.open .faq-answer {
+    max-height: 500px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-icon {
+    transition: transform 0.3s ease;
+}
+
+/* Slider Styles */
+.testimonial-slider { 
+    display: flex; 
+    transition: transform 0.5s ease-in-out; 
+}
+.testimonial-slide { 
+    min-width: 100%; 
+    box-sizing: border-box; 
+}
+
+.image-slider-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.image-slide {
+    min-width: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.image-slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.slider-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.slider-arrow:hover {
+    background-color: white;
+}
+
+.slider-arrow.prev {
+    left: 20px;
+}
+
+.slider-arrow.next {
+    right: 20px;
+}
+
+/* Modal Styles */
+.modal-overlay { 
+    transition: opacity 0.3s ease; 
+}
+.modal-content { 
+    transition: transform 0.3s ease; 
+}
+
+/* Canvas Styles */
+#drawing-canvas { 
+    touch-action: none; 
+    cursor: crosshair; 
+}
+.color-btn.active { 
+    transform: scale(1.2); 
+    box-shadow: 0 0 0 3px white, 0 0 0 5px currentColor; 
+}
+
+/* Layout Styles */
+.section-padding { 
+    padding: 5rem 0; 
+}
+.container-narrow { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+/* Premium Content Cards */
+.premium-card {
+    transition: all 0.3s ease;
+}
+
+.premium-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Testimonial improvements */
+.testimonial-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify;
+    hyphens: auto;
+    word-spacing: -0.05em;
+}
+
+/* Loading spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Canvas Styles */
+.canvas-container {
+    position: relative;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="white"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="lightgray" stroke-width="0.5"/></svg>');
+    background-size: 20px 20px;
+}
+
+.brush-size-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brush-size-preview {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid #2d3748;
+}
+
+.tool-btn {
+    transition: all 0.2s ease;
+}
+
+.tool-btn.active {
+    transform: scale(1.1);
+    background-color: #e5e7eb;
+}
+
+.tool-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Blog modal styles */
+.blog-modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .testimonial-text {
+        font-size: 1rem;
+        text-align: left;
+    }
+    
+    .image-slide img {
+        height: 300px;
+    }
+    
+    .section-padding {
+        padding: 3rem 0;
+    }
+    
+    .brush-size-control {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
