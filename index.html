@@ -1,493 +1,113 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Vincent's Preschool | Preschool & Daycare in Chanda Nagar, Hyderabad</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. Vincent’s Preschool</title>
+  <link href="styles.css" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-yellow-50 text-gray-800 text-xl">
+<body class="bg-red-50 text-gray-800">
 
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50 crayon-border border-t-0 border-l-0 border-r-0">
-        <div class="container-narrow px-6 py-3 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2">
-                <div class="w-12 h-12 flex items-center justify-center">
-                    <svg class="w-10 h-10 text-red-500" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 70 C 30 20, 70 20, 90 70" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round"/>
-                        <defs>
-                            <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#EF4444;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">St. Vincent's Preschool</h1>
-            </a>
-            <nav class="hidden md:flex items-center space-x-6 text-2xl">
-                 <a href="#programs" class="text-gray-600 hover:text-red-500">Programs</a>
-                 <a href="#gallery" class="text-gray-600 hover:text-red-500">Gallery</a>
-                 <a href="#creativity-canvas" class="text-gray-600 hover:text-red-500">Creativity</a>
-                 <a href="#faq" class="text-gray-600 hover:text-red-500">FAQ</a>
-                 <a href="#parent-resources" class="text-gray-600 hover:text-red-500">Parent Resources</a>
-                 <button id="open-contact-modal" class="crayon-button bg-red-400 text-white font-semibold px-6 py-2 text-2xl">Book a Tour</button>
-            </nav>
-            <button id="menu-btn" class="md:hidden crayon-button p-2 bg-yellow-300"><i data-lucide="menu" class="w-6 h-6"></i></button>
+  <!-- HEADER -->
+  <header class="bg-white shadow-md py-4 sticky top-0 z-40">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <h1 class="text-3xl font-bold text-red-600">St. Vincent’s Preschool</h1>
+      <nav class="hidden md:flex space-x-6">
+        <a href="#programs" class="hover:text-red-600">Programs</a>
+        <a href="#features" class="hover:text-red-600">Features</a>
+        <a href="#testimonials" class="hover:text-red-600">Testimonials</a>
+        <a href="#contact" class="hover:text-red-600">Contact</a>
+      </nav>
+      <button id="mobile-menu-button" class="md:hidden">
+        <i data-lucide="menu" class="w-8 h-8 text-red-600"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="bg-red-100 py-20 text-center">
+    <div class="container mx-auto px-4">
+      <h2 class="text-5xl font-extrabold text-red-700 mb-6">Nurturing Tomorrow’s Leaders, Today</h2>
+      <p class="text-lg max-w-2xl mx-auto text-gray-700 mb-8">A joyful, safe, and inspiring environment where children learn through play, creativity, and compassion.</p>
+      <button onclick="createContactModal()" class="crayon-button px-8 py-3 text-lg font-bold">Enroll Now</button>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section id="programs" class="section-padding bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center text-red-700 mb-10">Our Programs</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="program-card bg-red-50 rounded-2xl p-6 hover:shadow-lg transition" data-program="playgroup">
+          <h3 class="text-2xl font-bold text-red-600 mb-2">Playgroup</h3>
+          <p>For ages 1.5 – 2.5 years. Sensory exploration, social play, and joyful discovery.</p>
+          <span role="button" tabindex="0" class="mt-4 inline-block font-semibold text-red-600 text-xl">View Details →</span>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 text-2xl">
-            <a href="#programs" class="block text-center py-2 text-gray-600 hover:text-red-500">Programs</a>
-            <a href="#gallery" class="block text-center py-2 text-gray-600 hover:text-red-500">Gallery</a>
-            <a href="#creativity-canvas" class="block text-center py-2 text-gray-600 hover:text-red-500">Creativity</a>
-            <a href="#faq" class="block text-center py-2 text-gray-600 hover:text-red-500">FAQ</a>
-            <a href="#parent-resources" class="block text-center py-2 text-gray-600 hover:text-red-500">Parent Resources</a>
-            <button id="open-contact-modal-mobile" class="block text-center w-full py-2 text-gray-600 hover:text-red-500">Book a Tour</button>
+        <div class="program-card bg-red-50 rounded-2xl p-6 hover:shadow-lg transition" data-program="nursery">
+          <h3 class="text-2xl font-bold text-red-600 mb-2">Nursery</h3>
+          <p>For ages 2.5 – 3.5 years. Language, numeracy, and motor skill development through play.</p>
+          <span role="button" tabindex="0" class="mt-4 inline-block font-semibold text-red-600 text-xl">View Details →</span>
         </div>
-    </header>
+        <div class="program-card bg-red-50 rounded-2xl p-6 hover:shadow-lg transition" data-program="daycare">
+          <h3 class="text-2xl font-bold text-red-600 mb-2">Daycare</h3>
+          <p>Safe, structured care with daily routines, learning, and fun for children up to 6 years.</p>
+          <span role="button" tabindex="0" class="mt-4 inline-block font-semibold text-red-600 text-xl">View Details →</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="relative bg-paper section-padding">
-            <div class="container-narrow px-6 grid md:grid-cols-2 gap-8 items-center">
-                <div class="text-center md:text-left">
-                    <span class="text-red-500 font-semibold text-2xl">Admissions Open</span>
-                    <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">Your child's development is our Promise</h2>
-                    <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chanda Nagar. We offer a fun, safe, and stimulating environment for children aged 1.5 to 6 years.</p>
-                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <button id="open-contact-modal-hero" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">Schedule a Visit</button>
-                        <a href="tel:9100999312" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
-                            <i data-lucide="phone"></i>Call Us Now
-                        </a>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                    <img src="https://images.unsplash.com/photo-1519452575416-64e83f8b89cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Happy children" class="crayon-border object-cover w-full h-full">
-                </div>
-            </div>
-        </section>
+  <!-- FEATURES / BLOG -->
+  <section id="features" class="section-padding bg-red-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center text-red-700 mb-10">Our Approach</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition">
+          <i data-lucide="brain" class="w-10 h-10 text-red-600 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-2">The Science of Early Learning</h3>
+          <p>We use research-based methods to promote cognitive and emotional growth.</p>
+          <a href="#" class="open-blog-modal text-red-600 font-semibold inline-block mt-3" data-blog="science">Read More →</a>
+        </div>
+        <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition">
+          <i data-lucide="users" class="w-10 h-10 text-red-600 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-2">Social Development</h3>
+          <p>We nurture confidence, empathy, and communication through guided play.</p>
+          <a href="#" class="open-blog-modal text-red-600 font-semibold inline-block mt-3" data-blog="social">Read More →</a>
+        </div>
+        <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition">
+          <i data-lucide="book" class="w-10 h-10 text-red-600 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-2">Preparing for Primary School</h3>
+          <p>We equip children with foundational literacy and numeracy skills for school readiness.</p>
+          <a href="#" class="open-blog-modal text-red-600 font-semibold inline-block mt-3" data-blog="primary">Read More →</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Image Slider Section -->
-        <section id="gallery" class="section-padding bg-blue-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Our Happy Learning Environment</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Take a peek inside our vibrant classrooms and play areas.</p>
-                </div>
-                
-                <div class="image-slider-container crayon-border">
-                    <div class="image-slider" id="image-slider">
-                        <div class="image-slide">
-                            <img src="https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Preschool classroom">
-                        </div>
-                        <div class="image-slide">
-                            <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Children playing">
-                        </div>
-                        <div class="image-slide">
-                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Art activities">
-                        </div>
-                        <div class="image-slide">
-                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Outdoor play area">
-                        </div>
-                    </div>
-                    
-                    <div class="slider-arrow prev" id="slider-prev">
-                        <i data-lucide="chevron-left" class="w-6 h-6 text-gray-700"></i>
-                    </div>
-                    <div class="slider-arrow next" id="slider-next">
-                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
-                    </div>
-                    
-                    <div class="slider-nav" id="slider-nav">
-                        <div class="slider-dot active" data-index="0"></div>
-                        <div class="slider-dot" data-index="1"></div>
-                        <div class="slider-dot" data-index="2"></div>
-                        <div class="slider-dot" data-index="3"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section-padding bg-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-red-700 mb-10">Parent Testimonials</h2>
+      <div class="space-y-6 max-w-3xl mx-auto">
+        <blockquote class="italic">“My child loves coming here every day! The teachers are warm and engaging.”</blockquote>
+        <blockquote class="italic">“A perfect blend of learning and play. Highly recommended!”</blockquote>
+      </div>
+    </div>
+  </section>
 
-        <!-- Why Choose Us Section -->
-        <section class="section-padding bg-blue-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Why Parents Trust Us</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">A foundation for lifelong learning through a perfect blend of care, creativity, and curriculum.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white p-8 text-center crayon-border transform hover:-rotate-2 transition-transform">
-                        <div class="bg-red-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border">
-                            <i data-lucide="shield-check" class="w-12 h-12 text-red-600"></i>
-                        </div>
-                        <h3 class="font-bold text-3xl mt-6 text-gray-800">Safe & Secure</h3>
-                        <p class="font-body text-gray-600 mt-2 text-base">CCTV, child-proofed campus, and strict hygiene protocols ensure a safe environment.</p>
-                    </div>
-                    <div class="bg-white p-8 text-center crayon-border transform hover:rotate-2 transition-transform">
-                        <div class="bg-blue-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border">
-                            <i data-lucide="lightbulb" class="w-12 h-12 text-blue-600"></i>
-                        </div>
-                        <h3 class="font-bold text-3xl mt-6 text-gray-800">Play-Based Learning</h3>
-                        <p class="font-body text-gray-600 mt-2 text-base">Our curriculum fosters creativity and critical thinking through engaging, hands-on activities.</p>
-                    </div>
-                    <div class="bg-white p-8 text-center crayon-border transform hover:-rotate-2 transition-transform">
-                        <div class="bg-yellow-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border">
-                            <i data-lucide="users" class="w-12 h-12 text-yellow-600"></i>
-                        </div>
-                        <h3 class="font-bold text-3xl mt-6 text-gray-800">Caring Teachers</h3>
-                        <p class="font-body text-gray-600 mt-2 text-base">Our passionate educators are dedicated to your child's individual growth and happiness.</p>
-                    </div>
-                    <div class="bg-white p-8 text-center crayon-border transform hover:rotate-2 transition-transform">
-                        <div class="bg-green-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border">
-                            <i data-lucide="heart-handshake" class="w-12 h-12 text-green-600"></i>
-                        </div>
-                        <h3 class="font-bold text-3xl mt-6 text-gray-800">Personalized Care</h3>
-                        <p class="font-body text-gray-600 mt-2 text-base">A low student-teacher ratio ensures every child gets the attention they deserve.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- CONTACT -->
+  <section id="contact" class="section-padding bg-red-100 text-center">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-red-700 mb-6">Get In Touch</h2>
+      <button onclick="createContactModal()" class="crayon-button px-8 py-3 font-bold">Enquire Now</button>
+    </div>
+  </section>
 
-        <!-- Programs Section -->
-        <section id="programs" class="section-padding bg-paper">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Our Awesome Programs</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Structured for holistic development at every age.</p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="program-card bg-red-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="playgroup">
-                        <div class="p-8 text-center">
-                            <h3 class="font-bold text-4xl text-red-500">Playgroup</h3>
-                            <p class="font-body text-gray-600 mt-3 text-base">A gentle introduction to school, focusing on sensory exploration and social interaction.</p>
-                            <span class="mt-4 inline-block font-semibold text-red-600 text-xl">View Details &rarr;</span>
-                        </div>
-                    </div>
-                    <div class="program-card bg-blue-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="nursery">
-                        <div class="p-8 text-center">
-                            <h3 class="font-bold text-4xl text-blue-500">Nursery</h3>
-                            <p class="font-body text-gray-600 mt-3 text-base">Building foundational literacy and numeracy skills through fun, thematic activities.</p>
-                            <span class="mt-4 inline-block font-semibold text-blue-600 text-xl">View Details &rarr;</span>
-                        </div>
-                    </div>
-                    <div class="program-card bg-yellow-200 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="lkg">
-                        <div class="p-8 text-center">
-                            <h3 class="font-bold text-4xl text-yellow-600">LKG</h3>
-                            <p class="font-body text-gray-600 mt-3 text-base">Developing foundational academic skills and preparing children for formal schooling.</p>
-                            <span class="mt-4 inline-block font-semibold text-yellow-700 text-xl">View Details &rarr;</span>
-                        </div>
-                    </div>
-                    <div class="program-card bg-green-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="ukg">
-                        <div class="p-8 text-center">
-                            <h3 class="font-bold text-4xl text-green-600">UKG</h3>
-                            <p class="font-body text-gray-600 mt-3 text-base">Advanced preparation for primary school with focus on comprehensive skill development.</p>
-                            <span class="mt-4 inline-block font-semibold text-green-700 text-xl">View Details &rarr;</span>
-                        </div>
-                    </div>
-                    <div class="program-card bg-purple-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="daycare">
-                        <div class="p-8 text-center">
-                            <h3 class="font-bold text-4xl text-purple-600">Day Care</h3>
-                            <p class="font-body text-gray-600 mt-3 text-base">A safe, engaging, and structured environment for children of working parents.</p>
-                            <span class="mt-4 inline-block font-semibold text-purple-700 text-xl">View Details &rarr;</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Enhanced Creativity Canvas Section -->
-        <section id="creativity-canvas" class="section-padding bg-red-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">A Splash of Creativity</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Experience the joy of creation, just like our little learners. Grab a color and draw something wonderful!</p>
-                </div>
-                
-                <div class="bg-white p-6 crayon-border max-w-4xl mx-auto">
-                    <!-- Drawing Area -->
-                    <div class="canvas-container crayon-border mb-4 overflow-hidden">
-                        <canvas id="drawing-canvas" class="w-full h-96"></canvas>
-                    </div>
-                    
-                    <!-- Enhanced Controls -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <!-- Color Palette -->
-                        <div class="bg-yellow-50 p-4 crayon-border">
-                            <h3 class="font-bold text-xl mb-3 text-center">Colors</h3>
-                            <div class="flex flex-wrap justify-center gap-2">
-                                <button class="color-btn w-10 h-10 rounded-full bg-black active crayon-border" data-color="black" title="Black"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-red-500 crayon-border" data-color="#ef4444" title="Red"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-blue-500 crayon-border" data-color="#3b82f6" title="Blue"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-green-500 crayon-border" data-color="#22c55e" title="Green"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-yellow-400 crayon-border" data-color="#facc15" title="Yellow"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-purple-500 crayon-border" data-color="#a855f7" title="Purple"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-pink-500 crayon-border" data-color="#ec4899" title="Pink"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-orange-500 crayon-border" data-color="#f97316" title="Orange"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-teal-500 crayon-border" data-color="#14b8a6" title="Teal"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-gray-400 crayon-border" data-color="#9ca3af" title="Gray"></button>
-                            </div>
-                        </div>
-                        
-                        <!-- Tools & Settings -->
-                        <div class="bg-blue-50 p-4 crayon-border">
-                            <h3 class="font-bold text-xl mb-3 text-center">Tools</h3>
-                            <div class="flex flex-wrap justify-center gap-2 mb-3">
-                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg active" data-tool="brush" title="Brush">
-                                    <i data-lucide="paintbrush" class="w-5 h-5"></i>
-                                </button>
-                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg" data-tool="eraser" title="Eraser">
-                                    <i data-lucide="eraser" class="w-5 h-5"></i>
-                                </button>
-                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg" data-tool="fill" title="Fill">
-                                    <i data-lucide="bucket" class="w-5 h-5"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="brush-size-control mt-2">
-                                <label class="font-medium text-gray-700">Brush Size:</label>
-                                <input type="range" id="brush-size" min="1" max="30" value="5" class="w-full">
-                                <div class="brush-size-preview">
-                                    <div id="brush-preview" class="rounded-full bg-black"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Actions -->
-                        <div class="bg-green-50 p-4 crayon-border">
-                            <h3 class="font-bold text-xl mb-3 text-center">Actions</h3>
-                            <div class="flex flex-col gap-2">
-                                <button id="clear-canvas-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
-                                    <i data-lucide="trash-2" class="w-5 h-5"></i> Clear Canvas
-                                </button>
-                                <button id="save-canvas-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
-                                    <i data-lucide="download" class="w-5 h-5"></i> Save Drawing
-                                </button>
-                                <button id="random-color-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
-                                    <i data-lucide="shuffle" class="w-5 h-5"></i> Random Color
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Drawing Tips -->
-                    <div class="mt-6 bg-yellow-100 p-4 crayon-border">
-                        <h3 class="font-bold text-xl mb-2 text-center">Drawing Tips</h3>
-                        <ul class="font-body text-gray-700 text-base list-disc pl-5 space-y-1">
-                            <li>Use different brush sizes for varied effects</li>
-                            <li>Try the fill tool to quickly color large areas</li>
-                            <li>Use the eraser to correct mistakes</li>
-                            <li>Save your masterpiece when you're done!</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <footer class="bg-white py-6 text-center text-gray-600">
+    <p>© 2025 St. Vincent’s Preschool. All rights reserved.</p>
+  </footer>
 
-        <!-- Improved Testimonials Section -->
-        <section class="section-padding bg-paper">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Hear from families who have experienced the St. Vincent's difference</p>
-                </div>
-                <div class="relative overflow-hidden max-w-4xl mx-auto">
-                    <div class="testimonial-slider" id="testimonial-slider"></div>
-                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
-                        <i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i>
-                    </button>
-                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
-                        <i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i>
-                    </button>
-                </div>
-                <div class="text-center mt-12">
-                    <a href="https://g.page/r/CbNp6tq5qJ7-EB0/review" target="_blank" class="crayon-button bg-green-500 text-white font-bold px-8 py-4 text-xl inline-flex items-center gap-2">
-                        <i data-lucide="star" class="w-6 h-6"></i> Leave a Google Review
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Parent Resources Section -->
-        <section id="parent-resources" class="section-padding bg-yellow-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Resources for Parents</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Expert insights to help your child thrive in their early years.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="premium-card bg-white p-6 crayon-border">
-                        <div class="bg-blue-100 rounded-lg p-4 mb-4 crayon-border">
-                            <i data-lucide="brain" class="w-12 h-12 text-blue-600 mx-auto"></i>
-                        </div>
-                        <h3 class="font-bold text-2xl mb-3 text-gray-800">The Science of Early Learning</h3>
-                        <p class="font-body text-gray-600 mb-4 text-base">Discover how preschool shapes your child's brain development and sets the foundation for lifelong learning.</p>
-                        <button class="open-blog-modal text-blue-600 font-semibold text-lg flex items-center" data-blog="science">
-                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="premium-card bg-white p-6 crayon-border">
-                        <div class="bg-green-100 rounded-lg p-4 mb-4 crayon-border">
-                            <i data-lucide="users" class="w-12 h-12 text-green-600 mx-auto"></i>
-                        </div>
-                        <h3 class="font-bold text-2xl mb-3 text-gray-800">Social Skills Development</h3>
-                        <p class="font-body text-gray-600 mb-4 text-base">Learn how preschool helps children develop crucial social skills like sharing, empathy, and cooperation.</p>
-                        <button class="open-blog-modal text-green-600 font-semibold text-lg flex items-center" data-blog="social">
-                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="premium-card bg-white p-6 crayon-border">
-                        <div class="bg-purple-100 rounded-lg p-4 mb-4 crayon-border">
-                            <i data-lucide="graduation-cap" class="w-12 h-12 text-purple-600 mx-auto"></i>
-                        </div>
-                        <h3 class="font-bold text-2xl mb-3 text-gray-800">Preparing for Primary School</h3>
-                        <p class="font-body text-gray-600 mb-4 text-base">How our curriculum ensures a smooth transition to formal schooling with confidence and enthusiasm.</p>
-                        <button class="open-blog-modal text-purple-600 font-semibold text-lg flex items-center" data-blog="primary">
-                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="mt-12 bg-red-100 p-8 crayon-border text-center">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Give Your Child the Best Start?</h3>
-                    <p class="font-body text-gray-600 mb-6 max-w-2xl mx-auto text-lg">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
-                    <button class="open-contact-modal-premium crayon-button bg-red-500 text-white font-bold px-8 py-4 text-xl">Schedule a Tour Today</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section id="faq" class="section-padding bg-paper">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Frequently Asked Questions</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Answers to common questions about preschool and early childhood development.</p>
-                </div>
-                <div class="max-w-3xl mx-auto space-y-4">
-                    <!-- FAQ Item 1 -->
-                    <div class="faq-item bg-white crayon-border">
-                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">What is the ideal age to start preschool?</h3>
-                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-red-500 flex-shrink-0"></i>
-                        </div>
-                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>Most children are ready for preschool between ages 2 and 3. At this stage, they've typically developed basic communication skills, can follow simple instructions, and are beginning to show interest in playing with peers. Our playgroup program starts at 1.5 years for children who show readiness for structured social interaction.</p>
-                        </div>
-                    </div>
-                    <!-- FAQ Item 2 -->
-                    <div class="faq-item bg-white crayon-border">
-                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">How can I prepare my toddler for preschool?</h3>
-                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-blue-500 flex-shrink-0"></i>
-                        </div>
-                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>To make the transition smooth, regularly remind your child of the fun and happy things about school — it builds confidence and excitement. You can also prepare your child by establishing routines, reading books about preschool, practicing separation for short periods, and encouraging independence with simple tasks like putting on shoes or using the bathroom. We also offer orientation sessions where you and your child can visit the classroom together before the first day.</p>
-                        </div>
-                    </div>
-                    <!-- FAQ Item 3 -->
-                    <div class="faq-item bg-white crayon-border">
-                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">What should I look for in a quality preschool?</h3>
-                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-green-500 flex-shrink-0"></i>
-                        </div>
-                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>Key indicators of quality preschools include: low student-teacher ratios, qualified and caring staff, a safe and stimulating environment, a balanced curriculum that includes play, clear communication with parents, and happy, engaged children. We're proud to meet all these criteria at St. Vincent's.</p>
-                        </div>
-                    </div>
-                    <!-- FAQ Item 4 -->
-                    <div class="faq-item bg-white crayon-border">
-                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">How does preschool help with separation anxiety?</h3>
-                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-yellow-500 flex-shrink-0"></i>
-                        </div>
-                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>Our teachers are trained to help children through separation anxiety with comforting routines, engaging activities, and gradual transitions. We recommend starting with shorter days and building up, establishing a consistent goodbye ritual, and reassuring your child that you'll return. Most children adjust within a few weeks as they form bonds with teachers and classmates.</p>
-                        </div>
-                    </div>
-                    <!-- FAQ Item 5 -->
-                    <div class="faq-item bg-white crayon-border">
-                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">What is the role of play in preschool learning?</h3>
-                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-purple-500 flex-shrink-0"></i>
-                        </div>
-                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>Play is the primary way young children learn. Through play, children develop cognitive, physical, social, and emotional skills. Structured and unstructured play activities in our curriculum help children practice problem-solving, build vocabulary, develop fine and gross motor skills, learn to cooperate with peers, and express creativity.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section-padding bg-green-100">
-            <div class="container-narrow px-6">
-                 <div class="bg-white p-8 md:p-12 crayon-border grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Ready to Visit Us?</h2>
-                        <p class="font-body text-gray-600 mt-4 text-lg">Visit our campus to experience St. Vincent's difference. Click the button below to schedule a personalized tour. We can't wait to meet you and your little one!</p>
-                        <div class="mt-8 space-y-4 text-2xl">
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="map-pin" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
-                                <div>
-                                    <h4>Our Address</h4>
-                                    <p class="font-body text-gray-600 text-base">XH5F+G94, Papamma Guda, Chanda Nagar, Hyderabad, Telangana 500050</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="phone-call" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
-                                <div>
-                                    <h4>Call for Inquiries</h4>
-                                    <a href="tel:9100999312" class="font-body text-gray-600 hover:text-red-500 text-base">091009 99312</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                         <button id="open-contact-modal-bottom" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl">Schedule a Visit</button>
-                         <p class="font-body text-gray-600 mt-4 text-base">Or give us a call to book your tour directly.</p>
-                    </div>
-                 </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-8 text-xl">
-        <p>&copy; 2025 St. Vincent's Preschool & Daycare.</p>
-        <p class="text-base text-gray-400 mt-2">Designed to help your child grow, learn, and shine.</p>
-    </footer>
-
-    <!-- Modals -->
-    <div id="modal-container"></div>
-    <div id="contact-modal-container"></div>
-    <div id="review-modal-container"></div>
-    <div id="blog-modal-container"></div>
-
-    <!-- Tawk.to Chat Widget -->
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/66c7f2f09f5ed798a77a6d5f/1i68b8k9t';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-        })();
-    </script>
-
-    <!-- JavaScript Files -->
-    <script src="js/main.js"></script>
-    <script src="js/sliders.js"></script>
-    <script src="js/modal.js"></script>
-    <script src="js/canvas.js"></script>
-    <script src="js/form-handler.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>
