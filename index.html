@@ -563,70 +563,6 @@
             }
         }
 
-        /* Footer Color Variables - EASILY CHANGEABLE */
-        :root {
-            --footer-heading-color: #fbbf24; /* Change this value to any color */
-            --footer-text-color: #d1d5db; /* Change this value to any color */
-            --footer-link-color: #93c5fd; /* Change this value to any color */
-            --footer-hover-color: #ffffff; /* Change this value to any color */
-        }
-
-        .footer-heading {
-            color: var(--footer-heading-color);
-        }
-
-        .footer-text {
-            color: var(--footer-text-color);
-        }
-
-        .footer-link {
-            color: var(--footer-link-color);
-        }
-
-        .footer-link:hover {
-            color: var(--footer-hover-color);
-        }
-
-        /* Testimonial Section Fixes */
-        .testimonial-container {
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-        }
-
-        .testimonial-card {
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .testimonial-content {
-            flex-grow: 1;
-            overflow-y: auto;
-            max-height: 200px;
-            padding-right: 10px;
-        }
-
-        /* Custom scrollbar for testimonial content */
-        .testimonial-content::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .testimonial-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .testimonial-content::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 10px;
-        }
-
-        .testimonial-content::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-
         /* Utility classes */
         .hidden {
             display: none !important;
@@ -1204,77 +1140,184 @@
     </header>
 
     <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="relative bg-paper section-padding">
-            <div class="container-narrow px-6 grid md:grid-cols-2 gap-8 items-center">
-                <div class="text-center md:text-left">
-                    <span class="text-red-500 font-semibold text-2xl">Admissions Open</span>
-                    <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">Your child's development is our Promise</h2>
-                    <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chandanagar. We offer a fun, safe, premium and stimulating environment for children aged 1.5 to 6 years.</p>
-                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <button id="open-contact-modal-hero" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">Schedule a Visit</button>
-                        <a href="tel:+919032249494" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
-                            <i data-lucide="phone"></i>Call Us Now
-                        </a>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                    <div class="responsive-img-container crayon-border">
-                        <img src="images/hero/happy-children.jpg" alt="Happy children at St. Vincent's Preschool" class="responsive-img">
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main><!-- Add this <style> once in your main stylesheet or inside <head> -->
+<style>
+  /* Universal frame styles */
+  .framed-img {
+    border: 6px solid #ffffff; /* white inner border */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* soft shadow */
+    border-radius: 1rem; /* rounded corners */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .framed-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
 
-        <!-- Image Slider Section -->
-        <section id="gallery" class="section-padding bg-blue-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Our Happy Learning Environment</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Take a peek inside our vibrant classrooms and play areas.</p>
-                </div>
-                
-                <div class="image-slider-container crayon-border">
-                    <div class="image-slider" id="image-slider">
-                        <div class="image-slide">
-                            <div class="responsive-img-container">
-                                <img src="images/gallery/classroom-1.jpg" alt="Preschool classroom" class="responsive-img">
-                            </div>
-                        </div>
-                        <div class="image-slide">
-                            <div class="responsive-img-container">
-                                <img src="images/gallery/children-playing.jpg" alt="Children playing" class="responsive-img">
-                            </div>
-                        </div>
-                        <div class="image-slide">
-                            <div class="responsive-img-container">
-                                <img src="images/gallery/art-activities.jpg" alt="Art activities" class="responsive-img">
-                            </div>
-                        </div>
-                        <div class="image-slide">
-                            <div class="responsive-img-container">
-                                <img src="images/gallery/outdoor-play.jpg" alt="Outdoor play area" class="responsive-img">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="slider-arrow prev" id="slider-prev">
-                        <i data-lucide="chevron-left" class="w-6 h-6 text-gray-700"></i>
-                    </div>
-                    <div class="slider-arrow next" id="slider-next">
-                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
-                    </div>
-                    
-                    <div class="slider-nav" id="slider-nav">
-                        <div class="slider-dot active" data-index="0"></div>
-                        <div class="slider-dot" data-index="1"></div>
-                        <div class="slider-dot" data-index="2"></div>
-                        <div class="slider-dot" data-index="3"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  /* Ensure all images fit perfectly */
+  .framed-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Slider arrows position fix */
+  .slider-arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 8px;
+    transition: background-color 0.2s;
+  }
+  .slider-arrow:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  .slider-arrow.prev { left: 10px; }
+  .slider-arrow.next { right: 10px; }
+
+  .image-slider-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+
+  /* Defensive CSS to prevent horizontal overflow */
+  html, body {
+    overflow-x: hidden;
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="relative bg-paper section-padding">
+  <div class="container-narrow px-6 grid md:grid-cols-2 gap-8 items-center">
+    <div class="text-center md:text-left">
+      <span class="text-red-500 font-semibold text-2xl">Admissions Open</span>
+      <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">
+        Your child's development is our Promise
+      </h2>
+      <p class="font-body text-gray-600 mt-4 text-lg">
+        Your child's happy place in Chandanagar. We offer a fun, safe, premium and stimulating environment for children aged 1.5 to 6 years.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+        <button id="open-contact-modal-hero" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">
+          Schedule a Visit
+        </button>
+        <a href="tel:+919032249494" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
+          <i data-lucide="phone"></i>Call Us Now
+        </a>
+      </div>
+    </div>
+
+    <div class="hidden md:block">
+      <div class="framed-img">
+        <img src="images/hero/happy-children.jpeg" alt="Happy children at St. Vincent's Preschool">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Image Slider Section -->
+<section id="gallery" class="section-padding bg-blue-100">
+  <div class="container-narrow px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-5xl md:text-6xl font-bold text-gray-800">
+        Our Happy Learning Environment
+      </h2>
+      <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">
+        Take a peek inside our vibrant classrooms and play areas.
+      </p>
+    </div>
+
+    <div class="image-slider-container">
+      <div class="image-slider" id="image-slider">
+        <!-- Slides -->
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/classroom-1.jpeg" alt="Preschool classroom">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/children-playing.jpeg" alt="Children playing">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/art-activities.jpeg" alt="Art activities">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/outdoor-play.jpeg" alt="Outdoor play area">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/preschool-1.jpeg" alt="Preschool fun">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/preschool-2.jpeg" alt="Learning together">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/preschool-3.jpeg" alt="Outdoor learning">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/preschool-4.jpeg" alt="Creative activities">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/preschool-5.jpeg" alt="Group play">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/preschool-6.jpeg" alt="Art class">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/preschool-7.jpeg" alt="Outdoor fun">
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider Arrows -->
+      <div class="slider-arrow prev" id="slider-prev">
+        <i data-lucide="chevron-left" class="w-6 h-6 text-gray-700"></i>
+      </div>
+      <div class="slider-arrow next" id="slider-next">
+        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
+      </div>
+
+      <!-- Dots Navigation -->
+      <div class="slider-nav" id="slider-nav">
+        <div class="slider-dot active" data-index="0"></div>
+        <div class="slider-dot" data-index="1"></div>
+        <div class="slider-dot" data-index="2"></div>
+        <div class="slider-dot" data-index="3"></div>
+        <div class="slider-dot" data-index="4"></div>
+        <div class="slider-dot" data-index="5"></div>
+        <div class="slider-dot" data-index="6"></div>
+        <div class="slider-dot" data-index="7"></div>
+        <div class="slider-dot" data-index="8"></div>
+        <div class="slider-dot" data-index="9"></div>
+        <div class="slider-dot" data-index="10"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         <!-- Why Choose Us Section -->
         <section class="section-padding bg-blue-100">
@@ -1363,23 +1406,21 @@
             </div>
         </section>
         
-        <!-- Fixed Testimonials Section -->
+        <!-- Improved Testimonials Section -->
         <section class="section-padding bg-paper">
             <div class="container-narrow px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2>
                     <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Hear from families who have experienced the St. Vincent's difference</p>
                 </div>
-                <div class="testimonial-container">
-                    <div class="relative overflow-hidden max-w-4xl mx-auto">
-                        <div class="testimonial-slider" id="testimonial-slider"></div>
-                        <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
-                            <i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i>
-                        </button>
-                        <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
-                            <i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i>
-                        </button>
-                    </div>
+                <div class="relative overflow-hidden max-w-4xl mx-auto">
+                    <div class="testimonial-slider" id="testimonial-slider"></div>
+                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
+                        <i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i>
+                    </button>
+                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
+                        <i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i>
+                    </button>
                 </div>
             </div>
         </section>
@@ -1526,132 +1567,168 @@
             </div>
         </section>
 
-        <!-- Contact & Location Section -->
-        <section id="contact" class="section-padding bg-green-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Visit Our Campus</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Located in the heart of Chandanagar with easy access from all major landmarks</p>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-8 mb-12">
-                    <!-- Visual Contact Element -->
-                    <div class="contact-visual crayon-border">
-                        <div class="text-center">
-                            <i data-lucide="map-pin" class="w-20 h-20 text-red-500 mx-auto mb-4"></i>
-                            <h3 class="text-3xl font-bold text-gray-800 mb-2">Find Us Easily</h3>
-                            <p class="font-body text-gray-600">Street 1, Plot 454, Aparna Hillpark Rd<br>KSR Layout, PJR Layout, Chandanagar</p>
-                            <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-                                <a href="https://maps.google.com/?q=St.+Vincent's+Preschool+Chandanagar" target="_blank" class="crayon-button bg-blue-500 text-white font-bold px-6 py-3 text-lg">
-                                    <i data-lucide="navigation" class="w-5 h-5 inline mr-2"></i>Get Directions
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Contact Information -->
-                    <div class="bg-white p-8 crayon-border">
-                        <h3 class="text-4xl font-bold text-gray-800 mb-6">Get In Touch</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="map-pin" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
-                                <div>
-                                    <h4 class="font-bold text-2xl text-gray-800">Our Address</h4>
-                                    <p class="font-body text-gray-600 mt-1 text-lg">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout<br>Chandanagar, Hyderabad, Telangana 500050</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="phone-call" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
-                                <div>
-                                    <h4 class="font-bold text-2xl text-gray-800">Call for Inquiries</h4>
-                                    <a href="tel:+919032249494" class="font-body text-gray-600 hover:text-red-500 text-lg block mt-1">+91 9032249494</a>
-                                    <a href="https://wa.me/919032249494" class="font-body text-green-600 hover:text-green-700 text-lg block mt-1">
-                                        <i data-lucide="message-circle" class="w-5 h-5 inline mr-1"></i> WhatsApp
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="mail" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
-                                <div>
-                                    <h4 class="font-bold text-2xl text-gray-800">Email Us</h4>
-                                    <a href="mailto:Stvincent.school25@gmail.com" class="font-body text-gray-600 hover:text-red-500 text-lg block mt-1">Stvincent.school25@gmail.com</a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="clock" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
-                                <div>
-                                    <h4 class="font-bold text-2xl text-gray-800">Business Hours</h4>
-                                    <p class="font-body text-gray-600 mt-1 text-lg">Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 8:00 AM - 4:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <button id="open-contact-modal-bottom" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl w-full">Schedule a Campus Visit</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Campus Map -->
-                <div class="bg-white p-8 crayon-border text-center">
-                    <h3 class="text-4xl font-bold text-gray-800 mb-4">Our Location</h3>
-                    <p class="font-body text-gray-600 mb-6 text-lg max-w-2xl mx-auto">Conveniently located in Chandanagar with easy access from Kukatpally, Miyapur, and surrounding areas. Ample parking available for parents.</p>
-                    <div class="responsive-img-container crayon-border max-w-4xl mx-auto">
-                        <img src="images/map/campus-location.jpg" alt="St. Vincent's Preschool Location Map" class="responsive-img">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        <!-- Put this <style> once in the page (or in your main stylesheet) -->
+<style>
+  /* Defensive CSS to prevent accidental horizontal scroll from custom classes */
+  html, body {
+    box-sizing: border-box;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  /* Optional: hide tiny rounding overflow on mobile */
+  body { overflow-x: hidden; }
+  /* If you have custom .crayon-border that adds big shadows/margins, ensure it doesn't create overflow */
+  .crayon-border { max-width: 100%; box-sizing: border-box; }
+  /* Make sure lucide icons scale nicely */
+  [data-lucide] { max-width: 100%; height: auto; display: inline-block; }
+</style>
 
-    <!-- Footer with Custom Colors -->
-    <footer class="bg-gray-800 py-12">
+<!-- Contact & Location Section (updated to prevent overflow on mobile) -->
+<section id="contact" class="section-padding bg-green-100 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
+        Visit Our Campus
+      </h2>
+      <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg whitespace-normal break-words">
+        Located in the heart of Chandanagar with easy access from all major landmarks
+      </p>
+    </div>
+
+    <!-- Grid: IMPORTANT: each grid child has min-w-0 to allow proper shrinking -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
+      <!-- Visual Contact Element -->
+      <div class="contact-visual crayon-border bg-white p-5 sm:p-6 rounded-2xl shadow-md text-center min-w-0 overflow-hidden">
+        <div class="mx-auto max-w-full">
+          <i data-lucide="map-pin" class="w-16 h-16 sm:w-20 sm:h-20 text-red-500 mx-auto mb-4 inline-block"></i>
+          <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Find Us Easily</h3>
+          <p class="font-body text-gray-600 text-sm sm:text-base leading-snug whitespace-normal break-words">
+            Street 1, Plot 454, Aparna Hillpark Rd<br />
+            KSR Layout, PJR Layout, Chandanagar
+          </p>
+
+          <div class="mt-5 flex flex-col sm:flex-row gap-3 justify-center items-stretch">
+            <a href="https://maps.google.com/?q=St.+Vincent's+Preschool+Chandanagar"
+               target="_blank"
+               class="crayon-button bg-blue-500 text-white font-bold px-4 py-2 text-sm sm:text-base rounded-lg shadow inline-flex items-center justify-center w-full sm:w-auto">
+              <i data-lucide="navigation" class="w-4 h-4 inline mr-2"></i>
+              Get Directions
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="bg-white p-5 sm:p-6 crayon-border rounded-2xl shadow-md min-w-0 overflow-hidden">
+        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-5">Get In Touch</h3>
+
+        <div class="space-y-5">
+          <!-- Address -->
+          <div class="flex items-start gap-3 min-w-0">
+            <i data-lucide="map-pin" class="w-7 h-7 text-red-500 mt-1 flex-shrink-0"></i>
+            <div class="min-w-0">
+              <h4 class="font-bold text-lg sm:text-xl text-gray-800">Our Address</h4>
+              <p class="font-body text-gray-600 mt-1 text-sm sm:text-base whitespace-normal break-words">
+                Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout<br />
+                Chandanagar, Hyderabad, Telangana 500050
+              </p>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="flex items-start gap-3 min-w-0">
+            <i data-lucide="phone-call" class="w-7 h-7 text-red-500 mt-1 flex-shrink-0"></i>
+            <div class="min-w-0">
+              <h4 class="font-bold text-lg sm:text-xl text-gray-800">Call for Inquiries</h4>
+              <a href="tel:+919032249494" class="font-body text-gray-600 hover:text-red-500 text-sm sm:text-base block mt-1 break-words">
+                +91 9032249494
+              </a>
+              <a href="https://wa.me/919032249494" class="font-body text-green-600 hover:text-green-700 text-sm sm:text-base block mt-1 break-words">
+                <i data-lucide="message-circle" class="w-4 h-4 inline mr-1"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-start gap-3 min-w-0">
+            <i data-lucide="mail" class="w-7 h-7 text-red-500 mt-1 flex-shrink-0"></i>
+            <div class="min-w-0">
+              <h4 class="font-bold text-lg sm:text-xl text-gray-800">Email Us</h4>
+              <a href="mailto:Stvincent.school25@gmail.com" class="font-body text-gray-600 hover:text-red-500 text-sm sm:text-base block mt-1 break-words">
+                Stvincent.school25@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <!-- Hours -->
+          <div class="flex items-start gap-3 min-w-0">
+            <i data-lucide="clock" class="w-7 h-7 text-red-500 mt-1 flex-shrink-0"></i>
+            <div class="min-w-0">
+              <h4 class="font-bold text-lg sm:text-xl text-gray-800">Business Hours</h4>
+              <p class="font-body text-gray-600 mt-1 text-sm sm:text-base whitespace-normal break-words">
+                Monday - Friday: 8:00 AM - 6:00 PM<br />
+                Saturday: 8:00 AM - 4:00 PM
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <button id="open-contact-modal-bottom"
+                  class="crayon-button bg-red-400 text-white font-bold px-4 py-3 text-base sm:text-lg w-full rounded-lg shadow hover:bg-red-500 transition">
+            Schedule a Campus Visit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+                
+                
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
         <div class="container-narrow px-6">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-3xl font-bold mb-4 footer-heading">St. Vincent's Preschool</h3>
-                    <p class="font-body footer-text text-lg">An expert in providing quality early childhood education in Chandanagar.</p>
+                    <h3 class="text-3xl font-bold mb-4">St. Vincent's Preschool</h3>
+                    <p class="font-body text-gray-400 text-lg">An expert in providing quality early childhood education in Chandanagar.</p>
                 </div>
                 <div>
-                    <h4 class="text-2xl font-bold mb-4 footer-heading">Quick Links</h4>
+                    <h4 class="text-2xl font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="#programs" class="font-body footer-link text-lg">Programs</a></li>
-                        <li><a href="#gallery" class="font-body footer-link text-lg">Gallery</a></li>
-                        <li><a href="#faq" class="font-body footer-link text-lg">FAQ</a></li>
-                        <li><a href="#contact" class="font-body footer-link text-lg">Contact</a></li>
+                        <li><a href="#programs" class="font-body text-gray-400 hover:text-white text-lg">Programs</a></li>
+                        <li><a href="#gallery" class="font-body text-gray-400 hover:text-white text-lg">Gallery</a></li>
+                        <li><a href="#faq" class="font-body text-gray-400 hover:text-white text-lg">FAQ</a></li>
+                        <li><a href="#contact" class="font-body text-gray-400 hover:text-white text-lg">Contact</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-2xl font-bold mb-4 footer-heading">Contact Info</h4>
+                    <h4 class="text-2xl font-bold mb-4">Contact Info</h4>
                     <div class="space-y-2">
-                        <p class="font-body footer-text text-lg">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout</p>
-                        <p class="font-body footer-text text-lg">Chandanagar, Hyderabad, Telangana 500050</p>
-                        <p class="font-body footer-text text-lg">Phone: +91 9032249494</p>
-                        <p class="font-body footer-text text-lg">Email: Stvincent.school25@gmail.com</p>
+                        <p class="font-body text-gray-400 text-lg">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout</p>
+                        <p class="font-body text-gray-400 text-lg">Chandanagar, Hyderabad, Telangana 500050</p>
+                        <p class="font-body text-gray-400 text-lg">Phone: +91 9032249494</p>
+                        <p class="font-body text-gray-400 text-lg">Email: Stvincent.school25@gmail.com</p>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-2xl font-bold mb-4 footer-heading">Follow Us</h4>
+                    <h4 class="text-2xl font-bold mb-4">Follow Us</h4>
                     <div class="flex space-x-4">
-                        <a href="#" class="footer-link">
+                        <a href="#" class="text-gray-400 hover:text-white">
                             <i data-lucide="facebook" class="w-6 h-6"></i>
                         </a>
-                        <a href="#" class="footer-link">
+                        <a href="#" class="text-gray-400 hover:text-white">
                             <i data-lucide="instagram" class="w-6 h-6"></i>
                         </a>
-                        <a href="#" class="footer-link">
+                        <a href="#" class="text-gray-400 hover:text-white">
                             <i data-lucide="youtube" class="w-6 h-6"></i>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="footer-text text-lg">&copy; 2025 St. Vincent's Preschool & Daycare. All rights reserved.</p>
-                <p class="footer-text text-base mt-2">Designed to help your child grow, learn, and shine.</p>
+                <p class="text-gray-400 text-lg">&copy; 2025 St. Vincent's Preschool & Daycare. All rights reserved.</p>
+                <p class="text-gray-500 text-base mt-2">Designed to help your child grow, learn, and shine.</p>
             </div>
         </div>
     </footer>
@@ -1676,11 +1753,11 @@
     </div>
 
     <script>
-        // Fixed EmailJS Configuration
+        // EmailJS Configuration - FIXED: Now properly sends form data
         const EMAILJS_CONFIG = {
             SERVICE_ID: 'service_up2vw5t',
-            TEMPLATE_ID: 'template_xsr5fxl',  
-            PUBLIC_KEY: 'm5cYAcra_XSR5F_xlm5cYAcra'
+            TEMPLATE_ID: '_XSR5F_xlm5cYAcra',  
+            PUBLIC_KEY: '_XSR5F_xlm5cYAcra'
         };
 
         // Initialize EmailJS
@@ -1696,7 +1773,7 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Fixed Testimonial Slider with Manual Navigation Only
+        // Enhanced Testimonial Slider with Expandable Layout
         const testimonials = [
             { 
                 name: "Sai Ram", 
@@ -1716,30 +1793,80 @@
             },
             { 
                 name: "Anita Singha.", 
-                text: "Recently my daughter joined school and she's very happy and she's hyperactive kid so, I am happy that school is very spacious , hygienic plus we got good experienced teachers as well" 
+                text: "Recently my daughter joined  school and she's very happy and she's hyperactive kid so, I am happy that school is very spacious , hygienic  plus we got good  experienced teachers as well" 
             }
         ];
 
         const slider = document.getElementById('testimonial-slider');
         let currentIndex = 0;
+        let expandedStates = Array(testimonials.length).fill(false);
 
         function renderTestimonials() {
             if (!slider) return;
             
             slider.innerHTML = testimonials.map((t, index) => {
+                const isExpanded = expandedStates[index];
+                const isLongText = t.text.length > 200;
+                const displayText = isExpanded ? t.text : (isLongText ? t.text.substring(0, 200) + '...' : t.text);
+                
                 return `
                     <div class="testimonial-slide p-4 flex-shrink-0 w-full">
-                        <div class="testimonial-card bg-yellow-100 p-6 rounded-xl crayon-border h-full flex flex-col">
-                            <div class="testimonial-content">
-                                <p class="font-body text-gray-600 testimonial-text leading-relaxed text-justify">"${t.text}"</p>
+                        <div class="bg-yellow-100 p-6 rounded-xl crayon-border h-full flex flex-col justify-between min-h-[280px] max-h-[280px] transition-all duration-300 ${isExpanded ? 'expanded' : ''}">
+                            <div class="flex-grow overflow-hidden">
+                                <p class="font-body text-gray-600 testimonial-text leading-relaxed text-justify">"${displayText}"</p>
                             </div>
-                            <div class="mt-4">
-                                <p class="font-bold text-gray-800 text-xl text-right">- ${t.name}</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <p class="font-bold text-gray-800 text-xl text-right flex-1">- ${t.name}</p>
+                                ${isLongText ? `
+                                    <button class="read-more-btn ml-4 text-blue-600 font-semibold text-lg hover:text-blue-700 transition-colors crayon-button bg-blue-100 px-3 py-1" data-index="${index}">
+                                        ${isExpanded ? 'Read Less' : 'Read More'}
+                                    </button>
+                                ` : ''}
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
+            
+            // Add event listeners to read more buttons
+            document.querySelectorAll('.read-more-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const index = parseInt(btn.getAttribute('data-index'));
+                    toggleTestimonialExpansion(index);
+                });
+            });
+        }
+
+        function toggleTestimonialExpansion(index) {
+            expandedStates[index] = !expandedStates[index];
+            
+            // Update the current slide
+            const slides = document.querySelectorAll('.testimonial-slide');
+            if (slides[index]) {
+                const testimonialCard = slides[index].querySelector('.bg-yellow-100');
+                if (testimonialCard) {
+                    if (expandedStates[index]) {
+                        testimonialCard.classList.remove('min-h-[280px]', 'max-h-[280px]');
+                        testimonialCard.classList.add('min-h-[400px]', 'max-h-none');
+                    } else {
+                        testimonialCard.classList.remove('min-h-[400px]', 'max-h-none');
+                        testimonialCard.classList.add('min-h-[280px]', 'max-h-[280px]');
+                    }
+                    
+                    // Update button text
+                    const button = testimonialCard.querySelector('.read-more-btn');
+                    if (button) {
+                        button.textContent = expandedStates[index] ? 'Read Less' : 'Read More';
+                    }
+                    
+                    // Update text content
+                    const textElement = testimonialCard.querySelector('.testimonial-text');
+                    if (textElement) {
+                        textElement.textContent = `"${expandedStates[index] ? testimonials[index].text : testimonials[index].text.substring(0, 200) + '...'}"`;
+                    }
+                }
+            }
         }
 
         function updateSlider() { 
@@ -1753,7 +1880,7 @@
             updateSlider(); 
         }
 
-        // Initialize the slider - REMOVED AUTO-SLIDE
+        // Initialize the slider
         if (slider) {
             document.getElementById('nextBtn').addEventListener('click', showNext);
             document.getElementById('prevBtn').addEventListener('click', () => { 
@@ -1761,7 +1888,8 @@
                 updateSlider(); 
             });
             
-            // NO AUTO-SLIDE - Manual navigation only
+            // Auto-slide every 8 seconds (increased for better reading)
+            setInterval(showNext, 8000);
             renderTestimonials();
         }
 
@@ -1918,7 +2046,7 @@
             science: {
                 title: "The Science of Early Learning",
                 subtitle: "How Preschool Shapes Brain Development",
-                image: "images/blog/science-learning.jpg",
+                image: "images/blog/science-learning.jpeg",
                 content: `
                     <p class="mb-4">Early childhood is a critical period for brain development. Research shows that 90% of a child's brain develops by age 5, making the preschool years crucial for establishing the foundation for all future learning.</p>
                     <p class="mb-4">At St. Vincent's, we leverage this understanding through:</p>
@@ -1939,7 +2067,7 @@
             social: {
                 title: "Social Skills Development",
                 subtitle: "Building Foundations for Healthy Relationships",
-                image: "images/blog/social-skills.jpg",
+                image: "images/blog/social-skills.jpeg",
                 content: `
                     <p class="mb-4">Preschool provides the first structured environment where children learn to navigate social relationships outside their family. These early experiences are fundamental to developing essential life skills.</p>
                     <p class="mb-4">Through guided play, group activities, and daily interactions, our teachers help children learn:</p>
@@ -1961,7 +2089,7 @@
             primary: {
                 title: "Preparing for Primary School",
                 subtitle: "A Smooth Transition to Formal Education",
-                image: "images/blog/primary-preparation.jpg",
+                image: "images/blog/primary-preparation.jpeg",
                 content: `
                     <p class="mb-4">The transition from preschool to primary school is a significant milestone that requires careful preparation. Our program specifically focuses on ensuring children are academically, socially, and emotionally ready for this important step.</p>
                     <p class="mb-4">Key preparation areas include:</p>
@@ -2042,13 +2170,7 @@
                                 </div>
                                 <div class="text-2xl">
                                     <label for="childAge" class="font-medium text-gray-700">Child's Age</label>
-                                    <select id="childAge" name="childAge" class="w-full mt-1 p-3 crayon-border text-xl" required>
-                                        <option value="">Select age range</option>
-                                        <option value="1.5 to 3">1.5 to 3 years</option>
-                                        <option value="3 to 4">3 to 4 years</option>
-                                        <option value="4 to 5">4 to 5 years</option>
-                                        <option value="5 to 6">5 to 6 years</option>
-                                    </select>
+                                    <input type="number" id="childAge" name="childAge" min="1" max="8" class="w-full mt-1 p-3 crayon-border text-xl" required>
                                 </div>
                                 <div class="text-2xl">
                                     <label for="program" class="font-medium text-gray-700">Program Interested In</label>
@@ -2119,7 +2241,7 @@
             
             lucide.createIcons();
             
-            // Handle form submission for contact modal with EmailJS - FIXED
+            // Handle form submission for contact modal with EmailJS
             const contactForm = container.querySelector('#contact-form');
             if (contactForm) {
                 const successMessage = container.querySelector('#contact-form-success-message');
@@ -2136,7 +2258,7 @@
                     successMessage.classList.add('hidden');
                     errorMessage.classList.add('hidden');
                     
-                    // Collect form data
+                    // Collect form data - FIXED: Now properly collects all form fields
                     const formData = {
                         parentName: document.getElementById('parentName').value,
                         phone: document.getElementById('phone').value,
@@ -2149,41 +2271,33 @@
                     
                     console.log('Sending form data:', formData);
                     
-                    // Send email using EmailJS - FIXED TEMPLATE PARAMS
-                    emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, {
-                        from_name: formData.parentName,
-                        from_phone: formData.phone,
-                        child_age: formData.childAge,
-                        program: formData.program,
-                        message: formData.message,
-                        timestamp: formData.timestamp
-                    })
-                    .then(function(response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                        
-                        // On success
-                        successMessage.classList.remove('hidden');
-                        contactForm.reset();
-                        
-                        // Reset button state
-                        submitText.classList.remove('hidden');
-                        submitSpinner.classList.add('hidden');
-                        
-                        setTimeout(() => { 
-                            successMessage.classList.add('hidden'); 
-                            closeModal(overlay);
-                        }, 3000);
-                    }, function(error) {
-                        console.log('FAILED...', error);
-                        
-                        // On error - show more helpful message
-                        errorMessage.textContent = 'There was an error submitting your form. Please try again or call us directly at +91 9032249494.';
-                        errorMessage.classList.remove('hidden');
-                        
-                        // Reset button state
-                        submitText.classList.remove('hidden');
-                        submitSpinner.classList.add('hidden');
-                    });
+                    // Send email using EmailJS
+                    emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, formData)
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                            
+                            // On success
+                            successMessage.classList.remove('hidden');
+                            contactForm.reset();
+                            
+                            // Reset button state
+                            submitText.classList.remove('hidden');
+                            submitSpinner.classList.add('hidden');
+                            
+                            setTimeout(() => { 
+                                successMessage.classList.add('hidden'); 
+                                closeModal(overlay);
+                            }, 3000);
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                            
+                            // On error
+                            errorMessage.classList.remove('hidden');
+                            
+                            // Reset button state
+                            submitText.classList.remove('hidden');
+                            submitSpinner.classList.add('hidden');
+                        });
                 });
             }
             
@@ -2231,7 +2345,7 @@
             c.addEventListener('click', () => createModal(programData[c.dataset.program], document.getElementById('modal-container'))); 
         });
 
-        // Blog modals
+        // Blog modals - FIXED: Added proper event listeners
         document.querySelectorAll('.open-blog-modal').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
