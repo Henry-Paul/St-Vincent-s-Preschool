@@ -1140,77 +1140,139 @@
     </header>
 
     <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="relative bg-paper section-padding">
-            <div class="container-narrow px-6 grid md:grid-cols-2 gap-8 items-center">
-                <div class="text-center md:text-left">
-                    <span class="text-red-500 font-semibold text-2xl">Admissions Open</span>
-                    <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">Your child's development is our Promise</h2>
-                    <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chandanagar. We offer a fun, safe, premium and stimulating environment for children aged 1.5 to 6 years.</p>
-                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <button id="open-contact-modal-hero" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">Schedule a Visit</button>
-                        <a href="tel:+919032249494" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
-                            <i data-lucide="phone"></i>Call Us Now
-                        </a>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                    <div class="responsive-img-container crayon-border">
-                        <img src="images/hero/happy-children.jpg" alt="Happy children at St. Vincent's Preschool" class="responsive-img">
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main><!-- Add this <style> once in your main stylesheet or inside <head> -->
+<style>
+  /* Universal frame styles */
+  .framed-img {
+    border: 6px solid #ffffff; /* white inner border */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* soft shadow */
+    border-radius: 1rem; /* rounded corners */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .framed-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
 
-        <!-- Image Slider Section -->
-        <section id="gallery" class="section-padding bg-blue-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Our Happy Learning Environment</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Take a peek inside our vibrant classrooms and play areas.</p>
-                </div>
-                
-                <div class="image-slider-container crayon-border">
-                    <div class="image-slider" id="image-slider">
-                        <div class="image-slide">
-                            <div class="responsive-img-container">
-                                <img src="images/gallery/classroom-1.jpg" alt="Preschool classroom" class="responsive-img">
-                            </div>
-                        </div>
-                        <div class="image-slide">
-                            <div class="responsive-img-container">
-                                <img src="images/gallery/children-playing.jpeg" alt="Children playing" class="responsive-img">
-                            </div>
-                        </div>
-                        <div class="image-slide">
-                            <div class="responsive-img-container">
-                                <img src="images/gallery/art-activities.jpg" alt="Art activities" class="responsive-img">
-                            </div>
-                        </div>
-                        <div class="image-slide">
-                            <div class="responsive-img-container">
-                                <img src="images/gallery/outdoor-play.jpg" alt="Outdoor play area" class="responsive-img">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="slider-arrow prev" id="slider-prev">
-                        <i data-lucide="chevron-left" class="w-6 h-6 text-gray-700"></i>
-                    </div>
-                    <div class="slider-arrow next" id="slider-next">
-                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
-                    </div>
-                    
-                    <div class="slider-nav" id="slider-nav">
-                        <div class="slider-dot active" data-index="0"></div>
-                        <div class="slider-dot" data-index="1"></div>
-                        <div class="slider-dot" data-index="2"></div>
-                        <div class="slider-dot" data-index="3"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  /* Ensure all images fit perfectly */
+  .framed-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Slider arrows position fix */
+  .slider-arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 8px;
+    transition: background-color 0.2s;
+  }
+  .slider-arrow:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  .slider-arrow.prev { left: 10px; }
+  .slider-arrow.next { right: 10px; }
+
+  .image-slider-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+
+  /* Defensive CSS to prevent horizontal overflow */
+  html, body {
+    overflow-x: hidden;
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="relative bg-paper section-padding">
+  <div class="container-narrow px-6 grid md:grid-cols-2 gap-8 items-center">
+    <div class="text-center md:text-left">
+      <span class="text-red-500 font-semibold text-2xl">Admissions Open</span>
+      <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">
+        Your child's development is our Promise
+      </h2>
+      <p class="font-body text-gray-600 mt-4 text-lg">
+        Your child's happy place in Chandanagar. We offer a fun, safe, premium and stimulating environment for children aged 1.5 to 6 years.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+        <button id="open-contact-modal-hero" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">
+          Schedule a Visit
+        </button>
+        <a href="tel:+919032249494" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
+          <i data-lucide="phone"></i>Call Us Now
+        </a>
+      </div>
+    </div>
+
+    <div class="hidden md:block">
+      <div class="framed-img">
+        <img src="images/hero/happy-children.jpg" alt="Happy children at St. Vincent's Preschool">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Image Slider Section -->
+<section id="gallery" class="section-padding bg-blue-100">
+  <div class="container-narrow px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-5xl md:text-6xl font-bold text-gray-800">
+        Our Happy Learning Environment
+      </h2>
+      <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">
+        Take a peek inside our vibrant classrooms and play areas.
+      </p>
+    </div>
+    
+    <div class="image-slider-container">
+      <div class="image-slider" id="image-slider">
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/classroom-1.jpg" alt="Preschool classroom">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/children-playing.jpeg" alt="Children playing">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/art-activities.jpg" alt="Art activities">
+          </div>
+        </div>
+        <div class="image-slide">
+          <div class="framed-img">
+            <img src="images/gallery/outdoor-play.jpg" alt="Outdoor play area">
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-arrow prev" id="slider-prev">
+        <i data-lucide="chevron-left" class="w-6 h-6 text-gray-700"></i>
+      </div>
+      <div class="slider-arrow next" id="slider-next">
+        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
+      </div>
+
+      <div class="slider-nav" id="slider-nav">
+        <div class="slider-dot active" data-index="0"></div>
+        <div class="slider-dot" data-index="1"></div>
+        <div class="slider-dot" data-index="2"></div>
+        <div class="slider-dot" data-index="3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         <!-- Why Choose Us Section -->
         <section class="section-padding bg-blue-100">
