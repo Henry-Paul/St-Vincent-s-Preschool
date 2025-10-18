@@ -3,7 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Vincent's Preschool | Preschool & Daycare in Chanda Nagar, Hyderabad</title>
+    <title>St. Vincent's Preschool | Premium Preschool & Daycare in Chandanagar, Hyderabad</title>
+    <meta name="description" content="St. Vincent's Preschool offers premium early childhood education in Chandanagar, Hyderabad. EYFS curriculum, play-based learning for children 1.5-6 years.">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Preschool",
+        "name": "St. Vincent's Preschool",
+        "description": "Premium preschool and daycare in Chandanagar, Hyderabad offering EYFS curriculum and play-based learning for children aged 1.5 to 6 years.",
+        "url": "https://stvincentspreschool.com",
+        "telephone": "+91-9032249494",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout",
+            "addressLocality": "Chandanagar",
+            "addressRegion": "Telangana",
+            "postalCode": "500050",
+            "addressCountry": "IN"
+        },
+        "openingHours": [
+            "Mo-Fr 08:00-18:00",
+            "Sa 08:00-16:00"
+        ],
+        "areaServed": "Hyderabad",
+        "sameAs": [
+            "https://www.facebook.com/stvincentspreschool",
+            "https://www.instagram.com/stvincentspreschool"
+        ]
+    }
+    </script>
+    
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the ideal age to start preschool?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Most children are ready for preschool between ages 2 and 3. At this stage, they've typically developed basic communication skills, can follow simple instructions, and are beginning to show interest in playing with peers. Our playgroup program starts at 1.5 years for children who show readiness for structured social interaction."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How can I prepare my toddler for preschool?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "To help your child transition smoothly, talk about the fun parts of school to build excitement and confidence. Create routines, practice short separations, and encourage independence with simple tasks. Join our free orientation sessions to explore how our experts can help your child prepare for preschool."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What should I look for in a quality preschool?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Key indicators of quality preschools include: low student-teacher ratios, qualified and caring staff, a safe and stimulating environment, a balanced curriculum that includes play, clear communication with parents, and happy, engaged children. We're proud to meet all these criteria at St. Vincent's."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does preschool help with separation anxiety?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our teachers are trained to help children through separation anxiety with comforting routines, engaging activities, and gradual transitions. We recommend starting with shorter days and building up, establishing a consistent goodbye ritual, and reassuring your child that you'll return. Most children adjust within a few weeks as they form bonds with teachers and classmates."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the role of play in preschool learning?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Play is the primary way young children learn. Through play, children develop cognitive, physical, social, and emotional skills. Structured and unstructured play activities in our curriculum help children practice problem-solving, build vocabulary, develop fine and gross motor skills, learn to cooperate with peers, and express creativity."
+                }
+            }
+        ]
+    }
+    </script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,6 +181,39 @@
             padding: 0 1rem;
         }
 
+        /* Responsive Image Styles */
+        .responsive-img-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .responsive-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        /* Desktop - Landscape */
+        @media (min-width: 768px) {
+            .responsive-img-container {
+                aspect-ratio: 16/9; /* Landscape ratio */
+            }
+            .responsive-img {
+                height: 500px; /* Fixed height for desktop */
+            }
+        }
+
+        /* Mobile - Square */
+        @media (max-width: 767px) {
+            .responsive-img-container {
+                aspect-ratio: 1/1; /* Square ratio */
+            }
+            .responsive-img {
+                height: 300px; /* Fixed height for mobile */
+            }
+        }
+
         /* Image Slider Styles */
         .image-slider-container {
             position: relative;
@@ -112,11 +226,6 @@
         .image-slide {
             min-width: 100%;
             transition: opacity 0.3s ease;
-        }
-        .image-slide img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
         }
         .slider-nav {
             position: absolute;
@@ -215,15 +324,6 @@
         /* Smooth expansion animation */
         .bg-yellow-100 {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Ensure consistent text alignment */
-        .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            text-align: justify;
-            hyphens: auto;
-            word-spacing: -0.05em;
         }
 
         /* Mobile responsiveness for expanded state */
@@ -411,17 +511,15 @@
             overflow-x: hidden;
         }
 
-        /* Fix for Google Maps iframe */
-        .map-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-        }
-
-        .map-container iframe {
-            width: 100%;
+        /* Enhanced contact section */
+        .contact-visual {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 20px;
             height: 100%;
-            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
 
         /* Responsive design */
@@ -448,12 +546,9 @@
                 padding: 0 1.5rem;
             }
             
-            .image-slide img {
-                height: 300px;
-            }
-            
-            .map-container {
-                height: 300px;
+            .contact-visual {
+                min-height: 200px;
+                margin-bottom: 2rem;
             }
             
             /* Fix for mobile menu */
@@ -1052,7 +1147,7 @@
                 <div class="text-center md:text-left">
                     <span class="text-red-500 font-semibold text-2xl">Admissions Open</span>
                     <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">Your child's development is our Promise</h2>
-                    <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chanda Nagar. We offer a fun, safe, premium and stimulating environment for children aged 1.5 to 6 years.</p>
+                    <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chandanagar. We offer a fun, safe, premium and stimulating environment for children aged 1.5 to 6 years.</p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                         <button id="open-contact-modal-hero" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">Schedule a Visit</button>
                         <a href="tel:+919032249494" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
@@ -1061,7 +1156,9 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <img src="images/hero/happy-children.jpg" alt="Happy children" class="crayon-border object-cover w-full h-full">
+                    <div class="responsive-img-container crayon-border">
+                        <img src="images/hero/happy-children.jpg" alt="Happy children at St. Vincent's Preschool" class="responsive-img">
+                    </div>
                 </div>
             </div>
         </section>
@@ -1077,16 +1174,24 @@
                 <div class="image-slider-container crayon-border">
                     <div class="image-slider" id="image-slider">
                         <div class="image-slide">
-                            <img src="images/gallery/classroom-1.jpg" alt="Preschool classroom">
+                            <div class="responsive-img-container">
+                                <img src="images/gallery/classroom-1.jpg" alt="Preschool classroom" class="responsive-img">
+                            </div>
                         </div>
                         <div class="image-slide">
-                            <img src="images/gallery/children-playing.jpg" alt="Children playing">
+                            <div class="responsive-img-container">
+                                <img src="images/gallery/children-playing.jpg" alt="Children playing" class="responsive-img">
+                            </div>
                         </div>
                         <div class="image-slide">
-                            <img src="images/gallery/art-activities.jpg" alt="Art activities">
+                            <div class="responsive-img-container">
+                                <img src="images/gallery/art-activities.jpg" alt="Art activities" class="responsive-img">
+                            </div>
                         </div>
                         <div class="image-slide">
-                            <img src="images/gallery/outdoor-play.jpg" alt="Outdoor play area">
+                            <div class="responsive-img-container">
+                                <img src="images/gallery/outdoor-play.jpg" alt="Outdoor play area" class="responsive-img">
+                            </div>
                         </div>
                     </div>
                     
@@ -1151,11 +1256,8 @@
         <section id="programs" class="section-padding bg-paper">
             <div class="container-narrow px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Curriculam & Programs</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">EYFS Curriculum – Learning Through Play
-At St. Vincent’s Preschool, we follow the Early Years Foundation Stage (EYFS) — a UK-based framework that promotes holistic growth through play and exploration.
-
-Aligned with India’s National Education Policy (NEP), it builds strong foundations in language, creativity, confidence, and social skills — helping every child shine. .</p>
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Curriculum & Programs</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">EYFS Curriculum – Learning Through Play. At St. Vincent's Preschool, we follow the Early Years Foundation Stage (EYFS) — a UK-based framework that promotes holistic growth through play and exploration. Aligned with India's National Education Policy (NEP), it builds strong foundations in language, creativity, confidence, and social skills — helping every child shine.</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="program-card bg-red-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="playgroup">
@@ -1197,7 +1299,6 @@ Aligned with India’s National Education Policy (NEP), it builds strong foundat
             </div>
         </section>
         
-       
         <!-- Improved Testimonials Section -->
         <section class="section-padding bg-paper">
             <div class="container-narrow px-6">
@@ -1260,7 +1361,7 @@ Aligned with India’s National Education Policy (NEP), it builds strong foundat
                 </div>
                 
                 <div class="mt-12 bg-red-100 p-8 crayon-border text-center">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Give Your Child a Premium Preschool Exerience?</h3>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Give Your Child a Premium Preschool Experience?</h3>
                     <p class="font-body text-gray-600 mb-6 max-w-2xl mx-auto text-lg">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
                     <button class="open-contact-modal-premium crayon-button bg-red-500 text-white font-bold px-8 py-4 text-xl">Schedule a Tour Today</button>
                 </div>
@@ -1368,14 +1469,18 @@ Aligned with India’s National Education Policy (NEP), it builds strong foundat
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-8 mb-12">
-                    <!-- Google Maps Widget - FIXED: Now uses full layout dimensions -->
-                    <div class="crayon-border overflow-hidden map-container">
-                        <iframe 
-                            src="https://www.google.com/maps/place/St.+Vincent's+Preschool/@17.5033015,78.3295331,17z/data=!4m8!3m7!1s0x3bcb93745bd4b1e7:0x28f40f3e7616335f!8m2!3d17.5032964!4d78.332108!9m1!1b1!16s%2Fg%2F11x1n14rwg?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                    <!-- Visual Contact Element -->
+                    <div class="contact-visual crayon-border">
+                        <div class="text-center">
+                            <i data-lucide="map-pin" class="w-20 h-20 text-red-500 mx-auto mb-4"></i>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-2">Find Us Easily</h3>
+                            <p class="font-body text-gray-600">Street 1, Plot 454, Aparna Hillpark Rd<br>KSR Layout, PJR Layout, Chandanagar</p>
+                            <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+                                <a href="https://maps.google.com/?q=St.+Vincent's+Preschool+Chandanagar" target="_blank" class="crayon-button bg-blue-500 text-white font-bold px-6 py-3 text-lg">
+                                    <i data-lucide="navigation" class="w-5 h-5 inline mr-2"></i>Get Directions
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Contact Information -->
@@ -1406,7 +1511,7 @@ Aligned with India’s National Education Policy (NEP), it builds strong foundat
                                 <i data-lucide="mail" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
                                 <div>
                                     <h4 class="font-bold text-2xl text-gray-800">Email Us</h4>
-                                    <a href="mailto:info@stvincentspreschool.com" class="font-body text-gray-600 hover:text-red-500 text-lg block mt-1">Stvincent.school25@gmail.com</a>
+                                    <a href="mailto:Stvincent.school25@gmail.com" class="font-body text-gray-600 hover:text-red-500 text-lg block mt-1">Stvincent.school25@gmail.com</a>
                                 </div>
                             </div>
                             
@@ -1425,7 +1530,43 @@ Aligned with India’s National Education Policy (NEP), it builds strong foundat
                     </div>
                 </div>
                 
-                
+                <!-- Landmarks & Directions -->
+                <div class="bg-yellow-100 p-8 crayon-border">
+                    <h3 class="text-4xl font-bold text-gray-800 mb-6 text-center">Easy to Find Landmarks</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto crayon-border mb-3">
+                                <i data-lucide="navigation" class="w-8 h-8 text-blue-600"></i>
+                            </div>
+                            <h4 class="font-bold text-xl text-gray-800">From Chandanagar Bus Stop</h4>
+                            <p class="font-body text-gray-600 mt-1 text-base">2 minutes walk towards Miyapur</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto crayon-border mb-3">
+                                <i data-lucide="car" class="w-8 h-8 text-green-600"></i>
+                            </div>
+                            <h4 class="font-bold text-xl text-gray-800">From Miyapur Metro</h4>
+                            <p class="font-body text-gray-600 mt-1 text-base">8 minutes drive via Chandanagar Main Road</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto crayon-border mb-3">
+                                <i data-lucide="building" class="w-8 h-8 text-purple-600"></i>
+                            </div>
+                            <h4 class="font-bold text-xl text-gray-800">Nearby Landmarks</h4>
+                            <p class="font-body text-gray-600 mt-1 text-base">Opposite Sri Sai Baba Temple, Near Axis Bank</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto crayon-border mb-3">
+                                <i data-lucide="map" class="w-8 h-8 text-red-600"></i>
+                            </div>
+                            <h4 class="font-bold text-xl text-gray-800">Easy Parking</h4>
+                            <p class="font-body text-gray-600 mt-1 text-base">Ample parking space available for parents</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
@@ -1450,7 +1591,7 @@ Aligned with India’s National Education Policy (NEP), it builds strong foundat
                         <p class="font-body text-gray-400 text-lg">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout</p>
                         <p class="font-body text-gray-400 text-lg">Chandanagar, Hyderabad, Telangana 500050</p>
                         <p class="font-body text-gray-400 text-lg">Phone: +91 9032249494</p>
-                        <p class="font-body text-gray-400 text-lg">Email: Stvincent.schoo25@gmail.com</p>
+                        <p class="font-body text-gray-400 text-lg">Email: Stvincent.school25@gmail.com</p>
                     </div>
                 </div>
                 <div>
@@ -1527,7 +1668,7 @@ Aligned with India’s National Education Policy (NEP), it builds strong foundat
             }, 
             { 
                 name: "Shashank Bhardwaj.", 
-                text: "My child loves going to this preschool! The teachers are caring, the environment is safe and nurturing, and I’ve seen amazing growth in my little one’s confidence and skills." 
+                text: "My child loves going to this preschool! The teachers are caring, the environment is safe and nurturing, and I've seen amazing growth in my little one's confidence and skills." 
             },
             { 
                 name: "Saurabh Shourie.", 
@@ -1955,7 +2096,9 @@ Aligned with India’s National Education Policy (NEP), it builds strong foundat
                             </div>
                             <div class="flex flex-col md:flex-row gap-8 mb-8">
                                 <div class="md:w-2/5">
-                                    <img src="${data.image}" alt="${data.title}" class="w-full h-64 object-cover crayon-border">
+                                    <div class="responsive-img-container crayon-border">
+                                        <img src="${data.image}" alt="${data.title}" class="responsive-img">
+                                    </div>
                                 </div>
                                 <div class="md:w-3/5">
                                     <div class="prose max-w-none font-body text-gray-700 text-lg">
