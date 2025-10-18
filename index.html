@@ -1460,46 +1460,67 @@
             </div>
         </section>
 
-        <!-- Contact & Location Section -->
-<section id="contact" class="section-padding bg-green-100">
+        <!-- Put this <style> once in the page (or in your main stylesheet) -->
+<style>
+  /* Defensive CSS to prevent accidental horizontal scroll from custom classes */
+  html, body {
+    box-sizing: border-box;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  /* Optional: hide tiny rounding overflow on mobile */
+  body { overflow-x: hidden; }
+  /* If you have custom .crayon-border that adds big shadows/margins, ensure it doesn't create overflow */
+  .crayon-border { max-width: 100%; box-sizing: border-box; }
+  /* Make sure lucide icons scale nicely */
+  [data-lucide] { max-width: 100%; height: auto; display: inline-block; }
+</style>
+
+<!-- Contact & Location Section (updated to prevent overflow on mobile) -->
+<section id="contact" class="section-padding bg-green-100 overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800">Visit Our Campus</h2>
-      <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-base sm:text-lg">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
+        Visit Our Campus
+      </h2>
+      <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg whitespace-normal break-words">
         Located in the heart of Chandanagar with easy access from all major landmarks
       </p>
     </div>
 
-    <!-- Responsive grid for content -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-      
+    <!-- Grid: IMPORTANT: each grid child has min-w-0 to allow proper shrinking -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
       <!-- Visual Contact Element -->
-      <div class="contact-visual crayon-border bg-white p-6 sm:p-8 rounded-2xl shadow-md text-center">
-        <i data-lucide="map-pin" class="w-16 h-16 sm:w-20 sm:h-20 text-red-500 mx-auto mb-4"></i>
-        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Find Us Easily</h3>
-        <p class="font-body text-gray-600 text-base sm:text-lg">
-          Street 1, Plot 454, Aparna Hillpark Rd<br />
-          KSR Layout, PJR Layout, Chandanagar
-        </p>
-        <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="https://maps.google.com/?q=St.+Vincent's+Preschool+Chandanagar" target="_blank"
-            class="crayon-button bg-blue-500 text-white font-bold px-6 py-3 text-base sm:text-lg rounded-lg shadow hover:bg-blue-600 transition">
-            <i data-lucide="navigation" class="w-5 h-5 inline mr-2"></i>Get Directions
-          </a>
+      <div class="contact-visual crayon-border bg-white p-5 sm:p-6 rounded-2xl shadow-md text-center min-w-0 overflow-hidden">
+        <div class="mx-auto max-w-full">
+          <i data-lucide="map-pin" class="w-16 h-16 sm:w-20 sm:h-20 text-red-500 mx-auto mb-4 inline-block"></i>
+          <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Find Us Easily</h3>
+          <p class="font-body text-gray-600 text-sm sm:text-base leading-snug whitespace-normal break-words">
+            Street 1, Plot 454, Aparna Hillpark Rd<br />
+            KSR Layout, PJR Layout, Chandanagar
+          </p>
+
+          <div class="mt-5 flex flex-col sm:flex-row gap-3 justify-center items-stretch">
+            <a href="https://maps.google.com/?q=St.+Vincent's+Preschool+Chandanagar"
+               target="_blank"
+               class="crayon-button bg-blue-500 text-white font-bold px-4 py-2 text-sm sm:text-base rounded-lg shadow inline-flex items-center justify-center w-full sm:w-auto">
+              <i data-lucide="navigation" class="w-4 h-4 inline mr-2"></i>
+              Get Directions
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Contact Information -->
-      <div class="bg-white p-6 sm:p-8 crayon-border rounded-2xl shadow-md">
-        <h3 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">Get In Touch</h3>
+      <div class="bg-white p-5 sm:p-6 crayon-border rounded-2xl shadow-md min-w-0 overflow-hidden">
+        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-5">Get In Touch</h3>
 
-        <div class="space-y-6">
+        <div class="space-y-5">
           <!-- Address -->
-          <div class="flex items-start gap-4">
-            <i data-lucide="map-pin" class="w-7 h-7 sm:w-8 sm:h-8 text-red-500 mt-1 flex-shrink-0"></i>
-            <div>
-              <h4 class="font-bold text-xl sm:text-2xl text-gray-800">Our Address</h4>
-              <p class="font-body text-gray-600 mt-1 text-base sm:text-lg">
+          <div class="flex items-start gap-3 min-w-0">
+            <i data-lucide="map-pin" class="w-7 h-7 text-red-500 mt-1 flex-shrink-0"></i>
+            <div class="min-w-0">
+              <h4 class="font-bold text-lg sm:text-xl text-gray-800">Our Address</h4>
+              <p class="font-body text-gray-600 mt-1 text-sm sm:text-base whitespace-normal break-words">
                 Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout<br />
                 Chandanagar, Hyderabad, Telangana 500050
               </p>
@@ -1507,39 +1528,36 @@
           </div>
 
           <!-- Phone -->
-          <div class="flex items-start gap-4">
-            <i data-lucide="phone-call" class="w-7 h-7 sm:w-8 sm:h-8 text-red-500 mt-1 flex-shrink-0"></i>
-            <div>
-              <h4 class="font-bold text-xl sm:text-2xl text-gray-800">Call for Inquiries</h4>
-              <a href="tel:+919032249494"
-                class="font-body text-gray-600 hover:text-red-500 text-base sm:text-lg block mt-1">
+          <div class="flex items-start gap-3 min-w-0">
+            <i data-lucide="phone-call" class="w-7 h-7 text-red-500 mt-1 flex-shrink-0"></i>
+            <div class="min-w-0">
+              <h4 class="font-bold text-lg sm:text-xl text-gray-800">Call for Inquiries</h4>
+              <a href="tel:+919032249494" class="font-body text-gray-600 hover:text-red-500 text-sm sm:text-base block mt-1 break-words">
                 +91 9032249494
               </a>
-              <a href="https://wa.me/919032249494"
-                class="font-body text-green-600 hover:text-green-700 text-base sm:text-lg block mt-1">
-                <i data-lucide="message-circle" class="w-5 h-5 inline mr-1"></i> WhatsApp
+              <a href="https://wa.me/919032249494" class="font-body text-green-600 hover:text-green-700 text-sm sm:text-base block mt-1 break-words">
+                <i data-lucide="message-circle" class="w-4 h-4 inline mr-1"></i> WhatsApp
               </a>
             </div>
           </div>
 
           <!-- Email -->
-          <div class="flex items-start gap-4">
-            <i data-lucide="mail" class="w-7 h-7 sm:w-8 sm:h-8 text-red-500 mt-1 flex-shrink-0"></i>
-            <div>
-              <h4 class="font-bold text-xl sm:text-2xl text-gray-800">Email Us</h4>
-              <a href="mailto:Stvincent.school25@gmail.com"
-                class="font-body text-gray-600 hover:text-red-500 text-base sm:text-lg block mt-1">
+          <div class="flex items-start gap-3 min-w-0">
+            <i data-lucide="mail" class="w-7 h-7 text-red-500 mt-1 flex-shrink-0"></i>
+            <div class="min-w-0">
+              <h4 class="font-bold text-lg sm:text-xl text-gray-800">Email Us</h4>
+              <a href="mailto:Stvincent.school25@gmail.com" class="font-body text-gray-600 hover:text-red-500 text-sm sm:text-base block mt-1 break-words">
                 Stvincent.school25@gmail.com
               </a>
             </div>
           </div>
 
           <!-- Hours -->
-          <div class="flex items-start gap-4">
-            <i data-lucide="clock" class="w-7 h-7 sm:w-8 sm:h-8 text-red-500 mt-1 flex-shrink-0"></i>
-            <div>
-              <h4 class="font-bold text-xl sm:text-2xl text-gray-800">Business Hours</h4>
-              <p class="font-body text-gray-600 mt-1 text-base sm:text-lg">
+          <div class="flex items-start gap-3 min-w-0">
+            <i data-lucide="clock" class="w-7 h-7 text-red-500 mt-1 flex-shrink-0"></i>
+            <div class="min-w-0">
+              <h4 class="font-bold text-lg sm:text-xl text-gray-800">Business Hours</h4>
+              <p class="font-body text-gray-600 mt-1 text-sm sm:text-base whitespace-normal break-words">
                 Monday - Friday: 8:00 AM - 6:00 PM<br />
                 Saturday: 8:00 AM - 4:00 PM
               </p>
@@ -1547,10 +1565,9 @@
           </div>
         </div>
 
-        <!-- Button -->
-        <div class="mt-8">
+        <div class="mt-6">
           <button id="open-contact-modal-bottom"
-            class="crayon-button bg-red-400 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 text-lg sm:text-2xl w-full rounded-lg shadow hover:bg-red-500 transition">
+                  class="crayon-button bg-red-400 text-white font-bold px-4 py-3 text-base sm:text-lg w-full rounded-lg shadow hover:bg-red-500 transition">
             Schedule a Campus Visit
           </button>
         </div>
