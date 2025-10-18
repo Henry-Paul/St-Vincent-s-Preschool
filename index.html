@@ -182,6 +182,62 @@
             word-spacing: -0.05em;
         }
 
+        /* Enhanced Testimonial Styles */
+        .testimonial-slide {
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn {
+            border: 2px solid #3b82f6;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 1px 2px 0px #3b82f6;
+            cursor: pointer;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(1px) translateX(0.5px);
+            box-shadow: 0.5px 1px 0px #3b82f6;
+            background-color: #dbeafe;
+        }
+
+        .read-more-btn:active {
+            transform: translateY(2px) translateX(1px);
+            box-shadow: 0px 0px 0px #3b82f6;
+        }
+
+        /* Smooth expansion animation */
+        .bg-yellow-100 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Ensure consistent text alignment */
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: justify;
+            hyphens: auto;
+            word-spacing: -0.05em;
+        }
+
+        /* Mobile responsiveness for expanded state */
+        @media (max-width: 768px) {
+            .testimonial-slide .bg-yellow-100.expanded {
+                min-height: 450px !important;
+            }
+            
+            .read-more-btn {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+
         /* Loading spinner */
         .spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
@@ -999,7 +1055,7 @@
                     <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chanda Nagar. We offer a fun, safe, and stimulating environment for children aged 1.5 to 6 years.</p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                         <button id="open-contact-modal-hero" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">Schedule a Visit</button>
-                        <a href="tel:+919100999312" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
+                        <a href="tel:+919032249494" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
                             <i data-lucide="phone"></i>Call Us Now
                         </a>
                     </div>
@@ -1336,8 +1392,8 @@
                                 <i data-lucide="phone-call" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
                                 <div>
                                     <h4 class="font-bold text-2xl text-gray-800">Call for Inquiries</h4>
-                                    <a href="tel:+919100999312" class="font-body text-gray-600 hover:text-red-500 text-lg block mt-1">+91 9032249494</a>
-                                    <a href="https://wa.me/919100999312" class="font-body text-green-600 hover:text-green-700 text-lg block mt-1">
+                                    <a href="tel:+919032249494" class="font-body text-gray-600 hover:text-red-500 text-lg block mt-1">+91 9032249494</a>
+                                    <a href="https://wa.me/919032249494" class="font-body text-green-600 hover:text-green-700 text-lg block mt-1">
                                         <i data-lucide="message-circle" class="w-5 h-5 inline mr-1"></i> WhatsApp
                                     </a>
                                 </div>
@@ -1459,7 +1515,7 @@
 
     <!-- WhatsApp Style Chat Widget -->
     <div class="whatsapp-chat-widget">
-        <a href="https://wa.me/919100999312?text=Hi%20St.%20Vincent's%20Preschool%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programs" 
+        <a href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programs" 
            target="_blank" 
            class="whatsapp-chat-button" 
            id="whatsapp-chat-button">
@@ -1492,11 +1548,11 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Testimonial Slider with Improved Text Formatting
+        // Enhanced Testimonial Slider with Expandable Layout
         const testimonials = [
             { 
-                name: "Apoorva Nuthula.", 
-                text: "My husband remembered finding this school last year and it abruptly came to his mind to check it out for our son this year. We initially joined him in another school but we weren’t happy with it. We joined our son in St.Vincent’s preschool and it has been the best decision that we have taken for our son. He loves his school, his teachers, his friends. He never wants to miss a day at school. And honestly that’s what matters - our child to come home happy and feel safe away from home. The teachers here are polite, kind, warm and make the kids welcomed and safe. They earn their trust and shape them with love. My son loves Regina mam- his class teacher. I am really thankful for all the staff of the school for making it a beautiful experience for Ryan . Note: people in and around PJR enclave please visit this school for your child before joining him/her else where." 
+                name: "Apoorva Nuthula", 
+                text: "My husband remembered finding this school last year and it abruptly came to his mind to check it out for our son this year. We initially joined him in another school but we weren't happy with it. We joined our son in St.Vincent's preschool and it has been the best decision that we have taken for our son. He loves his school, his teachers, his friends. He never wants to miss a day at school. And honestly that's what matters - our child to come home happy and feel safe away from home. The teachers here are polite, kind, warm and make the kids welcomed and safe. They earn their trust and shape them with love. My son loves Regina mam- his class teacher. I am really thankful for all the staff of the school for making it a beautiful experience for Ryan . Note: people in and around PJR enclave please visit this school for your child before joining him/her else where." 
             }, 
             { 
                 name: "Praveen G.", 
@@ -1518,19 +1574,74 @@
 
         const slider = document.getElementById('testimonial-slider');
         let currentIndex = 0;
+        let expandedStates = Array(testimonials.length).fill(false);
 
         function renderTestimonials() {
             if (!slider) return;
-            slider.innerHTML = testimonials.map(t => `
-                <div class="testimonial-slide p-4 flex-shrink-0 w-full">
-                    <div class="bg-yellow-100 p-8 rounded-xl crayon-border h-full flex flex-col justify-between">
-                        <div class="flex-grow">
-                            <p class="font-body text-gray-600 testimonial-text leading-relaxed text-justify">"${t.text}"</p>
+            
+            slider.innerHTML = testimonials.map((t, index) => {
+                const isExpanded = expandedStates[index];
+                const isLongText = t.text.length > 200;
+                const displayText = isExpanded ? t.text : (isLongText ? t.text.substring(0, 200) + '...' : t.text);
+                
+                return `
+                    <div class="testimonial-slide p-4 flex-shrink-0 w-full">
+                        <div class="bg-yellow-100 p-6 rounded-xl crayon-border h-full flex flex-col justify-between min-h-[280px] max-h-[280px] transition-all duration-300 ${isExpanded ? 'expanded' : ''}">
+                            <div class="flex-grow overflow-hidden">
+                                <p class="font-body text-gray-600 testimonial-text leading-relaxed text-justify">"${displayText}"</p>
+                            </div>
+                            <div class="mt-4 flex justify-between items-center">
+                                <p class="font-bold text-gray-800 text-xl text-right flex-1">- ${t.name}</p>
+                                ${isLongText ? `
+                                    <button class="read-more-btn ml-4 text-blue-600 font-semibold text-lg hover:text-blue-700 transition-colors crayon-button bg-blue-100 px-3 py-1" data-index="${index}">
+                                        ${isExpanded ? 'Read Less' : 'Read More'}
+                                    </button>
+                                ` : ''}
+                            </div>
                         </div>
-                        <p class="font-bold text-gray-800 mt-6 text-2xl text-right">- ${t.name}</p>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+            
+            // Add event listeners to read more buttons
+            document.querySelectorAll('.read-more-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const index = parseInt(btn.getAttribute('data-index'));
+                    toggleTestimonialExpansion(index);
+                });
+            });
+        }
+
+        function toggleTestimonialExpansion(index) {
+            expandedStates[index] = !expandedStates[index];
+            
+            // Update the current slide
+            const slides = document.querySelectorAll('.testimonial-slide');
+            if (slides[index]) {
+                const testimonialCard = slides[index].querySelector('.bg-yellow-100');
+                if (testimonialCard) {
+                    if (expandedStates[index]) {
+                        testimonialCard.classList.remove('min-h-[280px]', 'max-h-[280px]');
+                        testimonialCard.classList.add('min-h-[400px]', 'max-h-none');
+                    } else {
+                        testimonialCard.classList.remove('min-h-[400px]', 'max-h-none');
+                        testimonialCard.classList.add('min-h-[280px]', 'max-h-[280px]');
+                    }
+                    
+                    // Update button text
+                    const button = testimonialCard.querySelector('.read-more-btn');
+                    if (button) {
+                        button.textContent = expandedStates[index] ? 'Read Less' : 'Read More';
+                    }
+                    
+                    // Update text content
+                    const textElement = testimonialCard.querySelector('.testimonial-text');
+                    if (textElement) {
+                        textElement.textContent = `"${expandedStates[index] ? testimonials[index].text : testimonials[index].text.substring(0, 200) + '...'}"`;
+                    }
+                }
+            }
         }
 
         function updateSlider() { 
@@ -1544,6 +1655,7 @@
             updateSlider(); 
         }
 
+        // Initialize the slider
         if (slider) {
             document.getElementById('nextBtn').addEventListener('click', showNext);
             document.getElementById('prevBtn').addEventListener('click', () => { 
@@ -1551,15 +1663,9 @@
                 updateSlider(); 
             });
             
-            // Auto-slide every 5 seconds
-            setInterval(showNext, 5000);
+            // Auto-slide every 8 seconds (increased for better reading)
+            setInterval(showNext, 8000);
             renderTestimonials();
-            
-            // Set fixed height for testimonial slides
-            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-            testimonialSlides.forEach(slide => {
-                slide.style.minHeight = '300px';
-            });
         }
 
         // FAQ Accordion
