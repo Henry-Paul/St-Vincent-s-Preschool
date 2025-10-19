@@ -654,6 +654,40 @@
             }
         }
 
+        /* Hero Image Frame */
+        .hero-image-frame {
+            position: relative;
+            border: 12px solid #f59e0b;
+            border-radius: 20px;
+            padding: 12px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-image-frame::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border: 3px dashed #f59e0b;
+            border-radius: 25px;
+            pointer-events: none;
+        }
+        
+        .hero-image-frame::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+            border: 2px solid #ef4444;
+            border-radius: 30px;
+            pointer-events: none;
+        }
+
         /* Utility classes */
         .hidden {
             display: none !important;
@@ -1247,8 +1281,10 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <div class="responsive-img-container crayon-border">
-                        <img src="images/hero/happy-children.jpg" alt="Happy children at St. Vincent's Preschool" class="responsive-img">
+                    <div class="hero-image-frame">
+                        <div class="responsive-img-container crayon-border">
+                            <img src="images/hero/happy-children.jpg" alt="Happy children at St. Vincent's Preschool" class="responsive-img">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1695,6 +1731,9 @@
     <div id="contact-modal-container"></div>
     <div id="blog-modal-container"></div>
 
+    <!-- Auto Popup Modal -->
+    <div id="auto-popup-modal-container"></div>
+
     <!-- WhatsApp Style Chat Widget -->
     <div class="whatsapp-chat-widget">
         <a href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programs" 
@@ -2003,7 +2042,7 @@
             science: {
                 title: "The Science of Early Learning",
                 subtitle: "How Preschool Shapes Brain Development",
-                image: "images/blog/science-learning.jpg",
+                image: "images/blog/science-learning.jpeg",
                 content: `
                     <p class="mb-4">Early childhood is a critical period for brain development. Research shows that 90% of a child's brain develops by age 5, making the preschool years crucial for establishing the foundation for all future learning.</p>
                     <p class="mb-4">At St. Vincent's, we leverage this understanding through:</p>
@@ -2024,7 +2063,7 @@
             social: {
                 title: "Social Skills Development",
                 subtitle: "Building Foundations for Healthy Relationships",
-                image: "images/blog/social-skills.jpg",
+                image: "images/blog/social-skills.jpeg",
                 content: `
                     <p class="mb-4">Preschool provides the first structured environment where children learn to navigate social relationships outside their family. These early experiences are fundamental to developing essential life skills.</p>
                     <p class="mb-4">Through guided play, group activities, and daily interactions, our teachers help children learn:</p>
@@ -2046,7 +2085,7 @@
             primary: {
                 title: "Preparing for Primary School",
                 subtitle: "A Smooth Transition to Formal Education",
-                image: "images/blog/primary-preparation.jpg",
+                image: "images/blog/primary-preparation.jpeg",
                 content: `
                     <p class="mb-4">The transition from preschool to primary school is a significant milestone that requires careful preparation. Our program specifically focuses on ensuring children are academically, socially, and emotionally ready for this important step.</p>
                     <p class="mb-4">Key preparation areas include:</p>
@@ -2067,7 +2106,7 @@
             }
         };
 
-        function createModal(data, container) {
+        function createModal(data, container, isAutoPopup = false) {
             let modalHTML = '';
             if (container === document.getElementById('modal-container')) {
                  modalHTML = `
@@ -2102,15 +2141,15 @@
                         </div>
                     </div>
                  </div>`;
-            } else if (container === document.getElementById('contact-modal-container')) {
+            } else if (container === document.getElementById('contact-modal-container') || container === document.getElementById('auto-popup-modal-container')) {
                  modalHTML = `
                  <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
                     <div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
                         <div class="p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
-                                    <h2 class="text-5xl font-bold text-gray-800">Schedule a Visit</h2>
-                                    <p class="text-xl text-gray-600 mt-2">We'd love to show you around our campus!</p>
+                                    <h2 class="text-5xl font-bold text-gray-800">${isAutoPopup ? 'Get Started Today!' : 'Schedule a Visit'}</h2>
+                                    <p class="text-xl text-gray-600 mt-2">${isAutoPopup ? 'Let us help you find the perfect program for your child!' : 'We\'d love to show you around our campus!'}</p>
                                 </div>
                                 <button class="close-modal-btn p-1">
                                     <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
@@ -2127,7 +2166,13 @@
                                 </div>
                                 <div class="text-2xl">
                                     <label for="childAge" class="font-medium text-gray-700">Child's Age</label>
-                                    <input type="number" id="childAge" name="childAge" min="1" max="8" class="w-full mt-1 p-3 crayon-border text-xl" required>
+                                    <select id="childAge" name="childAge" class="w-full mt-1 p-3 crayon-border text-xl" required>
+                                        <option value="">Select age range</option>
+                                        <option value="1.5 to 2 years">1.5 to 2 years</option>
+                                        <option value="2 to 3 years">2 to 3 years</option>
+                                        <option value="3 to 4 years">3 to 4 years</option>
+                                        <option value="4 to 5 years">4 to 5 years</option>
+                                    </select>
                                 </div>
                                 <div class="text-2xl">
                                     <label for="program" class="font-medium text-gray-700">Program Interested In</label>
@@ -2145,7 +2190,7 @@
                                     <textarea id="message" name="message" class="w-full mt-1 p-3 crayon-border text-xl" rows="3"></textarea>
                                 </div>
                                 <button type="submit" class="w-full crayon-button bg-red-400 text-white font-bold text-2xl p-4 flex items-center justify-center gap-2">
-                                    <span id="submit-text">Submit Inquiry</span>
+                                    <span id="submit-text">${isAutoPopup ? 'Get Started' : 'Submit Inquiry'}</span>
                                     <div id="submit-spinner" class="spinner hidden" style="width: 20px; height: 20px;"></div>
                                 </button>
                                 <p id="contact-form-success-message" class="text-green-600 text-center font-semibold hidden text-xl">Thank you! We'll call you soon!</p>
@@ -2223,7 +2268,7 @@
                         program: document.getElementById('program').value,
                         message: document.getElementById('message').value,
                         timestamp: new Date().toLocaleString(),
-                        source: 'Website Contact Form'
+                        source: isAutoPopup ? 'Auto Popup Form' : 'Website Contact Form'
                     };
                     
                     console.log('Sending form data:', formData);
@@ -2288,6 +2333,10 @@
         function createContactModal() {
             createModal({}, document.getElementById('contact-modal-container'));
         }
+        
+        function createAutoPopupModal() {
+            createModal({}, document.getElementById('auto-popup-modal-container'), true);
+        }
 
         function createBlogModal(blogId) {
             const blogDataWithColor = {
@@ -2348,6 +2397,13 @@
                     tooltip.style.transform = 'translateY(10px)';
                 }, 5000);
             }, 2000);
+        });
+
+        // Auto popup modal after 4 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                createAutoPopupModal();
+            }, 4000);
         });
 
         // Test EmailJS connection on page load
