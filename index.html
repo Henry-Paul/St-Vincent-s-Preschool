@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Cleaned Title and Description -->
+    <title>St. Vincent's Preschool | Premium Preschool & Daycare in Chandanagar, Hyderabad</title>
+    <meta name="description" content="St. Vincent's Preschool offers premium early childhood education in Chandanagar, Hyderabad. EYFS curriculum, play-based learning for children 1.5-6 years.">
+
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* --- CORE THEME ADJUSTMENTS FOR BRIGHT / VIBRANT AESTHETIC (Inspired by the image) --- */
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff; /* Light Sky Blue/Off-White (Sky 50) */
+            color: #1f2937; /* Dark Slate Gray for primary text */
+        }
+
+        .panel-bg {
+            background-color: #ffffff; /* White for cards/panels */
+            color: #1f2937;
+        }
+        
+        .main-bg {
+             background-color: #f0f9ff; /* Light Sky Blue/Off-White */
+        }
+        
+        /* Vibrant Green Accent - Used for primary CTAs and active state */
+        .accent-green {
+            color: #059669; /* Emerald 600 */
+        }
+        
+        /* Accent Button Style */
+        .accent-btn {
+            background-color: #10b981; /* Emerald 500 */
+            color: #ffffff; /* Contrast text on button */
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 700;
+        }
+
+        .accent-btn:hover {
+            background-color: #059669; /* Darker Emerald */
+            transform: scale(1.02);
+        }
+
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Image Cover effect - High-Contrast placeholder */
+        .hero-bg {
+            /* Placeholder adjusted for light theme with vibrant green text */
+            background-image: url('https://placehold.co/1920x1080/e0f2f1/059669?text=St.+Vincent\'s+Preschool');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Sleek Theme - Sidebar Active link style */
+        .nav-link.active {
+            color: #059669; /* Vibrant Green */
+            background-color: #e0f2f1; /* Light Emerald 50 for subtle highlight */
+            font-weight: 600;
+            border-left: 4px solid #059669; /* Vibrant Green line */
+        }
+        
+        /* Mobile menu active styling */
+        @media (max-width: 1023px) {
+            .nav-link.active {
+                color: #059669; 
+                background-color: #ffffff;
+                border-left: none;
+                border-bottom: 3px solid #059669; /* Vibrant Green line */
+            }
+        }
+
+        /* Fix for mobile header overlap: Mobile header is fixed at the top. 
+           This padding ensures the main content starts below the fixed header (top bar + tabs). */
+        #main-content {
+             padding-top: 104px; /* Adjusted padding-top for fixed mobile header */
+        }
+        @media (min-width: 1024px) {
+            #main-content {
+                padding-top: 32px; /* Original lg:pt-8 */
+            }
+        }
+
+        /* Custom scrollbar for a clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #a1a1aa; /* Gray 400 */
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #71717a; /* Gray 500 */
+        }
+
+        /* Simple animation for floating elements */
+        @keyframes pulse-once {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-pulse-once {
+            animation: pulse-once 1s ease-in-out 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Application Container -->
+    <div id="app" class="flex min-h-screen main-bg text-gray-800">
+        
+        <!-- Desktop Sidebar (Hidden on Mobile) -->
+        <aside id="sidebar-desktop" class="hidden lg:block w-64 main-bg shadow-lg flex-shrink-0 z-50 fixed h-full border-r border-gray-200">
+            <div class="p-6 border-b border-gray-200 flex items-center space-x-2">
+                <!-- Swapped icon for a friendlier one -->
+                <i data-lucide="hand-heart" class="w-8 h-8 accent-green"></i>
+                <span class="text-xl font-extrabold text-gray-900 tracking-tight">ST VINCENT'S</span>
+            </div>
+            <nav class="flex flex-col p-4 space-y-2">
+                <!-- Navigation links will be injected by JS -->
+            </nav>
+            <div class="absolute bottom-0 w-full p-4">
+                <button id="sidebar-schedule-btn" class="w-full accent-btn px-4 py-3 rounded-xl font-bold shadow-xl">
+                    Schedule Assessment
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area Wrapper -->
+        <div class="lg:ml-64 w-full flex flex-col">
+            <!-- Mobile Header/Navigation Bar (Fixed at Top) -->
+            <header id="header-mobile" class="lg:hidden panel-bg shadow-md z-40 fixed w-full top-0">
+                <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                    <div class="flex items-center space-x-2">
+                        <!-- Swapped icon for a friendlier one -->
+                        <i data-lucide="hand-heart" class="w-6 h-6 accent-green"></i>
+                        <span class="text-lg font-extrabold text-gray-900">ST VINCENT'S</span>
+                    </div>
+                    <button id="mobile-schedule-btn" class="accent-btn text-xs px-3 py-1.5 rounded-lg font-semibold shadow-md">
+                        Book a Visit
+                    </button>
+                </div>
+                <!-- Mobile Tab Navigation -->
+                <nav id="nav-mobile-tabs" class="flex justify-around items-center text-center text-sm font-medium border-t border-gray-100 panel-bg text-gray-600">
+                    <!-- Links will be injected by JS -->
+                </nav>
+            </header>
+
+            <!-- Main Content Section -->
+            <main id="main-content" class="flex-grow p-4 md:p-8">
+                <!-- Content will be injected based on current page -->
+            </main>
+
+            <!-- Footer -->
+            <footer class="lg:ml-0 main-bg border-t border-gray-200 py-6 text-sm text-gray-600">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <!-- Location -->
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3">Our Location</h3>
+                        <p class="text-gray-600">Chandanagar, Hyderabad - 500050</p>
+                        <p class="text-xs text-gray-500 mt-1">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout</p>
+                    </div>
+                    <!-- Contact -->
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3">Contact Us</h3>
+                        <p>+91-9032249494</p>
+                        <p>admissions@stvincents.com</p>
+                    </div>
+                    <!-- Hours -->
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3">Operational Hours</h3>
+                        <p class="text-gray-600">Mon - Fri: 8:00 AM - 6:00 PM</p>
+                        <p class="text-gray-600">Saturday: 8:00 AM - 2:00 PM</p>
+                    </div>
+                    <!-- Copyright -->
+                    <div class="col-span-2 md:col-span-1 md:text-right">
+                        <h3 class="font-bold text-gray-900 mb-3">St. Vincent's</h3>
+                        <p class="text-gray-600">&copy; 2024 St. Vincent's Preschool.</p>
+                        <p class="text-xs text-gray-500">All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Chat Button -->
+    <div id="whatsapp-chat-button" class="fixed right-4 bottom-4 md:right-8 md:bottom-8 z-50 group cursor-pointer animate-pulse-once">
+        <!-- Cleaned tooltip text -->
+        <div class="whatsapp-chat-tooltip absolute right-full bottom-0 mr-4 p-3 bg-gray-700 text-gray-100 rounded-lg shadow-xl text-sm whitespace-nowrap opacity-0 transition-all duration-300 transform translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0">
+            Chat with Admissions
+        </div>
+        <button class="w-16 h-16 bg-green-500 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-green-600 transition duration-300 relative transform hover:scale-110">
+            <div class="notification-badge absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full text-xs font-bold text-white flex items-center justify-center -mt-1 -mr-1">!</div>
+            <i data-lucide="message-circle" class="w-8 h-8 fill-white"></i>
+        </button>
+    </div>
+
+    <!-- Dynamic Modal Container (for Schedule Visit) -->
+    <div id="modal-container"></div>
+
+
+    <script>
+        // --- CONFIGURATION & STATE ---
+        const WHATSAPP_NUMBER = '+919032249494';
+
+        const PAGES = [
+            { id: 'home', label: 'Home', icon: 'layout-dashboard' },
+            { id: 'academics', label: 'Programs', icon: 'graduation-cap' },
+            { id: 'whyus', label: 'Features', icon: 'shield-check' },
+            { id: 'blog', label: 'Insights', icon: 'pen-tool' },
+            { id: 'faqs', label: 'FAQs', icon: 'help-circle' },
+        ];
+
+        let state = {
+            currentPage: 'home'
+        };
+
+        const FAQS = [
+            { q: "What is the EYFS curriculum and how does it benefit my child?", a: "The Early Years Foundation Stage (EYFS) is a framework from the UK that sets standards for the learning, development, and care of children from birth to five. It promotes holistic growth across seven key areas, ensuring your child is school-ready globally." },
+            { q: "What are your safety protocols on campus?", a: "Our campus has a secure access perimeter with biometric entry and exit. All common areas and classrooms are monitored 24/7 by CCTV. Staff are trained in emergency response, and all equipment is child-proofed and regularly maintained." },
+            { q: "What age groups do you accept for admission?", a: "We accept children from 1.5 years (Toddler) up to 6 years (Pre-Primary). We also offer extended Daycare services for the full range of age groups." },
+            { q: "How do I initiate the enrollment process and pay the fee?", a: "The process begins with scheduling a campus visit and a free trial session. Once confirmed, we send you a digital enrollment form and provide secure online payment links for all fee structures. Click the 'Initiate Enrollment' button to start!" },
+            { q: "Do you provide meal services?", a: "Yes, we provide nutritious and balanced meal plans prepared in our hygienic on-site kitchen, tailored to age-specific dietary needs and allergies (with parent consultation)." }
+        ];
+
+        // MOCK DATA for Google Maps Testimonials (5-Star only)
+        const GOOGLE_TESTIMONIALS = [
+            { name: "Suresh P.", review: "Absolutely brilliant preschool! The staff is caring, and the EYFS curriculum is top-notch. My daughter has blossomed in confidence and learning. Highly recommended for any parent in Chandanagar.", rating: 5 },
+            { name: "Priya S.", review: "5 stars! We switched from another school and noticed the difference immediately. The emphasis on play-based learning and the dedication of the educators is truly exceptional. Safe and fun environment.", rating: 5 },
+            { name: "Rahul M.", review: "Excellent facility and even better teachers. They manage the extended daycare flawlessly, and the healthy meal plans are a huge plus. The communication is always clear and timely.", rating: 5 },
+            { name: "Anjali K.", review: "St. Vincent's is a gem! My son looks forward to going to school. The campus security is reassuring, and the activities are genuinely engaging and educational. A fantastic start to his academic journey.", rating: 5 },
+        ];
+
+
+        // --- CORE APPLICATION LOGIC ---
+
+        /**
+         * Closes and removes a modal from the DOM.
+         */
+        function closeModal(modalElement) {
+            modalElement.classList.add('opacity-0');
+            modalElement.querySelector('.modal-content').classList.remove('scale-100');
+            modalElement.querySelector('.modal-content').classList.add('scale-95');
+            setTimeout(() => {
+                modalElement.closest('#modal-container').innerHTML = '';
+                document.body.classList.remove('overflow-hidden');
+            }, 300);
+        }
+
+        /**
+         * Creates and displays a generic contact modal.
+         */
+        function createContactModal(title, description, isAutoPopup = false) {
+            const container = document.getElementById('modal-container');
+            if (container.querySelector('.modal-backdrop')) return;
+
+            document.body.classList.add('overflow-hidden');
+
+            const modalHtml = `
+                <div class="modal-backdrop fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-[110] opacity-0 transition-opacity duration-300 p-4" 
+                     onclick="if(event.target.classList.contains('modal-backdrop')) closeModal(this)">
+                    <div class="modal-content panel-bg p-8 rounded-3xl shadow-2xl max-w-lg w-full transform scale-95 transition-all duration-300 relative border border-emerald-300">
+                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition duration-200 ${isAutoPopup ? 'p-2 rounded-full panel-bg' : ''}" onclick="closeModal(this.closest('.modal-backdrop'))">
+                            <i data-lucide="x" class="w-6 h-6"></i>
+                        </button>
+                        
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold accent-green mb-2">${title}</h3>
+                            <p class="text-gray-600">${description}</p>
+                        </div>
+
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="form-name" class="block text-sm font-medium text-gray-700 mb-1">Parent Name*</label>
+                                <input type="text" id="form-name" name="name" required class="w-full p-3 border border-gray-300 bg-gray-50 text-gray-800 rounded-xl focus:ring-emerald-500 focus:border-emerald-500 transition duration-200">
+                            </div>
+                            <div>
+                                <label for="form-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number*</label>
+                                <input type="tel" id="form-phone" name="phone" required class="w-full p-3 border border-gray-300 bg-gray-50 text-gray-800 rounded-xl focus:ring-emerald-500 focus:border-emerald-500 transition duration-200">
+                            </div>
+                            <div>
+                                <label for="form-child-age" class="block text-sm font-medium text-gray-700 mb-1">Child's Age (Years)</label>
+                                <input type="number" id="form-child-age" name="child_age" min="1" max="6" class="w-full p-3 border border-gray-300 bg-gray-50 text-gray-800 rounded-xl focus:ring-emerald-500 focus:border-emerald-500 transition duration-200">
+                            </div>
+                            <div>
+                                <label for="form-message" class="block text-sm font-medium text-gray-700 mb-1">Your Query (Optional)</label>
+                                <textarea id="form-message" name="message" rows="3" class="w-full p-3 border border-gray-300 bg-gray-50 text-gray-800 rounded-xl focus:ring-emerald-500 focus:border-emerald-500 transition duration-200"></textarea>
+                            </div>
+                            <!-- Cleaned button text -->
+                            <button type="submit" id="form-submit-btn" class="w-full accent-btn p-3 rounded-xl font-bold shadow-lg">
+                                Submit & Schedule Visit
+                            </button>
+                            <p id="form-message-status" class="text-center text-sm font-medium mt-3"></p>
+                        </form>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = modalHtml;
+            lucide.createIcons();
+
+            const backdrop = container.querySelector('.modal-backdrop');
+            const content = container.querySelector('.modal-content');
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                content.classList.replace('scale-95', 'scale-100');
+            }, 10);
+
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('form-submit-btn');
+            const statusMessage = document.getElementById('form-message-status');
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Processing...';
+                statusMessage.className = 'text-center text-sm font-medium mt-3 accent-green';
+                statusMessage.textContent = 'Sending your request...';
+
+                // Simulate success response for the immersive environment
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                statusMessage.className = 'text-center text-sm font-medium mt-3 text-green-600';
+                // Cleaned success message
+                statusMessage.textContent = 'Thank you! We will contact you shortly to confirm your booking.';
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit & Schedule Visit';
+            });
+        }
+
+        function createAutoPopupModal() {
+            // Cleaned alert message
+            createContactModal(
+                "Book Your Free Trial Session Today",
+                "Our enrollment is limited. Book your free trial class and campus visit now to secure your child's slot.",
+                true
+            );
+        }
+
+        function navigateTo(pageId) {
+            const page = PAGES.find(p => p.id === pageId);
+            if (!page) {
+                pageId = 'home';
+            }
+            state.currentPage = pageId;
+            window.location.hash = pageId;
+            renderApp();
+        }
+
+        // --- PAGE RENDERING FUNCTIONS ---
+
+        function renderHomePage() {
+            const faqsCondensed = FAQS.slice(0, 3);
+            return `
+                <div class="hero-bg min-h-[50vh] flex items-center justify-center rounded-3xl shadow-2xl mb-12 border border-emerald-300">
+                    <!-- Hero Content -->
+                    <div class="relative z-10 max-w-4xl mx-auto p-8 md:p-12 text-center space-y-6 bg-white bg-opacity-80 backdrop-blur-sm rounded-2xl border border-gray-200 shadow-xl">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900">
+                            Premium Education in <span class="accent-green">Chandanagar</span>, Hyderabad
+                        </h1>
+                        <p class="text-lg sm:text-xl font-light opacity-90 max-w-2xl mx-auto text-gray-700">
+                            Nurturing minds with the global EYFS curriculum and a pure play-based learning philosophy.
+                        </p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center pt-4">
+                            <!-- Cleaned button text -->
+                            <button id="home-enroll-btn" class="accent-btn px-8 py-3 rounded-xl font-bold text-lg shadow-2xl transform hover:scale-105">
+                                Initiate Enrollment
+                            </button>
+                            <a onclick="navigateTo('academics')" class="border-2 border-emerald-500 text-emerald-700 bg-white px-8 py-3 rounded-xl font-semibold text-lg hover:bg-emerald-50 transition duration-300 transform hover:scale-105 cursor-pointer shadow-md">
+                                View Our Programs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 panel-bg rounded-3xl shadow-xl mb-12 border border-gray-200">
+                    <div class="space-y-2 text-center">
+                        <i data-lucide="sun" class="w-8 h-8 text-yellow-500 mx-auto"></i>
+                        <h3 class="font-semibold text-gray-900">Spacious Learning Classrooms</h3>
+                        <p class="text-sm text-gray-600">Designed for optimal light and creative learning.</p>
+                    </div>
+                    <div class="space-y-2 text-center">
+                        <i data-lucide="users" class="w-8 h-8 accent-green mx-auto"></i>
+                        <h3 class="font-semibold text-gray-900">Dedicated Educators</h3>
+                        <p class="text-sm text-gray-600">Trained in global early childhood practices.</p>
+                    </div>
+                    <div class="space-y-2 text-center">
+                        <i data-lucide="lock" class="w-8 h-8 text-red-500 mx-auto"></i>
+                        <h3 class="font-semibold text-gray-900">Secure Campus</h3>
+                        <p class="text-sm text-gray-600">CCTV monitored, child-proof facility.</p>
+                    </div>
+                </div>
+
+                <!-- Condensed FAQ Section for Home Page -->
+                <div class="max-w-4xl mx-auto mt-16 p-8 main-bg rounded-3xl shadow-none border border-gray-200">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold accent-green mb-2">Top 3 Frequently Asked Questions</h2>
+                        <p class="text-lg text-gray-600">Quick answers to common queries from prospective parents.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        ${faqsCondensed.map((faq, index) => `
+                            <div class="panel-bg rounded-xl shadow-md border border-gray-200">
+                                <button class="w-full text-left p-4 flex justify-between items-center focus:outline-none" onclick="document.getElementById('home-faq-answer-${index}').classList.toggle('hidden'); this.querySelector('i').classList.toggle('rotate-180')">
+                                    <span class="font-semibold text-gray-800 text-base">${faq.q}</span>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 accent-green transition-transform duration-300"></i>
+                                </button>
+                                <div id="home-faq-answer-${index}" class="hidden p-4 pt-0 border-t border-gray-100 text-gray-600 text-sm transition-all duration-300">
+                                    <p>${faq.a}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <!-- Cleaned button text -->
+                        <button onclick="navigateTo('faqs')" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-bold hover:bg-gray-300 transition shadow-md">
+                            View All ${FAQS.length} FAQs
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAcademicsPage() {
+            return `
+                <div class="max-w-5xl mx-auto">
+                    <!-- Curriculum Section -->
+                    <div class="panel-bg p-8 rounded-3xl shadow-xl mb-12 border border-emerald-300">
+                        <div class="text-center mb-8">
+                            <h2 class="text-3xl font-bold accent-green mb-2">Curriculum & Philosophy</h2>
+                            <p class="text-lg text-gray-600">A blend of structured discovery and free-flow activity.</p>
+                        </div>
+                        <div class="flex flex-col lg:flex-row gap-8 items-center">
+                            <div class="lg:w-1/2">
+                                <img src="https://placehold.co/600x400/bbf7d0/059669?text=Play+Based+Learning" alt="Children learning activity" class="rounded-2xl shadow-lg w-full h-auto object-cover border border-emerald-300">
+                            </div>
+                            <div class="lg:w-1/2 space-y-4">
+                                <h3 class="text-xl font-bold text-gray-900">EYFS: Seven Areas of Development</h3>
+                                <p class="text-gray-600 leading-relaxed text-sm">
+                                    The UK's Early Years Foundation Stage framework focuses on three Prime Areas (Communication and Language, Physical Development, and Personal, Social and Emotional Development) and four Specific Areas (Literacy, Mathematics, Understanding the World, and Expressive Arts and Design).
+                                </p>
+                                <ul class="space-y-2 text-gray-700 text-sm">
+                                    <li class="flex items-start">
+                                        <i data-lucide="check-circle" class="w-4 h-4 accent-green mr-2 mt-1 flex-shrink-0"></i>
+                                        <span>**Prime Areas:** Foundational skill development.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i data-lucide="check-circle" class="w-4 h-4 accent-green mr-2 mt-1 flex-shrink-0"></i>
+                                        <span>**Specific Areas:** Knowledge and skill application.</span>
+                                    </li>
+                                </ul>
+                                <button onclick="createContactModal('Request Curriculum Details', 'Download the full EYFS framework overview and program timeline.')" class="bg-amber-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-amber-600 transition duration-300 shadow-md">
+                                    Request Overview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Programs Section -->
+                    <div class="panel-bg p-8 rounded-3xl shadow-xl border border-gray-200">
+                        <div class="text-center mb-8">
+                            <h2 class="text-3xl font-bold accent-green mb-2">Our Programs</h2>
+                            <p class="text-lg text-gray-600">Programs tailored for different age groups.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            ${[
+                                { title: 'Toddler Program', range: '1.5 - 2.5 Years', desc: 'Focus on sensory exploration, language burst, and gross motor skills development.' },
+                                { title: 'Pre-Nursery Program', range: '2.5 - 3.5 Years', desc: 'Introduction to structured play, social interaction, and early literacy concepts.' },
+                                { title: 'Nursery Program', range: '3.5 - 4.5 Years', desc: 'Deepening independent learning, pre-math, and narrative storytelling skills.' },
+                                { title: 'Daycare Extension', range: '1.5 - 6 Years (Extended)', desc: 'Safe, caring, and enriching extended hours for working parents.' }
+                            ].map(p => `
+                                <div class="p-6 border-t-4 border-emerald-500 bg-gray-50 rounded-xl shadow-md space-y-2">
+                                    <h3 class="text-xl font-bold text-gray-900">${p.title}</h3>
+                                    <p class="text-sm text-emerald-600">${p.range}</p>
+                                    <p class="text-gray-600 text-sm">${p.desc}</p>
+                                    <button onclick="createContactModal('Book Trial for ${p.title}', 'Book a free trial session to evaluate this program.')" class="mt-2 bg-gray-200 text-sm text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-300 transition shadow-sm">
+                                        Request Trial
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderWhyUsPage() {
+            return `
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold accent-green mb-2">Why Choose St. Vincent's?</h2>
+                        <p class="text-lg text-gray-600">We are committed to quality, safety, and holistic development.</p>
+                    </div>
+
+                    <!-- Features Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                        ${[
+                            { title: 'Global EYFS Curriculum', desc: 'The UK framework ensures holistic development and global school readiness.', icon: 'award' },
+                            { title: 'Pure Play-Based Learning', desc: 'Learning happens naturally through exploration, experimentation, and imaginative play.', icon: 'activity' },
+                            { title: 'Advanced Safety & Hygiene', desc: 'State-of-the-art security, CCTV, and rigorous cleanliness protocols.', icon: 'lock-keyhole' }
+                        ].map(f => `
+                            <div class="p-6 panel-bg rounded-2xl shadow-lg border border-gray-200 text-center">
+                                <div class="accent-green mb-3 inline-block p-3 rounded-full bg-emerald-50">
+                                    <i data-lucide="${f.icon}" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">${f.title}</h3>
+                                <p class="text-gray-600 text-sm">${f.desc}</p>
+                                <button onclick="createContactModal('Learn More About ${f.title}', 'Contact us to get a detailed specification sheet on this feature.')" class="mt-4 accent-btn text-xs px-4 py-2 rounded-lg transition shadow-md">
+                                    Get Details
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <!-- Testimonials Section: Now using simulated Google Maps 5-Star Reviews -->
+                    <div class="panel-bg p-8 rounded-3xl shadow-xl border border-emerald-300">
+                        <!-- Cleaned title -->
+                        <h3 class="text-2xl font-bold accent-green text-center mb-6">Parent Testimonials (5-Star Reviews)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            ${GOOGLE_TESTIMONIALS.map(t => `
+                                <div class="p-6 bg-gray-50 rounded-2xl border-l-4 border-amber-500 shadow-sm">
+                                    <div class="flex items-center mb-3">
+                                        <!-- Star rating visualization - using Amber 500 for a warm feel -->
+                                        ${[...Array(t.rating)].map(() => `<i data-lucide="star" class="w-4 h-4 fill-amber-500 text-amber-500 mr-1"></i>`).join('')}
+                                    </div>
+                                    <p class="text-base text-gray-700 italic mb-3">
+                                        "${t.review}"
+                                    </p>
+                                    <div class="font-semibold text-sm text-gray-800">- ${t.name} <span class="text-gray-500">(Google Review)</span></div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderBlogPage() {
+            const blogPosts = [
+                { title: 'The Role of Analytical Play in Cognitive Development', summary: 'Analytical play isn\'t just fun; it builds complex problem-solving neural pathways. We analyze its critical role in early childhood intelligence.', date: 'Nov 10, 2024', tag: 'Academics' },
+                { title: 'Implementing Safety Protocols for Children', summary: 'A deep dive into our multi-layered security infrastructure, covering physical access control, cyber safety training, and parent communication.', date: 'Oct 25, 2024', tag: 'Safety' },
+                { title: 'A Data-Driven Approach to Individualized Learning', summary: 'We leverage continuous observation data to generate personalized learning paths (PLPs) for every child, ensuring maximum developmental progress.', date: 'Sep 15, 2024', tag: 'Strategy' },
+                { title: 'Recruitment and Training for Our Educators', summary: 'Our commitment to excellence starts with our team. Review the rigorous certification and ongoing professional development for all staff.', date: 'Aug 01, 2024', tag: 'Team' }
+            ];
+
+            return `
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold accent-green mb-2">Our Latest Insights</h2>
+                        <p class="text-lg text-gray-600">Our latest reports and articles on early childhood education.</p>
+                        <button onclick="createContactModal('Subscribe to Newsletter', 'Don\'t miss our next report. Subscribe for weekly email updates!')" class="mt-4 bg-amber-500 text-white px-5 py-2 rounded-lg font-semibold hover:bg-amber-600 transition shadow-md">
+                            Subscribe Now
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                        ${blogPosts.map(post => `
+                            <div class="panel-bg p-6 rounded-2xl shadow-lg border border-gray-200 flex flex-col justify-between">
+                                <div>
+                                    <span class="text-xs font-semibold uppercase tracking-wider accent-green bg-emerald-50 px-2 py-0.5 rounded-full">${post.tag}</span>
+                                    <h3 class="text-xl font-bold text-gray-900 mt-3 mb-2 hover:text-emerald-600 transition cursor-pointer">${post.title}</h3>
+                                    <p class="text-gray-600 text-sm mb-4">${post.summary}</p>
+                                </div>
+                                <div class="flex justify-between items-center text-sm text-gray-500 mt-4">
+                                    <span>${post.date}</span>
+                                    <a href="#" onclick="createContactModal('Request Full Article: ${post.title}', 'Fill in your details to receive the full PDF version of this article.')" class="accent-btn text-xs px-3 py-1.5 rounded-lg font-semibold flex items-center transition shadow-md">
+                                        Download <i data-lucide="download" class="w-4 h-4 ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFaqPage() {
+            return `
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold accent-green mb-2">Frequently Asked Questions</h2>
+                        <p class="text-lg text-gray-600">Common questions from parents about our programs and operations.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        ${FAQS.map((faq, index) => `
+                            <div class="panel-bg rounded-xl shadow-lg border border-gray-200">
+                                <button class="w-full text-left p-5 flex justify-between items-center focus:outline-none" onclick="document.getElementById('faq-answer-${index}').classList.toggle('hidden'); this.querySelector('i').classList.toggle('rotate-180')">
+                                    <span class="font-semibold text-gray-900 text-lg">${faq.q}</span>
+                                    <i data-lucide="chevron-down" class="w-6 h-6 accent-green transition-transform duration-300"></i>
+                                </button>
+                                <div id="faq-answer-${index}" class="hidden p-5 pt-0 border-t border-gray-100 text-gray-600 transition-all duration-300">
+                                    <p>${faq.a}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="mt-12 text-center p-8 panel-bg rounded-xl border border-gray-200 shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Still Have Questions?</h3>
+                        <p class="text-gray-600 mb-6">If your question is not answered, schedule a visit to speak with our admissions team directly.</p>
+                        <button onclick="createContactModal('Schedule a Call', 'We will call you back to answer any detailed questions you may have.')" class="accent-btn px-8 py-3 rounded-lg font-bold shadow-md">
+                            Schedule a Call
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // --- MAIN RENDER FUNCTION ---
+
+        function renderApp() {
+            const mainContent = document.getElementById('main-content');
+            const navDesktop = document.querySelector('#sidebar-desktop nav');
+            const navMobile = document.getElementById('nav-mobile-tabs');
+
+            // 1. Render Navigation
+            const currentHash = window.location.hash.substring(1) || 'home';
+            state.currentPage = PAGES.map(p => p.id).includes(currentHash) ? currentHash : 'home';
+
+            // Desktop Nav
+            navDesktop.innerHTML = PAGES.map(page => `
+                <a href="#${page.id}" class="nav-link flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-100 transition duration-200 text-gray-700 ${state.currentPage === page.id ? 'active' : ''}">
+                    <i data-lucide="${page.icon}" class="w-5 h-5"></i>
+                    <span>${page.label}</span>
+                </a>
+            `).join('');
+
+            // Mobile Nav (Tabs)
+            navMobile.innerHTML = PAGES.map(page => `
+                <a href="#${page.id}" class="nav-link flex-1 flex flex-col items-center justify-center p-2.5 hover:bg-gray-100 transition duration-200 ${state.currentPage === page.id ? 'active' : ''}">
+                    <i data-lucide="${page.icon}" class="w-5 h-5"></i>
+                    <span class="text-xs mt-1">${page.label}</span>
+                </a>
+            `).join('');
+
+            // 2. Render Main Content
+            let contentHTML = '';
+            switch (state.currentPage) {
+                case 'academics':
+                    contentHTML = renderAcademicsPage();
+                    break;
+                case 'whyus':
+                    contentHTML = renderWhyUsPage();
+                    break;
+                case 'blog':
+                    contentHTML = renderBlogPage();
+                    break;
+                case 'faqs':
+                    contentHTML = renderFaqPage();
+                    break;
+                case 'home':
+                default:
+                    contentHTML = renderHomePage();
+                    break;
+            }
+            
+            mainContent.innerHTML = contentHTML;
+            
+            // Re-initialize Lucide icons for the new content
+            lucide.createIcons();
+
+            // 3. Attach Home button listener after content is rendered
+            const homeEnrollBtn = document.getElementById('home-enroll-btn');
+            if (homeEnrollBtn) {
+                homeEnrollBtn.addEventListener('click', () => createContactModal("Initiate Enrollment", "Start your child's journey by scheduling a free assessment and campus visit."));
+            }
+        }
+
+        // --- EVENT LISTENERS (DOM Content Loaded) ---
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initial render based on hash or default to 'home'
+            if (window.location.hash) {
+                 navigateTo(window.location.hash.substring(1));
+            } else {
+                 renderApp();
+            }
+
+            // Listen for hash changes to navigate without full reload
+            window.addEventListener('hashchange', () => navigateTo(window.location.hash.substring(1)));
+
+            // Attach modal creation listener to all schedule buttons (sidebar, mobile header)
+            const scheduleButtons = [
+                document.getElementById('sidebar-schedule-btn'),
+                document.getElementById('mobile-schedule-btn'),
+            ];
+            scheduleButtons.forEach(button => {
+                if (button) {
+                    button.addEventListener('click', () => {
+                        createContactModal("Schedule Your Campus Visit", "We look forward to showing you our facilities and discussing your child's needs.");
+                    });
+                }
+            });
+
+            // --- WhatsApp button functionality ---
+            const whatsappButton = document.getElementById('whatsapp-chat-button');
+            whatsappButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                const badge = this.querySelector('.notification-badge');
+                if (badge) {
+                    badge.style.display = 'none';
+                }
+                const url = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%20I%20am%20interested%20in%20St.%20Vincent's%20Preschool%20and%20would%20like%20to%20know%20more.`;
+                window.open(url, '_blank');
+            });
+
+            // Auto-show tooltip on page load
+            setTimeout(() => {
+                const tooltip = whatsappButton.querySelector('.whatsapp-chat-tooltip');
+                tooltip.style.opacity = '1';
+                tooltip.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    tooltip.style.opacity = '0';
+                    tooltip.style.transform = 'translateY(10px)';
+                }, 5000);
+            }, 2000);
+
+            // --- Auto popup modal after 4 seconds (now limited to once per session) ---
+            setTimeout(() => {
+                if (!sessionStorage.getItem('autoPopupShown')) {
+                    createAutoPopupModal();
+                    sessionStorage.setItem('autoPopupShown', 'true');
+                }
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
+
