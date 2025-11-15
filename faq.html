@@ -1,53 +1,145 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>FAQ — St. Vincent's Preschool</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
-</head>
-<body class="bg-[#fff7ed]">
 
-  <header class="bg-[#3f1444] text-[#f8e6d6]">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="font-bold text-2xl">St. Vincent's</a>
-      <nav class="hidden md:flex gap-6 items-center">
-        <a href="index.html">Home</a>
-        <a href="programs.html">Programs</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="faq.html" class="underline">FAQ</a>
-        <a href="contact.html" class="px-4 py-2 rounded-full bg-[#f0d9c8] text-[#3f1444]">Contact</a>
+  <!-- FAQ structured data (10 Qs) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"What ages do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept children from 1.5 years up to 6 years across Playgroup, Nursery and Pre-primary."}},
+      {"@type":"Question","name":"What is your curriculum?","acceptedAnswer":{"@type":"Answer","text":"We follow a play-based early years curriculum focused on social-emotional development, early literacy and numeracy."}},
+      {"@type":"Question","name":"What are your fees and payment options?","acceptedAnswer":{"@type":"Answer","text":"Fees vary by program and are shared on enquiry. We accept monthly / term payments; contact us for the latest fee schedule."}},
+      {"@type":"Question","name":"What are the timings and holidays?","acceptedAnswer":{"@type":"Answer","text":"Typically classes run Monday–Friday 08:00–18:00. We follow local school holidays; exact calendar is provided at enrollment."}},
+      {"@type":"Question","name":"Do you provide meals?","acceptedAnswer":{"@type":"Answer","text":"Light snacks are provided. For full-day children we recommend packed lunches following our nutrition guidelines."}},
+      {"@type":"Question","name":"What is your teacher-to-child ratio?","acceptedAnswer":{"@type":"Answer","text":"We maintain small groups with a low teacher-to-child ratio for safety and individual attention; details available per program."}},
+      {"@type":"Question","name":"How do you handle illness and emergencies?","acceptedAnswer":{"@type":"Answer","text":"We have trained staff, first-aid kits, emergency protocols, and immediate parent contact procedures for any illness or emergency."}},
+      {"@type":"Question","name":"Can parents visit during the day?","acceptedAnswer":{"@type":"Answer","text":"Yes — visits are welcome by appointment to respect routines and children's comfort."}},
+      {"@type":"Question","name":"How do I enrol my child?","acceptedAnswer":{"@type":"Answer","text":"Fill the enquiry form, schedule a visit, and submit required documents to complete registration."}},
+      {"@type":"Question","name":"What safety measures are in place (CCTV, security)?","acceptedAnswer":{"@type":"Answer","text":"We follow strict security protocols, supervised arrivals/departures, and secure premises with staff monitoring."}}
+    ]
+  }
+  </script>
+</head>
+<body class="bg-[#fff7ed] text-gray-900">
+
+  <header class="site-header bg-[#3f1444] text-white">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/logo.png" alt="logo" class="w-10 h-10">
+        <div class="text-lg font-semibold">St. Vincent's</div>
+      </a>
+      <nav class="hidden md:flex gap-6">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="programs.html" class="nav-link">Programs</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
       </nav>
-      <button class="md:hidden menu-toggle px-3 py-2 rounded bg-[#f0d9c8]">
-        <i class="fa fa-bars"></i>
-      </button>
+      <button id="menu-btn" class="menu-toggle md:hidden p-2 rounded" aria-label="Toggle menu"></button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-[#3f1444] text-[#f8e6d6] px-6 pb-4">
-      <a href="index.html" class="block py-2 border-b border-[#4b2444]">Home</a>
-      <a href="programs.html" class="block py-2 border-b border-[#4b2444]">Programs</a>
-      <a href="gallery.html" class="block py-2 border-b border-[#4b2444]">Gallery</a>
-      <a href="faq.html" class="block py-2">FAQ</a>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#3a1038] text-[#f6e8e4] px-4 pb-4">
+      <a href="index.html" class="block py-2">Home</a>
+      <a href="programs.html" class="block py-2">Programs</a>
+      <a href="gallery.html" class="block py-2">Gallery</a>
       <a href="contact.html" class="block py-2">Contact</a>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-6 py-12">
+  <main class="max-w-6xl mx-auto px-4 py-12">
     <h1 class="text-4xl font-bold">Frequently Asked Questions</h1>
-    <div class="mt-6 space-y-4">
+    <p class="mt-2 text-gray-700">Answers to the top questions parents ask us.</p>
+
+    <div class="mt-6 space-y-4" id="faq-list">
+      <!-- FAQ items -->
       <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold">What ages do you accept?</summary>
-        <p class="mt-2">We accept children between 1.5 to 6 years across Playgroup, Nursery and Pre-primary.</p>
+        <summary class="font-semibold text-lg">What ages do you accept?</summary>
+        <p class="mt-2">We accept children from 1.5 to 6 years across Playgroup, Nursery and Pre-primary.</p>
       </details>
+
       <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold">What is your curriculum?</summary>
-        <p class="mt-2">Play-based learning with structured literacy and numeracy for older kids.</p>
+        <summary class="font-semibold text-lg">What is your curriculum?</summary>
+        <p class="mt-2">Play-based curriculum focused on social, emotional and early literacy/numeracy development.</p>
       </details>
+
       <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold">Do you provide meals?</summary>
-        <p class="mt-2">Yes — hygienic snacks are provided; full day children bring packed lunches as per guidelines.</p>
+        <summary class="font-semibold text-lg">What are your fees and payment options?</summary>
+        <p class="mt-2">Fees depend on program and timings; we accept monthly/quarterly/term payments. Contact us for current rates.</p>
+      </details>
+
+      <details class="p-4 bg-white rounded shadow">
+        <summary class="font-semibold text-lg">What are the timings and holiday schedule?</summary>
+        <p class="mt-2">Standard hours: Mon-Fri 08:00–18:00. We publish an academic calendar for holidays and closures.</p>
+      </details>
+
+      <details class="p-4 bg-white rounded shadow">
+        <summary class="font-semibold text-lg">Do you provide meals?</summary>
+        <p class="mt-2">We provide hygienic snacks. Full day children should bring packed lunches as per our nutrition guidelines.</p>
+      </details>
+
+      <details class="p-4 bg-white rounded shadow">
+        <summary class="font-semibold text-lg">What is the teacher-to-child ratio?</summary>
+        <p class="mt-2">We maintain small groups with low teacher-to-child ratios to ensure personal attention and safety.</p>
+      </details>
+
+      <details class="p-4 bg-white rounded shadow">
+        <summary class="font-semibold text-lg">How do you handle illness and emergencies?</summary>
+        <p class="mt-2">Staff are trained in first aid, we have clear protocols and immediate parent contact for any medical concerns.</p>
+      </details>
+
+      <details class="p-4 bg-white rounded shadow">
+        <summary class="font-semibold text-lg">Can parents visit during the day?</summary>
+        <p class="mt-2">Yes — visits by appointment are welcome to maintain routine and minimize disruption to children.</p>
+      </details>
+
+      <details class="p-4 bg-white rounded shadow">
+        <summary class="font-semibold text-lg">How do I enrol my child?</summary>
+        <p class="mt-2">Submit an enquiry or book a visit via our form. We will guide you through registration and document submission.</p>
+      </details>
+
+      <details class="p-4 bg-white rounded shadow">
+        <summary class="font-semibold text-lg">What safety & security measures do you have?</summary>
+        <p class="mt-2">Secure premises, supervised drop-off/pick-up, and staff background checks. CCTV and access control are in place where possible.</p>
       </details>
     </div>
   </main>
+
+  <!-- Footer + WhatsApp as before -->
+  <footer class="site-footer bg-gray-800 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-2xl font-bold mb-2">St. Vincent's Preschool</h3>
+        <p class="text-sm text-gray-300">A nurturing and joyful environment for early childhood education.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Quick Links</h4>
+        <ul class="mt-3 text-sm space-y-2">
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold">Contact</h4>
+        <p class="mt-3 text-sm">Chandanagar, Hyderabad<br/>Phone: +91 90322 49494</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Hours</h4>
+        <p class="mt-3 text-sm">Mon-Fri 08:00 - 18:00<br/>Sat 08:00 - 16:00</p>
+      </div>
+    </div>
+    <div class="text-center py-4 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
+  </footer>
+
+  <div id="whatsapp-widget" class="whatsapp-chat-widget" aria-hidden="false">
+    <button id="whatsapp-open" class="whatsapp-chat-button" aria-label="Chat on WhatsApp">
+      <i class="fa-brands fa-whatsapp" style="font-size:20px;color:white;"></i>
+    </button>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
