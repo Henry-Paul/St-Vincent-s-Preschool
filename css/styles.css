@@ -1,75 +1,35 @@
-/* styles.css - custom classes used across pages */
-
+/* styles.css — accessible, responsive base styles */
 :root{
-  --primary:#7c2d6b;
-  --accent:#f0d9c8;
-  --muted:#5b4750;
+  --brand:#7c2d6b;
+  --muted:#53535a;
+  --bg:#fff7ed;
+  --focus: #f6d6a5;
+  --accent: #3f1444;
 }
+html { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; font-size:16px; }
+body { background:var(--bg); color:#111827; margin:0; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+a { color:var(--brand); }
+.btn-primary{ background:var(--accent); color:#fff; padding:.6rem 1rem; border-radius:999px; border:3px solid #2a0b2b; font-weight:700; }
+.btn-primary-outline{ background:white; color:var(--accent); padding:.5rem .9rem; border-radius:999px; border:2px solid rgba(0,0,0,.06); }
+.btn-outline{ background:transparent; border:1px solid rgba(255,255,255,.12); padding:.4rem .8rem; border-radius:8px; }
+.btn-ghost{ background:#fff; color:var(--accent); padding:.5rem .9rem; border-radius:999px; }
+.nav-link{ color:#fff; text-decoration:none; font-weight:600; }
+.hero-frame{ border-radius:16px; padding:6px; background:linear-gradient(180deg,#fff,#fdebd3); border:8px solid #f7d7a6; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
 
-body { font-family: 'Lora', serif; }
-
-.cta-primary{
-  background:var(--primary);
-  color:var(--accent);
-  border:3px solid #2a0b2b;
-  padding:0.6rem 1rem;
-  border-radius:9999px;
-  font-weight:700;
-  box-shadow: 3px 6px 0 rgba(0,0,0,0.08);
-}
-.cta-primary:hover{ transform: translateY(-2px); }
-
-.cta-outline{
-  background:white;
-  color:var(--muted);
-  border:3px solid rgba(0,0,0,0.06);
-  padding:0.5rem 0.9rem;
-  border-radius:9999px;
-  font-weight:600;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
-}
-
-.cta-primary-alt{
-  background:#b03a5b;
-  color:#fff;
-  border-radius:9999px;
-  padding:0.6rem 1rem;
-  border:3px solid rgba(0,0,0,0.06);
-}
-
-/* hero frame */
-.hero-frame{
-  border:10px solid #f7d7a6;
-  border-radius:18px;
-  padding:6px;
-  background:linear-gradient(180deg,#fff,#fdebd3);
-  max-width:480px;
-}
-
-/* whatsapp FAB */
-.whatsapp-fab{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  background:#25D366;
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  z-index:9999;
-  box-shadow:0 6px 20px rgba(0,0,0,0.2);
-  font-size:24px;
-}
-
-/* modal base */
+/* modal */
 .modal{ display:flex; }
 .modal.hidden{ display:none; }
-.modal-panel{ max-width:640px; }
+.modal-panel{ width:100%; max-width:560px; }
 
-/* small responsive tweaks */
-@media (max-width:767px){
-  .hero-frame{ display:none; }
+/* WhatsApp widget */
+.wa-fab{ position:fixed; right:18px; bottom:18px; width:56px; height:56px; border-radius:50%; background:#25D366; color:white; display:flex; align-items:center; justify-content:center; z-index:9999; box-shadow:0 6px 20px rgba(0,0,0,.18); border:none; }
+.wa-panel{ position:fixed; right:18px; bottom:86px; width:280px; background:white; border-radius:8px; box-shadow:0 12px 40px rgba(0,0,0,.12); overflow:hidden; z-index:9999; }
+.wa-panel .wa-header{ padding:10px; background:var(--accent); color:white; font-weight:700; }
+.wa-panel .wa-body{ padding:10px; display:flex; flex-direction:column; gap:8px; }
+.wa-suggest{ padding:10px; border-radius:8px; border:1px solid #eee; background:#fff; text-align:left; font-size:14px; }
+.wa-suggest.selected{ border-color:var(--brand); }
+
+/* small screens */
+@media(max-width:767px){
+  .hero-frame{ display:block; margin:0 auto; }
 }
