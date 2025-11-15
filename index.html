@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>St. Vincent's Preschool</title>
+  <meta name="description" content="St. Vincent's Preschool - nurturing and joyful environment for early childhood education." />
+
+  <!-- Tailwind CDN for utility classes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#fff7ed] text-gray-800" style="font-family: 'Lora', serif;">
+
+  <!-- HEADER -->
+  <header class="bg-[#3f1444] text-[#f8e6d6]">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+      <a href="index.html" class="flex items-center gap-4">
+        <div class="text-2xl font-bold">St. Vincent's<span class="block text-sm">PRESCHOOL</span></div>
+      </a>
+      <nav class="hidden md:flex gap-6 items-center">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="programs.html" class="hover:underline">Programs</a>
+        <a href="gallery.html" class="hover:underline">Gallery</a>
+        <a href="faq.html" class="hover:underline">FAQ</a>
+        <a href="contact.html" class="px-4 py-2 rounded-full bg-[#f0d9c8] text-[#3f1444] font-semibold">Contact</a>
+      </nav>
+
+      <button id="menu-btn" class="md:hidden px-3 py-2 rounded bg-[#f0d9c8] text-[#3f1444]">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-[#3f1444] text-[#f8e6d6] px-6 pb-4">
+      <a href="programs.html" class="block py-2">Programs</a>
+      <a href="gallery.html" class="block py-2">Gallery</a>
+      <a href="faq.html" class="block py-2">FAQ</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-5xl md:text-6xl font-serif font-bold text-[#2b1228] leading-tight">Where Every Child Shines</h1>
+        <p class="mt-6 text-lg text-[#47323a] max-w-xl">A nurturing and joyful environment for early childhood education</p>
+        <div class="mt-8 flex gap-4 flex-wrap">
+          <button id="hero-cta" class="cta-primary px-6 py-3 rounded-full">Learn More</button>
+          <a href="tel:+919032249494" class="cta-outline px-6 py-3 rounded-full">Call Us</a>
+          <button id="open-contact-modal-hero" class="cta-primary-alt px-6 py-3 rounded-full">Schedule a Visit</button>
+        </div>
+      </div>
+
+      <div class="flex justify-center md:justify-end">
+        <div class="hero-frame p-3">
+          <img src="assets/images/hero/happy-children.jpg" alt="children" class="rounded-lg w-full object-cover">
+        </div>
+      </div>
+    </section>
+
+    <!-- three features -->
+    <section class="bg-[#fff1e6] py-12">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#f6d6a5] mb-4">
+            <i class="fa fa-star text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Quality Education</h3>
+          <p class="mt-2 text-[#5b4750]">Engaging and enriching curriculum</p>
+        </div>
+        <div>
+          <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#f6d6a5] mb-4">
+            <i class="fa fa-hand-holding-heart text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Caring Teachers</h3>
+          <p class="mt-2 text-[#5b4750]">Experienced and compassionate</p>
+        </div>
+        <div>
+          <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#f6d6a5] mb-4">
+            <i class="fa fa-puzzle-piece text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Play-based Learning</h3>
+          <p class="mt-2 text-[#5b4750]">Fun and interactive activities</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- gallery preview -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+      <h2 class="text-3xl font-bold text-center">Gallery</h2>
+      <p class="text-center mt-2 text-[#5b4750]">See our classrooms and activities</p>
+      <div class="grid md:grid-cols-3 gap-4 mt-6">
+        <a href="gallery.html" class="block overflow-hidden rounded-lg"><img src="assets/images/gallery/preschool-1.jpeg" alt="" class="w-full h-56 object-cover"></a>
+        <a href="gallery.html" class="block overflow-hidden rounded-lg"><img src="assets/images/gallery/preschool-2.jpeg" alt="" class="w-full h-56 object-cover"></a>
+        <a href="gallery.html" class="block overflow-hidden rounded-lg"><img src="assets/images/gallery/preschool-3.jpeg" alt="" class="w-full h-56 object-cover"></a>
+      </div>
+      <div class="text-center mt-6">
+        <a href="gallery.html" class="cta-outline px-6 py-3 rounded-full inline-block">View Full Gallery</a>
+      </div>
+    </section>
+
+    <!-- testimonials -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+      <h3 class="text-3xl font-bold text-center">What Parents Say</h3>
+      <div id="testimonial-slider" class="mt-6 space-y-4">
+        <!-- rendered by JS -->
+      </div>
+    </section>
+
+    <!-- CTA band -->
+    <section class="bg-[#3f1444] text-[#f8e6d6] py-12">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h3 class="text-3xl font-bold">Ready to join St. Vincent's?</h3>
+        <p class="mt-2">Schedule a campus visit or send an inquiry</p>
+        <div class="mt-6">
+          <button id="open-contact-modal-bottom" class="cta-primary">Schedule a Visit</button>
+          <a href="contact.html" class="cta-outline ml-3">Contact Page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#3f1444] text-[#f8e6d6]">
+    <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-6">
+      <div>
+        <h4 class="text-2xl font-bold">St. Vincent's Preschool</h4>
+        <p class="mt-2 text-sm">A nurturing and joyful environment for early childhood education.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Quick Links</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold">Contact</h4>
+        <p class="mt-3 text-sm">Chandanagar, Hyderabad<br/>Phone: +91 90322 49494</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Hours</h4>
+        <p class="mt-3 text-sm">Mon-Fri 08:00 - 18:00<br/>Sat 08:00 - 16:00</p>
+      </div>
+    </div>
+    <div class="text-center py-6 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a class="whatsapp-fab" href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fa fa-whatsapp"></i>
+  </a>
+
+  <!-- MODALS: contact modal + auto-popup -->
+  <!-- Contact Modal -->
+  <div id="contact-modal" class="modal hidden fixed inset-0 z-50 items-center justify-center bg-black/50">
+    <div class="modal-panel bg-white rounded-lg max-w-lg w-full p-6 relative">
+      <button id="close-contact-modal" class="absolute right-4 top-4 text-gray-600"><i class="fa fa-times"></i></button>
+      <h3 class="text-2xl font-bold mb-2">Enquiry / Schedule a Visit</h3>
+      <p class="text-sm text-gray-600 mb-4">Fill the details and we will contact you shortly.</p>
+
+      <form id="contact-form-modal" class="space-y-3">
+        <input type="text" id="parentName" name="parentName" placeholder="Parent's Name" class="w-full p-3 border rounded" required>
+        <input type="tel" id="phone" name="phone" placeholder="Phone Number" class="w-full p-3 border rounded" required>
+        <select id="childAge" name="childAge" class="w-full p-3 border rounded">
+          <option value="">Child's Age / Class</option>
+          <option value="1.5 to 2 years">1.5 to 2 years</option>
+          <option value="2 to 3 years">2 to 3 years</option>
+          <option value="Playgroup">Playgroup</option>
+          <option value="Nursery">Nursery</option>
+          <option value="Pre-Primary 1">Pre-Primary 1</option>
+          <option value="Pre-Primary 2">Pre-Primary 2</option>
+          <option value="Day Care">Day Care</option>
+        </select>
+        <select id="program" name="program" class="w-full p-3 border rounded">
+          <option value="">Program of Interest</option>
+          <option value="Playgroup">Playgroup</option>
+          <option value="Nursery">Nursery</option>
+          <option value="Pre-Primary 1">Pre-Primary 1</option>
+          <option value="Pre-Primary 2">Pre-Primary 2</option>
+          <option value="Day Care">Day Care</option>
+        </select>
+        <textarea id="message" name="message" rows="3" placeholder="Message (optional)" class="w-full p-3 border rounded"></textarea>
+
+        <div class="flex gap-3">
+          <button type="submit" id="contact-submit-modal" class="cta-primary flex-1">Submit</button>
+          <button type="button" id="contact-cancel" class="cta-outline flex-1">Cancel</button>
+        </div>
+
+        <p id="modal-success" class="hidden text-green-600 font-semibold text-center">Thank you — we'll contact you soon!</p>
+        <p id="modal-error" class="hidden text-red-600 font-semibold text-center">Submission failed. Try again.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Auto-Popup (shows once) -->
+  <div id="auto-popup" class="modal hidden fixed inset-0 z-40 items-center justify-center bg-black/40">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+      <button id="close-auto-popup" class="absolute right-4 top-4 text-gray-600"><i class="fa fa-times"></i></button>
+      <h4 class="text-xl font-bold">Admissions Open</h4>
+      <p class="mt-2 text-sm text-gray-600">Enroll now for the new academic year. Book a tour today.</p>
+      <div class="mt-4 text-right">
+        <button id="auto-popup-cta" class="cta-primary">Book a Tour</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
