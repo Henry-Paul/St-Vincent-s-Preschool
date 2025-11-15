@@ -1,21 +1,22 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Programs — St. Vincent's Preschool</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-[#fff7ed] text-gray-900">
+<body>
 
-  <!-- Header (same as index) -->
-  <header class="site-header bg-[#3f1444] text-white">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
+  <!-- Header -->
+  <header class="site-header bg-white shadow fixed w-full z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
         <img src="images/logo.png" alt="logo" class="w-10 h-10 object-contain">
         <div class="text-lg font-semibold">St. Vincent's</div>
       </a>
+
       <nav class="hidden md:flex gap-6 items-center">
         <a href="index.html" class="nav-link">Home</a>
         <a href="programs.html" class="nav-link">Programs</a>
@@ -23,72 +24,83 @@
         <a href="faq.html" class="nav-link">FAQ</a>
         <a href="contact.html" class="btn-outline">Contact</a>
       </nav>
-      <button id="menu-btn" class="menu-toggle md:hidden p-2 rounded-md" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-[#3a1038] text-[#f6e8e4] px-4 pb-4">
-      <a href="index.html" class="block py-2">Home</a>
-      <a href="programs.html" class="block py-2">Programs</a>
-      <a href="gallery.html" class="block py-2">Gallery</a>
-      <a href="faq.html" class="block py-2">FAQ</a>
-      <a href="contact.html" class="block py-2">Contact</a>
+
+      <div class="flex items-center gap-3">
+        <button id="back-btn" class="hidden md:inline-flex items-center gap-2 text-sm text-gray-600">← Back</button>
+        <button id="menu-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu"></button>
+      </div>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold">Programs</h1>
-    <p class="mt-2 text-gray-700">Click a program to read full details or enquire now.</p>
+  <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
+    <a href="index.html" class="inline-block mb-4 text-blue-600">← Back to Home</a>
+    <h1 class="text-3xl font-bold">Programs</h1>
+    <p class="mt-2 text-gray-700">Click a program to read full details and enquire.</p>
 
     <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <!-- Program card (repeat for each) -->
-      <article class="p-6 bg-white rounded-lg shadow">
-        <h3 class="text-2xl font-semibold">Playgroup</h3>
-        <p class="mt-2 text-sm text-gray-700">For children aged 1.5–2 years. Focus on socialization & routines.</p>
+      <!-- Program Card -->
+      <article class="p-6 bg-white rounded-xl shadow-lg">
+        <h3 class="text-xl font-semibold">Playgroup</h3>
+        <p class="mt-2 text-gray-600">Age: 1.5–2 years. Focused on settling, sensory play and routines.</p>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1">
+          <li>Short sessions (2–3 hours)</li>
+          <li>Low teacher:child ratio</li>
+          <li>Gentle transition support</li>
+        </ul>
         <div class="mt-4 flex gap-2">
-          <button class="btn-small open-program-details" data-program="Playgroup">View Details</button>
-          <button class="btn-small open-contact-modal-from-program" data-program="Playgroup">Enquire Now</button>
+          <button class="btn-small open-program-details" data-program="Playgroup">Details</button>
+          <button class="btn-small open-contact-modal" data-program="Playgroup">Enquire</button>
         </div>
       </article>
 
-      <article class="p-6 bg-white rounded-lg shadow">
-        <h3 class="text-2xl font-semibold">Nursery</h3>
-        <p class="mt-2 text-sm text-gray-700">Building early literacy, numeracy and independence.</p>
+      <article class="p-6 bg-white rounded-xl shadow-lg">
+        <h3 class="text-xl font-semibold">Nursery</h3>
+        <p class="mt-2 text-gray-600">Age: 2–3 years. Literacy & numeracy fundamentals through play.</p>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1">
+          <li>Play-based learning</li>
+          <li>Story time & activity stations</li>
+          <li>Daily progress notes</li>
+        </ul>
         <div class="mt-4 flex gap-2">
-          <button class="btn-small open-program-details" data-program="Nursery">View Details</button>
-          <button class="btn-small open-contact-modal-from-program" data-program="Nursery">Enquire Now</button>
+          <button class="btn-small open-program-details" data-program="Nursery">Details</button>
+          <button class="btn-small open-contact-modal" data-program="Nursery">Enquire</button>
         </div>
       </article>
 
-      <article class="p-6 bg-white rounded-lg shadow">
-        <h3 class="text-2xl font-semibold">Pre-Primary</h3>
-        <p class="mt-2 text-sm text-gray-700">Structured early years learning to prepare for primary school.</p>
+      <article class="p-6 bg-white rounded-xl shadow-lg">
+        <h3 class="text-xl font-semibold">Pre-Primary</h3>
+        <p class="mt-2 text-gray-600">Age: 3–6 years. Structured preparation for primary school.</p>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1">
+          <li>Classroom routines & readiness</li>
+          <li>Phonics & maths introduction</li>
+          <li>Communication & social skills</li>
+        </ul>
         <div class="mt-4 flex gap-2">
-          <button class="btn-small open-program-details" data-program="Pre-Primary">View Details</button>
-          <button class="btn-small open-contact-modal-from-program" data-program="Pre-Primary">Enquire Now</button>
+          <button class="btn-small open-program-details" data-program="Pre-Primary">Details</button>
+          <button class="btn-small open-contact-modal" data-program="Pre-Primary">Enquire</button>
         </div>
       </article>
     </div>
-
-    <!-- Program detail modal is generated dynamically by JS when 'View Details' clicked -->
   </main>
 
-  <!-- Contact modal (same markup) -->
+  <!-- Contact modal (same as index) -->
   <div id="contact-modal" class="modal hidden fixed inset-0 z-50 items-center justify-center bg-black/50" role="dialog" aria-modal="true">
-    <div class="modal-panel bg-white rounded-lg w-full max-w-md p-6 relative">
-      <button data-close-modal class="absolute right-4 top-4 text-gray-500" aria-label="Close">&times;</button>
-      <h4 class="text-xl font-semibold">Enquiry / Book a Visit</h4>
-      <form id="contact-form" class="space-y-4 mt-3" aria-live="polite">
+    <div class="modal-panel bg-white rounded-xl w-full max-w-md p-6 relative">
+      <button data-close-modal class="absolute right-4 top-4 text-gray-500" aria-label="Close">✕</button>
+      <h3 class="text-2xl font-semibold">Enquiry / Schedule a Visit</h3>
+      <form id="contact-form" class="mt-4 space-y-3" aria-live="polite">
         <div>
-          <label for="parentName" class="font-medium text-gray-700">Parent's Name</label>
-          <input type="text" id="parentName" name="parentName" class="w-full mt-1 p-3 crayon-border text-lg" required>
+          <label for="parentName" class="text-sm font-medium">Parent's Name</label>
+          <input type="text" id="parentName" name="parentName" class="w-full p-3 crayon-border rounded" required>
         </div>
         <div>
-          <label for="phone" class="font-medium text-gray-700">Phone Number</label>
-          <input type="tel" id="phone" name="phone" class="w-full mt-1 p-3 crayon-border text-lg" required>
+          <label for="phone" class="text-sm font-medium">Phone</label>
+          <input type="tel" id="phone" name="phone" class="w-full p-3 crayon-border rounded" required>
         </div>
         <div>
-          <label for="childAge" class="font-medium text-gray-700">Child's Age</label>
-          <select id="childAge" name="childAge" class="w-full mt-1 p-3 crayon-border text-lg" required>
-            <option value="">Select age range</option>
+          <label for="childAge" class="text-sm font-medium">Child's Age</label>
+          <select id="childAge" name="childAge" class="w-full p-3 crayon-border rounded" required>
+            <option value="">Select age</option>
             <option value="1.5 to 2 years">1.5 to 2 years</option>
             <option value="2 to 3 years">2 to 3 years</option>
             <option value="3 to 4 years">3 to 4 years</option>
@@ -97,77 +109,52 @@
           </select>
         </div>
         <div>
-          <label for="program" class="font-medium text-gray-700">Program</label>
-          <select id="program" name="program" class="w-full mt-1 p-3 crayon-border text-lg">
+          <label for="program" class="text-sm font-medium">Program</label>
+          <select id="program" name="program" class="w-full p-3 crayon-border rounded">
             <option value="">Select program</option>
-            <option value="playgroup">Playgroup</option>
-            <option value="nursery">Nursery</option>
-            <option value="lkg">Pre-Primary 1</option>
-            <option value="ukg">Pre-Primary 2</option>
-            <option value="daycare">Day Care</option>
+            <option value="Playgroup">Playgroup</option>
+            <option value="Nursery">Nursery</option>
+            <option value="Pre-Primary">Pre-Primary</option>
           </select>
         </div>
-
         <div>
-          <label for="message" class="font-medium text-gray-700">Additional Message (Optional)</label>
-          <textarea id="message" name="message" class="w-full mt-1 p-3 crayon-border text-lg" rows="3"></textarea>
+          <label for="message" class="text-sm font-medium">Message (optional)</label>
+          <textarea id="message" name="message" class="w-full p-3 crayon-border rounded" rows="3"></textarea>
         </div>
-
-        <button type="submit" class="w-full crayon-button bg-red-400 text-white font-bold text-lg p-3">
-          Submit Inquiry
-        </button>
-        <p id="contact-form-success-message" class="text-green-600 text-center font-semibold hidden">Thank you! We'll call you soon!</p>
-        <p id="contact-form-error-message" class="text-red-600 text-center font-semibold hidden">There was an error submitting your form. Please try again or call us directly.</p>
+        <button type="submit" class="w-full btn-primary">Submit Inquiry</button>
+        <p id="contact-form-success-message" class="text-green-600 text-center mt-2 hidden">Thanks — we'll contact you soon.</p>
+        <p id="contact-form-error-message" class="text-red-600 text-center mt-2 hidden">There was an error; try again later.</p>
       </form>
     </div>
   </div>
 
-  <!-- WhatsApp Widget -->
-  <div id="whatsapp-widget" class="whatsapp-chat-widget" aria-hidden="false">
-    <button id="whatsapp-open" class="whatsapp-chat-button" aria-label="Chat on WhatsApp">
-      <i class="fa-brands fa-whatsapp" style="font-size:20px;color:white;"></i>
-    </button>
-    <div id="whatsapp-panel" class="whatsapp-chat-panel hidden" role="dialog" aria-label="WhatsApp chat">
-      <div class="wa-header">Chat with us</div>
-      <div class="wa-body p-3">
-        <button class="wa-suggest block w-full text-left mb-2" data-msg="Hi, I'd like details about admissions.">Admissions info</button>
-        <button class="wa-suggest block w-full text-left mb-2" data-msg="Hi, I want to schedule a visit.">Schedule visit</button>
-      </div>
-      <div class="wa-foot p-3 text-right">
-        <button id="wa-send" class="btn-primary">Open WhatsApp</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="site-footer bg-gray-800 text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-8">
+  <!-- Footer + WhatsApp -->
+  <footer class="site-footer bg-gray-900 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-6">
       <div>
-        <h3 class="text-2xl font-bold mb-2">St. Vincent's Preschool</h3>
-        <p class="text-sm text-gray-300">A nurturing and joyful environment for early childhood education.</p>
+        <h3 class="text-xl font-bold">St. Vincent's Preschool</h3>
+        <p class="mt-2 text-gray-400">Nurturing early learning.</p>
       </div>
       <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <ul class="mt-3 text-sm space-y-2">
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <h4>Links</h4>
+        <ul class="space-y-2 mt-3 text-gray-300"><li><a href="index.html">Home</a></li><li><a href="gallery.html">Gallery</a></li></ul>
       </div>
       <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-3 text-sm">Chandanagar, Hyderabad<br/>Phone: +91 90322 49494</p>
+        <h4>Contact</h4>
+        <p class="mt-2 text-gray-300">+91 9032249494</p>
       </div>
       <div>
-        <h4 class="font-semibold">Hours</h4>
-        <p class="mt-3 text-sm">Mon-Fri 08:00 - 18:00<br/>Sat 08:00 - 16:00</p>
+        <h4>Hours</h4>
+        <p class="mt-2 text-gray-300">Mon–Fri 08:00–18:00</p>
       </div>
     </div>
     <div class="text-center py-4 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
   </footer>
 
+  <a id="whatsapp-fab" href="https://wa.me/919032249494" target="_blank" class="fixed right-6 bottom-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg">💬</a>
+
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap" async defer></script>
   <script src="js/main.js"></script>
 </body>
 </html>
