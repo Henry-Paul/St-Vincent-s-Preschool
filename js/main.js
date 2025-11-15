@@ -1,234 +1,227 @@
-// main.js - robust menu, image fallback, EmailJS, modal & forms (copy this file exactly)
+// js/main.js — copy/paste exactly
 
-// ---------- EmailJS configuration (from your uploaded file) ----------
-const EMAILJS = {
-  SERVICE_ID: 'service_14zrdg6',
-  TEMPLATE_ID: 'template_snxhxlk',
-  PUBLIC_KEY: '5SyxCT8kGY0_H51dC'
+/* ========== CONFIG - update these ========== */
+const CONFIG = {
+  EMAILJS: {
+    SERVICE_ID: 'service_14zrdg6',   // from your uploaded file (or replace with your own)
+    TEMPLATE_ID: 'template_snxhxlk',
+    PUBLIC_KEY: '5SyxCT8kGY0_H51dC'
+  },
+  // Replace with your placeId (find via Place ID Finder or Maps Platform)
+  PLACE_ID: 'YOUR_PLACE_ID_HERE',
+  WHATSAPP_NUMBER: '919032249494' // country code + number (no +)
 };
+/* ========================================== */
 
-// initialize EmailJS if available
-if (window.emailjs) {
-  emailjs.init(EMAILJS.PUBLIC_KEY);
-} else {
-  console.warn('EmailJS SDK not loaded.');
-}
+/* EmailJS init */
+if (window.emailjs) emailjs.init(CONFIG.EMAILJS.PUBLIC_KEY);
 
-// --- helper selectors ---
-const $ = (sel) => document.querySelector(sel);
-const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+/* helpers */
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => Array.from(document.querySelectorAll(s));
 
-// ---------- robust mobile menu toggler ----------
-(function mobileMenuSetup(){
-  // mobile menu id is 'mobile-menu' (present in all pages)
+/* ===== Mobile menu ===== */
+(function menuSetup(){
+  const menuToggle = document.querySelectorAll('.menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
-
-  // attach all elements with class 'menu-toggle' to toggle the menu
-  const toggles = Array.from(document.querySelectorAll('.menu-toggle'));
-
-  // fallback: any button with "menu" in its id or class
-  if(toggles.length === 0){
-    Array.from(document.querySelectorAll('button')).forEach(b=>{
-      if(/menu/i.test(b.id || b.className)) toggles.push(b);
-    });
-  }
-
-  toggles.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if(!mobileMenu) {
-        console.warn('[menu] mobile menu not found');
-        return;
-      }
+  menuToggle.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
       mobileMenu.classList.toggle('hidden');
-      const expanded = !mobileMenu.classList.contains('hidden');
-      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      btn.setAttribute('aria-expanded', String(isHidden));
     });
   });
 })();
 
-// ---------- image error handler (reports missing images + provides placeholder) ----------
-(function imageErrorHandler(){
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('img').forEach(img => {
-      img.addEventListener('error', function(){
-        console.warn('[img-missing] Failed to load:', img.getAttribute('src'));
-        // small neutral svg fallback
-        img.src = "data:image/svg+xml;utf8," + encodeURIComponent(
-          `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='#f3f4f6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#999' font-size='20'>Image not found</text></svg>`
-        );
-      });
-      if(img.complete && img.naturalWidth === 0){
-        img.dispatchEvent(new Event('error'));
-      }
-    });
-  });
-})();
-
-// ---------- modal helpers (open / close by data attribute) ----------
-function openModalById(id){
-  const modal = document.getElementById(id);
-  if(!modal) return;
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-}
-function closeModalByEl(el){
-  if(!el) return;
-  const modal = el.closest('.modal');
-  if(modal) modal.classList.add('hidden');
-  document.body.style.overflow = '';
-}
-
-// wire buttons with data-open-modal and data-close-modal
+/* ===== Modal open/close (data attributes) ===== */
 document.addEventListener('click', (e) => {
   const open = e.target.closest('[data-open-modal]');
-  if(open){
+  if (open) {
     const id = open.getAttribute('data-open-modal');
-    openModalById(id);
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
   }
+
   const close = e.target.closest('[data-close-modal]');
-  if(close){
-    closeModalByEl(close);
+  if (close) {
+    const modal = close.closest('.modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
   }
 });
 
-// open contact modal buttons (some pages use data attributes or specific selectors)
-$$('[data-open-modal="contact-modal"]').forEach(btn => {
-  btn.addEventListener('click', () => openModalById('contact-modal'));
-});
-
-// auto popup (show once per session)
-(function autoPopup(){
-  const auto = document.getElementById('auto-popup');
-  if(!auto) return;
-  if(!sessionStorage.getItem('seenAutopopup')){
-    setTimeout(()=> openModalById('auto-popup'), 1200);
-    sessionStorage.setItem('seenAutopopup','1');
+/* Close modal on Escape */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal').forEach(m => {
+      m.classList.add('hidden');
+      m.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
   }
-  const autoCta = document.getElementById('auto-popup-cta');
-  if(autoCta) autoCta.addEventListener('click', ()=>{
-    closeModalByEl(autoCta);
-    openModalById('contact-modal');
-  });
-})();
-
-// ---------- connect "open from program" buttons to modal and copy program value ----------
-$$('.open-contact-from-program').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const program = btn.dataset.program || '';
-    // modal selects have id 'modal-program' and page selects 'page-program'
-    const modalProgram = $('#modal-program');
-    if(modalProgram) modalProgram.value = program;
-    openModalById('contact-modal');
-  });
 });
 
-// ---------- contact modal form submission ----------
-(function contactModalForm(){
-  const form = $('#contact-form-modal');
+/* ===== Contact form (modal) ===== */
+(function contactModal(){
+  const form = $('#contact-modal-form');
+  const status = $('#modal-status');
   if(!form) return;
 
-  const successEl = $('#modal-success');
-  const errorEl = $('#modal-error');
-  const submitBtn = $('#contact-submit-modal');
-
-  form.addEventListener('submit', function(e){
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    successEl?.classList.add('hidden');
-    errorEl?.classList.add('hidden');
+    status.textContent = 'Sending...';
 
     const payload = {
-      parentName: form.querySelector('[name="parentName"]')?.value || '',
-      phone: form.querySelector('[name="phone"]')?.value || '',
-      childAge: form.querySelector('[name="childAge"]')?.value || '',
-      program: form.querySelector('[name="program"]')?.value || '',
-      message: form.querySelector('[name="message"]')?.value || '',
+      parentName: form.parentName?.value || form.querySelector('#c-name')?.value || '',
+      phone: form.phone?.value || form.querySelector('#c-phone')?.value || '',
+      childAge: form.childAge?.value || form.querySelector('#c-age')?.value || '',
+      message: form.message?.value || form.querySelector('#c-message')?.value || '',
       timestamp: new Date().toLocaleString()
     };
 
-    if(!payload.parentName || !payload.phone){
-      if(errorEl){ errorEl.textContent = 'Please fill name and phone.'; errorEl.classList.remove('hidden'); }
+    if (!payload.parentName || !payload.phone) {
+      status.textContent = 'Please add name and phone.';
       return;
     }
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-
-    emailjs.send(EMAILJS.SERVICE_ID, EMAILJS.TEMPLATE_ID, payload)
-      .then(resp => {
-        if(successEl) successEl.classList.remove('hidden');
+    // call EmailJS
+    emailjs.send(CONFIG.EMAILJS.SERVICE_ID, CONFIG.EMAILJS.TEMPLATE_ID, payload)
+      .then(() => {
+        status.textContent = 'Thanks — we will contact you soon!';
         form.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit';
-        setTimeout(()=> closeModalByEl(submitBtn), 1400);
-      }).catch(err => {
+        setTimeout(()=> {
+          const modal = form.closest('.modal');
+          if(modal){ modal.classList.add('hidden'); document.body.style.overflow = ''; }
+          status.textContent = '';
+        }, 1400);
+      }).catch((err)=> {
         console.error('EmailJS error', err);
-        if(errorEl){ errorEl.textContent = 'Could not send. Try again.'; errorEl.classList.remove('hidden'); }
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit';
+        status.textContent = 'Could not send; try again later.';
       });
   });
 })();
 
-// ---------- contact page form submission ----------
-(function contactPageForm(){
-  const form = $('#contact-form');
-  if(!form) return;
+/* ===== WhatsApp chat mini-widget ===== */
+(function waWidget(){
+  const open = $('#wa-open');
+  const panel = $('#wa-panel');
+  const sendBtn = $('#wa-send');
+  const suggestions = Array.from(document.querySelectorAll('.wa-suggest'));
+  let selected = suggestions[0]?.dataset.msg || 'Hi, I would like to know about admissions.';
 
-  const successEl = $('#contact-success');
-  const errorEl = $('#contact-error');
-  const submitBtn = $('#contact-submit');
+  suggestions.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      selected = e.currentTarget.dataset.msg;
+      // visual focus
+      suggestions.forEach(s => s.classList.remove('selected'));
+      e.currentTarget.classList.add('selected');
+    });
+  });
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    successEl?.classList.add('hidden');
-    errorEl?.classList.add('hidden');
+  open?.addEventListener('click', () => {
+    panel?.classList.toggle('hidden');
+  });
 
-    const payload = {
-      parentName: form.querySelector('[name="parentName"]')?.value || '',
-      phone: form.querySelector('[name="phone"]')?.value || '',
-      childAge: form.querySelector('[name="childAge"]')?.value || '',
-      program: form.querySelector('[name="program"]')?.value || '',
-      message: form.querySelector('[name="message"]')?.value || '',
-      timestamp: new Date().toLocaleString()
-    };
-
-    if(!payload.parentName || !payload.phone){
-      if(errorEl){ errorEl.textContent = 'Please fill name and phone.'; errorEl.classList.remove('hidden'); }
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-
-    emailjs.send(EMAILJS.SERVICE_ID, EMAILJS.TEMPLATE_ID, payload)
-      .then(resp => {
-        if(successEl) successEl.classList.remove('hidden');
-        form.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Inquiry';
-      }).catch(err => {
-        console.error('EmailJS error', err);
-        if(errorEl){ errorEl.textContent = 'Could not send. Try again.'; errorEl.classList.remove('hidden'); }
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Inquiry';
-      });
+  sendBtn?.addEventListener('click', () => {
+    const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(selected)}`;
+    window.open(url, '_blank');
   });
 })();
 
-// ---------- testimonials renderer (keeps UI consistent) ----------
-(function renderTestimonials(){
-  const testimonials = [
-    { name: "Sai Ram", text: "My child has shown lot of development and he is now more confident after joining st vincent's school." },
-    { name: "Latha B.", text: "St. Vincent School has excellent facilities... One of the Best Schools in ChandaNagar" },
-    { name: "Shashank Bhardwaj", text: "My child loves going to this preschool! The teachers are caring..." }
-  ];
-  const slider = $('#testimonial-slider');
-  if(!slider) return;
-  slider.innerHTML = testimonials.map(t => `
-    <div class="p-4 bg-white rounded shadow">
-      <p class="text-sm text-gray-700">"${t.text}"</p>
-      <p class="mt-2 font-semibold text-sm">- ${t.name}</p>
-    </div>
-  `).join('');
-})();
+/* ===== Map + Reviews using PlacesService (client-side) =====
+   - Requires the Maps JS API loaded with &libraries=places
+   - We create a map (hidden) and call getDetails to retrieve reviews
+   - Google Places returns a limited number of reviews (often up to 5) for public requests.
+   - If no reviews or access denied, we show a friendly fallback with link to Google listing.
+   Docs: https://developers.google.com/maps/documentation/javascript/reference/places-service
+*/
+let map, placesService;
+function initMap() {
+  // default center (fallback)
+  const center = { lat: 17.4447, lng: 78.3432 }; // approximate Hyderabad
+  map = new google.maps.Map(document.getElementById('map'), {
+    center,
+    zoom: 16,
+    disableDefaultUI: true,
+    gestureHandling: 'cooperative'
+  });
+
+  placesService = new google.maps.places.PlacesService(map);
+
+  // Try to place marker for our PLACE_ID if provided, else geocode / textSearch could be used.
+  if (CONFIG.PLACE_ID && CONFIG.PLACE_ID !== 'YOUR_PLACE_ID_HERE') {
+    const request = { placeId: CONFIG.PLACE_ID, fields: ['name','formatted_address','geometry','rating','user_ratings_total','reviews','url'] };
+    placesService.getDetails(request, (place, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK && place) {
+        map.setCenter(place.geometry.location);
+        const marker = new google.maps.Marker({ map, position: place.geometry.location, title: place.name });
+        const info = new google.maps.InfoWindow({ content: `<strong>${place.name}</strong><div>${place.formatted_address}</div><a href="${place.url}" target="_blank" rel="noopener">Open on Google</a>`});
+        marker.addListener('click', ()=> info.open(map, marker));
+
+        // Populate reviews
+        renderReviewsFromPlace(place);
+      } else {
+        // fallback: show a message and try to load via text search later
+        document.getElementById('reviews-container').innerHTML = `<div class="text-sm text-gray-600">Reviews are unavailable right now. <a href="#" target="_blank">Check our Google listing</a>.</div>`;
+        console.warn('PlacesService.getDetails status', status);
+      }
+    });
+  } else {
+    document.getElementById('reviews-container').innerHTML = `<div class="text-sm text-gray-600">No Place ID configured. Add your business Place ID in js/main.js to show Google reviews.</div>`;
+  }
+
+  // Hook the "Show on Map" button to center map and open info
+  document.getElementById('map-focus-btn')?.addEventListener('click', ()=> {
+    window.scrollTo({ top: document.getElementById('map').offsetTop - 80, behavior: 'smooth' });
+  });
+}
+
+/* Render reviews provided by Place Details result */
+function renderReviewsFromPlace(place) {
+  const container = document.getElementById('reviews-container');
+  container.innerHTML = ''; // clear loading
+  if (place.reviews && place.reviews.length) {
+    const reviewsHTML = place.reviews.map(r => {
+      // rating, author_name, relative_time_description, text
+      return `<div class="p-4 border rounded bg-[#fff7f1]">
+        <div class="flex items-center gap-3">
+          <div class="text-lg font-semibold">${escapeHtml(r.author_name || 'User')}</div>
+          <div class="ml-auto text-sm text-gray-600">${'★'.repeat(Math.round(r.rating || 0))}</div>
+        </div>
+        <div class="text-sm text-gray-700 mt-2">${escapeHtml(r.text || '')}</div>
+        <div class="text-xs text-gray-500 mt-2">${escapeHtml(r.relative_time_description || '')}</div>
+      </div>`;
+    }).join('');
+    container.innerHTML = reviewsHTML;
+    // If Google returned fewer than the total on the place, show a link to Google listing
+    if (place.user_ratings_total && place.reviews.length < place.user_ratings_total) {
+      const more = document.createElement('div');
+      more.className = 'mt-2 text-sm';
+      more.innerHTML = `<a href="${place.url || '#'}" target="_blank" rel="noopener">Read more reviews on Google Maps (${place.user_ratings_total} total)</a>`;
+      container.appendChild(more);
+    }
+  } else {
+    container.innerHTML = `<div class="text-sm text-gray-600">No reviews found. <a href="${place.url || '#'}" target="_blank">View on Google Maps</a></div>`;
+  }
+}
+
+/* small HTML escape helper */
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);
+}
+
+/* ===== PWA service-worker registration ===== */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').then(reg => {
+      console.log('Service worker registered:', reg.scope);
+    }).catch(err => console.warn('Service worker registration failed:', err));
+  });
+}
