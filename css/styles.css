@@ -1,35 +1,66 @@
-/* styles.css — accessible, responsive base styles */
+/* styles.css - custom rules (works with Tailwind utilities) */
+
+/* Colors */
 :root{
   --brand:#7c2d6b;
+  --accent:#3f1444;
   --muted:#53535a;
   --bg:#fff7ed;
-  --focus: #f6d6a5;
-  --accent: #3f1444;
 }
-html { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; font-size:16px; }
-body { background:var(--bg); color:#111827; margin:0; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-a { color:var(--brand); }
-.btn-primary{ background:var(--accent); color:#fff; padding:.6rem 1rem; border-radius:999px; border:3px solid #2a0b2b; font-weight:700; }
+
+/* Base */
+html,body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+body { background:var(--bg); margin:0; color:#111827; }
+
+/* Buttons */
+.btn-primary{ background:var(--accent); color:#fff; padding:.6rem 1rem; border-radius:999px; border:3px solid #2a0b2b; font-weight:700; display:inline-block; }
+.btn-primary:hover{ transform:translateY(-2px); }
 .btn-primary-outline{ background:white; color:var(--accent); padding:.5rem .9rem; border-radius:999px; border:2px solid rgba(0,0,0,.06); }
 .btn-outline{ background:transparent; border:1px solid rgba(255,255,255,.12); padding:.4rem .8rem; border-radius:8px; }
-.btn-ghost{ background:#fff; color:var(--accent); padding:.5rem .9rem; border-radius:999px; }
-.nav-link{ color:#fff; text-decoration:none; font-weight:600; }
+.btn-small{ background:#f6d6a5; padding:.5rem .8rem; border-radius:8px; }
+
+/* Header */
+.site-header{ position:relative; }
+@media (min-width:1024px){
+  .site-header{ position:fixed; top:0; left:0; right:0; z-index:60; }
+  .site-main{ margin-top:88px; } /* accounted for fixed header */
+}
+
+/* Hero frame */
 .hero-frame{ border-radius:16px; padding:6px; background:linear-gradient(180deg,#fff,#fdebd3); border:8px solid #f7d7a6; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
 
-/* modal */
+/* Crayon border used historically */
+.crayon-border{ border:3px solid rgba(0,0,0,0.08); border-radius:12px; }
+
+/* Modal */
 .modal{ display:flex; }
 .modal.hidden{ display:none; }
-.modal-panel{ width:100%; max-width:560px; }
+.modal-panel{ max-width:640px; }
 
 /* WhatsApp widget */
-.wa-fab{ position:fixed; right:18px; bottom:18px; width:56px; height:56px; border-radius:50%; background:#25D366; color:white; display:flex; align-items:center; justify-content:center; z-index:9999; box-shadow:0 6px 20px rgba(0,0,0,.18); border:none; }
-.wa-panel{ position:fixed; right:18px; bottom:86px; width:280px; background:white; border-radius:8px; box-shadow:0 12px 40px rgba(0,0,0,.12); overflow:hidden; z-index:9999; }
-.wa-panel .wa-header{ padding:10px; background:var(--accent); color:white; font-weight:700; }
-.wa-panel .wa-body{ padding:10px; display:flex; flex-direction:column; gap:8px; }
-.wa-suggest{ padding:10px; border-radius:8px; border:1px solid #eee; background:#fff; text-align:left; font-size:14px; }
-.wa-suggest.selected{ border-color:var(--brand); }
+.whatsapp-chat-widget{ position:fixed; right:18px; bottom:18px; z-index:9999; }
+.whatsapp-chat-button{ width:56px; height:56px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; color:white; box-shadow:0 6px 20px rgba(0,0,0,0.2); border:none; }
+.whatsapp-chat-panel{ position:fixed; right:18px; bottom:86px; width:280px; background:white; border-radius:8px; box-shadow:0 12px 40px rgba(0,0,0,0.12); overflow:hidden; z-index:9999; }
+.wa-header{ padding:10px; background:var(--accent); color:white; font-weight:700; }
 
-/* small screens */
-@media(max-width:767px){
+/* Slider */
+.image-slider{ width:100%; }
+.image-slide{ min-width:100%; flex-shrink:0; }
+.slider-btn{ background:rgba(0,0,0,0.05); padding:.4rem .6rem; border-radius:6px; }
+
+/* spinner */
+.spinner{ display:inline-block; width:18px; height:18px; border-radius:50%; border:3px solid rgba(255,255,255,0.3); border-top-color:#fff; animation:spin 1s linear infinite; }
+.spinner.hidden{ display:none; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* Footer */
+.site-footer a{ color:inherit; opacity:0.9; text-decoration:none; }
+.site-footer a:hover{ opacity:1; }
+
+/* Accessibility focus */
+a:focus, button:focus, input:focus, select:focus, textarea:focus{ outline:3px solid var(--hero, #f6d6a5); outline-offset:2px; }
+
+/* Responsive tweaks */
+@media (max-width:767px){
   .hero-frame{ display:block; margin:0 auto; }
 }
