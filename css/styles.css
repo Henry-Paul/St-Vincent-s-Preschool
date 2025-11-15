@@ -1,4 +1,4 @@
-/* styles.css - small custom enhancements + classes used by HTML */
+/* styles.css - custom classes used across pages */
 
 :root{
   --primary:#7c2d6b;
@@ -43,7 +43,7 @@ body { font-family: 'Lora', serif; }
   border-radius:18px;
   padding:6px;
   background:linear-gradient(180deg,#fff,#fdebd3);
-  max-width:420px;
+  max-width:480px;
 }
 
 /* whatsapp FAB */
