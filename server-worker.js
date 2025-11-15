@@ -1,21 +1,13 @@
-const CACHE_NAME = 'stvincent-v1';
-const APP_SHELL = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/main.js'
-];
-
-self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(APP_SHELL)));
+const CACHE = 'stvincent-v1';
+const OFFLINE_URL = '/index.html';
+self.addEventListener('install', event => {
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll([OFFLINE_URL, '/css/styles.css', '/js/main.js'])));
   self.skipWaiting();
 });
-
-self.addEventListener('fetch', (e) => {
-  // network-first for HTML, cache-first for others
-  if(e.request.mode === 'navigate'){
-    e.respondWith(fetch(e.request).catch(()=> caches.match('/index.html')));
+self.addEventListener('fetch', event => {
+  if(event.request.mode === 'navigate'){
+    event.respondWith(fetch(event.request).catch(()=> caches.match(OFFLINE_URL)));
     return;
   }
-  e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+  event.respondWith(caches.match(event.request).then(res => res || fetch(event.request)));
 });
