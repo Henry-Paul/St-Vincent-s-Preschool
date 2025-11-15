@@ -1,67 +1,173 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Programs — St. Vincent's Preschool</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-[#fff7ed] text-gray-800">
+<body class="bg-[#fff7ed] text-gray-900">
 
-  <!-- HEADER (same markup pattern so burger works across pages) -->
-  <header class="bg-[#3f1444] text-[#f8e6d6]">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="font-bold text-2xl">St. Vincent's</a>
+  <!-- Header (same as index) -->
+  <header class="site-header bg-[#3f1444] text-white">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
+        <img src="images/logo.png" alt="logo" class="w-10 h-10 object-contain">
+        <div class="text-lg font-semibold">St. Vincent's</div>
+      </a>
       <nav class="hidden md:flex gap-6 items-center">
-        <a href="index.html">Home</a>
-        <a href="programs.html" class="underline">Programs</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html" class="px-4 py-2 rounded-full bg-[#f0d9c8] text-[#3f1444]">Contact</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="programs.html" class="nav-link">Programs</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="contact.html" class="btn-outline">Contact</a>
       </nav>
-      <button class="md:hidden menu-toggle px-3 py-2 rounded bg-[#f0d9c8]" aria-label="Toggle menu">
-        <i class="fa fa-bars"></i>
-      </button>
+      <button id="menu-btn" class="menu-toggle md:hidden p-2 rounded-md" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-[#3f1444] text-[#f8e6d6] px-6 pb-4">
-      <a href="index.html" class="block py-2 border-b border-[#4b2444]">Home</a>
-      <a href="programs.html" class="block py-2 border-b border-[#4b2444]">Programs</a>
-      <a href="gallery.html" class="block py-2 border-b border-[#4b2444]">Gallery</a>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#3a1038] text-[#f6e8e4] px-4 pb-4">
+      <a href="index.html" class="block py-2">Home</a>
+      <a href="programs.html" class="block py-2">Programs</a>
+      <a href="gallery.html" class="block py-2">Gallery</a>
       <a href="faq.html" class="block py-2">FAQ</a>
       <a href="contact.html" class="block py-2">Contact</a>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-6 py-12">
+  <main class="max-w-6xl mx-auto px-4 py-12">
     <h1 class="text-4xl font-bold">Programs</h1>
-    <p class="mt-2 text-[#5b4750]">We offer playgroup, nursery, pre-primary and daycare programs for 1.5 - 6 years.</p>
+    <p class="mt-2 text-gray-700">Click a program to read full details or enquire now.</p>
 
-    <div class="grid md:grid-cols-3 gap-6 mt-8">
-      <div class="p-6 bg-white rounded-lg shadow">
-        <h3 class="font-semibold text-2xl">Playgroup (1.5 - 2.5 yrs)</h3>
-        <p class="mt-2 text-sm">Play-based introduction to routines, socialization and sensory activities.</p>
-        <div class="mt-4">
-          <button class="cta-primary open-contact-from-program" data-program="Playgroup">Enquire</button>
+    <div class="mt-6 grid md:grid-cols-3 gap-6">
+      <!-- Program card (repeat for each) -->
+      <article class="p-6 bg-white rounded-lg shadow">
+        <h3 class="text-2xl font-semibold">Playgroup</h3>
+        <p class="mt-2 text-sm text-gray-700">For children aged 1.5–2 years. Focus on socialization & routines.</p>
+        <div class="mt-4 flex gap-2">
+          <button class="btn-small open-program-details" data-program="Playgroup">View Details</button>
+          <button class="btn-small open-contact-modal-from-program" data-program="Playgroup">Enquire Now</button>
         </div>
-      </div>
-      <div class="p-6 bg-white rounded-lg shadow">
-        <h3 class="font-semibold text-2xl">Nursery (2.5 - 3.5 yrs)</h3>
-        <p class="mt-2 text-sm">Foundational literacy & numeracy through play and stories.</p>
-        <div class="mt-4">
-          <button class="cta-primary open-contact-from-program" data-program="Nursery">Enquire</button>
+      </article>
+
+      <article class="p-6 bg-white rounded-lg shadow">
+        <h3 class="text-2xl font-semibold">Nursery</h3>
+        <p class="mt-2 text-sm text-gray-700">Building early literacy, numeracy and independence.</p>
+        <div class="mt-4 flex gap-2">
+          <button class="btn-small open-program-details" data-program="Nursery">View Details</button>
+          <button class="btn-small open-contact-modal-from-program" data-program="Nursery">Enquire Now</button>
         </div>
-      </div>
-      <div class="p-6 bg-white rounded-lg shadow">
-        <h3 class="font-semibold text-2xl">Pre-Primary (3.5 - 6 yrs)</h3>
-        <p class="mt-2 text-sm">Structured early years learning that prepares for primary school.</p>
-        <div class="mt-4">
-          <button class="cta-primary open-contact-from-program" data-program="Pre-Primary">Enquire</button>
+      </article>
+
+      <article class="p-6 bg-white rounded-lg shadow">
+        <h3 class="text-2xl font-semibold">Pre-Primary</h3>
+        <p class="mt-2 text-sm text-gray-700">Structured early years learning to prepare for primary school.</p>
+        <div class="mt-4 flex gap-2">
+          <button class="btn-small open-program-details" data-program="Pre-Primary">View Details</button>
+          <button class="btn-small open-contact-modal-from-program" data-program="Pre-Primary">Enquire Now</button>
         </div>
-      </div>
+      </article>
     </div>
+
+    <!-- Program detail modal is generated dynamically by JS when 'View Details' clicked -->
   </main>
 
+  <!-- Contact modal (same markup) -->
+  <div id="contact-modal" class="modal hidden fixed inset-0 z-50 items-center justify-center bg-black/50" role="dialog" aria-modal="true">
+    <div class="modal-panel bg-white rounded-lg w-full max-w-md p-6 relative">
+      <button data-close-modal class="absolute right-4 top-4 text-gray-500" aria-label="Close">&times;</button>
+      <h4 class="text-xl font-semibold">Enquiry / Book a Visit</h4>
+      <form id="contact-form" class="space-y-4 mt-3" aria-live="polite">
+        <div>
+          <label for="parentName" class="font-medium text-gray-700">Parent's Name</label>
+          <input type="text" id="parentName" name="parentName" class="w-full mt-1 p-3 crayon-border text-lg" required>
+        </div>
+        <div>
+          <label for="phone" class="font-medium text-gray-700">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="w-full mt-1 p-3 crayon-border text-lg" required>
+        </div>
+        <div>
+          <label for="childAge" class="font-medium text-gray-700">Child's Age</label>
+          <select id="childAge" name="childAge" class="w-full mt-1 p-3 crayon-border text-lg" required>
+            <option value="">Select age range</option>
+            <option value="1.5 to 2 years">1.5 to 2 years</option>
+            <option value="2 to 3 years">2 to 3 years</option>
+            <option value="3 to 4 years">3 to 4 years</option>
+            <option value="4 to 5 years">4 to 5 years</option>
+            <option value="5 to 6 years">5 to 6 years</option>
+          </select>
+        </div>
+        <div>
+          <label for="program" class="font-medium text-gray-700">Program</label>
+          <select id="program" name="program" class="w-full mt-1 p-3 crayon-border text-lg">
+            <option value="">Select program</option>
+            <option value="playgroup">Playgroup</option>
+            <option value="nursery">Nursery</option>
+            <option value="lkg">Pre-Primary 1</option>
+            <option value="ukg">Pre-Primary 2</option>
+            <option value="daycare">Day Care</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="font-medium text-gray-700">Additional Message (Optional)</label>
+          <textarea id="message" name="message" class="w-full mt-1 p-3 crayon-border text-lg" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="w-full crayon-button bg-red-400 text-white font-bold text-lg p-3">
+          Submit Inquiry
+        </button>
+        <p id="contact-form-success-message" class="text-green-600 text-center font-semibold hidden">Thank you! We'll call you soon!</p>
+        <p id="contact-form-error-message" class="text-red-600 text-center font-semibold hidden">There was an error submitting your form. Please try again or call us directly.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- WhatsApp Widget -->
+  <div id="whatsapp-widget" class="whatsapp-chat-widget" aria-hidden="false">
+    <button id="whatsapp-open" class="whatsapp-chat-button" aria-label="Chat on WhatsApp">
+      <i class="fa-brands fa-whatsapp" style="font-size:20px;color:white;"></i>
+    </button>
+    <div id="whatsapp-panel" class="whatsapp-chat-panel hidden" role="dialog" aria-label="WhatsApp chat">
+      <div class="wa-header">Chat with us</div>
+      <div class="wa-body p-3">
+        <button class="wa-suggest block w-full text-left mb-2" data-msg="Hi, I'd like details about admissions.">Admissions info</button>
+        <button class="wa-suggest block w-full text-left mb-2" data-msg="Hi, I want to schedule a visit.">Schedule visit</button>
+      </div>
+      <div class="wa-foot p-3 text-right">
+        <button id="wa-send" class="btn-primary">Open WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer bg-gray-800 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-2xl font-bold mb-2">St. Vincent's Preschool</h3>
+        <p class="text-sm text-gray-300">A nurturing and joyful environment for early childhood education.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Quick Links</h4>
+        <ul class="mt-3 text-sm space-y-2">
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold">Contact</h4>
+        <p class="mt-3 text-sm">Chandanagar, Hyderabad<br/>Phone: +91 90322 49494</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Hours</h4>
+        <p class="mt-3 text-sm">Mon-Fri 08:00 - 18:00<br/>Sat 08:00 - 16:00</p>
+      </div>
+    </div>
+    <div class="text-center py-4 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
