@@ -4,50 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>St. Vincent's Preschool — Home</title>
-  <meta name="description" content="St. Vincent's Preschool, Chandanagar — Play-based early learning, admissions open." />
-  <!-- Google Tag Manager (replace GTM-XXXX with your container ID) -->
-  <!-- Add your GTM container ID here -->
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-    j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-XXXX');
-  </script>
+  <meta name="description" content="St. Vincent's Preschool, Chandanagar — Play-based early learning." />
 
-  <!-- Styles & fonts -->
+  <!-- Tailwind for utilities (fast prototype) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/styles.css">
-
-  <!-- Structured data: Organization + main contact + FAQ (improves SEO) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Preschool",
-    "name":"St. Vincent's Preschool",
-    "image":["https://YOUR_DOMAIN_OR_GITHUB_IO/images/hero-children.jpg"],
-    "address":{
-      "@type":"PostalAddress",
-      "streetAddress":"Aparna Hillpark Rd, KSR Layout, PJR Layout, Chandanagar",
-      "addressLocality":"Hyderabad",
-      "addressRegion":"Telangana",
-      "postalCode":"500050",
-      "addressCountry":"IN"
-    },
-    "telephone":"+919032249494",
-    "url":"https://YOUR_USERNAME.github.io/YOUR_REPO/"
-  }
-  </script>
+  <link rel="manifest" href="manifest.json">
 </head>
-<body class="bg-[#fff7ed] text-gray-900 font-sans">
+<body class="bg-[#fff7ed] text-gray-900">
 
-  <!-- GTM noscript fallback -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-  <!-- Accessible header -->
-  <header class="bg-[#3f1444] text-white">
+  <!-- Header (fixed on desktop) -->
+  <header class="site-header bg-[#3f1444] text-white">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3" aria-label="St. Vincent's Preschool home">
         <img src="images/logo.png" alt="St. Vincent's Preschool logo" class="w-12 h-12 object-contain">
@@ -57,17 +24,16 @@
         </div>
       </a>
 
-      <nav role="navigation" aria-label="Main navigation" class="hidden md:flex gap-6 items-center">
+      <nav class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Main">
         <a href="index.html" class="nav-link">Home</a>
         <a href="programs.html" class="nav-link">Programs</a>
         <a href="gallery.html" class="nav-link">Gallery</a>
         <a href="faq.html" class="nav-link">FAQ</a>
-        <a href="resources.html" class="nav-link">Resources</a>
         <a href="contact.html" class="btn-outline">Contact</a>
       </nav>
 
-      <button class="p-2 rounded-md md:hidden menu-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button id="menu-btn" class="menu-toggle md:hidden p-2 rounded-md" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu">
+        <!-- hamburger icon inserted by JS -->
       </button>
     </div>
 
@@ -81,9 +47,10 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <main>
-    <section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-8 items-center">
+  <!-- Main (scrollable on desktop) -->
+  <main class="site-main max-w-6xl mx-auto px-4 py-12">
+    <!-- HERO -->
+    <section class="grid md:grid-cols-2 gap-8 items-center">
       <div>
         <p class="text-brand font-semibold">Admissions Open</p>
         <h1 class="text-4xl md:text-5xl font-bold mt-2">Where every child learns, plays & grows</h1>
@@ -102,139 +69,204 @@
       </div>
     </section>
 
-    <!-- TESTIMONIALS (real-time reviews from Google Places) -->
-    <section class="bg-white py-10">
-      <div class="max-w-6xl mx-auto px-4">
+    <!-- Reviews (from Google Places if configured) -->
+    <section class="bg-white py-10 mt-10">
+      <div>
         <h2 class="text-2xl font-semibold">What parents say</h2>
-        <p class="text-sm text-gray-600 mt-2">Live reviews from our Google listing (updated in real time).</p>
-
-        <!-- container where reviews are populated -->
-        <div id="reviews-container" class="mt-6 grid md:grid-cols-2 gap-4" aria-live="polite" aria-atomic="true">
-          <div id="reviews-loading" class="text-gray-500">Loading reviews...</div>
-        </div>
-
-        <div class="mt-4 text-sm text-gray-600">
-          Note: Google Places returns recent reviews (limit applied by Google). See notes below for full listing.
-        </div>
+        <p class="text-sm text-gray-600 mt-1">Live reviews from our Google listing (if configured).</p>
+        <div id="reviews-container" class="mt-6 grid md:grid-cols-2 gap-4" aria-live="polite"></div>
       </div>
     </section>
 
-    <!-- MAP & CONTACT SUMMARY -->
-    <section class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-8">
-      <div>
-        <h3 class="text-xl font-semibold">Visit Us</h3>
-        <p class="mt-2 text-gray-700">Aparna Hillpark Rd, KSR Layout, PJR Layout, Chandanagar, Hyderabad</p>
-        <p class="mt-2 text-gray-700">Phone: +91 90322 49494</p>
-        <div class="mt-4">
-          <!-- clicking this will center map + open info bubble -->
-          <button id="map-focus-btn" class="btn-primary">Show on Map</button>
-          <button data-open-modal="contact-modal" class="btn-primary-outline ml-3">Enquire</button>
-        </div>
-      </div>
-
-      <div>
-        <!-- Embedded Google Map (Maps JS is loaded in bottom with API key) -->
-        <div id="map" role="region" aria-label="Map showing St. Vincent's Preschool" class="w-full h-64 rounded shadow"></div>
-      </div>
-    </section>
-
-    <!-- sample features, programs, gallery previews (kept short here) -->
-    <section class="max-w-6xl mx-auto px-4 py-12">
-      <h2 class="text-2xl font-semibold">Our Programs</h2>
+    <!-- Programs preview -->
+    <section class="py-10">
+      <h2 class="text-2xl font-semibold">Programs</h2>
       <div class="mt-4 grid md:grid-cols-3 gap-6">
-        <article class="p-4 bg-[#fff7f1] rounded">
-          <h3 class="font-semibold">Playgroup</h3>
-          <p class="text-sm mt-2">For 1.5 - 2.5 years — play-based routines and social skills.</p>
+        <article class="p-6 bg-[#fff7f1] rounded">
+          <h3 class="font-semibold text-xl">Playgroup (1.5–2 yrs)</h3>
+          <p class="mt-2 text-sm">Play-based introduction to routines and socialization.</p>
+          <div class="mt-4 flex gap-2">
+            <button class="btn-small open-program-details" data-program="Playgroup">Learn More</button>
+            <button class="btn-small open-contact-modal-from-program" data-program="Playgroup">Enquire</button>
+          </div>
         </article>
-        <article class="p-4 bg-[#fff7f1] rounded">
-          <h3 class="font-semibold">Nursery</h3>
-          <p class="text-sm mt-2">Foundational literacy & numeracy through stories and play.</p>
+        <article class="p-6 bg-[#fff7f1] rounded">
+          <h3 class="font-semibold text-xl">Nursery (2–3 yrs)</h3>
+          <p class="mt-2 text-sm">Foundation literacy & numeracy with play.</p>
+          <div class="mt-4 flex gap-2">
+            <button class="btn-small open-program-details" data-program="Nursery">Learn More</button>
+            <button class="btn-small open-contact-modal-from-program" data-program="Nursery">Enquire</button>
+          </div>
         </article>
-        <article class="p-4 bg-[#fff7f1] rounded">
-          <h3 class="font-semibold">Pre-Primary</h3>
-          <p class="text-sm mt-2">Structured early years learning to prepare for primary.</p>
+        <article class="p-6 bg-[#fff7f1] rounded">
+          <h3 class="font-semibold text-xl">Pre-Primary (3–6 yrs)</h3>
+          <p class="mt-2 text-sm">Structured learning to prepare for school.</p>
+          <div class="mt-4 flex gap-2">
+            <button class="btn-small open-program-details" data-program="Pre-Primary">Learn More</button>
+            <button class="btn-small open-contact-modal-from-program" data-program="Pre-Primary">Enquire</button>
+          </div>
         </article>
+      </div>
+    </section>
+
+    <!-- Gallery top video preview -->
+    <section class="py-10">
+      <h2 class="text-2xl font-semibold">A tour of our preschool</h2>
+      <div class="mt-4 grid md:grid-cols-2 gap-6">
+        <div class="rounded overflow-hidden">
+          <!-- video: either mp4 in videos/ or YouTube embed (uncomment as needed) -->
+          <video controls poster="images/gallery/video-poster.jpg" class="w-full h-64 object-cover rounded">
+            <source src="videos/preschool-tour.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+
+        <!-- gallery slider preview -->
+        <div>
+          <div class="gallery-frame crayon-border overflow-hidden">
+            <div id="image-slider" class="image-slider flex transition-transform duration-500">
+              <!-- slides: ensure images exist in images/gallery/ -->
+              <div class="image-slide min-w-full"><img src="images/gallery/preschool-1.jpeg" alt="gallery 1" class="w-full h-64 object-cover"></div>
+              <div class="image-slide min-w-full"><img src="images/gallery/preschool-2.jpeg" alt="gallery 2" class="w-full h-64 object-cover"></div>
+              <div class="image-slide min-w-full"><img src="images/gallery/preschool-3.jpeg" alt="gallery 3" class="w-full h-64 object-cover"></div>
+            </div>
+            <div class="flex justify-between items-center p-2">
+              <button id="slider-prev" class="slider-btn">‹</button>
+              <div class="slider-dots flex gap-2">
+                <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
+                <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
+                <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+              </div>
+              <button id="slider-next" class="slider-btn">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA band -->
+    <section class="bg-[#3f1444] text-[#f6e8e4] py-10 rounded mt-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-bold">Ready to join St. Vincent's?</h3>
+          <p class="text-sm mt-1">Schedule a campus visit or send an enquiry</p>
+        </div>
+        <div>
+          <button data-open-modal="contact-modal" class="btn-primary">Schedule a Visit</button>
+          <a href="contact.html" class="btn-primary-outline ml-3">Contact Page</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- CONTACT MODAL -->
-  <div id="contact-modal" class="modal hidden fixed inset-0 z-50 items-center justify-center bg-black/50">
-    <div class="modal-panel bg-white rounded-lg w-full max-w-md p-6 relative" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
-      <button data-close-modal class="absolute right-4 top-4 text-gray-500" aria-label="Close contact form">&times;</button>
-      <h4 id="contactModalTitle" class="text-xl font-semibold">Enquiry / Book a Visit</h4>
-      <form id="contact-modal-form" class="mt-4 space-y-3">
-        <label class="sr-only" for="c-name">Parent's name</label>
-        <input id="c-name" name="parentName" required placeholder="Parent's name" class="w-full p-3 border rounded" />
-        <label class="sr-only" for="c-phone">Phone</label>
-        <input id="c-phone" name="phone" required placeholder="Phone" class="w-full p-3 border rounded" />
-        <label class="sr-only" for="c-age">Child age / class</label>
-        <select id="c-age" name="childAge" class="w-full p-3 border rounded">
-          <option value="">Child's age / class</option>
-          <option>1.5 to 2 years</option><option>2 to 3 years</option><option>Playgroup</option><option>Nursery</option><option>Pre-Primary 1</option><option>Pre-Primary 2</option>
-        </select>
-        <textarea id="c-message" name="message" rows="3" placeholder="Message (optional)" class="w-full p-3 border rounded"></textarea>
+  <!-- Contact modal (reused across site) -->
+  <div id="contact-modal" class="modal hidden fixed inset-0 z-50 items-center justify-center bg-black/50" role="dialog" aria-modal="true">
+    <div class="modal-panel bg-white rounded-lg w-full max-w-md p-6 relative">
+      <button data-close-modal class="absolute right-4 top-4 text-gray-500" aria-label="Close">&times;</button>
+      <h4 class="text-xl font-semibold">Enquiry / Book a Visit</h4>
 
-        <div class="flex gap-3">
-          <button type="submit" id="modal-submit" class="btn-primary flex-1">Send</button>
-          <button type="button" data-close-modal class="btn-outline flex-1">Cancel</button>
+      <!-- exact contact form as in your uploaded demo -->
+      <form id="contact-form" class="space-y-4 mt-3" aria-live="polite">
+        <div>
+          <label for="parentName" class="font-medium text-gray-700">Parent's Name</label>
+          <input type="text" id="parentName" name="parentName" class="w-full mt-1 p-3 crayon-border text-lg" required>
+        </div>
+        <div>
+          <label for="phone" class="font-medium text-gray-700">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="w-full mt-1 p-3 crayon-border text-lg" required>
+        </div>
+        <div>
+          <label for="childAge" class="font-medium text-gray-700">Child's Age</label>
+          <select id="childAge" name="childAge" class="w-full mt-1 p-3 crayon-border text-lg" required>
+            <option value="">Select age range</option>
+            <option value="1.5 to 2 years">1.5 to 2 years</option>
+            <option value="2 to 3 years">2 to 3 years</option>
+            <option value="3 to 4 years">3 to 4 years</option>
+            <option value="4 to 5 years">4 to 5 years</option>
+            <option value="5 to 6 years">5 to 6 years</option>
+          </select>
+        </div>
+        <div>
+          <label for="program" class="font-medium text-gray-700">Program</label>
+          <select id="program" name="program" class="w-full mt-1 p-3 crayon-border text-lg">
+            <option value="">Select program</option>
+            <option value="playgroup">Playgroup</option>
+            <option value="nursery">Nursery</option>
+            <option value="lkg">Pre-Primary 1</option>
+            <option value="ukg">Pre-Primary 2</option>
+            <option value="daycare">Day Care</option>
+          </select>
         </div>
 
-        <div id="modal-status" class="text-sm mt-2" aria-live="polite"></div>
+        <div>
+          <label for="message" class="font-medium text-gray-700">Additional Message (Optional)</label>
+          <textarea id="message" name="message" class="w-full mt-1 p-3 crayon-border text-lg" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="w-full crayon-button bg-red-400 text-white font-bold text-lg p-3 flex items-center justify-center gap-2">
+          <span id="submit-text">Submit Inquiry</span>
+          <span id="submit-spinner" class="spinner hidden" aria-hidden="true"></span>
+        </button>
+
+        <p id="contact-form-success-message" class="text-green-600 text-center font-semibold hidden">Thank you! We'll call you soon!</p>
+        <p id="contact-form-error-message" class="text-red-600 text-center font-semibold hidden">There was an error submitting your form. Please try again or call us directly.</p>
       </form>
     </div>
   </div>
 
-  <!-- WhatsApp chat floating + mini-chat UI -->
-  <div id="wa-chat" class="wa-chat" aria-hidden="false">
-    <button id="wa-open" class="wa-fab" aria-label="Chat on WhatsApp">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M..."/></svg>
+  <!-- WhatsApp Chat Widget (site-wide; included on every page file too) -->
+  <div id="whatsapp-widget" class="whatsapp-chat-widget" aria-hidden="false">
+    <button id="whatsapp-open" class="whatsapp-chat-button" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20.5 3.5L3.5 20.5" stroke="white" stroke-width="0"/></svg>
+      <i class="fa-brands fa-whatsapp" aria-hidden="true" style="font-size:20px;color:white;"></i>
     </button>
-    <div id="wa-panel" class="wa-panel hidden" role="dialog" aria-label="WhatsApp chat">
+    <div id="whatsapp-panel" class="whatsapp-chat-panel hidden" role="dialog" aria-label="WhatsApp chat">
       <div class="wa-header">Chat with us</div>
-      <div class="wa-body">
-        <button class="wa-suggest" data-msg="Hi, I'd like details about admissions.">Admissions info</button>
-        <button class="wa-suggest" data-msg="Hi, I want to schedule a visit.">Schedule visit</button>
-        <button class="wa-suggest" data-msg="What are the fees and timings?">Fees & timings</button>
+      <div class="wa-body p-3">
+        <button class="wa-suggest block w-full text-left mb-2 px-3 py-2 rounded" data-msg="Hi, I'd like details about admissions.">Admissions info</button>
+        <button class="wa-suggest block w-full text-left mb-2 px-3 py-2 rounded" data-msg="Hi, I want to schedule a visit.">Schedule visit</button>
+        <button class="wa-suggest block w-full text-left px-3 py-2 rounded" data-msg="What are the fees and timings?">Fees & timings</button>
       </div>
-      <div class="wa-foot">
+      <div class="wa-foot p-3 text-right">
         <button id="wa-send" class="btn-primary">Open WhatsApp</button>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-[#3f1444] text-[#f6e8e4] mt-12">
-    <div class="max-w-6xl mx-auto px-4 py-8 grid md:grid-cols-4 gap-6">
+  <!-- Footer (reuse on all pages) -->
+  <footer class="site-footer bg-gray-800 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-8">
       <div>
-        <strong>St. Vincent's Preschool</strong>
-        <p class="mt-2 text-sm">Play-based early learning · Chandanagar</p>
+        <h3 class="text-2xl font-bold mb-2">St. Vincent's Preschool</h3>
+        <p class="text-sm text-gray-300">A nurturing and joyful environment for early childhood education.</p>
       </div>
       <div>
-        <strong>Quick links</strong>
-        <ul class="mt-2 text-sm space-y-1">
+        <h4 class="font-semibold">Quick Links</h4>
+        <ul class="mt-3 text-sm space-y-2">
           <li><a href="programs.html">Programs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
-        <strong>Contact</strong>
-        <p class="mt-2 text-sm">+91 90322 49494</p>
+        <h4 class="font-semibold">Contact</h4>
+        <p class="mt-3 text-sm">Chandanagar, Hyderabad<br/>Phone: +91 90322 49494</p>
       </div>
       <div>
-        <strong>Hours</strong>
-        <p class="mt-2 text-sm">Mon-Fri 08:00–18:00</p>
+        <h4 class="font-semibold">Hours</h4>
+        <p class="mt-3 text-sm">Mon-Fri 08:00 - 18:00<br/>Sat 08:00 - 16:00</p>
       </div>
     </div>
     <div class="text-center py-4 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
   </footer>
 
   <!-- Scripts -->
-  <!-- Google Maps JS (enable Maps JavaScript API and Places Library) -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY_HERE&libraries=places&callback=initMap" async defer></script>
-
-  <!-- EmailJS SDK -->
+  <!-- EmailJS SDK (client side) -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Google Maps JS (optional for reviews / map) - add your API key and keep 'places' library -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap" async defer></script>
 
   <!-- Main JS -->
   <script src="js/main.js"></script>
