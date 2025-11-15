@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>St. Vincent's Preschool</title>
   <meta name="description" content="St. Vincent's Preschool - nurturing and joyful environment for early childhood education." />
-
-  <!-- Tailwind CDN for utility classes -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
@@ -16,10 +14,11 @@
 
   <!-- HEADER -->
   <header class="bg-[#3f1444] text-[#f8e6d6]">
-    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-      <a href="index.html" class="flex items-center gap-4">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
         <div class="text-2xl font-bold">St. Vincent's<span class="block text-sm">PRESCHOOL</span></div>
       </a>
+
       <nav class="hidden md:flex gap-6 items-center">
         <a href="index.html" class="hover:underline">Home</a>
         <a href="programs.html" class="hover:underline">Programs</a>
@@ -28,40 +27,43 @@
         <a href="contact.html" class="px-4 py-2 rounded-full bg-[#f0d9c8] text-[#3f1444] font-semibold">Contact</a>
       </nav>
 
-      <button id="menu-btn" class="md:hidden px-3 py-2 rounded bg-[#f0d9c8] text-[#3f1444]">
+      <button class="md:hidden menu-toggle px-3 py-2 rounded bg-[#f0d9c8] text-[#3f1444]" aria-label="Toggle menu">
         <i class="fa fa-bars"></i>
       </button>
     </div>
 
+    <!-- mobile menu (toggle) -->
     <div id="mobile-menu" class="hidden md:hidden bg-[#3f1444] text-[#f8e6d6] px-6 pb-4">
-      <a href="programs.html" class="block py-2">Programs</a>
-      <a href="gallery.html" class="block py-2">Gallery</a>
-      <a href="faq.html" class="block py-2">FAQ</a>
+      <a href="index.html" class="block py-2 border-b border-[#4b2444]">Home</a>
+      <a href="programs.html" class="block py-2 border-b border-[#4b2444]">Programs</a>
+      <a href="gallery.html" class="block py-2 border-b border-[#4b2444]">Gallery</a>
+      <a href="faq.html" class="block py-2 border-b border-[#4b2444]">FAQ</a>
       <a href="contact.html" class="block py-2">Contact</a>
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- MAIN / HERO -->
   <main>
     <section class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-8 items-center">
       <div>
         <h1 class="text-5xl md:text-6xl font-serif font-bold text-[#2b1228] leading-tight">Where Every Child Shines</h1>
         <p class="mt-6 text-lg text-[#47323a] max-w-xl">A nurturing and joyful environment for early childhood education</p>
         <div class="mt-8 flex gap-4 flex-wrap">
-          <button id="hero-cta" class="cta-primary px-6 py-3 rounded-full">Learn More</button>
+          <a href="programs.html" class="cta-primary px-6 py-3 rounded-full">Learn More</a>
           <a href="tel:+919032249494" class="cta-outline px-6 py-3 rounded-full">Call Us</a>
-          <button id="open-contact-modal-hero" class="cta-primary-alt px-6 py-3 rounded-full">Schedule a Visit</button>
+          <button data-open-modal="contact-modal" class="cta-primary-alt px-6 py-3 rounded-full">Schedule a Visit</button>
         </div>
       </div>
 
       <div class="flex justify-center md:justify-end">
-        <div class="hero-frame p-3">
-          <img src="assets/images/hero/happy-children.jpg" alt="children" class="rounded-lg w-full object-cover">
+        <div class="hero-frame p-3 max-w-[480px] w-full">
+          <!-- hero image now in images/ folder -->
+          <img src="images/hero-children.jpg" alt="children" class="rounded-lg w-full h-auto object-cover">
         </div>
       </div>
     </section>
 
-    <!-- three features -->
+    <!-- FEATURES -->
     <section class="bg-[#fff1e6] py-12">
       <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center">
         <div>
@@ -88,36 +90,40 @@
       </div>
     </section>
 
-    <!-- gallery preview -->
+    <!-- GALLERY preview (images in images/gallery/) -->
     <section class="max-w-6xl mx-auto px-6 py-12">
       <h2 class="text-3xl font-bold text-center">Gallery</h2>
       <p class="text-center mt-2 text-[#5b4750]">See our classrooms and activities</p>
       <div class="grid md:grid-cols-3 gap-4 mt-6">
-        <a href="gallery.html" class="block overflow-hidden rounded-lg"><img src="assets/images/gallery/preschool-1.jpeg" alt="" class="w-full h-56 object-cover"></a>
-        <a href="gallery.html" class="block overflow-hidden rounded-lg"><img src="assets/images/gallery/preschool-2.jpeg" alt="" class="w-full h-56 object-cover"></a>
-        <a href="gallery.html" class="block overflow-hidden rounded-lg"><img src="assets/images/gallery/preschool-3.jpeg" alt="" class="w-full h-56 object-cover"></a>
+        <a href="gallery.html" class="block overflow-hidden rounded-lg">
+          <img src="images/gallery/preschool-1.jpeg" alt="gallery 1" class="w-full h-56 object-cover rounded-lg">
+        </a>
+        <a href="gallery.html" class="block overflow-hidden rounded-lg">
+          <img src="images/gallery/preschool-2.jpeg" alt="gallery 2" class="w-full h-56 object-cover rounded-lg">
+        </a>
+        <a href="gallery.html" class="block overflow-hidden rounded-lg">
+          <img src="images/gallery/preschool-3.jpeg" alt="gallery 3" class="w-full h-56 object-cover rounded-lg">
+        </a>
       </div>
       <div class="text-center mt-6">
         <a href="gallery.html" class="cta-outline px-6 py-3 rounded-full inline-block">View Full Gallery</a>
       </div>
     </section>
 
-    <!-- testimonials -->
+    <!-- Testimonials -->
     <section class="max-w-6xl mx-auto px-6 py-12">
       <h3 class="text-3xl font-bold text-center">What Parents Say</h3>
-      <div id="testimonial-slider" class="mt-6 space-y-4">
-        <!-- rendered by JS -->
-      </div>
+      <div id="testimonial-slider" class="mt-6 space-y-4"></div>
     </section>
 
-    <!-- CTA band -->
+    <!-- CTA -->
     <section class="bg-[#3f1444] text-[#f8e6d6] py-12">
       <div class="max-w-6xl mx-auto px-6 text-center">
         <h3 class="text-3xl font-bold">Ready to join St. Vincent's?</h3>
         <p class="mt-2">Schedule a campus visit or send an inquiry</p>
         <div class="mt-6">
-          <button id="open-contact-modal-bottom" class="cta-primary">Schedule a Visit</button>
-          <a href="contact.html" class="cta-outline ml-3">Contact Page</a>
+          <button data-open-modal="contact-modal" class="cta-primary px-6 py-3 rounded-full">Schedule a Visit</button>
+          <a href="contact.html" class="cta-outline ml-3 px-6 py-3 rounded-full">Contact Page</a>
         </div>
       </div>
     </section>
@@ -151,23 +157,22 @@
     <div class="text-center py-6 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
   </footer>
 
-  <!-- WHATSAPP FLOAT -->
+  <!-- WHATSAPP FAB -->
   <a class="whatsapp-fab" href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool" target="_blank" aria-label="Chat on WhatsApp">
     <i class="fa fa-whatsapp"></i>
   </a>
 
-  <!-- MODALS: contact modal + auto-popup -->
-  <!-- Contact Modal -->
+  <!-- CONTACT MODAL (re-usable) -->
   <div id="contact-modal" class="modal hidden fixed inset-0 z-50 items-center justify-center bg-black/50">
     <div class="modal-panel bg-white rounded-lg max-w-lg w-full p-6 relative">
-      <button id="close-contact-modal" class="absolute right-4 top-4 text-gray-600"><i class="fa fa-times"></i></button>
+      <button data-close-modal class="absolute right-4 top-4 text-gray-600"><i class="fa fa-times"></i></button>
       <h3 class="text-2xl font-bold mb-2">Enquiry / Schedule a Visit</h3>
       <p class="text-sm text-gray-600 mb-4">Fill the details and we will contact you shortly.</p>
 
       <form id="contact-form-modal" class="space-y-3">
-        <input type="text" id="parentName" name="parentName" placeholder="Parent's Name" class="w-full p-3 border rounded" required>
-        <input type="tel" id="phone" name="phone" placeholder="Phone Number" class="w-full p-3 border rounded" required>
-        <select id="childAge" name="childAge" class="w-full p-3 border rounded">
+        <input type="text" id="modal-parentName" name="parentName" placeholder="Parent's Name" class="w-full p-3 border rounded" required>
+        <input type="tel" id="modal-phone" name="phone" placeholder="Phone Number" class="w-full p-3 border rounded" required>
+        <select id="modal-childAge" name="childAge" class="w-full p-3 border rounded">
           <option value="">Child's Age / Class</option>
           <option value="1.5 to 2 years">1.5 to 2 years</option>
           <option value="2 to 3 years">2 to 3 years</option>
@@ -177,7 +182,8 @@
           <option value="Pre-Primary 2">Pre-Primary 2</option>
           <option value="Day Care">Day Care</option>
         </select>
-        <select id="program" name="program" class="w-full p-3 border rounded">
+
+        <select id="modal-program" name="program" class="w-full p-3 border rounded">
           <option value="">Program of Interest</option>
           <option value="Playgroup">Playgroup</option>
           <option value="Nursery">Nursery</option>
@@ -185,23 +191,24 @@
           <option value="Pre-Primary 2">Pre-Primary 2</option>
           <option value="Day Care">Day Care</option>
         </select>
-        <textarea id="message" name="message" rows="3" placeholder="Message (optional)" class="w-full p-3 border rounded"></textarea>
+
+        <textarea id="modal-message" name="message" rows="3" placeholder="Message (optional)" class="w-full p-3 border rounded"></textarea>
 
         <div class="flex gap-3">
           <button type="submit" id="contact-submit-modal" class="cta-primary flex-1">Submit</button>
-          <button type="button" id="contact-cancel" class="cta-outline flex-1">Cancel</button>
+          <button type="button" data-close-modal class="cta-outline flex-1">Cancel</button>
         </div>
 
         <p id="modal-success" class="hidden text-green-600 font-semibold text-center">Thank you — we'll contact you soon!</p>
-        <p id="modal-error" class="hidden text-red-600 font-semibold text-center">Submission failed. Try again.</p>
+        <p id="modal-error" class="hidden text-red-600 font-semibold text-center">There was an error submitting your request.</p>
       </form>
     </div>
   </div>
 
-  <!-- Auto-Popup (shows once) -->
+  <!-- AUTO POPUP (shown once per session) -->
   <div id="auto-popup" class="modal hidden fixed inset-0 z-40 items-center justify-center bg-black/40">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full">
-      <button id="close-auto-popup" class="absolute right-4 top-4 text-gray-600"><i class="fa fa-times"></i></button>
+    <div class="bg-white rounded-lg p-6 max-w-md w-full relative">
+      <button data-close-modal class="absolute right-4 top-4 text-gray-600"><i class="fa fa-times"></i></button>
       <h4 class="text-xl font-bold">Admissions Open</h4>
       <p class="mt-2 text-sm text-gray-600">Enroll now for the new academic year. Book a tour today.</p>
       <div class="mt-4 text-right">
