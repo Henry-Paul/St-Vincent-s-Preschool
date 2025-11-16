@@ -1,27 +1,27 @@
-// js/site-core.js - consolidated site logic (burger, modals, testimonials, slider, emailjs, global WhatsApp fab)
-
-/* EMAILJS CONFIG — use your actual EmailJS values */
+// js/site-core.js - consolidated logic for St. Vincent's site
+/* EMAILJS CONFIG — replace with real values if needed */
 const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_14zrdg6',
   TEMPLATE_ID: 'template_snxhxlk',
   PUBLIC_KEY: '5SyxCT8kGY0_H51dC'
 };
 
-/* Init EmailJS if loaded */
+/* Try to init emailjs if loaded */
 if (window.emailjs && EMAILJS_CONFIG.PUBLIC_KEY) {
-  try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); } catch (e) { console.warn('EmailJS init failed', e); }
+  try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); } catch (e) { console.warn('emailjs init error', e); }
 }
 
+/* helpers */
 const $ = (s, ctx=document) => ctx.querySelector(s);
 const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
 
-/* --------- burger / mobile menu that works on every page --------- */
+/* ---------- Burger menu (universal) ---------- */
 function initUniversalBurger() {
-  $$('#menu-btn').forEach(btn => {
+  const btns = document.querySelectorAll('#menu-btn');
+  btns.forEach(btn => {
     const header = btn.closest('header') || document;
     const mobileMenu = header.querySelector('#mobile-menu') || document.getElementById('mobile-menu');
     function setIcon(open) {
-      if (btn.dataset.customIcon) return;
       btn.innerHTML = open ? '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     setIcon(false);
@@ -31,76 +31,73 @@ function initUniversalBurger() {
       const isHidden = mobileMenu.classList.toggle('hidden');
       setIcon(!isHidden);
       btn.setAttribute('aria-expanded', String(!isHidden));
-      if (!isHidden) { const first = mobileMenu.querySelector('a, button, [tabindex]'); if (first) first.focus(); }
+      if (!isHidden) {
+        const first = mobileMenu.querySelector('a, button, [tabindex]'); if (first) first.focus();
+      }
     });
     if (mobileMenu) {
-      mobileMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', (ev) => {
-          mobileMenu.classList.add('hidden');
-          setIcon(false);
-          btn.setAttribute('aria-expanded','false');
+      mobileMenu.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', (ev)=> {
+          mobileMenu.classList.add('hidden'); setIcon(false); btn.setAttribute('aria-expanded','false');
           const href = a.getAttribute('href');
           if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-            ev.preventDefault();
-            setTimeout(()=> window.location.href = href, 90);
+            ev.preventDefault(); setTimeout(()=> window.location.href = href, 90);
           }
         });
       });
     }
   });
-  document.addEventListener('click', (ev) => {
+
+  document.addEventListener('click', (ev)=> {
     $$('#mobile-menu').forEach(menu => {
       if (!menu.classList.contains('hidden') && !menu.contains(ev.target)) {
         menu.classList.add('hidden');
-        const header = menu.closest('header'); const btn = header ? header.querySelector('#menu-btn') : document.getElementById('menu-btn');
+        const header = menu.closest('header');
+        const btn = header ? header.querySelector('#menu-btn') : document.getElementById('menu-btn');
         if (btn) { btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; btn.setAttribute('aria-expanded','false'); }
       }
     });
   });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { $$('#mobile-menu').forEach(m => m.classList.add('hidden')); } });
+
+  document.addEventListener('keydown', (e)=> { if (e.key === 'Escape') { $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); } });
 }
 
-/* ---------------- Testimonials (static top 5) ---------------- */
-const STATIC_TESTIMONIALS = [
-  { name: "Sai Ram", text: "My child has shown lot of development and he is now more confident after joining st vincent's school." },
-  { name: "Latha B.", text: "St. Vincent School has excellent facilities and a clean, well-maintained campus that supports learning. The classrooms are modern and well-equipped. What truly stands out is how friendly and approachable the teachers are... One of the Best Schools in ChandaNagar" },
-  { name: "Shashank Bhardwaj.", text: "My child loves going to this preschool! The teachers are caring, the environment is safe and nurturing, and I've seen amazing growth in my little one's confidence and skills." },
-  { name: "Saurabh Shourie.", text: "Great environment with lesser fees in comparison to other schools nearby . My child loves the school. Highly recommended.!" },
-  { name: "Anita Singha.", text: "Recently my daughter joined school and she's very happy and she's hyperactive kid so, I am happy that school is very spacious , hygienic plus we got good experienced teachers as well" }
-];
-
-function renderTestimonialsGrid() {
-  const c = document.getElementById('testimonials-grid'); if (!c) return;
-  c.innerHTML = STATIC_TESTIMONIALS.slice(0,5).map((t,i) => `
-    <article class="testimonial-card bg-white p-6 rounded-2xl shadow-lg">
-      <div class="flex items-start gap-4">
-        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-2xl text-yellow-600">★</div>
-        <div class="flex-1">
-          <div class="flex justify-between items-start">
-            <h3 class="text-lg font-semibold">${escapeHtml(t.name)}</h3>
-            <div class="text-yellow-500 text-lg font-bold">5.0</div>
-          </div>
-          <p class="mt-3 text-gray-600">${escapeHtml(t.text.length>240? t.text.slice(0,240) + '...' : t.text)}</p>
-        </div>
-      </div>
-      <div class="mt-4 flex justify-between items-center">
-        <div class="text-xs text-gray-500">Verified Google Review</div>
-        <button class="testimonial-enquire btn-small" data-index="${i}">Enquire</button>
-      </div>
-    </article>`).join('');
-  $$('.testimonial-enquire').forEach(b => b.addEventListener('click', () => openUnifiedModal({})));
+/* ---------- Gallery slider ---------- */
+function initImageSlider() {
+  const slider = document.getElementById('image-slider'); if (!slider) return;
+  const slides = slider.querySelectorAll('.image-slide'); if (!slides.length) return;
+  let idx = 0, total = slides.length;
+  const prev = document.getElementById('slider-prev'), next = document.getElementById('slider-next');
+  const dots = Array.from(document.querySelectorAll('.slider-dot'));
+  function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
+  prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
+  next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
+  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); }));
+  setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
+  update();
 }
 
-/* ---------------- Program details content (used only if needed) ---------------- */
-const PROGRAM_DETAILS = {
-  playgroup: { title: 'Playgroup (1.5–2.5 yrs)', content: `<p>Gentle settling, sensory exploration and early social skills. Teacher ratio 1:6.</p>` },
-  nursery: { title: 'Nursery (2.5–3.5 yrs)', content: `<p>Foundational literacy & numeracy through play.</p>` },
-  lkg: { title: 'Pre-Primary 1 (PP1)', content: `<p>Pre-writing and phonemic awareness.</p>` },
-  ukg: { title: 'Pre-Primary 2 (PP2)', content: `<p>Reading fluency and arithmetic readiness.</p>` },
-  daycare: { title: 'Day Care', content: `<p>Extended care with meals and supervised activities.</p>` }
-};
+/* ---------- FAQ accordion ---------- */
+function initFAQAccordion() {
+  $$('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const expanded = q.getAttribute('aria-expanded') === 'true';
+      const a = q.parentElement.querySelector('.faq-a');
+      if (!a) return;
+      if (expanded) { a.style.maxHeight = '0'; q.setAttribute('aria-expanded','false'); } 
+      else { a.style.maxHeight = a.scrollHeight + 'px'; q.setAttribute('aria-expanded','true'); }
+    });
+  });
+}
 
-/* ---------------- Unified enquiry modal (fields from your original html) ---------------- */
+/* ---------- Testimonials wiring ---------- */
+function wireTestimonialEnquiries() {
+  $$('.testimonial-card button, .testimonial-enquire, .testimonial .open-contact-modal').forEach(b => {
+    b.addEventListener('click', ()=> openUnifiedModal({}));
+  });
+}
+
+/* ---------- Unified enquiry modal (reused across site) ---------- */
 function openUnifiedModal({ prefillProgram = '' } = {}) {
   const existing = document.getElementById('sv-contact-modal'); if (existing) existing.remove();
   const overlay = document.createElement('div');
@@ -129,9 +126,9 @@ function openUnifiedModal({ prefillProgram = '' } = {}) {
 
   if (prefillProgram) { const hid = overlay.querySelector('#program'); if (hid) hid.value = prefillProgram; }
 
-  overlay.querySelector('#sv-close').addEventListener('click', () => overlay.remove());
-  overlay.querySelector('#sv-cancel').addEventListener('click', () => overlay.remove());
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const el = document.getElementById('sv-contact-modal'); if (el) el.remove(); } });
+  overlay.querySelector('#sv-close').addEventListener('click', ()=> overlay.remove());
+  overlay.querySelector('#sv-cancel').addEventListener('click', ()=> overlay.remove());
+  document.addEventListener('keydown', (e)=> { if (e.key === 'Escape') { const el = document.getElementById('sv-contact-modal'); if (el) el.remove(); } });
 
   overlay.querySelector('#schedule-visit-form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -148,43 +145,16 @@ function openUnifiedModal({ prefillProgram = '' } = {}) {
     };
     if (window.emailjs && EMAILJS_CONFIG.SERVICE_ID) {
       emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, payload)
-        .then(() => { res.textContent = 'Thanks — we will contact you shortly.'; setTimeout(() => overlay.remove(), 1200); })
-        .catch(err => { console.error('EmailJS error', err); res.textContent = 'Submission failed — please call +91 9032249494'; });
+        .then(()=> { res.textContent = 'Thanks — we will contact you shortly.'; setTimeout(()=> overlay.remove(), 1200); })
+        .catch(err=> { console.error('EmailJS error', err); res.textContent = 'Submission failed — please call +91 9032249494'; });
     } else {
-      setTimeout(() => { res.textContent = 'Thanks — we will contact you shortly.'; setTimeout(() => overlay.remove(), 900); }, 900);
+      // simulation for local previews
+      setTimeout(()=> { res.textContent = 'Thanks — we will contact you shortly.'; setTimeout(()=> overlay.remove(), 900); }, 900);
     }
   });
 }
 
-/* ---------------- FAQ accordion ---------------- */
-function initFAQAccordion() {
-  $$('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const expanded = q.getAttribute('aria-expanded') === 'true';
-      const a = q.parentElement.querySelector('.faq-a');
-      if (!a) return;
-      if (expanded) { a.style.maxHeight = '0'; q.setAttribute('aria-expanded','false'); } 
-      else { a.style.maxHeight = a.scrollHeight + 'px'; q.setAttribute('aria-expanded','true'); }
-    });
-  });
-}
-
-/* ---------------- Gallery slider ---------------- */
-function initImageSlider() {
-  const slider = document.getElementById('image-slider'); if (!slider) return;
-  const slides = slider.querySelectorAll('.image-slide'); if (!slides.length) return;
-  let idx = 0, total = slides.length;
-  const prev = document.getElementById('slider-prev'), next = document.getElementById('slider-next');
-  const dots = Array.from(document.querySelectorAll('.slider-dot'));
-  function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
-  prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
-  next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
-  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); }));
-  setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
-  update();
-}
-
-/* ---------------- Global WhatsApp floating button (real icon) ---------------- */
+/* ---------- Global WhatsApp fab (real icon) ---------- */
 function initWhatsAppFab() {
   if (document.getElementById('whatsapp-fab-global')) return;
   const phone = '919032249494';
@@ -212,6 +182,8 @@ function initWhatsAppFab() {
   a.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
   a.style.borderRadius = '999px';
   a.setAttribute('aria-label','Chat on WhatsApp');
+
+  // WhatsApp SVG (realistic)
   a.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.672.15-.198.297-.768.966-.942 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.173.2-.298.3-.497.1-.198.05-.372-.025-.52-.074-.149-.672-1.618-.922-2.214-.243-.579-.49-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.064 2.876 1.212 3.074c.149.198 2.095 3.2 5.077 4.487  .709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="white"/></svg>`;
 
   const tip = document.createElement('div');
@@ -242,21 +214,21 @@ function initWhatsAppFab() {
   setInterval(()=> { a.style.transform='scale(1.06)'; setTimeout(()=> a.style.transform='scale(1)',220); }, 9000);
 }
 
-/* --------------- wire global CTAs & init --------------- */
+/* ---------- wire global CTA triggers ---------- */
 function wireGlobalTriggers() {
-  $$('.open-contact-modal').forEach(btn => btn.addEventListener('click', ()=> openUnifiedModal({ prefillProgram: btn.dataset.program || '' })));
+  $$('.open-contact-modal').forEach(btn => btn.addEventListener('click', (e) => {
+    const program = btn.dataset.program || '';
+    openUnifiedModal({ prefillProgram: program });
+  }));
   const mainBtn = document.getElementById('schedule-visit-btn-main'); if (mainBtn) mainBtn.addEventListener('click', ()=> openUnifiedModal({}));
 }
 
-/* helpers */
-function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-/* init */
+/* ---------- init on DOMContentLoaded ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   initUniversalBurger();
-  renderTestimonialsGrid();
   initImageSlider();
   initFAQAccordion();
+  wireTestimonialEnquiries();
   wireGlobalTriggers();
   initWhatsAppFab();
 });
