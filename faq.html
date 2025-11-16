@@ -1,146 +1,97 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>FAQ — St. Vincent's Preschool</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
-
-  <!-- FAQ structured data (10 Qs) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity": [
-      {"@type":"Question","name":"What ages do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept children from 1.5 years up to 6 years across Playgroup, Nursery and Pre-primary."}},
-      {"@type":"Question","name":"What is your curriculum?","acceptedAnswer":{"@type":"Answer","text":"We follow a play-based early years curriculum focused on social-emotional development, early literacy and numeracy."}},
-      {"@type":"Question","name":"What are your fees and payment options?","acceptedAnswer":{"@type":"Answer","text":"Fees vary by program and are shared on enquiry. We accept monthly / term payments; contact us for the latest fee schedule."}},
-      {"@type":"Question","name":"What are the timings and holidays?","acceptedAnswer":{"@type":"Answer","text":"Typically classes run Monday–Friday 08:00–18:00. We follow local school holidays; exact calendar is provided at enrollment."}},
-      {"@type":"Question","name":"Do you provide meals?","acceptedAnswer":{"@type":"Answer","text":"Light snacks are provided. For full-day children we recommend packed lunches following our nutrition guidelines."}},
-      {"@type":"Question","name":"What is your teacher-to-child ratio?","acceptedAnswer":{"@type":"Answer","text":"We maintain small groups with a low teacher-to-child ratio for safety and individual attention; details available per program."}},
-      {"@type":"Question","name":"How do you handle illness and emergencies?","acceptedAnswer":{"@type":"Answer","text":"We have trained staff, first-aid kits, emergency protocols, and immediate parent contact procedures for any illness or emergency."}},
-      {"@type":"Question","name":"Can parents visit during the day?","acceptedAnswer":{"@type":"Answer","text":"Yes — visits are welcome by appointment to respect routines and children's comfort."}},
-      {"@type":"Question","name":"How do I enrol my child?","acceptedAnswer":{"@type":"Answer","text":"Fill the enquiry form, schedule a visit, and submit required documents to complete registration."}},
-      {"@type":"Question","name":"What safety measures are in place (CCTV, security)?","acceptedAnswer":{"@type":"Answer","text":"We follow strict security protocols, supervised arrivals/departures, and secure premises with staff monitoring."}}
-    ]
-  }
-  </script>
 </head>
-<body class="bg-[#fff7ed] text-gray-900">
-
-  <header class="site-header bg-[#3f1444] text-white">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="images/logo.png" alt="logo" class="w-10 h-10">
-        <div class="text-lg font-semibold">St. Vincent's</div>
-      </a>
-      <nav class="hidden md:flex gap-6">
+<body>
+  <header class="bg-white shadow fixed w-full z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
+      <nav class="hidden md:flex gap-6 items-center">
         <a href="index.html" class="nav-link">Home</a>
         <a href="programs.html" class="nav-link">Programs</a>
         <a href="gallery.html" class="nav-link">Gallery</a>
         <a href="faq.html" class="nav-link">FAQ</a>
       </nav>
-      <button id="menu-btn" class="menu-toggle md:hidden p-2 rounded" aria-label="Toggle menu"></button>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-[#3a1038] text-[#f6e8e4] px-4 pb-4">
-      <a href="index.html" class="block py-2">Home</a>
-      <a href="programs.html" class="block py-2">Programs</a>
-      <a href="gallery.html" class="block py-2">Gallery</a>
-      <a href="contact.html" class="block py-2">Contact</a>
+      <div class="flex items-center gap-3">
+        <button id="menu-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu"></button>
+      </div>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold">Frequently Asked Questions</h1>
-    <p class="mt-2 text-gray-700">Answers to the top questions parents ask us.</p>
+  <main class="max-w-3xl mx-auto px-4 pt-28 pb-16">
+    <a href="index.html" class="inline-block mb-6 text-blue-600">← Back to Home</a>
+    <h1 class="text-4xl font-bold mb-8">Frequently Asked Questions</h1>
 
-    <div class="mt-6 space-y-4" id="faq-list">
-      <!-- FAQ items -->
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">What ages do you accept?</summary>
-        <p class="mt-2">We accept children from 1.5 to 6 years across Playgroup, Nursery and Pre-primary.</p>
+    <div class="space-y-6">
+      <!-- 10 FAQs: each has a details + Enquire -->
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">1. What is the ideal age to start preschool?</summary>
+        <p class="mt-4">Most children begin preschool between 1.5–3 years. We offer playgroup for 1.5+ with gentle settling.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal" data-program="playgroup">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">What is your curriculum?</summary>
-        <p class="mt-2">Play-based curriculum focused on social, emotional and early literacy/numeracy development.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">2. What safety measures are provided?</summary>
+        <p class="mt-4">CCTV, controlled entry, trained staff, sanitized classrooms and first-aid trained personnel.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">What are your fees and payment options?</summary>
-        <p class="mt-2">Fees depend on program and timings; we accept monthly/quarterly/term payments. Contact us for current rates.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">3. What is the teacher-to-child ratio?</summary>
+        <p class="mt-4">Playgroup 1:6, Nursery 1:8, Pre-Primary 1:10 — optimized for attention and care.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">What are the timings and holiday schedule?</summary>
-        <p class="mt-2">Standard hours: Mon-Fri 08:00–18:00. We publish an academic calendar for holidays and closures.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">4. Do you provide meals?</summary>
+        <p class="mt-4">We provide hygienic meals & snacks; allergies and preferences are carefully managed.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">Do you provide meals?</summary>
-        <p class="mt-2">We provide hygienic snacks. Full day children should bring packed lunches as per our nutrition guidelines.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">5. What curriculum do you follow?</summary>
+        <p class="mt-4">Play-based, activity-driven learning focusing on cognitive, motor, language & social development.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">What is the teacher-to-child ratio?</summary>
-        <p class="mt-2">We maintain small groups with low teacher-to-child ratios to ensure personal attention and safety.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">6. Can parents visit during school hours?</summary>
+        <p class="mt-4">Scheduled observations are allowed; minimal disturbance policy ensures children’s routine.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">How do you handle illness and emergencies?</summary>
-        <p class="mt-2">Staff are trained in first aid, we have clear protocols and immediate parent contact for any medical concerns.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">7. What are the school timings?</summary>
+        <p class="mt-4">Playgroup & Nursery 9 AM–12 PM, Pre-Primary 9 AM–1 PM. Daycare extends to 7 PM.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">Can parents visit during the day?</summary>
-        <p class="mt-2">Yes — visits by appointment are welcome to maintain routine and minimize disruption to children.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">8. How do you handle sickness?</summary>
+        <p class="mt-4">Supervised resting area, parent notification, and access to immediate medical help when required.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">How do I enrol my child?</summary>
-        <p class="mt-2">Submit an enquiry or book a visit via our form. We will guide you through registration and document submission.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">9. Are activities included?</summary>
+        <p class="mt-4">Storytelling, phonics, art, music, dance, early science, clay modelling, sensory learning.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
 
-      <details class="p-4 bg-white rounded shadow">
-        <summary class="font-semibold text-lg">What safety & security measures do you have?</summary>
-        <p class="mt-2">Secure premises, supervised drop-off/pick-up, and staff background checks. CCTV and access control are in place where possible.</p>
+      <details class="p-6 bg-white rounded-xl shadow">
+        <summary class="text-2xl font-bold cursor-pointer">10. How do I enrol my child?</summary>
+        <p class="mt-4">Fill the enquiry form; our team will contact you for a tour, fee details and admission steps.</p>
+        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
       </details>
     </div>
   </main>
 
-  <!-- Footer + WhatsApp as before -->
-  <footer class="site-footer bg-gray-800 text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-8">
-      <div>
-        <h3 class="text-2xl font-bold mb-2">St. Vincent's Preschool</h3>
-        <p class="text-sm text-gray-300">A nurturing and joyful environment for early childhood education.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <ul class="mt-3 text-sm space-y-2">
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-3 text-sm">Chandanagar, Hyderabad<br/>Phone: +91 90322 49494</p>
-      </div>
-      <div>
-        <h4 class="font-semibold">Hours</h4>
-        <p class="mt-3 text-sm">Mon-Fri 08:00 - 18:00<br/>Sat 08:00 - 16:00</p>
-      </div>
-    </div>
-    <div class="text-center py-4 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
-  </footer>
+  <footer class="site-footer bg-gray-900 text-white mt-12 p-6 text-center">© 2025 St. Vincent's Preschool</footer>
 
-  <div id="whatsapp-widget" class="whatsapp-chat-widget" aria-hidden="false">
-    <button id="whatsapp-open" class="whatsapp-chat-button" aria-label="Chat on WhatsApp">
-      <i class="fa-brands fa-whatsapp" style="font-size:20px;color:white;"></i>
-    </button>
-  </div>
-
-  <script src="js/main.js"></script>
+  <script src="js/site-core.js"></script>
 </body>
 </html>
