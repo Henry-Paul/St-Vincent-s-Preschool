@@ -15,10 +15,10 @@
     .btn-primary-outline{border:2px solid var(--brand);color:var(--brand);padding:.5rem .9rem;border-radius:999px;font-weight:600;background:transparent}
     .cta-yellow{background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:600}
     .blog-card img{height:200px;object-fit:cover;border-radius:12px}
-    .modal-inner-scroll{max-height:70vh;overflow:auto;padding-right:8px}
+    .modal-inner-scroll{max-height:calc(100vh - 180px);overflow:auto;padding-right:8px;-webkit-overflow-scrolling:touch}
     .blog-meta{color:#6b7280;font-size:.95rem}
     .open-contact-modal{cursor:pointer}
-    @media (max-width:640px){ .blog-card img{height:150px} }
+    @media (max-width:640px){ .blog-card img{height:150px} .modal-inner-scroll{max-height:calc(100vh - 120px);} }
   </style>
 </head>
 <body>
@@ -63,9 +63,6 @@
       <div>
         <h1 class="text-4xl font-bold text-gray-900">Parenting & Early Learning Blog</h1>
         <p class="text-gray-600 mt-2">Helpful guides, research-backed insights and practical tips for parents.</p>
-      </div>
-      <div>
-        <a href="index.html" class="btn-primary">Back to Home</a>
       </div>
     </div>
 
@@ -125,10 +122,11 @@
     <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
   </footer>
 
-  <!-- Blog Read Modal (fixed, scrollable inner content) -->
-  <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden">
-    <div class="min-h-screen flex items-center justify-center p-4">
-      <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden" role="dialog" aria-modal="true">
+  <!-- Fixed, scrollable blog modal (overlay scroll enabled, inner scroll smooth on mobile) -->
+  <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden overflow-y-auto">
+    <div class="min-h-screen flex items-start md:items-center justify-center p-4">
+      <div id="blog-modal-inner" class="bg-white rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden" role="dialog" aria-modal="true"
+           style="max-height: calc(100vh - 48px); display:flex; flex-direction:column;">
         <div class="p-6 pb-3 border-b flex justify-between items-start">
           <div>
             <h2 id="blog-title" class="text-2xl font-bold text-[--brand]"></h2>
@@ -141,8 +139,8 @@
           </div>
         </div>
 
-        <div id="blog-body" class="p-6 modal-inner-scroll">
-          <!-- content injected by script; scrolls internally -->
+        <div id="blog-body" class="p-6 modal-inner-scroll" tabindex="0" aria-live="polite">
+          <!-- injected content -->
         </div>
 
         <div class="p-6 pt-3 border-t flex justify-end gap-3 bg-gray-50">
@@ -153,11 +151,10 @@
     </div>
   </div>
 
-  <!-- Floating WhatsApp (if site-core didn't add it, this ensures presence) -->
+  <!-- Optional fallback WhatsApp if site-core doesn't inject one -->
   <div id="whatsapp-fab-fallback" style="display:none;"></div>
 
   <script>
-    // Minimal blog post data (images referenced from images/blog/)
     const blogPosts = {
       1: {
         title: "Why Play Matters: The Foundation of Early Learning",
@@ -174,7 +171,6 @@
             <li><strong>Physical Development:</strong> Gross & fine motor activities that build coordination.</li>
           </ul>
           <p class="mt-3">By prioritizing play, we give children a strong start — curious, capable, and confident.</p>
-
           <div class="mt-6 p-4 bg-[#fff4f7] rounded-lg border-l-4 border-[--brand]">
             <p class="font-semibold">Ready to see play-based learning in action?</p>
             <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Tour - Why Play Matters">Schedule a Tour</button></div>
@@ -221,7 +217,8 @@
       }
     };
 
-    const modal = document.getElementById('blog-modal');
+    const overlay = document.getElementById('blog-modal');
+    const modalInner = document.getElementById('blog-modal-inner');
     const modalTitle = document.getElementById('blog-title');
     const modalMeta = document.getElementById('blog-meta');
     const modalBody = document.getElementById('blog-body');
@@ -232,20 +229,34 @@
       if (!post) return;
       modalTitle.textContent = post.title;
       modalMeta.textContent = `By ${post.author} • ${post.date}`;
-      modalBody.innerHTML = `
-        <div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;"></div>
-        <div class="mt-4 text-gray-700">${post.body}</div>
-      `;
-      modal.classList.remove('hidden');
+      modalBody.innerHTML = `<div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;"></div>
+                             <div class="mt-4 text-gray-700">${post.body}</div>`;
+
+      overlay.classList.remove('hidden');
+      // lock page scroll but allow inner scrolling
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
-      // Ensure internal scroll at top
+      // for mobile touch behavior: prevent overlay from intercepting touchmove while allowing inner scroll
+      overlay.addEventListener('touchmove', overlayTouchHandler, { passive: false });
       setTimeout(()=> modalBody.scrollTop = 0, 30);
+      // focus the inner scrollable area for accessibility
+      modalBody.focus();
     }
 
     function closeBlogModal() {
-      modal.classList.add('hidden');
+      overlay.classList.add('hidden');
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
+      overlay.removeEventListener('touchmove', overlayTouchHandler);
       modalBody.innerHTML = '';
+    }
+
+    function overlayTouchHandler(e){
+      // if the touch is on the overlay (outside modal inner), prevent body scroll
+      if (!modalInner.contains(e.target)) {
+        e.preventDefault();
+      }
+      // allow scrolling when touch is inside modalBody (inner scroll container)
     }
 
     document.querySelectorAll('.open-blog').forEach(btn => {
@@ -253,20 +264,19 @@
     });
 
     blogClose.addEventListener('click', closeBlogModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeBlogModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeBlogModal(); });
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeBlogModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeBlogModal(); });
 
-    // Ensure .open-contact-modal buttons open the site-wide enquiry modal (site-core.js exposes openUnifiedModal)
+    // wire open-contact-modal to site-wide modal (site-core.js should provide openUnifiedModal)
     document.addEventListener('click', (e) => {
-      const target = e.target.closest && e.target.closest('.open-contact-modal');
-      if (!target) return;
-      const program = target.dataset.program || '';
+      const el = e.target.closest && e.target.closest('.open-contact-modal');
+      if (!el) return;
+      const program = el.dataset.program || '';
       if (typeof openUnifiedModal === 'function') {
         openUnifiedModal({ prefillProgram: program });
       } else {
-        // fallback: attempt to call site-core.js function later
-        console.warn('openUnifiedModal not available yet — will attempt after site-core loads.');
-        setTimeout(() => { if (typeof openUnifiedModal === 'function') openUnifiedModal({ prefillProgram: program }); else alert('Enquiry form is not available — please call +91 9032249494'); }, 400);
+        // fallback attempt after slight delay in case site-core loads later
+        setTimeout(()=> { if (typeof openUnifiedModal === 'function') openUnifiedModal({ prefillProgram: program }); else alert('Enquiry form is not available — please call +91 9032249494'); }, 300);
       }
     });
   </script>
