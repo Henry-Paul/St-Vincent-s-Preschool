@@ -9,31 +9,28 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* small badge layout overrides for responsive placement */
-    .badge-google { display:inline-flex; gap:.4rem; align-items:center; font-weight:600; color:#1f2937; background:#fff;padding:.3rem .5rem;border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.06); font-size:.85rem;}
-    /* top-right badge (desktop) */
-    .test-card-badge-top { position:absolute; top:12px; right:12px; display:none; z-index:5; }
-    /* name-badge (tablet) */
-    .test-card-badge-name { display:none; margin-top:.35rem; }
-    /* bottom badge (mobile) */
-    .test-card-badge-bottom { display:none; margin-top:1rem; }
-
-    /* show top badge on large screens */
-    @media (min-width: 1024px) {
-      .test-card-badge-top { display:inline-flex; }
-    }
-    /* show name badge on medium screens */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      .test-card-badge-name { display:inline-flex; }
-    }
-    /* show bottom badge on small screens */
-    @media (max-width: 767px) {
-      .test-card-badge-bottom { display:inline-flex; }
-    }
-
-    /* testimonial card base */
-    .testimonial-card { position:relative; border-radius:18px; background:#fff; }
-    .testimonial-card .content { padding-right:12px; }
+    :root{--brand:#8b2b58;--brand-dark:#6f1f44;--muted:#6b7280}
+    body{background:#fffaf8;color:#0f172a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
+    .btn-primary{background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:600;display:inline-flex;gap:.5rem;align-items:center}
+    .btn-primary-outline{border:2px solid var(--brand);color:var(--brand);padding:.5rem .9rem;border-radius:999px;font-weight:600;background:transparent}
+    .btn-ghost{background:transparent;color:var(--brand);padding:.4rem .8rem;border-radius:10px;border:1px dashed #f3e5ec}
+    .program-card{background:#fff}
+    .slider-btn{background:#f3f3f3;padding:.4rem .6rem;border-radius:8px}
+    .slider-dot{width:10px;height:10px;border-radius:50%;background:#ddd;display:inline-block;border:none}
+    .slider-dot.active{background:var(--brand)}
+    .testimonial-card{min-height:160px}
+    .faq-q{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q .sign{width:28px;height:28px;border-radius:6px;background:#fff;border:1px solid #eee;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(15,23,42,0.04)}
+    .resource-card img{height:140px;object-fit:cover;border-radius:8px}
+    .trust-visual{display:flex;gap:12px;align-items:center}
+    .trust-visual img{width:64px;height:64px;object-fit:cover;border-radius:10px}
+    .sv-modal-enter{opacity:0;transform:translateY(12px)}
+    .sv-modal-enter.sv-modal-show{opacity:1;transform:none;transition:all .28s ease}
+    a:focus, button:focus, input:focus { outline: 3px solid rgba(139,43,88,0.18); outline-offset: 3px; }
+    /* Testimonial slider controls */
+    .testimonial-slider-wrapper { position: relative; }
+    .testimonial-controls { position: absolute; right: 1rem; top: -2.4rem; display:flex; gap:.5rem; align-items:center; }
+    .badge-google { background: linear-gradient(90deg,#fff8f9,#fff); border-radius:10px; padding:.25rem .5rem; display:inline-flex; gap:.4rem; align-items:center; font-weight:600; color:#1f2937; box-shadow:0 6px 18px rgba(0,0,0,0.06); font-size:.85rem; }
   </style>
 </head>
 <body>
@@ -92,7 +89,7 @@
 
       <div class="mx-auto">
         <div class="hero-frame max-w-[520px]">
-          <img src="images/hero-children.png" alt="Children smiling" class="w-full h-auto rounded-lg object-cover shadow-lg">
+          <img src="images/hero-children.jpg" alt="Children smiling" class="w-full h-auto rounded-lg object-cover shadow-lg">
         </div>
       </div>
     </section>
@@ -105,7 +102,7 @@
       </header>
 
       <div class="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Program cards (same as before) -->
+        <!-- Program cards (unchanged) ... copy the same program card markup from your existing file -->
         <!-- Playgroup -->
         <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-yellow-500">
           <div class="flex items-center space-x-4 mb-4">
@@ -124,10 +121,77 @@
           </div>
         </div>
 
-        <!-- Other program cards (Nursery, PP1, PP2, Day Care) remain identical to earlier version -->
-        <!-- ... copy the rest of the program card HTML from your previous file ... -->
+        <!-- Nursery -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-green-500">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-pencil-ruler text-3xl text-green-500 p-3 bg-green-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Nursery</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 2.5 – 3.5 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Foundation literacy & numeracy through play.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Pre-reading & phonics awareness</li>
+            <li>Number recognition & counting</li>
+            <li>Confidence in group activities</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-contact-modal" data-program="Nursery">Enquire</button>
+          </div>
+        </div>
 
-        <!-- For brevity in this paste, ensure you include the Nursery, PP1, PP2 and Day Care card blocks identical to the prior version. -->
+        <!-- PP1 -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-blue-500">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-book-open text-3xl text-blue-500 p-3 bg-blue-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 1 (PP1)</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 3.5 – 4.5 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Pre-writing, phonemic awareness & concept application.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Letter formation & pre-writing strokes</li>
+            <li>Phonemic activities & group play</li>
+            <li>Early numeracy concepts</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-contact-modal" data-program="PP1">Enquire</button>
+          </div>
+        </div>
+
+        <!-- PP2 -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-red-500">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-graduation-cap text-3xl text-red-500 p-3 bg-red-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 2 (PP2)</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 4.5 – 6 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Reading fluency, arithmetic basics & school readiness.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Reading fluency & comprehension</li>
+            <li>Basic addition & subtraction</li>
+            <li>Independent work & social readiness</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-contact-modal" data-program="PP2">Enquire</button>
+          </div>
+        </div>
+
+        <!-- Day Care -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 md:col-span-2 lg:col-span-1 mx-auto md:w-full lg:w-full max-w-lg">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-clock text-3xl text-purple-500 p-3 bg-purple-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Day Care</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 1.5 – 6 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Safe, structured extended care for working parents.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Meals & supervised rest</li>
+            <li>Structured activities & safety</li>
+            <li>Continuity of learning</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-contact-modal" data-program="Day Care">Enquire</button>
+          </div>
+        </div>
       </div>
 
       <div class="flex justify-center mt-12">
@@ -135,7 +199,7 @@
       </div>
     </section>
 
-    <!-- GALLERY + VIDEO (unchanged) -->
+    <!-- GALLERY + VIDEO -->
     <section class="py-8">
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-semibold">Gallery & Tour</h2>
@@ -178,7 +242,7 @@
         <!-- 2x2 grid -->
         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/safe-secure.jpg" alt="Safe and Secure" class="w-16 h-16 mr-3 float-left rounded-lg object-cover">
+            <img src="images/trust/safe-secure.jpg" alt="Safe and Secure">
             <div>
               <h4 class="font-semibold">Safe & Secure</h4>
               <p class="text-gray-700">CCTV, child-proofed campus and strict hygiene protocols ensure a safe environment.</p>
@@ -186,7 +250,7 @@
           </div>
 
           <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/play-based.jpg" alt="Play-Based Learning" class="w-16 h-16 mr-3 float-left rounded-lg object-cover">
+            <img src="images/trust/play-based.jpg" alt="Play-Based Learning">
             <div>
               <h4 class="font-semibold">Play-Based Learning</h4>
               <p class="text-gray-700">Our curriculum fosters creativity and critical thinking through hands-on activities.</p>
@@ -194,7 +258,7 @@
           </div>
 
           <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/caring-teachers.jpg" alt="Caring Teachers" class="w-16 h-16 mr-3 float-left rounded-lg object-cover">
+            <img src="images/trust/caring-teachers.jpg" alt="Caring Teachers">
             <div>
               <h4 class="font-semibold">Caring Teachers</h4>
               <p class="text-gray-700">Passionate educators dedicated to each child's growth and happiness.</p>
@@ -202,7 +266,7 @@
           </div>
 
           <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/personalized-care.jpg" alt="Personalized Care" class="w-16 h-16 mr-3 float-left rounded-lg object-cover">
+            <img src="images/trust/personalized-care.jpg" alt="Personalized Care">
             <div>
               <h4 class="font-semibold">Personalized Care</h4>
               <p class="text-gray-700">Low student-teacher ratio ensures every child receives the attention they need.</p>
@@ -231,7 +295,7 @@
 
         <div class="testimonial-slider-wrapper overflow-hidden">
           <div id="testimonial-slider" class="flex gap-6 transition-transform duration-500">
-            <!-- JS populates testimonial cards -->
+            <!-- JS populates testimonial cards (keeps existing 5 entries) -->
           </div>
 
           <!-- pager dots -->
@@ -294,15 +358,125 @@
       </div>
     </section>
 
-    <!-- PREMIUM FAQ (unchanged) -->
+    <!-- PREMIUM FAQ (animated + / -) -->
     <section id="faq" class="py-12">
       <div class="max-w-6xl mx-auto px-4 bg-white rounded-xl p-6 shadow">
         <h3 class="text-2xl font-bold text-center">Frequently Asked Questions</h3>
         <p class="text-center text-gray-600 mt-2">Answers to common questions about preschool and early childhood development.</p>
 
         <div class="mt-6 grid md:grid-cols-2 gap-4">
-          <!-- 10 FAQs (same as before) -->
-          <!-- (Ensure same FAQ items as in previous file) -->
+          <!-- repeat the 10 FAQ items (same as prior) -->
+          <!-- 1 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>What is the ideal age to start preschool?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Children typically start between 1.5–3 years depending on readiness. Our Playgroup caters to 1.5+ with gentle settling and sensory play.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>How can I prepare my toddler for preschool?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Start short separation practices, encourage simple routines (handwashing, snack time), read books daily, and practice simple self-help tasks.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>What should I look for in a quality preschool?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Safe environment, trained teachers, play-based curriculum, low student-teacher ratio, hygiene & clear communication with parents.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>How does preschool help with separation anxiety?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Gradual settling, consistent routines, familiar staff, and parent partnership help children feel secure and reduce separation anxiety.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>What is the teacher-to-child ratio?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>We maintain ratios designed to provide focused attention: Playgroup 1:6, Nursery 1:8, Pre-Primary 1:10 (approx.).</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>Do you provide meals and manage allergies?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Yes — nutritious meals and snack plans are provided. Please share allergy details at enrolment; strict protocols are followed to prevent cross contamination.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 7 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>How do you handle emergencies or sickness?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>First-aid trained staff, parent notification protocols, and quick access to local medical support. Serious cases are immediately escalated.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 8 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>What are your school timings and fees structure?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Typical timings: Playgroup & Nursery 9 AM–12 PM, Pre-Primary 9 AM–1 PM. Daycare extension available. Please enquire for detailed fee & enrollment options.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 9 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>How do I enrol my child?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Complete the enquiry form and our team will contact you to arrange a tour, explain fees, and complete admission steps. We support you through documentation and start dates.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+          <!-- 10 -->
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>What is the role of play in preschool learning?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Play is the primary way children learn: it builds language, problem solving, social skills and motor development. Our day includes guided & free play experiences.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+
         </div>
 
       </div>
