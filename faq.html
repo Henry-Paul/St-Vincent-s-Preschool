@@ -7,17 +7,21 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="bg-white shadow fixed w-full z-40">
+  <!-- header -->
+  <header class="bg-white shadow fixed w-full z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
-      <nav class="hidden md:flex gap-6 items-center">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="programs.html" class="nav-link">Programs</a>
-        <a href="gallery.html" class="nav-link">Gallery</a>
-        <a href="faq.html" class="nav-link">FAQ</a>
-      </nav>
-      <div class="flex items-center gap-3">
-        <button id="menu-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu"></button>
+      <nav class="hidden md:flex gap-6 items-center"><a href="index.html" class="nav-link">Home</a><a href="programs.html" class="nav-link">Programs</a><a href="gallery.html" class="nav-link">Gallery</a><a href="faq.html" class="nav-link">FAQ</a></nav>
+      <div class="flex items-center gap-3"><button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button></div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
+        <a href="index.html" class="py-2">Home</a>
+        <a href="programs.html" class="py-2">Programs</a>
+        <a href="gallery.html" class="py-2">Gallery</a>
+        <a href="faq.html" class="py-2">FAQ</a>
+        <a href="blogs.html" class="py-2">Blog</a>
+        <a href="contact.html" class="py-2">Contact</a>
       </div>
     </div>
   </header>
@@ -27,71 +31,33 @@
     <h1 class="text-4xl font-bold mb-8">Frequently Asked Questions</h1>
 
     <div class="space-y-6">
-      <!-- 10 FAQs: each has a details + Enquire -->
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">1. What is the ideal age to start preschool?</summary>
-        <p class="mt-4">Most children begin preschool between 1.5–3 years. We offer playgroup for 1.5+ with gentle settling.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal" data-program="playgroup">Enquire Now</button>
-      </details>
+      <!-- 10 faq items, identical to premium-faq content -->
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">1. What is the ideal age to start preschool?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Most children begin preschool between 1.5–3 years. We offer playgroup for 1.5+ with gentle settling.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal" data-program="playgroup">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">2. What safety measures are provided?</summary>
-        <p class="mt-4">CCTV, controlled entry, trained staff, sanitized classrooms and first-aid trained personnel.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">2. What safety measures are provided?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>CCTV, controlled entry, trained staff, sanitized classrooms and first-aid trained personnel.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">3. What is the teacher-to-child ratio?</summary>
-        <p class="mt-4">Playgroup 1:6, Nursery 1:8, Pre-Primary 1:10 — optimized for attention and care.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">3. What is the teacher-to-child ratio?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Playgroup 1:6, Nursery 1:8, Pre-Primary 1:10.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">4. Do you provide meals?</summary>
-        <p class="mt-4">We provide hygienic meals & snacks; allergies and preferences are carefully managed.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">4. Do you provide meals?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Yes — we provide hygienic meals & snacks; allergies and preferences are carefully managed.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">5. What curriculum do you follow?</summary>
-        <p class="mt-4">Play-based, activity-driven learning focusing on cognitive, motor, language & social development.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">5. What curriculum do you follow?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Play-based, activity-driven learning focusing on cognitive, motor, language & social development.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">6. Can parents visit during school hours?</summary>
-        <p class="mt-4">Scheduled observations are allowed; minimal disturbance policy ensures children’s routine.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">6. Can parents visit during school hours?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Scheduled observations are allowed; minimal disturbance policy ensures children’s routine.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">7. What are the school timings?</summary>
-        <p class="mt-4">Playgroup & Nursery 9 AM–12 PM, Pre-Primary 9 AM–1 PM. Daycare extends to 7 PM.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">7. What are the school timings?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Playgroup & Nursery 9 AM–12 PM, Pre-Primary 9 AM–1 PM. Daycare extends to 7 PM.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">8. How do you handle sickness?</summary>
-        <p class="mt-4">Supervised resting area, parent notification, and access to immediate medical help when required.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">8. How do you handle sickness?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Supervised resting area, parent notification, and access to immediate medical help when required.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">9. Are activities included?</summary>
-        <p class="mt-4">Storytelling, phonics, art, music, dance, early science, clay modelling, sensory learning.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">9. Are activities included?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Storytelling, phonics, art, music, dance, early science, clay modelling, sensory learning.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
 
-      <details class="p-6 bg-white rounded-xl shadow">
-        <summary class="text-2xl font-bold cursor-pointer">10. How do I enrol my child?</summary>
-        <p class="mt-4">Fill the enquiry form; our team will contact you for a tour, fee details and admission steps.</p>
-        <button class="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button>
-      </details>
+      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">10. How do I enrol my child?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Fill the enquiry form; our team will contact you for a tour, fee details and admission steps.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
+
     </div>
   </main>
 
   <footer class="site-footer bg-gray-900 text-white mt-12 p-6 text-center">© 2025 St. Vincent's Preschool</footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="js/site-core.js"></script>
 </body>
 </html>
