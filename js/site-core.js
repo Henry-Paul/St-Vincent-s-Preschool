@@ -1,24 +1,23 @@
-// js/site-core.js - consolidated logic for St. Vincent's site
-/* EMAILJS CONFIG — replace with real values if needed */
+// js/site-core.js - consolidated logic with Resource modals & FAQ +/− behavior
+
+/* ========== EmailJS config (your values) ========== */
 const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_14zrdg6',
   TEMPLATE_ID: 'template_snxhxlk',
   PUBLIC_KEY: '5SyxCT8kGY0_H51dC'
 };
 
-/* Try to init emailjs if loaded */
 if (window.emailjs && EMAILJS_CONFIG.PUBLIC_KEY) {
-  try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); } catch (e) { console.warn('emailjs init error', e); }
+  try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); } catch (e) { console.warn('EmailJS init failed', e); }
 }
 
-/* helpers */
+/* DOM helpers */
 const $ = (s, ctx=document) => ctx.querySelector(s);
 const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
 
-/* ---------- Burger menu (universal) ---------- */
+/* --------- Burger menu (global) ---------- */
 function initUniversalBurger() {
-  const btns = document.querySelectorAll('#menu-btn');
-  btns.forEach(btn => {
+  $$('#menu-btn').forEach(btn => {
     const header = btn.closest('header') || document;
     const mobileMenu = header.querySelector('#mobile-menu') || document.getElementById('mobile-menu');
     function setIcon(open) {
@@ -31,9 +30,7 @@ function initUniversalBurger() {
       const isHidden = mobileMenu.classList.toggle('hidden');
       setIcon(!isHidden);
       btn.setAttribute('aria-expanded', String(!isHidden));
-      if (!isHidden) {
-        const first = mobileMenu.querySelector('a, button, [tabindex]'); if (first) first.focus();
-      }
+      if (!isHidden) { const first = mobileMenu.querySelector('a, button, [tabindex]'); if (first) first.focus(); }
     });
     if (mobileMenu) {
       mobileMenu.querySelectorAll('a').forEach(a=>{
@@ -62,7 +59,7 @@ function initUniversalBurger() {
   document.addEventListener('keydown', (e)=> { if (e.key === 'Escape') { $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); } });
 }
 
-/* ---------- Gallery slider ---------- */
+/* --------- Gallery slider ---------- */
 function initImageSlider() {
   const slider = document.getElementById('image-slider'); if (!slider) return;
   const slides = slider.querySelectorAll('.image-slide'); if (!slides.length) return;
@@ -77,34 +74,43 @@ function initImageSlider() {
   update();
 }
 
-/* ---------- FAQ accordion ---------- */
-function initFAQAccordion() {
-  $$('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const expanded = q.getAttribute('aria-expanded') === 'true';
-      const a = q.parentElement.querySelector('.faq-a');
-      if (!a) return;
-      if (expanded) { a.style.maxHeight = '0'; q.setAttribute('aria-expanded','false'); } 
-      else { a.style.maxHeight = a.scrollHeight + 'px'; q.setAttribute('aria-expanded','true'); }
-    });
-  });
+/* --------- Testimonials (render static polished ones) ---------- */
+const STATIC_TESTIMONIALS = [
+  { name: "Sai Ram", text: "My child has shown tremendous development and confidence after joining St. Vincent's." },
+  { name: "Latha B.", text: "Excellent facilities, caring teachers and a clean environment — one of the best in Chandanagar." },
+  { name: "Shashank", text: "Caring staff and great learning environment — my child loves it." },
+  { name: "Saurabh", text: "Great environment with competitive fees. Highly recommended!" },
+  { name: "Anita", text: "Spacious, hygienic and experienced teachers — very happy with the progress." }
+];
+function renderTestimonialsGrid() {
+  const container = document.getElementById('testimonials-grid'); if (!container) return;
+  container.innerHTML = STATIC_TESTIMONIALS.slice(0,3).map((t,i) => `
+    <article class="testimonial-card bg-white p-6 rounded-2xl shadow-lg">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-2xl text-yellow-600">★</div>
+        <div class="flex-1">
+          <div class="flex justify-between items-start">
+            <h3 class="text-lg font-semibold">${escapeHtml(t.name)}</h3>
+            <div class="text-yellow-500 text-lg font-bold">5.0</div>
+          </div>
+          <p class="mt-3 text-gray-600">${escapeHtml(t.text)}</p>
+        </div>
+      </div>
+      <div class="mt-4 flex justify-end"><button class="px-4 py-2 bg-var-primary text-white rounded open-contact-modal">Enquire</button></div>
+    </article>
+  `).join('');
+  // wire enquiry buttons just rendered
+  $$('.testimonial-card .open-contact-modal').forEach(b => b.addEventListener('click', ()=> openUnifiedModal({})));
 }
 
-/* ---------- Testimonials wiring ---------- */
-function wireTestimonialEnquiries() {
-  $$('.testimonial-card button, .testimonial-enquire, .testimonial .open-contact-modal').forEach(b => {
-    b.addEventListener('click', ()=> openUnifiedModal({}));
-  });
-}
-
-/* ---------- Unified enquiry modal (reused across site) ---------- */
+/* --------- Unified enquiry modal (exact fields) ---------- */
 function openUnifiedModal({ prefillProgram = '' } = {}) {
   const existing = document.getElementById('sv-contact-modal'); if (existing) existing.remove();
   const overlay = document.createElement('div');
   overlay.id = 'sv-contact-modal';
   overlay.className = 'fixed inset-0 z-60 flex items-center justify-center bg-black/60 p-4';
   overlay.innerHTML = `
-    <div class="bg-white rounded-xl p-6 w-full max-w-lg relative">
+    <div class="bg-white rounded-xl p-6 w-full max-w-lg relative sv-modal-enter sv-modal-show">
       <button id="sv-close" class="absolute right-4 top-4 text-gray-600">✕</button>
       <h3 class="text-2xl font-bold mb-3">Schedule a Visit / Enquiry</h3>
       <form id="schedule-visit-form" class="space-y-3">
@@ -113,7 +119,7 @@ function openUnifiedModal({ prefillProgram = '' } = {}) {
         <div><input type="tel" id="phone_number" name="phone_number" placeholder="Phone Number" required class="w-full p-3 border rounded" /></div>
         <div><input type="text" id="child_age" name="child_age" placeholder="Child's Age (e.g., 2.5 years)" required class="w-full p-3 border rounded" /></div>
         <div><label class="text-sm">Preferred Visit Date</label><input type="date" id="preferred_date" name="preferred_date" required class="w-full p-3 border rounded" /></div>
-        <input type="hidden" id="program" name="program" value="" />
+        <input type="hidden" id="program" name="program" value="${escapeHtml(prefillProgram || '')}" />
         <div class="flex gap-3">
           <button type="submit" class="btn-primary w-full">Send Request</button>
           <button type="button" id="sv-cancel" class="btn-primary-outline w-full">Cancel</button>
@@ -124,11 +130,9 @@ function openUnifiedModal({ prefillProgram = '' } = {}) {
   `;
   document.body.appendChild(overlay);
 
-  if (prefillProgram) { const hid = overlay.querySelector('#program'); if (hid) hid.value = prefillProgram; }
-
   overlay.querySelector('#sv-close').addEventListener('click', ()=> overlay.remove());
   overlay.querySelector('#sv-cancel').addEventListener('click', ()=> overlay.remove());
-  document.addEventListener('keydown', (e)=> { if (e.key === 'Escape') { const el = document.getElementById('sv-contact-modal'); if (el) el.remove(); } });
+  document.addEventListener('keydown', (e)=> { if (e.key==='Escape') { const el=document.getElementById('sv-contact-modal'); if (el) el.remove(); } });
 
   overlay.querySelector('#schedule-visit-form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -145,16 +149,114 @@ function openUnifiedModal({ prefillProgram = '' } = {}) {
     };
     if (window.emailjs && EMAILJS_CONFIG.SERVICE_ID) {
       emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, payload)
-        .then(()=> { res.textContent = 'Thanks — we will contact you shortly.'; setTimeout(()=> overlay.remove(), 1200); })
-        .catch(err=> { console.error('EmailJS error', err); res.textContent = 'Submission failed — please call +91 9032249494'; });
+        .then(()=> { res.textContent='Thanks — we will contact you shortly.'; setTimeout(()=> overlay.remove(),1200); })
+        .catch(err=> { console.error('EmailJS error', err); res.textContent='Submission failed — please call +91 9032249494'; });
     } else {
-      // simulation for local previews
-      setTimeout(()=> { res.textContent = 'Thanks — we will contact you shortly.'; setTimeout(()=> overlay.remove(), 900); }, 900);
+      setTimeout(()=> { res.textContent='Thanks — we will contact you shortly.'; setTimeout(()=> overlay.remove(),900); }, 900);
     }
   });
 }
 
-/* ---------- Global WhatsApp fab (real icon) ---------- */
+/* --------- Resources modal content mapping ---------- */
+const RESOURCE_CONTENT = {
+  "early-learning": {
+    title: "The Science of Early Learning",
+    image: "images/resources/early-learning.jpg",
+    html: `
+      <p>The early years are a critical period for brain development. Preschool experiences influence neural pathways responsible for language, social skills, and executive function.</p>
+      <h4 class="mt-4 font-semibold">What we focus on</h4>
+      <ul class="list-disc pl-5 mt-2">
+        <li>Language-rich interactions and story-based learning</li>
+        <li>Play-based activities that strengthen attention and memory</li>
+        <li>Opportunities for exploration to build curiosity and confidence</li>
+      </ul>
+      <p class="mt-3">Our teachers scaffold learning to ensure each child experiences success and joyful discovery.</p>
+    `
+  },
+  "social-skills": {
+    title: "Social Skills Development",
+    image: "images/resources/social-skills.jpg",
+    html: `
+      <p>Preschool is where children learn to share, cooperate, and express emotions positively. Peer interactions and guided group activities build empathy and communication.</p>
+      <h4 class="mt-4 font-semibold">How we support social growth</h4>
+      <ul class="list-disc pl-5 mt-2">
+        <li>Structured group play and turn-taking games</li>
+        <li>Emotion coaching and language for feelings</li>
+        <li>Conflict resolution modeled by teachers</li>
+      </ul>
+      <p class="mt-3">We intentionally create environments where social skills are practiced daily, guided by kind and consistent adults.</p>
+    `
+  },
+  "primary-school": {
+    title: "Preparing for Primary School",
+    image: "images/resources/primary-school.jpg",
+    html: `
+      <p>Transitioning to primary school is smoother when children have early practice with routines, basic literacy and numeracy, and confidence in group learning.</p>
+      <h4 class="mt-4 font-semibold">Key preparation areas</h4>
+      <ul class="list-disc pl-5 mt-2">
+        <li>Independence & self-help skills</li>
+        <li>Following multi-step instructions and classroom routines</li>
+        <li>Foundational literacy and numeracy concepts</li>
+      </ul>
+      <p class="mt-3">We partner with parents to scaffold these skills so each child begins primary school ready and confident.</p>
+    `
+  }
+};
+
+/* --------- Open resource modal (image on top) ---------- */
+function openResourceModal(key) {
+  const data = RESOURCE_CONTENT[key];
+  if (!data) return;
+  const existing = document.getElementById('resource-modal'); if (existing) existing.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'resource-modal';
+  overlay.className = 'fixed inset-0 z-70 flex items-start justify-center bg-black/60 p-4';
+  overlay.innerHTML = `
+    <div class="bg-white rounded-xl w-full max-w-2xl overflow-hidden sv-modal-enter sv-modal-show">
+      <div style="height:220px; background:url('${data.image}') center/cover no-repeat"></div>
+      <div class="p-6">
+        <div class="flex justify-between">
+          <h3 class="text-2xl font-bold">${escapeHtml(data.title)}</h3>
+          <button id="resource-close" class="text-gray-600">✕</button>
+        </div>
+        <div class="mt-4 text-gray-700">${data.html}</div>
+        <div class="mt-6 flex gap-3">
+          <button class="btn-primary open-contact-modal" data-program="${escapeHtml(data.title)}">Schedule a Visit</button>
+          <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
+          <a class="btn-primary-outline" href="https://wa.me/919032249494" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  overlay.querySelector('#resource-close').addEventListener('click', ()=> overlay.remove());
+  document.addEventListener('keydown', (e)=> { if (e.key==='Escape') { const el=document.getElementById('resource-modal'); if (el) el.remove(); } });
+  // wire contact buttons inside modal:
+  overlay.querySelectorAll('.open-contact-modal').forEach(b => b.addEventListener('click', ()=> openUnifiedModal({ prefillProgram: b.dataset.program || '' })));
+}
+
+/* --------- FAQ accordion with + / - ---------- */
+function initFAQAccordion() {
+  $$('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const expanded = q.getAttribute('aria-expanded') === 'true';
+      const sign = q.querySelector('.sign');
+      const a = q.parentElement.querySelector('.faq-a');
+      if (!a) return;
+      if (expanded) {
+        a.style.maxHeight = '0';
+        q.setAttribute('aria-expanded','false');
+        if (sign) sign.textContent = '+';
+      } else {
+        a.style.maxHeight = a.scrollHeight + 'px';
+        q.setAttribute('aria-expanded','true');
+        if (sign) sign.textContent = '−';
+      }
+    });
+  });
+}
+
+/* --------- WhatsApp floating fab (global) ---------- */
 function initWhatsAppFab() {
   if (document.getElementById('whatsapp-fab-global')) return;
   const phone = '919032249494';
@@ -165,7 +267,7 @@ function initWhatsAppFab() {
   wrapper.style.position = 'fixed';
   wrapper.style.right = '1.5rem';
   wrapper.style.bottom = '1.5rem';
-  wrapper.style.zIndex = '60';
+  wrapper.style.zIndex = '80';
   wrapper.className = 'whatsapp-wrapper';
 
   const a = document.createElement('a');
@@ -182,9 +284,7 @@ function initWhatsAppFab() {
   a.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
   a.style.borderRadius = '999px';
   a.setAttribute('aria-label','Chat on WhatsApp');
-
-  // WhatsApp SVG (realistic)
-  a.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.672.15-.198.297-.768.966-.942 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.173.2-.298.3-.497.1-.198.05-.372-.025-.52-.074-.149-.672-1.618-.922-2.214-.243-.579-.49-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.064 2.876 1.212 3.074c.149.198 2.095 3.2 5.077 4.487  .709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="white"/></svg>`;
+  a.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.672.15-.198.297-.768.966-.942 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.173.2-.298.3-.497.1-.198.05-.372-.025-.52-.074-.149-.672-1.618-.922-2.214-.243-.579-.49-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.064 2.876 1.212 3.074c.149.198 2.095 3.2 5.077 4.487  .709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="white"/></svg>`;
 
   const tip = document.createElement('div');
   tip.style.position = 'absolute';
@@ -207,28 +307,41 @@ function initWhatsAppFab() {
 
   setTimeout(()=> { tip.style.opacity='1'; tip.style.transform='translateY(0)'; }, 1200);
   setTimeout(()=> { tip.style.opacity='0'; tip.style.transform='translateY(6px)'; }, 6500);
-
   a.addEventListener('mouseenter', ()=> { tip.style.opacity='1'; tip.style.transform='translateY(0)'; });
   a.addEventListener('mouseleave', ()=> { tip.style.opacity='0'; tip.style.transform='translateY(6px)'; });
-  a.addEventListener('click', ()=> { tip.style.opacity='0'; tip.style.transform='translateY(6px)'; });
-  setInterval(()=> { a.style.transform='scale(1.06)'; setTimeout(()=> a.style.transform='scale(1)',220); }, 9000);
 }
 
-/* ---------- wire global CTA triggers ---------- */
-function wireGlobalTriggers() {
-  $$('.open-contact-modal').forEach(btn => btn.addEventListener('click', (e) => {
-    const program = btn.dataset.program || '';
-    openUnifiedModal({ prefillProgram: program });
-  }));
+/* --------- Resource buttons wiring ---------- */
+function wireResourceButtons() {
+  $$('[data-resource]').forEach(b => {
+    b.addEventListener('click', (e) => {
+      const key = e.currentTarget.dataset.resource;
+      openResourceModal(key);
+    });
+  });
+}
+
+/* --------- Global CTAs wiring ---------- */
+function wireGlobalCTAs() {
+  $$('.open-contact-modal').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const program = btn.dataset.program || '';
+      openUnifiedModal({ prefillProgram: program });
+    });
+  });
   const mainBtn = document.getElementById('schedule-visit-btn-main'); if (mainBtn) mainBtn.addEventListener('click', ()=> openUnifiedModal({}));
 }
 
-/* ---------- init on DOMContentLoaded ---------- */
+/* --------- small helpers ---------- */
+function escapeHtml(s){ return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* --------- init ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   initUniversalBurger();
   initImageSlider();
+  renderTestimonialsGrid();
+  wireResourceButtons();
+  wireGlobalCTAs();
   initFAQAccordion();
-  wireTestimonialEnquiries();
-  wireGlobalTriggers();
   initWhatsAppFab();
 });
