@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>St. Vincent's Preschool — Home</title>
   <meta name="description" content="St. Vincent's Preschool — premium preschool & daycare in Chandanagar. Play-based EYFS curriculum." />
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -72,7 +71,7 @@
       </div>
     </section>
 
-    <!-- PROGRAMS (identical with programs.html) -->
+    <!-- PROGRAMS (ENQUIRY ONLY) -->
     <section id="programs" class="pt-12">
       <header class="text-center mb-8">
         <h2 class="text-3xl font-bold">Our Curriculum & Programs</h2>
@@ -94,7 +93,6 @@
             <li>Goal: Mastering basic routines and independent play.</li>
           </ul>
           <div class="mt-4 flex gap-3">
-            <button class="btn-small open-program-details" data-program="playgroup">Details</button>
             <button class="btn-small open-contact-modal" data-program="playgroup">Enquire</button>
           </div>
         </div>
@@ -113,7 +111,6 @@
             <li>Goal: Confident verbal communication and group engagement.</li>
           </ul>
           <div class="mt-4 flex gap-3">
-            <button class="btn-small open-program-details" data-program="nursery">Details</button>
             <button class="btn-small open-contact-modal" data-program="nursery">Enquire</button>
           </div>
         </div>
@@ -132,7 +129,6 @@
             <li>Goal: Understanding simple math and mastering early writing skills.</li>
           </ul>
           <div class="mt-4 flex gap-3">
-            <button class="btn-small open-program-details" data-program="lkg">Details</button>
             <button class="btn-small open-contact-modal" data-program="lkg">Enquire</button>
           </div>
         </div>
@@ -151,7 +147,6 @@
             <li>Goal: Smooth and confident transition into primary school.</li>
           </ul>
           <div class="mt-4 flex gap-3">
-            <button class="btn-small open-program-details" data-program="ukg">Details</button>
             <button class="btn-small open-contact-modal" data-program="ukg">Enquire</button>
           </div>
         </div>
@@ -170,7 +165,6 @@
             <li>Goal: Continuity of care in a productive, secure environment.</li>
           </ul>
           <div class="mt-4 flex gap-3">
-            <button class="btn-small open-program-details" data-program="daycare">Details</button>
             <button class="btn-small open-contact-modal" data-program="daycare">Enquire</button>
           </div>
         </div>
@@ -181,7 +175,7 @@
       </div>
     </section>
 
-    <!-- Gallery preview -->
+    <!-- Gallery preview + video -->
     <section class="py-8">
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-semibold">Gallery & Tour</h2>
@@ -214,16 +208,85 @@
       </div>
     </section>
 
-    <!-- PREMIUM FAQ (after gallery) -->
+    <!-- PREMIUM FAQ -->
     <section id="premium-faq" class="bg-white rounded-xl p-8 mt-10 shadow-lg">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-2xl font-bold text-center">Frequently Asked Questions</h2>
         <p class="text-center text-gray-600 mt-2">Common questions from parents — click a question to expand and enquire.</p>
 
         <div class="mt-8 grid md:grid-cols-2 gap-6">
-          <!-- FAQ items (10 items) -->
-          <!-- ... FAQ markup as previously provided ... -->
-          <!-- For brevity not repeated here; ensure faq.html has same content if needed -->
+          <!-- 10 FAQs (each has .faq-q and .faq-a with open-contact-modal CTA) -->
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">What is the ideal age to start preschool?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>Children typically begin between 1.5–3 years. Our Playgroup starts at 1.5 years with gentle settling, sensory play and short sessions to build routines and social skills.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal" data-program="playgroup">Enquire Now</button></div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">How do you ensure safety & hygiene?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>We have CCTV, controlled entry, trained staff, frequent sanitization, and first-aid trained caregivers.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">What is the teacher-to-child ratio?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>Playgroup 1:6, Nursery 1:8, Pre-Primary 1:10 — ratios designed to provide individual attention and safety.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">Do you provide meals & manage allergies?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>Yes — we provide meals and snacks. We carefully manage allergies and special dietary requests on a per-child basis with clear parent communication.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">What curriculum do you follow?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>We follow a play-based curriculum inspired by EYFS focusing on cognitive, motor, language, and social development.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">Can parents visit during school hours?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>Yes — scheduled parent observations to minimize disruption while providing transparency and peace of mind.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">What are school timings?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>Playgroup & Nursery 9 AM–12 PM. Pre-Primary 9 AM–1 PM. Daycare extends to 7 PM.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">How do you handle sickness & emergencies?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>We have supervised rest area, parent notification protocol and immediate access to medical assistance when required.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-gray-50 p-6 rounded-lg">
+            <button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">How do I enrol my child?</button>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;">
+              <p>Fill the enquiry form and our team will contact you for a tour, fee structure and admission steps.</p>
+              <div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -241,7 +304,18 @@
 
   </main>
 
-  <!-- Footer -->
+  <!-- Visit Us + Footer -->
+  <section class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="bg-white p-6 rounded-xl shadow-lg">
+      <h3 class="text-xl font-bold">Visit Us Now</h3>
+      <p class="text-gray-600 mt-2">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout, Chandanagar, Hyderabad</p>
+      <div class="mt-4 w-full h-80 rounded-lg overflow-hidden">
+        <iframe src="https://www.google.com/maps?q=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad&output=embed" style="border:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="mt-4 flex gap-3"><a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad" target="_blank" rel="noopener">Get Directions</a><a class="btn-outline" href="tel:+919032249494">Call Us</a></div>
+    </div>
+  </section>
+
   <footer class="site-footer bg-gray-900 text-white mt-12">
     <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-6">
       <div>
@@ -269,9 +343,9 @@
     <div class="text-center py-4 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
   </footer>
 
-  <!-- EmailJS -->
+  <!-- EmailJS (keeps keys in site-core.js) -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <!-- Site script -->
+  <!-- core site script -->
   <script src="js/site-core.js"></script>
 </body>
 </html>
