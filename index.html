@@ -3,54 +3,65 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>St. Vincent's Preschool — Home</title>
-  <meta name="description" content="St. Vincent's Preschool — premium preschool & daycare in Chandanagar. Play-based EYFS curriculum." />
+  <title>St. Vincent's Preschool | Premium Preschool & Daycare in Chandanagar, Hyderabad</title>
+  <meta name="description" content="St. Vincent's Preschool offers premium early childhood education in Chandanagar, Hyderabad. EYFS curriculum, play-based learning for children 1.5-6 years." />
+  <meta name="robots" content="index,follow" />
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Your styles -->
+  <link rel="stylesheet" href="css/styles.css">
   <style>
-    :root{--brand:#8b2b58;--brand-dark:#6f1f44;--muted:#6b7280}
-    body{background:#fffaf8;color:#0f172a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
-    .btn-primary{background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:600;display:inline-flex;gap:.5rem;align-items:center}
-    .btn-primary-outline{border:2px solid var(--brand);color:var(--brand);padding:.5rem .9rem;border-radius:999px;font-weight:600;background:transparent}
-    .btn-ghost{background:transparent;color:var(--brand);padding:.4rem .8rem;border-radius:10px;border:1px dashed #f3e5ec}
-    .program-card{background:#fff}
-    .slider-btn{background:#f3f3f3;padding:.4rem .6rem;border-radius:8px}
-    .slider-dot{width:10px;height:10px;border-radius:50%;background:#ddd;display:inline-block;border:none}
-    .slider-dot.active{background:var(--brand)}
-    .testimonial-card{min-height:160px}
-    .faq-q{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-    .faq-q .sign{width:28px;height:28px;border-radius:6px;background:#fff;border:1px solid #eee;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(15,23,42,0.04)}
-    .resource-card img{height:140px;object-fit:cover;border-radius:8px}
-    .trust-visual{display:flex;gap:12px;align-items:center}
-    .trust-visual img{width:64px;height:64px;object-fit:cover;border-radius:10px}
-    /* modal animation helpers */
-    .sv-modal-enter{opacity:0;transform:translateY(12px)}
-    .sv-modal-show{opacity:1;transform:none;transition:all .28s ease}
-    /* accessibility focus styles */
-    a:focus, button:focus, input:focus { outline: 3px solid rgba(139,43,88,0.18); outline-offset: 3px; }
+    :root { --brand:#8b2b58; --brand-dark:#6f1f44; }
+    html { scroll-behavior: smooth; }
   </style>
+
+  <!-- Structured data (schema) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Preschool",
+    "name": "St. Vincent's Preschool",
+    "description": "Premium preschool and daycare in Chandanagar, Hyderabad offering EYFS curriculum and play-based learning for children aged 1.5 to 6 years.",
+    "url": "https://stvincentspreschool.com",
+    "telephone": "+91-9032249494",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout",
+      "addressLocality": "Chandanagar",
+      "addressRegion": "Telangana",
+      "postalCode": "500050",
+      "addressCountry": "IN"
+    },
+    "openingHours": [
+      "Mo-Fr 08:00-18:00",
+      "Sa 08:00-16:00"
+    ]
+  }
+  </script>
 </head>
-<body>
+<body class="min-h-screen bg-[--surface] text-[--text-dark]">
 
   <!-- HEADER -->
-  <header class="bg-white shadow fixed w-full z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
-        <img src="images/logo.png" alt="logo" class="w-12 h-12 object-contain">
-        <div>
-          <div class="text-xl font-semibold">St. Vincent's</div>
-          <div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div>
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3" aria-label="St. Vincent's Preschool Home">
+        <img src="images/logo.png" alt="St. Vincent's logo" class="w-12 h-12 object-contain">
+        <div class="leading-tight">
+          <div class="text-lg font-bold">St. Vincent's Preschool</div>
+          <div class="text-xs text-gray-500 -mt-1">Premium Preschool & Daycare — Chandanagar</div>
         </div>
       </a>
 
-      <nav class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav-link text-gray-700 hover:text-[--brand]">Home</a>
-        <a href="programs.html" class="nav-link text-gray-700 hover:text-[--brand]">Programs</a>
-        <a href="gallery.html" class="nav-link text-gray-700 hover:text-[--brand]">Gallery</a>
-        <a href="faq.html" class="nav-link text-gray-700 hover:text-[--brand]">FAQ</a>
-        <a href="blogs.html" class="nav-link text-gray-700 hover:text-[--brand]">Blog</a>
-        <a href="contact.html" class="btn-primary-outline">Contact</a>
+      <nav class="hidden md:flex gap-6 items-center" aria-label="Main navigation">
+        <a class="nav-link text-gray-700 hover:text-[--brand]" href="index.html">Home</a>
+        <a class="nav-link text-gray-700 hover:text-[--brand]" href="programs.html">Programs</a>
+        <a class="nav-link text-gray-700 hover:text-[--brand]" href="gallery.html">Gallery</a>
+        <a class="nav-link text-gray-700 hover:text-[--brand]" href="faq.html">FAQ</a>
+        <a class="nav-link text-gray-700 hover:text-[--brand]" href="blogs.html">Blog</a>
+        <a class="nav-link text-gray-700 hover:text-[--brand]" href="contact.html">Contact</a>
+        <a class="btn-primary-outline ml-2" href="tel:+919032249494">Call Us</a>
       </nav>
 
       <div class="flex items-center gap-3">
@@ -59,8 +70,9 @@
       </div>
     </div>
 
+    <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-2">
         <a href="index.html" class="py-2">Home</a>
         <a href="programs.html" class="py-2">Programs</a>
         <a href="gallery.html" class="py-2">Gallery</a>
@@ -71,124 +83,154 @@
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 pt-28 pb-20">
+  <main class="max-w-7xl mx-auto px-4 pt-28 pb-20">
 
     <!-- HERO -->
     <section class="grid md:grid-cols-2 gap-8 items-center py-12">
       <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-[#3b0b27]">Where Every Child Shines</h1>
-        <p class="mt-4 text-lg text-gray-700 max-w-xl">A nurturing and joyful environment for early childhood education. Play-based learning and caring teachers help your child grow.</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-[#3b0b27]">Admissions Open — Your Child’s Development is Our Promise</h1>
+        <p class="mt-4 text-lg text-gray-700 max-w-2xl">
+          Your child's happy place in Chandanagar. We offer a fun, safe, premium and stimulating environment for children aged 1.5 to 6 years.
+        </p>
         <div class="mt-6 flex gap-3 flex-wrap">
-          <a href="programs.html" class="btn-primary">Programs</a>
-          <button class="btn-primary-outline open-contact-modal" data-program="" aria-haspopup="dialog">Schedule a Tour</button>
-          <a href="tel:+919032249494" class="btn-ghost">Call Us</a>
+          <button class="btn-primary open-contact-modal" data-program="General Enquiry">Schedule a Visit</button>
+          <a class="btn-primary-outline" href="tel:+919032249494">Call Us Now</a>
+          <a class="btn-ghost" href="programs.html">Our Programs</a>
         </div>
+
+        <!-- Quick features -->
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+            <div class="text-2xl font-bold">Safe</div><div class="text-sm text-gray-500">CCTV & hygiene</div>
+          </div>
+          <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+            <div class="text-2xl font-bold">Play</div><div class="text-sm text-gray-500">Play-based learning</div>
+          </div>
+          <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+            <div class="text-2xl font-bold">Care</div><div class="text-sm text-gray-500">Low ratios</div>
+          </div>
+          <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+            <div class="text-2xl font-bold">Teachers</div><div class="text-sm text-gray-500">Trained staff</div>
+          </div>
+        </div>
+
       </div>
 
       <div class="mx-auto">
-        <div class="hero-frame max-w-[520px]">
+        <div class="hero-frame max-w-[560px]">
           <img src="images/hero-children.jpg" alt="Children smiling" class="w-full h-auto rounded-lg object-cover shadow-lg">
         </div>
       </div>
     </section>
 
-    <!-- PROGRAMS -->
-    <section id="programs" class="pt-12">
+    <!-- Our Happy Learning Environment (gallery thumbnails) -->
+    <section class="py-6">
+      <h2 class="text-2xl font-bold">Our Happy Learning Environment</h2>
+      <p class="text-gray-600 mt-2">Take a peek inside our vibrant classrooms and play areas.</p>
+      <div class="mt-4 grid sm:grid-cols-3 gap-4">
+        <img src="images/gallery/preschool-1.jpeg" alt="Preschool classroom" class="rounded-lg object-cover h-48 w-full">
+        <img src="images/gallery/preschool-2.jpeg" alt="Children playing" class="rounded-lg object-cover h-48 w-full">
+        <img src="images/gallery/preschool-3.jpeg" alt="Outdoor play area" class="rounded-lg object-cover h-48 w-full">
+      </div>
+    </section>
+
+    <!-- Curriculum & Programs -->
+    <section id="programs" class="pt-10">
       <header class="text-center mb-8">
-        <h2 class="text-3xl font-bold">Our Curriculum & Programs</h2>
-        <p class="mt-2 text-gray-600 max-w-3xl mx-auto">A foundation for lifelong learning through a play-based curriculum and caring teachers.</p>
+        <h3 class="text-3xl font-bold">Curriculum & Programs</h3>
+        <p class="mt-2 text-gray-600 max-w-2xl mx-auto">EYFS Curriculum – Learning Through Play. Our programs are tailored for 1.5–6 years.</p>
       </header>
 
       <div class="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <!-- Playgroup -->
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-yellow-500">
-          <div class="flex items-center space-x-4 mb-4">
+        <article class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-yellow-500">
+          <header class="flex items-center gap-4 mb-3">
             <i class="fas fa-baby text-3xl text-yellow-500 p-3 bg-yellow-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Playgroup</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 1.5 – 2.5 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Social & Sensory Exploration. Gentle introduction to school.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <h4 class="text-2xl font-bold">Playgroup</h4>
+          </header>
+          <p class="text-sm text-gray-500">Age: 1.5 – 2.5 Years</p>
+          <p class="mt-2 text-gray-700">Core Objective: Social & Sensory Exploration. Gentle introduction to school life.</p>
+          <ul class="mt-3 text-sm text-gray-600 list-disc pl-5 space-y-1">
             <li>Separation comfort & secure attachments</li>
-            <li>Sensory play — sand, water, textures</li>
+            <li>Sensory play (sand, water, textures)</li>
             <li>Basic routines & independent play</li>
           </ul>
-          <div class="mt-4 flex gap-3">
+          <div class="mt-4">
             <button class="btn-small open-contact-modal" data-program="Playgroup">Enquire</button>
           </div>
-        </div>
+        </article>
 
         <!-- Nursery -->
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-green-500">
-          <div class="flex items-center space-x-4 mb-4">
+        <article class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-green-500">
+          <header class="flex items-center gap-4 mb-3">
             <i class="fas fa-pencil-ruler text-3xl text-green-500 p-3 bg-green-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Nursery</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 2.5 – 3.5 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Foundation literacy & numeracy through play.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <h4 class="text-2xl font-bold">Nursery</h4>
+          </header>
+          <p class="text-sm text-gray-500">Age: 2.5 – 3.5 Years</p>
+          <p class="mt-2 text-gray-700">Core Objective: Foundation literacy & numeracy through play.</p>
+          <ul class="mt-3 text-sm text-gray-600 list-disc pl-5 space-y-1">
             <li>Pre-reading & phonics awareness</li>
-            <li>Number recognition & counting</li>
-            <li>Confidence in group activities</li>
+            <li>Number recognition (1-10) & basic counting</li>
+            <li>Verbal communication & group engagement</li>
           </ul>
-          <div class="mt-4 flex gap-3">
+          <div class="mt-4">
             <button class="btn-small open-contact-modal" data-program="Nursery">Enquire</button>
           </div>
-        </div>
+        </article>
 
-        <!-- PP1 -->
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-blue-500">
-          <div class="flex items-center space-x-4 mb-4">
+        <!-- Pre-Primary 1 -->
+        <article class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-blue-500">
+          <header class="flex items-center gap-4 mb-3">
             <i class="fas fa-book-open text-3xl text-blue-500 p-3 bg-blue-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 1 (PP1)</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 3.5 – 4.5 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Pre-writing, phonemic awareness & concept application.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <h4 class="text-2xl font-bold">Pre-Primary 1 (PP1)</h4>
+          </header>
+          <p class="text-sm text-gray-500">Age: 3.5 – 4.5 Years</p>
+          <p class="mt-2 text-gray-700">Core Objective: Pre-writing, phonemic awareness & concept application.</p>
+          <ul class="mt-3 text-sm text-gray-600 list-disc pl-5 space-y-1">
             <li>Letter formation & pre-writing strokes</li>
             <li>Phonemic activities & group play</li>
             <li>Early numeracy concepts</li>
           </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="PP1">Enquire</button>
+          <div class="mt-4">
+            <button class="btn-small open-contact-modal" data-program="Pre-Primary 1">Enquire</button>
           </div>
-        </div>
+        </article>
 
-        <!-- PP2 -->
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-red-500">
-          <div class="flex items-center space-x-4 mb-4">
+        <!-- Pre-Primary 2 -->
+        <article class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-red-500">
+          <header class="flex items-center gap-4 mb-3">
             <i class="fas fa-graduation-cap text-3xl text-red-500 p-3 bg-red-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 2 (PP2)</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 4.5 – 6 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Reading fluency, arithmetic basics & school readiness.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <h4 class="text-2xl font-bold">Pre-Primary 2 (PP2)</h4>
+          </header>
+          <p class="text-sm text-gray-500">Age: 4.5 – 6 Years</p>
+          <p class="mt-2 text-gray-700">Core Objective: Reading fluency, arithmetic basics & school readiness.</p>
+          <ul class="mt-3 text-sm text-gray-600 list-disc pl-5 space-y-1">
             <li>Reading fluency & comprehension</li>
-            <li>Basic addition & subtraction</li>
-            <li>Independent work & social readiness</li>
+            <li>Basic arithmetic (add/sub)</li>
+            <li>Independence & social maturity</li>
           </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="PP2">Enquire</button>
+          <div class="mt-4">
+            <button class="btn-small open-contact-modal" data-program="Pre-Primary 2">Enquire</button>
           </div>
-        </div>
+        </article>
 
         <!-- Day Care -->
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 md:col-span-2 lg:col-span-1 mx-auto md:w-full lg:w-full max-w-lg">
-          <div class="flex items-center space-x-4 mb-4">
+        <article class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 md:col-span-2 lg:col-span-1 mx-auto max-w-lg">
+          <header class="flex items-center gap-4 mb-3">
             <i class="fas fa-clock text-3xl text-purple-500 p-3 bg-purple-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Day Care</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 1.5 – 6 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Safe, structured extended care for working parents.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <h4 class="text-2xl font-bold">Day Care</h4>
+          </header>
+          <p class="text-sm text-gray-500">Age: 1.5 – 6 Years</p>
+          <p class="mt-2 text-gray-700">Core Objective: Safe, structured extended care for children of working parents.</p>
+          <ul class="mt-3 text-sm text-gray-600 list-disc pl-5 space-y-1">
             <li>Meals & supervised rest</li>
-            <li>Structured activities & safety</li>
-            <li>Continuity of learning</li>
+            <li>Structured activities & continuity of learning</li>
+            <li>Safe and secure environment</li>
           </ul>
-          <div class="mt-4 flex gap-3">
+          <div class="mt-4">
             <button class="btn-small open-contact-modal" data-program="Day Care">Enquire</button>
           </div>
-        </div>
+        </article>
       </div>
 
       <div class="flex justify-center mt-12">
@@ -196,128 +238,64 @@
       </div>
     </section>
 
-    <!-- GALLERY + VIDEO -->
-    <section class="py-8">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-semibold">Gallery & Tour</h2>
-        <a href="gallery.html" class="text-sm text-gray-600 hover:underline">See all</a>
-      </div>
-
-      <div class="mt-4 grid md:grid-cols-2 gap-6">
-        <div>
-          <video controls poster="images/gallery/video-poster.jpg" class="w-full h-64 rounded-lg object-cover shadow">
-            <source src="videos/preschool-tour.mp4" type="video/mp4">
-            Your browser does not support video.
-          </video>
-        </div>
-
-        <div class="gallery-frame overflow-hidden rounded-lg">
-          <div id="image-slider" class="image-slider flex transition-transform duration-500">
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-1.jpeg" alt="gallery 1" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-2.jpeg" alt="gallery 2" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-3.jpeg" alt="gallery 3" class="w-full h-64 object-cover"></div>
-          </div>
-
-          <div class="flex justify-between items-center p-2">
-            <button id="slider-prev" class="slider-btn">‹</button>
-            <div class="slider-dots flex gap-2">
-              <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
-              <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
-              <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
-            </div>
-            <button id="slider-next" class="slider-btn">›</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY PARENTS TRUST US -->
-    <section class="py-8">
-      <div class="max-w-6xl mx-auto bg-white rounded-xl p-6 shadow">
-        <h3 class="text-2xl font-bold">Why Parents Trust Us</h3>
-        <div class="mt-4 grid md:grid-cols-2 gap-6">
-          <div class="trust-visual">
-            <img src="images/trust/safe-secure.jpg" alt="Safe and Secure">
-            <div>
-              <h4 class="font-semibold">Safe & Secure</h4>
-              <p class="text-gray-700">CCTV, child-proofed campus and strict hygiene protocols ensure a safe environment.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual">
-            <img src="images/trust/play-based.jpg" alt="Play-Based Learning">
-            <div>
-              <h4 class="font-semibold">Play-Based Learning</h4>
-              <p class="text-gray-700">Our curriculum fosters creativity and critical thinking through hands-on activities.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual">
-            <img src="images/trust/caring-teachers.jpg" alt="Caring Teachers">
-            <div>
-              <h4 class="font-semibold">Caring Teachers</h4>
-              <p class="text-gray-700">Passionate educators dedicated to each child's growth and happiness.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual">
-            <img src="images/trust/personalized-care.jpg" alt="Personalized Care">
-            <div>
-              <h4 class="font-semibold">Personalized Care</h4>
-              <p class="text-gray-700">Low student-teacher ratio ensures every child receives the attention they need.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
+    <!-- Testimonials slider (T1) -->
     <section class="py-12">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-6">
-          <h2 class="text-3xl font-bold">What Parents Say</h2>
-          <p class="text-gray-600 mt-2">Top 5-star feedback, curated and polished.</p>
+      <div class="max-w-6xl mx-auto">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-3xl font-bold">What Our Parents Say</h3>
+            <p class="text-gray-600 mt-2">Curated 5-star feedback — hear from families who trust St. Vincent's.</p>
+          </div>
+
+          <div class="testimonial-controls">
+            <button id="test-prev" class="slider-btn" aria-label="Previous testimonial">‹</button>
+            <button id="test-play-toggle" class="slider-btn" aria-label="Pause testimonials">⏸</button>
+            <button id="test-next" class="slider-btn" aria-label="Next testimonial">›</button>
+          </div>
         </div>
 
-        <div id="testimonials-grid" class="grid md:grid-cols-3 gap-6">
-          <!-- JS will render all existing testimonials here -->
+        <div class="testimonial-slider-wrapper overflow-hidden">
+          <div id="testimonial-slider" class="flex gap-6 transition-transform duration-500">
+            <!-- JS populates testimonials -->
+          </div>
+          <div id="test-dots" class="flex gap-2 justify-center mt-4"></div>
         </div>
       </div>
     </section>
 
-    <!-- RESOURCES FOR PARENTS -->
+    <!-- Resources for Parents -->
     <section id="resources" class="py-12">
-      <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
         <div class="text-center mb-6">
-          <h2 class="text-3xl font-bold">Resources for Parents</h2>
+          <h3 class="text-3xl font-bold">Resources for Parents</h3>
           <p class="text-gray-600 mt-2">Expert insights to help your child thrive in their early years.</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
-          <article class="bg-white p-6 rounded-xl shadow-lg resource-card">
-            <img src="images/resources/early-learning.jpg" alt="Early learning banner">
-            <h3 class="text-xl font-semibold mt-4">The Science of Early Learning</h3>
-            <p class="mt-3 text-gray-600">Discover how preschool shapes your child's brain development and sets the foundation for lifelong learning.</p>
+          <article class="resource-card bg-white p-6 rounded-xl shadow-lg">
+            <img src="images/resources/early-learning.jpg" alt="The Science of Early Learning" class="w-full rounded-lg object-cover h-44">
+            <h4 class="mt-4 text-xl font-semibold">The Science of Early Learning</h4>
+            <p class="text-gray-600 mt-2">Discover how preschool shapes your child's brain development and sets the foundation for lifelong learning.</p>
             <div class="mt-4 flex gap-3">
               <button class="btn-primary" data-resource="early-learning">Read More</button>
               <button class="btn-primary-outline open-contact-modal" data-program="Early Learning">Enquire</button>
             </div>
           </article>
 
-          <article class="bg-white p-6 rounded-xl shadow-lg resource-card">
-            <img src="images/resources/social-skills.jpg" alt="Social skills banner">
-            <h3 class="text-xl font-semibold mt-4">Social Skills Development</h3>
-            <p class="mt-3 text-gray-600">Learn how preschool helps children develop crucial social skills like sharing, empathy, and cooperation.</p>
+          <article class="resource-card bg-white p-6 rounded-xl shadow-lg">
+            <img src="images/resources/social-skills.jpg" alt="Social Skills Development" class="w-full rounded-lg object-cover h-44">
+            <h4 class="mt-4 text-xl font-semibold">Social Skills Development</h4>
+            <p class="text-gray-600 mt-2">Learn how preschool helps children develop crucial social skills like sharing, empathy, and cooperation.</p>
             <div class="mt-4 flex gap-3">
               <button class="btn-primary" data-resource="social-skills">Read More</button>
               <button class="btn-primary-outline open-contact-modal" data-program="Social Skills">Enquire</button>
             </div>
           </article>
 
-          <article class="bg-white p-6 rounded-xl shadow-lg resource-card">
-            <img src="images/resources/primary-school.jpg" alt="Preparing for primary school">
-            <h3 class="text-xl font-semibold mt-4">Preparing for Primary School</h3>
-            <p class="mt-3 text-gray-600">How our curriculum ensures a smooth transition to formal schooling with confidence and enthusiasm.</p>
+          <article class="resource-card bg-white p-6 rounded-xl shadow-lg">
+            <img src="images/resources/primary-school.jpg" alt="Preparing for Primary School" class="w-full rounded-lg object-cover h-44">
+            <h4 class="mt-4 text-xl font-semibold">Preparing for Primary School</h4>
+            <p class="text-gray-600 mt-2">How our curriculum ensures a smooth transition to formal schooling with confidence and enthusiasm.</p>
             <div class="mt-4 flex gap-3">
               <button class="btn-primary" data-resource="primary-school">Read More</button>
               <button class="btn-primary-outline open-contact-modal" data-program="Preparing for Primary">Enquire</button>
@@ -327,26 +305,54 @@
       </div>
     </section>
 
-    <!-- READY CTA -->
-    <section class="py-10">
-      <div class="max-w-6xl mx-auto bg-[#fff] rounded-xl p-8 shadow-lg text-center">
-        <h3 class="text-2xl font-bold">Ready to Give Your Child a Premium Preschool Experience?</h3>
-        <p class="text-gray-600 mt-2">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
-        <div class="mt-6 flex justify-center gap-4">
-          <button class="btn-primary open-contact-modal">Schedule a Tour Today</button>
-          <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
+    <!-- Why parents trust us (2x2) -->
+    <section class="py-8">
+      <div class="max-w-6xl mx-auto bg-white rounded-xl p-6 shadow">
+        <h3 class="text-2xl font-bold">Why Parents Trust Us</h3>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex gap-4 p-4 rounded-lg bg-white shadow-sm items-start">
+            <img src="images/trust/safe-secure.jpg" alt="Safe & Secure" class="w-16 h-16 rounded-lg object-cover">
+            <div>
+              <h4 class="font-semibold">Safe & Secure</h4>
+              <p class="text-gray-700">CCTV, child-proofed campus, and strict hygiene protocols ensure a safe environment.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-4 rounded-lg bg-white shadow-sm items-start">
+            <img src="images/trust/play-based.jpg" alt="Play-Based Learning" class="w-16 h-16 rounded-lg object-cover">
+            <div>
+              <h4 class="font-semibold">Play-Based Learning</h4>
+              <p class="text-gray-700">Our curriculum fosters creativity and critical thinking through engaging hands-on activities.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-4 rounded-lg bg-white shadow-sm items-start">
+            <img src="images/trust/caring-teachers.jpg" alt="Caring Teachers" class="w-16 h-16 rounded-lg object-cover">
+            <div>
+              <h4 class="font-semibold">Caring Teachers</h4>
+              <p class="text-gray-700">Passionate educators dedicated to your child's individual growth and happiness.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-4 rounded-lg bg-white shadow-sm items-start">
+            <img src="images/trust/personalized-care.jpg" alt="Personalized Care" class="w-16 h-16 rounded-lg object-cover">
+            <div>
+              <h4 class="font-semibold">Personalized Care</h4>
+              <p class="text-gray-700">A low student-teacher ratio ensures every child gets the attention they deserve.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- PREMIUM FAQ (animated + / -) -->
+    <!-- FAQ (10 items) -->
     <section id="faq" class="py-12">
-      <div class="max-w-6xl mx-auto px-4 bg-white rounded-xl p-6 shadow">
+      <div class="max-w-6xl mx-auto bg-white rounded-xl p-6 shadow">
         <h3 class="text-2xl font-bold text-center">Frequently Asked Questions</h3>
         <p class="text-center text-gray-600 mt-2">Answers to common questions about preschool and early childhood development.</p>
 
         <div class="mt-6 grid md:grid-cols-2 gap-4">
-          <!-- 10 FAQ items -->
+          <!-- FAQ item template repeated -->
           <div class="p-4 rounded-lg border">
             <div class="faq-q" aria-expanded="false">
               <div>What is the ideal age to start preschool?</div>
@@ -364,7 +370,7 @@
               <div class="sign">+</div>
             </div>
             <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Start short separation practices, encourage simple routines (handwashing, snack time), read books daily, and practice simple self-help tasks.</p>
+              <p>Start short separation practices, practice routines, read books daily and encourage self-help tasks like handwashing and carrying a water bottle.</p>
               <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
             </div>
           </div>
@@ -441,25 +447,39 @@
               <div class="sign">+</div>
             </div>
             <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Complete the enquiry form and our team will contact you to arrange a tour, explain fees, and complete admission steps. We support you through documentation and start dates.</p>
+              <p>Complete the enquiry form and our team will contact you to arrange a tour, explain fees, and complete admission steps.</p>
               <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
             </div>
           </div>
 
+          <div class="p-4 rounded-lg border">
+            <div class="faq-q" aria-expanded="false">
+              <div>What is the role of play in preschool learning?</div>
+              <div class="sign">+</div>
+            </div>
+            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+              <p>Play builds language, problem solving, social skills and motor development. Our day includes guided & free play experiences.</p>
+              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
+            </div>
+          </div>
         </div>
-
       </div>
     </section>
 
-    <!-- VISIT US -->
-    <section class="max-w-6xl mx-auto px-4 pb-8">
-      <div class="bg-white p-6 rounded-xl shadow-lg">
-        <h3 class="text-xl font-bold">Visit Us Now</h3>
+    <!-- Visit Us (Maps) -->
+    <section class="py-8">
+      <div class="max-w-6xl mx-auto bg-white rounded-xl p-6 shadow">
+        <h3 class="text-xl font-bold">Visit Our Campus</h3>
         <p class="text-gray-600 mt-2">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout, Chandanagar, Hyderabad</p>
+
         <div class="mt-4 w-full h-80 rounded-lg overflow-hidden">
           <iframe src="https://www.google.com/maps?q=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad&output=embed" style="border:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div class="mt-4 flex gap-3"><a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad" target="_blank" rel="noopener">Get Directions</a><a class="btn-primary-outline" href="tel:+919032249494">Call Us</a></div>
+
+        <div class="mt-4 flex gap-3">
+          <a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad" target="_blank" rel="noopener">Get Directions</a>
+          <a class="btn-primary-outline" href="tel:+919032249494">Call Us</a>
+        </div>
       </div>
     </section>
 
@@ -467,11 +487,12 @@
 
   <!-- FOOTER -->
   <footer class="site-footer bg-[--brand] text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
+    <div class="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
       <div>
         <img src="images/logo.png" alt="logo" class="w-20 mb-3">
         <p class="text-gray-200">St. Vincent's Preschool — Nurturing early learning in Chandanagar.</p>
       </div>
+
       <div>
         <h4 class="font-semibold">Quick Links</h4>
         <ul class="mt-3 space-y-2 text-gray-200">
@@ -481,17 +502,20 @@
           <li><a href="blogs.html">Blog</a></li>
         </ul>
       </div>
+
       <div>
         <h4 class="font-semibold">Contact</h4>
-        <p class="mt-2 text-gray-200">+91 9032249494<br/>Stvincent.school25@gmail.com</p>
+        <p class="mt-2 text-gray-200">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout<br/>Chandanagar, Hyderabad, Telangana 500050</p>
+        <p class="mt-2 text-gray-200">Phone: +91 9032249494<br/>Email: Stvincent.school25@gmail.com</p>
       </div>
     </div>
+
     <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
   </footer>
 
-  <!-- EmailJS -->
+  <!-- EmailJS (placeholder) -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <!-- Site core script -->
+  <!-- Site script -->
   <script src="js/site-core.js"></script>
 </body>
 </html>
