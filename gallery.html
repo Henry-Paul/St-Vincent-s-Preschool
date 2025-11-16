@@ -7,26 +7,29 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- header -->
-  <header class="bg-white shadow fixed w-full z-40">
+  <!-- header (same) -->
+  <header class="bg-white shadow fixed w-full z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
-      <nav class="hidden md:flex gap-6 items-center">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="programs.html" class="nav-link">Programs</a>
-        <a href="gallery.html" class="nav-link">Gallery</a>
-        <a href="faq.html" class="nav-link">FAQ</a>
-      </nav>
-      <div class="flex items-center gap-3">
-        <button id="menu-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu"></button>
+      <nav class="hidden md:flex gap-6 items-center"><a href="index.html" class="nav-link">Home</a><a href="programs.html" class="nav-link">Programs</a><a href="gallery.html" class="nav-link">Gallery</a><a href="faq.html" class="nav-link">FAQ</a></nav>
+      <div class="flex items-center gap-3"><button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button></div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
+        <a href="index.html" class="py-2">Home</a>
+        <a href="programs.html" class="py-2">Programs</a>
+        <a href="gallery.html" class="py-2">Gallery</a>
+        <a href="faq.html" class="py-2">FAQ</a>
+        <a href="blogs.html" class="py-2">Blog</a>
+        <a href="contact.html" class="py-2">Contact</a>
       </div>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
     <a href="index.html" class="inline-block text-blue-600 mb-4">← Back to Home</a>
-    <h1 class="text-3xl font-bold">Gallery</h1>
-    <p class="mt-2 text-gray-700">Photos and video tour.</p>
+    <h1 class="text-3xl font-bold">Gallery & Video Tour</h1>
+    <p class="mt-2 text-gray-700">View photos and our video tour.</p>
 
     <section class="mt-6">
       <video controls poster="images/gallery/video-poster.jpg" class="w-full h-96 rounded-lg object-cover mb-6">
@@ -53,10 +56,12 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer bg-gray-900 text-white mt-12 p-6 text-center">© 2025 St. Vincent's Preschool</footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="js/site-core.js"></script>
 </body>
 </html>
