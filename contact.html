@@ -7,18 +7,15 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="bg-white shadow fixed w-full z-40">
+  <!-- header -->
+  <header class="bg-white shadow fixed w-full z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
-      <nav class="hidden md:flex gap-6 items-center">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="programs.html" class="nav-link">Programs</a>
-        <a href="gallery.html" class="nav-link">Gallery</a>
-        <a href="faq.html" class="nav-link">FAQ</a>
-      </nav>
-      <div class="flex items-center gap-3">
-        <button id="menu-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu"></button>
-      </div>
+      <nav class="hidden md:flex gap-6 items-center"><a href="index.html" class="nav-link">Home</a><a href="programs.html" class="nav-link">Programs</a><a href="gallery.html" class="nav-link">Gallery</a><a href="faq.html" class="nav-link">FAQ</a></nav>
+      <div class="flex items-center gap-3"><button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false"></button></div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2"><a href="index.html" class="py-2">Home</a><a href="programs.html" class="py-2">Programs</a><a href="gallery.html" class="py-2">Gallery</a><a href="faq.html" class="py-2">FAQ</a><a href="blogs.html" class="py-2">Blog</a><a href="contact.html" class="py-2">Contact</a></div>
     </div>
   </header>
 
@@ -27,31 +24,30 @@
 
     <section class="bg-white p-6 rounded-xl shadow">
       <h2 class="text-2xl font-bold">Contact Us</h2>
-      <p class="mt-2 text-gray-700">Fill the enquiry form (modal) or contact directly.</p>
+      <p class="mt-2 text-gray-700">Fill the enquiry modal or contact directly.</p>
 
       <div class="mt-4 space-y-2">
-        <p><strong>Address:</strong> Street 1, Plot 454, Aparna Hillpark Rd, Chandanagar, Hyderabad</p>
+        <p><strong>Address:</strong> Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout, Chandanagar, Hyderabad</p>
         <p><strong>Phone:</strong> +91 9032249494</p>
         <p><strong>Email:</strong> Stvincent.school25@gmail.com</p>
       </div>
 
-      <div class="mt-6">
-        <button class="btn-primary open-contact-modal">Enquire / Schedule a Visit</button>
-      </div>
+      <div class="mt-6"><button class="btn-primary open-contact-modal">Enquire / Schedule a Visit</button></div>
     </section>
 
     <section>
-      <h3 class="text-xl font-semibold">Visit / Map</h3>
-      <p class="mt-2 text-gray-700">Interactive map below — you can pan and zoom.</p>
-      <div id="map" class="w-full h-96 mt-4 rounded-lg shadow bg-gray-100 flex items-center justify-center">
-        <!-- Replace with your Google Maps iframe or JS embed; left as placeholder to avoid API key exposure -->
-        <p class="text-gray-500">Map placeholder — add Google Maps iframe or script with your API key.</p>
+      <h3 class="text-xl font-semibold">Visit Us Now</h3>
+      <p class="mt-2 text-gray-700">Interactive map. Click Get Directions to open Google Maps.</p>
+      <div class="mt-4 w-full h-96 rounded-lg overflow-hidden shadow bg-gray-100">
+        <iframe src="https://www.google.com/maps?q=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad&output=embed" style="border:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
+      <div class="mt-4 flex gap-3"><a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad" target="_blank" rel="noopener">Get Directions</a><a class="btn-outline" href="tel:+919032249494">Call Us</a></div>
     </section>
   </main>
 
   <footer class="site-footer bg-gray-900 text-white mt-12 p-6 text-center">© 2025 St. Vincent's Preschool</footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="js/site-core.js"></script>
 </body>
 </html>
