@@ -2,9 +2,9 @@
 
 /* EMAILJS config (replace with real keys when ready) */
 const EMAILJS_CONFIG = {
-  SERVICE_ID: 'service_14zrdg6',
-  TEMPLATE_ID: 'template_snxhxlk',
-  PUBLIC_KEY: '5SyxCT8kGY0_H51dC'
+  SERVICE_ID: 'service_up2vw5t',
+  TEMPLATE_ID: 'template_s7ly8in',
+  PUBLIC_KEY: '_XSR5F_xlm5cYAcra'
 };
 if (window.emailjs && EMAILJS_CONFIG.PUBLIC_KEY) {
   try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); } catch (e) { console.warn('EmailJS init error', e); }
