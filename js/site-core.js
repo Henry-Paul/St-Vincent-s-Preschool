@@ -1,6 +1,6 @@
-// js/site-core.js - consolidated site logic (burger, modals, testimonials, slider, emailjs)
+// js/site-core.js - consolidated site logic (burger, modals, testimonials, slider, emailjs, global WhatsApp fab)
 
-/* EMAILJS CONFIG — using values from your uploaded file */
+/* EMAILJS CONFIG — using values you provided earlier */
 const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_14zrdg6',
   TEMPLATE_ID: 'template_snxhxlk',
@@ -18,7 +18,6 @@ const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
 
 /* ----------------- Universal burger/mobile menu ----------------- */
 function initUniversalBurger() {
-  // select any menu buttons on the page (support id or class)
   const buttons = Array.from(document.querySelectorAll('[id="menu-btn"], .menu-btn'));
   buttons.forEach(btn => {
     const header = btn.closest('header') || document;
@@ -41,7 +40,6 @@ function initUniversalBurger() {
       }
     });
 
-    // Ensure links inside mobile menu close menu and navigate
     if (mobileMenu) {
       mobileMenu.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', (ev) => {
@@ -58,7 +56,6 @@ function initUniversalBurger() {
     }
   });
 
-  // click outside to close
   document.addEventListener('click', (ev) => {
     $$('#mobile-menu').forEach(menu => {
       if (!menu.classList.contains('hidden') && !menu.contains(ev.target)) {
@@ -70,7 +67,6 @@ function initUniversalBurger() {
     });
   });
 
-  // ESC closes mobile menus
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { $$('#mobile-menu').forEach(m => m.classList.add('hidden')); } });
 }
 
@@ -165,14 +161,12 @@ function openUnifiedModal({ prefillProgram = '' } = {}) {
   `;
   document.body.appendChild(overlay);
 
-  // prefill program if provided
   if (prefillProgram) { const sel = overlay.querySelector('#program'); if (sel) sel.value = prefillProgram; }
 
   overlay.querySelector('#sv-close').addEventListener('click', () => overlay.remove());
   overlay.querySelector('#sv-cancel').addEventListener('click', () => overlay.remove());
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const el = document.getElementById('sv-contact-modal'); if (el) el.remove(); } });
 
-  // form submit handler
   overlay.querySelector('#schedule-visit-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const res = overlay.querySelector('#sv-result'); res.classList.remove('hidden'); res.textContent = 'Sending...';
@@ -229,13 +223,91 @@ function initImageSlider() {
   update();
 }
 
+/* ------------------ Global WhatsApp floating button (inject on every page) ------------------ */
+function initWhatsAppFab() {
+  // avoid duplicates
+  if (document.getElementById('whatsapp-fab-global')) return;
+
+  const phone = '919032249494'; // update if you want different number
+  const text = encodeURIComponent("Hello, I am interested in St. Vincent's Preschool programs.");
+  const url = `https://wa.me/${phone}?text=${text}`;
+
+  // wrapper
+  const wrapper = document.createElement('div');
+  wrapper.style.position = 'fixed';
+  wrapper.style.right = '1.5rem';
+  wrapper.style.bottom = '1.5rem';
+  wrapper.style.zIndex = '60';
+  wrapper.className = 'whatsapp-wrapper';
+
+  // anchor/button
+  const a = document.createElement('a');
+  a.id = 'whatsapp-fab-global';
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.className = 'rounded-full flex items-center justify-center';
+  a.setAttribute('aria-label', 'Chat on WhatsApp');
+  a.style.width = '56px';
+  a.style.height = '56px';
+  a.style.background = '#25D366';
+  a.style.display = 'flex';
+  a.style.alignItems = 'center';
+  a.style.justifyContent = 'center';
+  a.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+  a.style.borderRadius = '999px';
+  a.style.transition = 'transform .12s ease';
+  a.style.cursor = 'pointer';
+  a.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.672.15-.198.297-.768.966-.942 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.173.2-.298.3-.497.1-.198.05-.372-.025-.52-.074-.149-.672-1.618-.922-2.214-.243-.579-.49-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.064 2.876 1.212 3.074c.149.198 2.095 3.2 5.077 4.487  .709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="white"/></svg>';
+
+  // tooltip
+  const tip = document.createElement('div');
+  tip.id = 'whatsapp-tooltip-global';
+  tip.textContent = 'Chat with us on WhatsApp';
+  tip.style.position = 'absolute';
+  tip.style.right = '70px';
+  tip.style.bottom = '10px';
+  tip.style.background = 'rgba(31,31,31,0.92)';
+  tip.style.color = '#fff';
+  tip.style.padding = '6px 10px';
+  tip.style.borderRadius = '8px';
+  tip.style.fontSize = '13px';
+  tip.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
+  tip.style.opacity = '0';
+  tip.style.transform = 'translateY(6px)';
+  tip.style.transition = 'opacity .28s, transform .28s';
+
+  wrapper.appendChild(a);
+  wrapper.appendChild(tip);
+  document.body.appendChild(wrapper);
+
+  // show tooltip briefly
+  setTimeout(() => { tip.style.opacity = '1'; tip.style.transform = 'translateY(0)'; }, 1200);
+  setTimeout(() => { tip.style.opacity = '0'; tip.style.transform = 'translateY(6px)'; }, 6500);
+
+  a.addEventListener('mouseenter', () => { tip.style.opacity = '1'; tip.style.transform = 'translateY(0)'; });
+  a.addEventListener('mouseleave', () => { tip.style.opacity = '0'; tip.style.transform = 'translateY(6px)'; });
+  a.addEventListener('click', () => { tip.style.opacity = '0'; tip.style.transform = 'translateY(6px)'; });
+  a.addEventListener('focus', () => { tip.style.opacity = '1'; tip.style.transform = 'translateY(0)'; });
+  a.addEventListener('blur', () => { tip.style.opacity = '0'; tip.style.transform = 'translateY(6px)'; });
+
+  // small pulse effect
+  setInterval(() => {
+    if (!a) return;
+    a.style.transform = 'scale(1.06)';
+    setTimeout(()=> a.style.transform = 'scale(1)', 220);
+  }, 9000);
+}
+
 /* ------------------ wire global triggers ------------------ */
 function wireGlobalTriggers() {
   $$('.open-program-details').forEach(btn => btn.addEventListener('click', () => openProgramModal(btn.dataset.program || '')));
-  $$('.open-contact-modal').forEach(btn => btn.addEventListener('click', (e) => {
-    const p = btn.dataset.program || '';
-    openUnifiedModal({ prefillProgram: p });
-  }));
+  $$('.open-contact-modal').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const p = btn.dataset.program || '';
+      openUnifiedModal({ prefillProgram: p });
+    });
+  });
   const mainBtn = document.getElementById('schedule-visit-btn-main'); if (mainBtn) mainBtn.addEventListener('click', () => openUnifiedModal({}));
 }
 
@@ -249,4 +321,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initImageSlider();
   initFAQAccordion();
   wireGlobalTriggers();
+  initWhatsAppFab(); // <<-- global WhatsApp bubble injected here
 });
