@@ -1,45 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blog — St. Vincent's Preschool</title>
-  <meta name="description" content="Parenting & early learning insights from St. Vincent's Preschool, Chandanagar." />
+  <meta name="description" content="Parenting & early learning blog - St. Vincent's Preschool" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    :root{--brand:#8b2b58;--muted:#6b7280}
-    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto; background:#fffaf8;color:#0f172a}
-    header a.logo { display:flex; gap:0.75rem; align-items:center }
-    .btn-small { padding:.45rem .9rem; border-radius:.5rem; font-weight:600 }
-    .card-hover { transition: transform .22s, box-shadow .22s }
-    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(15,23,42,0.06) }
-    .blog-hero { background: linear-gradient(90deg, rgba(139,43,88,0.06), rgba(139,43,88,0.02)); padding:2rem; border-radius:14px }
-    .modal-close { cursor:pointer }
-    #blog-modal .modal-inner { max-height: 80vh; overflow:auto; padding-right: 12px }
-    .cta-primary { background:var(--brand); color:#fff; padding:.6rem 1rem; border-radius:10px; font-weight:700; display:inline-block }
-    .post-meta { color:var(--muted); font-size:.95rem }
-    @media (max-width:640px){ .grid-mobile-3 { grid-template-columns: 1fr } }
+    :root{--brand:#8b2b58}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:#fffaf8;color:#0f172a}
+    .nav-link{color:#475569}
+    .blog-card img{height:200px;object-fit:cover;border-radius:12px}
+    .cta-yellow{background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:600}
+    .modal-inner-scroll{max-height:70vh;overflow:auto;padding-right:8px}
+    .blog-meta{color:#6b7280;font-size:0.95rem}
+    @media (max-width:640px){ .blog-card img{height:150px} }
   </style>
 </head>
 <body>
 
   <header class="bg-white shadow fixed w-full z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="logo" aria-label="Home">
+      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
         <img src="images/logo.png" alt="logo" class="w-10 h-10 object-contain">
         <div>
           <div class="text-lg font-semibold" style="color:var(--brand)">St. Vincent's</div>
           <div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div>
         </div>
       </a>
-
       <nav class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav-link text-gray-700 hover:text-[--brand]">Home</a>
-        <a href="programs.html" class="nav-link text-gray-700 hover:text-[--brand]">Programs</a>
-        <a href="gallery.html" class="nav-link text-gray-700 hover:text-[--brand]">Gallery</a>
-        <a href="faq.html" class="nav-link text-gray-700 hover:text-[--brand]">FAQ</a>
+        <a href="index.html" class="nav-link hover:text-[--brand]">Home</a>
+        <a href="programs.html" class="nav-link hover:text-[--brand]">Programs</a>
+        <a href="gallery.html" class="nav-link hover:text-[--brand]">Gallery</a>
+        <a href="faq.html" class="nav-link hover:text-[--brand]">FAQ</a>
         <a href="contact.html" class="btn-primary-outline">Contact</a>
       </nav>
 
@@ -50,49 +45,46 @@
 
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
       <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="index.html" class="py-2 text-gray-700 hover:text-[--brand]">Home</a>
-        <a href="programs.html" class="py-2 text-gray-700 hover:text-[--brand]">Programs</a>
-        <a href="gallery.html" class="py-2 text-gray-700 hover:text-[--brand]">Gallery</a>
-        <a href="faq.html" class="py-2 text-gray-700 hover:text-[--brand]">FAQ</a>
-        <a href="contact.html" class="py-2 text-gray-700 hover:text-[--brand]">Contact</a>
+        <a href="index.html" class="py-2">Home</a>
+        <a href="programs.html" class="py-2">Programs</a>
+        <a href="gallery.html" class="py-2">Gallery</a>
+        <a href="faq.html" class="py-2">FAQ</a>
+        <a href="contact.html" class="py-2">Contact</a>
       </div>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
-    <div class="blog-hero">
-      <h1 class="text-4xl font-bold text-[#3b0b27]">Parenting & Early Learning Blog</h1>
-      <p class="text-gray-700 mt-2 max-w-3xl">Expert insights and practical tips for parents raising curious, confident children. Read our latest posts below.</p>
-    </div>
+    <h1 class="text-4xl font-bold mb-6 text-gray-900">Parenting & Early Learning Blog</h1>
 
-    <div class="grid md:grid-cols-3 gap-8 mt-8">
-      <article class="bg-white p-6 rounded-2xl shadow-sm card-hover">
-        <img src="images/gallery/preschool-1.jpeg" alt="Why Play Matters" class="w-full h-40 object-cover rounded-xl mb-4">
-        <h3 class="text-2xl font-semibold text-gray-800">Why Play Matters</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
+        <img src="images/resources/early-learning.jpg" alt="Why play matters">
+        <h3 class="text-2xl font-semibold text-gray-800 mt-4">Why Play Matters</h3>
         <p class="text-gray-600 mt-2">How play-based learning supports cognitive, social, and physical development in early childhood.</p>
         <div class="mt-6 flex gap-3">
-          <button class="open-blog btn-small cta-primary" data-blog-id="1">Read Blog</button>
-          <button class="open-contact-modal btn-small btn-primary-outline" data-program="Why Play Matters">Enquire</button>
+          <button class="open-blog cta-yellow" data-blog-id="1">Read Blog</button>
+          <button class="open-contact-modal btn-primary-outline" data-program="Why Play Matters">Enquire</button>
         </div>
       </article>
 
-      <article class="bg-white p-6 rounded-2xl shadow-sm card-hover">
-        <img src="images/gallery/preschool-2.jpeg" alt="Social Growth" class="w-full h-40 object-cover rounded-xl mb-4">
-        <h3 class="text-2xl font-semibold text-gray-800">Social Growth & Transitions</h3>
+      <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
+        <img src="images/resources/social-skills.jpg" alt="Social growth">
+        <h3 class="text-2xl font-semibold text-gray-800 mt-4">Social Growth & Transitions</h3>
         <p class="text-gray-600 mt-2">Essential strategies for helping your child transition to school with confidence and ease.</p>
         <div class="mt-6 flex gap-3">
-          <button class="open-blog btn-small cta-primary" data-blog-id="2">Read Blog</button>
-          <button class="open-contact-modal btn-small btn-primary-outline" data-program="Social Growth & Transitions">Enquire</button>
+          <button class="open-blog cta-yellow" data-blog-id="2">Read Blog</button>
+          <button class="open-contact-modal btn-primary-outline" data-program="Social Growth & Transitions">Enquire</button>
         </div>
       </article>
 
-      <article class="bg-white p-6 rounded-2xl shadow-sm card-hover">
-        <img src="images/gallery/preschool-3.jpeg" alt="Parenting Tips" class="w-full h-40 object-cover rounded-xl mb-4">
-        <h3 class="text-2xl font-semibold text-gray-800">Parenting Tips for Early Years</h3>
+      <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
+        <img src="images/resources/primary-school.jpg" alt="Parenting tips">
+        <h3 class="text-2xl font-semibold text-gray-800 mt-4">Parenting Tips for Early Years</h3>
         <p class="text-gray-600 mt-2">Short, actionable tips to encourage curiosity and maintain a supportive routine at home.</p>
         <div class="mt-6 flex gap-3">
-          <button class="open-blog btn-small cta-primary" data-blog-id="3">Read Blog</button>
-          <button class="open-contact-modal btn-small btn-primary-outline" data-program="Parenting Tips">Enquire</button>
+          <button class="open-blog cta-yellow" data-blog-id="3">Read Blog</button>
+          <button class="open-contact-modal btn-primary-outline" data-program="Parenting Tips">Enquire</button>
         </div>
       </article>
     </div>
@@ -110,7 +102,7 @@
           <li><a href="programs.html">Programs</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="faq.html">FAQ</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="index.html">Home</a></li>
         </ul>
       </div>
       <div>
@@ -121,30 +113,26 @@
     <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
   </footer>
 
-  <div id="blog-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 z-[100] hidden">
+  <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden">
     <div class="flex items-center justify-center min-h-screen p-4">
-      <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl transform transition-all duration-300 my-8">
+      <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl transform transition-all duration-300 my-8" role="dialog" aria-modal="true">
         <div class="p-6 md:p-8">
           <div class="flex justify-between items-start">
             <div>
-              <h2 id="blog-title" class="text-2xl font-bold text-[#3b0b27]"></h2>
-              <p id="blog-meta" class="post-meta mt-1"></p>
+              <h2 id="blog-title" class="text-2xl font-bold text-[--brand]"></h2>
+              <p id="blog-meta" class="blog-meta mt-1"></p>
             </div>
             <div>
-              <button id="blog-close" class="modal-close text-gray-500" aria-label="Close">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
+              <button id="blog-close" aria-label="Close blog" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             </div>
           </div>
 
-          <div id="blog-body" class="mt-4 max-h-[70vh] overflow-y-auto pr-2">
-            <!-- blog HTML injected here -->
-          </div>
+          <div id="blog-body" class="modal-inner-scroll mt-4 text-gray-700"></div>
 
-          <div class="mt-6 flex justify-end gap-3">
-            <button id="blog-enquire" class="cta-primary">Enquire about this topic</button>
+          <div class="mt-6 flex gap-3 justify-end">
+            <button class="cta-yellow open-contact-modal" data-program="General Enquiry from Blog">Enquire</button>
             <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
           </div>
         </div>
@@ -158,25 +146,23 @@
         title: "Why Play Matters: The Foundation of Early Learning",
         author: "St. Vincent's Staff",
         date: "October 28, 2025",
-        image: "images/gallery/preschool-1.jpeg",
-        content: `
-          <p>At St. Vincent's, we believe that <strong>play isn't just fun—it's foundational</strong>. It is the most natural and effective way for young children to learn about the world, themselves, and others. A play-based curriculum is not simply about 'free time'; it's a carefully orchestrated environment that fosters holistic development.</p>
+        image: "images/resources/early-learning.jpg",
+        body: `
+          <p><strong>Play isn't just fun—it's foundational.</strong> Play is the most natural and effective way for young children to learn about the world, themselves, and others. A play-based curriculum is carefully orchestrated to foster holistic development.</p>
 
           <h3 class="mt-4">The Four Pillars of Play-Based Learning</h3>
-          <p>Through engaging activities like building blocks, dramatic play, and painting, children develop crucial skills across all domains:</p>
-
-          <ul>
-            <li><strong>Cognitive Development:</strong> Problem-solving, basic physics and math, and critical thinking.</li>
-            <li><strong>Social & Emotional Growth:</strong> Sharing, negotiation, empathy and self-regulation.</li>
-            <li><strong>Language Skills:</strong> Narrative play expands vocabulary and communication.</li>
-            <li><strong>Physical Development:</strong> Gross and fine motor activities strengthen coordination.</li>
+          <ul class="list-disc pl-5 mt-2">
+            <li><strong>Cognitive Development:</strong> Problem-solving & critical thinking through exploration and play.</li>
+            <li><strong>Social & Emotional Growth:</strong> Sharing, negotiation and empathy developed through group play.</li>
+            <li><strong>Language Skills:</strong> Dramatic play expands vocabulary and narrative skills.</li>
+            <li><strong>Physical Development:</strong> Gross & fine motor activities that build coordination.</li>
           </ul>
 
-          <p>By prioritizing play, we are giving your child the strongest possible start—curious, capable, and confident learners.</p>
+          <p class="mt-3">By prioritizing play, we give children a strong start — curious, capable, and confident.</p>
 
-          <div class="mt-6 p-4 border-l-4 border-[--brand] bg-[#fff6f9] rounded">
-            <p class="font-semibold">Want to see play-based learning in action?</p>
-            <button class="cta-primary mt-3 open-contact-modal" data-program="Why Play Matters">Schedule a Visit</button>
+          <div class="mt-6 p-4 bg-[#fff4f7] rounded-lg border-l-4 border-[--brand]">
+            <p class="font-semibold">Ready to see play-based learning in action?</p>
+            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Tour - Why Play Matters">Schedule a Tour</button></div>
           </div>
         `
       },
@@ -184,22 +170,20 @@
         title: "Smooth Sailing: Navigating Social Growth and School Transitions",
         author: "St. Vincent's Staff",
         date: "November 10, 2025",
-        image: "images/gallery/preschool-2.jpeg",
-        content: `
-          <p>The transition to preschool or kindergarten can be an exciting yet emotional time for both children and parents. A child's social and emotional readiness often determines how successful this transition will be.</p>
+        image: "images/resources/social-skills.jpg",
+        body: `
+          <p>Transitions can be emotional. Focus on independence, naming emotions, and simple routines to help your child adjust smoothly.</p>
 
           <h3 class="mt-4">Building Confidence and Independence</h3>
-          <ul>
-            <li><strong>Practice Self-Help Skills:</strong> Dressing, packing a snack, and managing simple routines.</li>
-            <li><strong>Discuss Emotions:</strong> Encourage naming feelings and strategies to manage them.</li>
-            <li><strong>Establish Familiarity:</strong> Talk positively about school and practice routines at home.</li>
+          <ul class="list-disc pl-5 mt-2">
+            <li>Practice self-help skills</li>
+            <li>Discuss emotions and model naming feelings</li>
+            <li>Familiarize your child with school routines</li>
           </ul>
 
-          <p>Separation anxiety is common — our teachers support gentle settling and strong parent partnerships.</p>
-
-          <div class="mt-6 p-4 border-l-4 border-[--brand] bg-[#fff6f9] rounded">
-            <p class="font-semibold">Need personalised guidance for your child's transition?</p>
-            <button class="cta-primary mt-3 open-contact-modal" data-program="Transition Guidance">Book a Consultation</button>
+          <div class="mt-6 p-4 bg-[#f0fdfa] rounded-lg border-l-4 border-teal-400">
+            <p class="font-semibold">Have specific concerns?</p>
+            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Readiness Consultation">Book a Readiness Consultation</button></div>
           </div>
         `
       },
@@ -207,23 +191,20 @@
         title: "Simple Strategies: Parenting Tips for Early Years",
         author: "St. Vincent's Staff",
         date: "September 15, 2025",
-        image: "images/gallery/preschool-3.jpeg",
-        content: `
-          <p>The early years are a critical time for brain development, and your daily interactions have the biggest impact. You don't need complicated lessons; just small, consistent habits can make a huge difference.</p>
+        image: "images/resources/primary-school.jpg",
+        body: `
+          <p>Small consistent habits at home have big impact on early learning. Encourage curiosity and predictable routines.</p>
 
-          <h3 class="mt-4">Three Tips to Encourage Curiosity and Routine</h3>
-          <h4 class="mt-3">Embrace the 'Why?'</h4>
-          <p>Turn questions into joint discovery — ask them what they think and explore together.</p>
+          <h3 class="mt-4">Three Tips</h3>
+          <ol class="list-decimal pl-5 mt-2">
+            <li><strong>Encourage curiosity</strong> by asking "What do you think?"</li>
+            <li><strong>Create predictable routines</strong> for security and exploration</li>
+            <li><strong>Read daily</strong> and ask open-ended questions</li>
+          </ol>
 
-          <h4 class="mt-3">Create Predictable Routines</h4>
-          <p>Consistent schedules for meals, sleep and play provide security that supports learning.</p>
-
-          <h4 class="mt-3">Read, Read, Read</h4>
-          <p>Reading aloud and asking open-ended questions builds language and comprehension.</p>
-
-          <div class="mt-6 p-4 border-l-4 border-[--brand] bg-[#fff6f9] rounded">
-            <p class="font-semibold">Want a weekly tip pack for parents?</p>
-            <button class="cta-primary mt-3 open-contact-modal" data-program="Parenting Tips">Subscribe & Enquire</button>
+          <div class="mt-6 p-4 bg-[#fff0f6] rounded-lg border-l-4 border-pink-300">
+            <p class="font-semibold">Want weekly tips?</p>
+            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Newsletter Signup">Subscribe</button></div>
           </div>
         `
       }
@@ -234,41 +215,26 @@
     const modalMeta = document.getElementById('blog-meta');
     const modalBody = document.getElementById('blog-body');
     const blogClose = document.getElementById('blog-close');
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    function openModal(postId){
-      const post = blogPosts[postId];
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    function openModal(id){
+      const post = blogPosts[id];
       if(!post) return;
       modalTitle.textContent = post.title;
-      modalMeta.textContent = `By ${post.author} • ${post.date}`;
-      modalBody.innerHTML = `
-        <img src="${post.image}" alt="" class="w-full h-48 object-cover rounded-lg mb-4">
-        ${post.content}
-      `;
+      modalMeta.textContent = `By ${post.author} | ${post.date}`;
+      // build body: include image and body html. make scrollable area
+      modalBody.innerHTML = `<div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;"></div>
+                             <div class="mt-4">${post.body}</div>`;
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
-
-      // wire any in-modal CTAs to the unified enquiry modal (openUnifiedModal is provided by site-core.js)
-      modalBody.querySelectorAll('.open-contact-modal').forEach(btn=>{
-        btn.addEventListener('click', (e)=>{
-          e.preventDefault();
-          const program = btn.dataset.program || post.title;
-          if(typeof openUnifiedModal === 'function'){
-            openUnifiedModal({ prefillProgram: program });
-          } else {
-            // fallback: emulate an event so the page doesn't break if site-core.js isn't loaded yet
-            console.warn('openUnifiedModal not available — ensure js/site-core.js is loaded');
-          }
-        });
-      });
-
-      // wire top enquire button
-      document.getElementById('blog-enquire').onclick = function(){
-        if(typeof openUnifiedModal === 'function'){
-          openUnifiedModal({ prefillProgram: post.title });
-        } else {
-          console.warn('openUnifiedModal not available — ensure js/site-core.js is loaded');
-        }
-      };
+      // ensure inner scroll container is focused
+      setTimeout(()=> {
+        const inner = modalBody.querySelector('.modal-inner-scroll') || modalBody;
+        inner.scrollTop = 0;
+      }, 60);
     }
 
     function closeModal(){
@@ -284,20 +250,20 @@
     });
 
     blogClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (ev)=>{
-      if(ev.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', (ev)=>{
-      if(ev.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
-    });
+    modal.addEventListener('click', (ev)=> { if(ev.target === modal) closeModal(); });
+    document.addEventListener('keydown', (ev)=> { if(ev.key==='Escape' && !modal.classList.contains('hidden')) closeModal(); });
 
-    // wire open-contact-modal preview buttons (if site-core.js isn't loaded yet)
-    document.querySelectorAll('.open-contact-modal').forEach(b=>{
-      b.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const program = b.dataset.program || '';
-        if(typeof openUnifiedModal === 'function') openUnifiedModal({ prefillProgram: program });
-      });
+    // wire blog CTAs (open enquiry modal). openUnifiedModal is available from js/site-core.js
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.matches && e.target.matches('.open-contact-modal')){
+        const program = e.target.dataset.program || '';
+        if(typeof openUnifiedModal === 'function'){
+          openUnifiedModal({ prefillProgram: program });
+        } else {
+          // fallback: show simple alert
+          alert('Enquiry form is coming. Please call +91 9032249494.');
+        }
+      }
     });
   </script>
 
