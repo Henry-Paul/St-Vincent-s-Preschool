@@ -9,14 +9,17 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    :root{--brand:#8b2b58}
+    :root{--brand:#8b2b58;--brand-dark:#6f1f44}
     body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:#fffaf8;color:#0f172a}
-    .nav-link{color:#475569}
-    .blog-card img{height:200px;object-fit:cover;border-radius:12px}
     .cta-yellow{background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:600}
+    .btn-primary-outline{border:2px solid var(--brand);color:var(--brand);padding:.5rem .9rem;border-radius:999px;background:transparent}
+    .blog-card img{height:200px;object-fit:cover;border-radius:12px}
     .modal-inner-scroll{max-height:70vh;overflow:auto;padding-right:8px}
     .blog-meta{color:#6b7280;font-size:0.95rem}
+    header .nav-link{color:#475569}
     @media (max-width:640px){ .blog-card img{height:150px} }
+    /* small accessibility focus */
+    a:focus, button:focus, input:focus { outline: 3px solid rgba(139,43,88,0.18); outline-offset: 3px; }
   </style>
 </head>
 <body>
@@ -30,6 +33,7 @@
           <div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div>
         </div>
       </a>
+
       <nav class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Main navigation">
         <a href="index.html" class="nav-link hover:text-[--brand]">Home</a>
         <a href="programs.html" class="nav-link hover:text-[--brand]">Programs</a>
@@ -59,31 +63,31 @@
 
     <div class="grid md:grid-cols-3 gap-8">
       <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
-        <img src="images/resources/early-learning.jpg" alt="Why play matters">
+        <img src="images/blog/post1.jpg" alt="Why play matters">
         <h3 class="text-2xl font-semibold text-gray-800 mt-4">Why Play Matters</h3>
         <p class="text-gray-600 mt-2">How play-based learning supports cognitive, social, and physical development in early childhood.</p>
         <div class="mt-6 flex gap-3">
-          <button class="open-blog cta-yellow" data-blog-id="1">Read Blog</button>
+          <button class="open-blog cta-yellow" data-blog-id="1" aria-haspopup="dialog">Read Blog</button>
           <button class="open-contact-modal btn-primary-outline" data-program="Why Play Matters">Enquire</button>
         </div>
       </article>
 
       <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
-        <img src="images/resources/social-skills.jpg" alt="Social growth">
+        <img src="images/blog/post2.jpg" alt="Social growth">
         <h3 class="text-2xl font-semibold text-gray-800 mt-4">Social Growth & Transitions</h3>
         <p class="text-gray-600 mt-2">Essential strategies for helping your child transition to school with confidence and ease.</p>
         <div class="mt-6 flex gap-3">
-          <button class="open-blog cta-yellow" data-blog-id="2">Read Blog</button>
+          <button class="open-blog cta-yellow" data-blog-id="2" aria-haspopup="dialog">Read Blog</button>
           <button class="open-contact-modal btn-primary-outline" data-program="Social Growth & Transitions">Enquire</button>
         </div>
       </article>
 
       <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
-        <img src="images/resources/primary-school.jpg" alt="Parenting tips">
+        <img src="images/blog/post3.jpg" alt="Parenting tips">
         <h3 class="text-2xl font-semibold text-gray-800 mt-4">Parenting Tips for Early Years</h3>
         <p class="text-gray-600 mt-2">Short, actionable tips to encourage curiosity and maintain a supportive routine at home.</p>
         <div class="mt-6 flex gap-3">
-          <button class="open-blog cta-yellow" data-blog-id="3">Read Blog</button>
+          <button class="open-blog cta-yellow" data-blog-id="3" aria-haspopup="dialog">Read Blog</button>
           <button class="open-contact-modal btn-primary-outline" data-program="Parenting Tips">Enquire</button>
         </div>
       </article>
@@ -113,40 +117,45 @@
     <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
   </footer>
 
-  <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden">
-    <div class="flex items-center justify-center min-h-screen p-4">
-      <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl transform transition-all duration-300 my-8" role="dialog" aria-modal="true">
-        <div class="p-6 md:p-8">
-          <div class="flex justify-between items-start">
-            <div>
-              <h2 id="blog-title" class="text-2xl font-bold text-[--brand]"></h2>
-              <p id="blog-meta" class="blog-meta mt-1"></p>
-            </div>
-            <div>
-              <button id="blog-close" aria-label="Close blog" class="text-gray-500 hover:text-gray-700">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-              </button>
-            </div>
+  <!-- Fixed, scrollable blog modal (replacement for earlier modal; uses the site's enquiry modal from site-core.js) -->
+  <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden overflow-y-auto" aria-hidden="true">
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden" role="dialog" aria-modal="true" aria-labelledby="blog-title">
+        <div class="p-6 pb-3 border-b flex justify-between items-start">
+          <div>
+            <h2 id="blog-title" class="text-2xl font-bold text-[--brand]">Title</h2>
+            <p id="blog-meta" class="blog-meta mt-1">By — date</p>
           </div>
-
-          <div id="blog-body" class="modal-inner-scroll mt-4 text-gray-700"></div>
-
-          <div class="mt-6 flex gap-3 justify-end">
-            <button class="cta-yellow open-contact-modal" data-program="General Enquiry from Blog">Enquire</button>
-            <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
+          <div>
+            <button id="blog-close" aria-label="Close blog" class="text-gray-500 hover:text-gray-700">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
           </div>
         </div>
+
+        <div id="blog-body" class="p-6 modal-inner-scroll" style="max-height:70vh; overflow-y:auto;">
+          <!-- content injected by JS -->
+        </div>
+
+        <div class="p-6 pt-3 border-t flex justify-end gap-3 bg-gray-50">
+          <button class="cta-yellow open-contact-modal" data-program="General Enquiry from Blog">Enquire</button>
+          <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
+        </div>
+
       </div>
     </div>
   </div>
 
   <script>
+    // blog data (same tone/content as earlier)
     const blogPosts = {
       1: {
         title: "Why Play Matters: The Foundation of Early Learning",
         author: "St. Vincent's Staff",
         date: "October 28, 2025",
-        image: "images/resources/early-learning.jpg",
+        image: "images/blog/post1.jpg",
         body: `
           <p><strong>Play isn't just fun—it's foundational.</strong> Play is the most natural and effective way for young children to learn about the world, themselves, and others. A play-based curriculum is carefully orchestrated to foster holistic development.</p>
 
@@ -170,7 +179,7 @@
         title: "Smooth Sailing: Navigating Social Growth and School Transitions",
         author: "St. Vincent's Staff",
         date: "November 10, 2025",
-        image: "images/resources/social-skills.jpg",
+        image: "images/blog/post2.jpg",
         body: `
           <p>Transitions can be emotional. Focus on independence, naming emotions, and simple routines to help your child adjust smoothly.</p>
 
@@ -191,7 +200,7 @@
         title: "Simple Strategies: Parenting Tips for Early Years",
         author: "St. Vincent's Staff",
         date: "September 15, 2025",
-        image: "images/resources/primary-school.jpg",
+        image: "images/blog/post3.jpg",
         body: `
           <p>Small consistent habits at home have big impact on early learning. Encourage curiosity and predictable routines.</p>
 
@@ -218,51 +227,55 @@
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    // mobile menu toggle (keeps behaviour consistent)
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
 
+    // Open blog modal and ensure inner scrolling and full visibility
     function openModal(id){
       const post = blogPosts[id];
       if(!post) return;
       modalTitle.textContent = post.title;
-      modalMeta.textContent = `By ${post.author} | ${post.date}`;
-      // build body: include image and body html. make scrollable area
-      modalBody.innerHTML = `<div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;"></div>
-                             <div class="mt-4">${post.body}</div>`;
+      modalMeta.textContent = `By ${post.author} • ${post.date}`;
+      modalBody.innerHTML = `
+        <div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;"></div>
+        <div class="mt-4">${post.body}</div>
+      `;
       modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      // ensure inner scroll container is focused
-      setTimeout(()=> {
-        const inner = modalBody.querySelector('.modal-inner-scroll') || modalBody;
-        inner.scrollTop = 0;
-      }, 60);
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden'; // lock background
+      // reset blog-body scroll
+      setTimeout(()=> { modalBody.scrollTop = 0; }, 20);
     }
 
     function closeModal(){
       modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden','true');
       document.body.style.overflow = '';
     }
 
     document.querySelectorAll('.open-blog').forEach(btn=>{
       btn.addEventListener('click', e=>{
         const id = e.currentTarget.dataset.blogId;
-        if(id) openModal(id);
+        if (id) openModal(id);
       });
     });
 
     blogClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (ev)=> { if(ev.target === modal) closeModal(); });
-    document.addEventListener('keydown', (ev)=> { if(ev.key==='Escape' && !modal.classList.contains('hidden')) closeModal(); });
+    modal.addEventListener('click', (ev)=> { if (ev.target === modal) closeModal(); });
+    document.addEventListener('keydown', (ev)=> { if (ev.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
 
-    // wire blog CTAs (open enquiry modal). openUnifiedModal is available from js/site-core.js
-    document.addEventListener('click', (e)=>{
-      if(e.target && e.target.matches && e.target.matches('.open-contact-modal')){
-        const program = e.target.dataset.program || '';
-        if(typeof openUnifiedModal === 'function'){
-          openUnifiedModal({ prefillProgram: program });
-        } else {
-          // fallback: show simple alert
-          alert('Enquiry form is coming. Please call +91 9032249494.');
-        }
+    // Wire .open-contact-modal to the global openUnifiedModal in site-core.js
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest && e.target.closest('.open-contact-modal');
+      if (!el) return;
+      const program = el.dataset.program || '';
+      if (typeof openUnifiedModal === 'function') {
+        openUnifiedModal({ prefillProgram: program });
+      } else {
+        // fallback: simple alert if site-core.js not loaded
+        alert('Enquiry: please call +91 9032249494.');
       }
     });
   </script>
