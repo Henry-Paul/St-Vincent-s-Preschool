@@ -1,6 +1,6 @@
-// js/site-core.js - final site logic with multi-badge testimonial placement and T1 slider + resource modal scroll fix
+// js/site-core.js - final consolidated script (testimonial slider T1 + resource modal scroll fix + others)
 
-/* EMAILJS config - replace with your real keys */
+/* EMAILJS config (replace with real keys when ready) */
 const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_14zrdg6',
   TEMPLATE_ID: 'template_snxhxlk',
@@ -15,7 +15,7 @@ const $ = (s, ctx=document) => ctx.querySelector(s);
 const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
 function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-/* ---------- Universal burger ---------- */
+/* ---------- Burger menu (universal) ---------- */
 function initUniversalBurger(){
   $$('#menu-btn').forEach(btn=>{
     const header = btn.closest('header') || document;
@@ -74,7 +74,7 @@ function initImageSlider(){
   update();
 }
 
-/* ---------- Testimonials slider (T1) with multi-badge placement ---------- */
+/* ---------- Testimonials slider (T1) ---------- */
 const TESTIMONIALS = [
   { name: "Sai Ram", text: "My child has shown lot of development and he is now more confident after joining st vincent's school." },
   { name: "Latha B.", text: "St. Vincent School has excellent facilities and a clean, well-maintained campus that supports learning. The classrooms are modern and well-equipped. What truly stands out is how friendly and approachable the teachers are... One of the Best Schools in ChandaNagar" },
@@ -85,32 +85,25 @@ const TESTIMONIALS = [
 
 function renderTestimonialsSlider(){
   const wrapper = document.getElementById('testimonial-slider'); if(!wrapper) return;
-  wrapper.innerHTML = '';
+  wrapper.innerHTML = ''; // clear
   TESTIMONIALS.forEach((t,i) => {
     const card = document.createElement('article');
     card.className = 'testimonial-card bg-white p-6 rounded-2xl shadow-lg flex-shrink-0';
     card.style.minWidth = '320px';
     card.style.maxWidth = '360px';
-    card.style.position = 'relative';
     card.innerHTML = `
-      <div class="test-card-badge-top" aria-hidden="true">
-        <span class="badge-google"><svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.25rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</span>
-      </div>
       <div style="display:flex;gap:12px;align-items:flex-start;">
         <div style="width:56px;height:56px;border-radius:12px;background:#fff8f9;display:flex;align-items:center;justify-content:center;font-size:20px;color:#f59e0b">★</div>
-        <div class="content">
-          <div style="display:flex;align-items:center;justify-content:space-between; gap:.5rem; flex-wrap:wrap;">
-            <div>
-              <h3 style="font-weight:600;margin:0">${escapeHtml(t.name)}</h3>
-              <div class="test-card-badge-name" aria-hidden="true"><span class="badge-google"><svg width="12" height="12" viewBox="0 0 24 24" style="margin-right:.2rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</span></div>
-            </div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <h3 style="font-weight:600">${escapeHtml(t.name)}</h3>
             <div style="font-weight:700;color:#f59e0b">5.0</div>
           </div>
           <p style="margin-top:.6rem;color:#475569">${escapeHtml(t.text)}</p>
         </div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
-        <div class="test-card-badge-bottom" aria-hidden="true"><span class="badge-google"><svg width="12" height="12" viewBox="0 0 24 24" style="margin-right:.2rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</span></div>
+        <div class="badge-google" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.25rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</div>
         <div><button class="btn-primary open-contact-modal" data-program="Enquiry from ${escapeHtml(t.name)}">Enquire</button></div>
       </div>
     `;
@@ -129,7 +122,10 @@ function renderTestimonialsSlider(){
     dotsContainer.appendChild(d);
   }
 
-  $$('.open-contact-modal').forEach(b => b.addEventListener('click', e => openUnifiedModal({ prefillProgram: b.dataset.program || '' })));
+  // wire enquire buttons
+  $$('.open-contact-modal').forEach(b => {
+    b.addEventListener('click', e => openUnifiedModal({ prefillProgram: b.dataset.program || '' }));
+  });
 }
 
 /* slider mechanics */
@@ -142,11 +138,8 @@ function updateTestimonialPosition(){
   const wrapper = document.getElementById('testimonial-slider');
   if(!wrapper) return;
   const card = wrapper.querySelector('.testimonial-card');
-  if(!card) return;
-  const style = getComputedStyle(card);
-  const gap = parseInt(style.marginRight || 24, 10) || 24;
-  const cardWidth = card.getBoundingClientRect().width + gap;
-  wrapper.style.transform = `translateX(-${testIdx * cardWidth}px)`;
+  const cardWidth = card ? card.getBoundingClientRect().width + 24 : 360;
+  wrapper.style.transform = `translateX(-${testIdx * (cardWidth)}px)`;
   const dots = Array.from(document.querySelectorAll('#test-dots .slider-dot'));
   dots.forEach((d,i)=> d.classList.toggle('active', i===testIdx));
 }
@@ -167,6 +160,7 @@ function stopTestAutoplay(){
 function jumpToTestimonial(i){
   testIdx = i % TESTIMONIALS.length;
   updateTestimonialPosition();
+  // when user manually jumps, pause autoplay until play clicked (we keep autoplay paused)
   pauseAutoplayUntilPlay();
 }
 
@@ -182,9 +176,14 @@ function toggleTestPlay(){
   const toggle = document.getElementById('test-play-toggle');
   if(!toggle) return;
   if(testAutoplay){
-    testAutoplay = false; stopTestAutoplay(); toggle.textContent = '▶';
+    // pause
+    testAutoplay = false;
+    stopTestAutoplay();
+    toggle.textContent = '▶';
   } else {
-    testAutoplay = true; toggle.textContent = '⏸'; startTestAutoplay();
+    testAutoplay = true;
+    toggle.textContent = '⏸';
+    startTestAutoplay();
   }
 }
 
@@ -196,8 +195,12 @@ function testNext(){ testIdx = (testIdx + 1) % TESTIMONIALS.length; updateTestim
 function wireTestHoverPause(){
   const wrap = document.querySelector('.testimonial-slider-wrapper');
   if(!wrap) return;
-  wrap.addEventListener('mouseenter', ()=> { stopTestAutoplay(); });
-  wrap.addEventListener('mouseleave', ()=> { if(testAutoplay) startTestAutoplay(); });
+  wrap.addEventListener('mouseenter', ()=> {
+    stopTestAutoplay();
+  });
+  wrap.addEventListener('mouseleave', ()=> {
+    if(testAutoplay) startTestAutoplay();
+  });
 }
 
 /* ---------- Unified enquiry modal (unchanged fields) ---------- */
@@ -306,6 +309,7 @@ function openResourceModal(key){
   const existing = document.getElementById('resource-modal'); if(existing) existing.remove();
   lockBodyScroll(true);
 
+  // The modal has a scrollable content container (max-height)
   const overlay = document.createElement('div');
   overlay.id = 'resource-modal';
   overlay.className = 'fixed inset-0 z-95 flex items-start justify-center bg-black/60 p-4';
@@ -331,6 +335,7 @@ function openResourceModal(key){
   overlay.querySelector('#resource-close').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
   document.addEventListener('keydown', e=> { if(e.key==='Escape'){ const el=document.getElementById('resource-modal'); if(el){ el.remove(); lockBodyScroll(false); } } });
 
+  // wire contact buttons inside modal
   overlay.querySelectorAll('.open-contact-modal').forEach(b => b.addEventListener('click', ()=> openUnifiedModal({ prefillProgram: b.dataset.program || '' })));
 }
 
@@ -441,8 +446,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
   initImageSlider();
   renderTestimonialsSlider();
   // set initial testimonial position and start autoplay
-  setTimeout(()=> { updateTestimonialPosition(); startTestAutoplay(); }, 120);
+  updateTestimonialPosition();
+  startTestAutoplay();
   wireTestHoverPause();
+
+  // play/pause and next/prev buttons
   document.getElementById('test-play-toggle')?.addEventListener('click', toggleTestPlay);
   document.getElementById('test-prev')?.addEventListener('click', ()=> { testPrev(); });
   document.getElementById('test-next')?.addEventListener('click', ()=> { testNext(); });
@@ -458,6 +466,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     wrap.addEventListener('click', ()=> { pauseAutoplayUntilPlay(); });
   }
 
-  // sync dots occasionally to current index
-  setInterval(()=> updateTestimonialPosition(), 200);
+  // Make sure dots reflect current index
+  setInterval(()=> updateTestimonialPosition(), 250);
 });
