@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog — St. Vincent's Preschool</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="bg-white shadow fixed w-full z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
+      <nav class="hidden md:flex gap-6 items-center">
+        <a href="index.html">Home</a>
+        <a href="programs.html">Programs</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button id="menu-btn" class="md:hidden p-2 rounded"></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
+    <h1 class="text-4xl font-bold mb-6">Parenting & Early Learning Blog</h1>
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="bg-white p-6 rounded-xl shadow">
+        <img src="images/blog/early-learning.jpg" alt="" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold">Why play matters</h3>
+        <p class="text-gray-600 mt-2">How play-based learning supports early development.</p>
+        <div class="mt-4 flex gap-3"><button class="open-blog crayon-button bg-blue-400 text-white px-4 py-2">Read</button><button class="open-contact-modal crayon-button bg-red-400 text-white px-4 py-2">Enquire</button></div>
+      </article>
+
+      <!-- duplicate or add other blog cards -->
+      <article class="bg-white p-6 rounded-xl shadow">
+        <img src="images/blog/social-growth.jpg" alt="" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold">Social growth & transitions</h3>
+        <p class="text-gray-600 mt-2">Helping your child transition to school with confidence.</p>
+        <div class="mt-4 flex gap-3"><button class="open-blog crayon-button bg-blue-400 text-white px-4 py-2">Read</button><button class="open-contact-modal crayon-button bg-red-400 text-white px-4 py-2">Enquire</button></div>
+      </article>
+
+      <article class="bg-white p-6 rounded-xl shadow">
+        <img src="images/blog/parenting-tips.jpg" alt="" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold">Parenting tips for early years</h3>
+        <p class="text-gray-600 mt-2">Short tips to encourage curiosity and routine at home.</p>
+        <div class="mt-4 flex gap-3"><button class="open-blog crayon-button bg-blue-400 text-white px-4 py-2">Read</button><button class="open-contact-modal crayon-button bg-red-400 text-white px-4 py-2">Enquire</button></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer bg-gray-900 text-white mt-12 p-6 text-center">© 2025 St. Vincent's Preschool</footer>
+
+  <script src="js/site-core.js"></script>
+</body>
+</html>
