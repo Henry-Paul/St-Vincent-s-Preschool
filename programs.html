@@ -1,32 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Programs — St. Vincent's Preschool</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="site-header bg-white shadow fixed w-full z-40">
+  <!-- header (same as index) -->
+  <header class="bg-white shadow fixed w-full z-40">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="images/logo.png" alt="logo" class="w-10 h-10 object-contain">
-        <div class="text-lg font-semibold">St. Vincent's</div>
-      </a>
-
+      <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
       <nav class="hidden md:flex gap-6 items-center">
         <a href="index.html" class="nav-link">Home</a>
         <a href="programs.html" class="nav-link">Programs</a>
         <a href="gallery.html" class="nav-link">Gallery</a>
         <a href="faq.html" class="nav-link">FAQ</a>
-        <a href="contact.html" class="btn-outline">Contact</a>
+        <a href="blogs.html" class="nav-link">Blog</a>
       </nav>
-
       <div class="flex items-center gap-3">
-        <button id="back-btn" class="hidden md:inline-flex items-center gap-2 text-sm text-gray-600">← Back</button>
         <button id="menu-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu"></button>
       </div>
     </div>
@@ -34,127 +27,86 @@
 
   <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
     <a href="index.html" class="inline-block mb-4 text-blue-600">← Back to Home</a>
-    <h1 class="text-3xl font-bold">Programs</h1>
+    <h1 class="text-3xl font-bold">Programs — Details</h1>
     <p class="mt-2 text-gray-700">Click a program to read full details and enquire.</p>
 
     <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <!-- Program Card -->
+      <!-- Playgroup Card -->
       <article class="p-6 bg-white rounded-xl shadow-lg">
         <h3 class="text-xl font-semibold">Playgroup</h3>
-        <p class="mt-2 text-gray-600">Age: 1.5–2 years. Focused on settling, sensory play and routines.</p>
+        <p class="mt-2 text-gray-600">Age: 1.5–2.5 years</p>
         <ul class="mt-3 text-sm text-gray-600 space-y-1">
-          <li>Short sessions (2–3 hours)</li>
+          <li>Short sessions & gentle settling</li>
           <li>Low teacher:child ratio</li>
-          <li>Gentle transition support</li>
+          <li>Sensory and social play</li>
         </ul>
-        <div class="mt-4 flex gap-2">
-          <button class="btn-small open-program-details" data-program="Playgroup">Details</button>
-          <button class="btn-small open-contact-modal" data-program="Playgroup">Enquire</button>
+        <div class="mt-4 flex gap-3">
+          <button class="btn-small open-program-details" data-program="playgroup">Details</button>
+          <button class="btn-small open-contact-modal" data-program="playgroup">Enquire</button>
         </div>
       </article>
 
+      <!-- Nursery Card -->
       <article class="p-6 bg-white rounded-xl shadow-lg">
         <h3 class="text-xl font-semibold">Nursery</h3>
-        <p class="mt-2 text-gray-600">Age: 2–3 years. Literacy & numeracy fundamentals through play.</p>
+        <p class="mt-2 text-gray-600">Age: 2.5–3.5 years</p>
         <ul class="mt-3 text-sm text-gray-600 space-y-1">
-          <li>Play-based learning</li>
-          <li>Story time & activity stations</li>
-          <li>Daily progress notes</li>
+          <li>Phonics-focused activities</li>
+          <li>Counting & social skills</li>
         </ul>
-        <div class="mt-4 flex gap-2">
-          <button class="btn-small open-program-details" data-program="Nursery">Details</button>
-          <button class="btn-small open-contact-modal" data-program="Nursery">Enquire</button>
+        <div class="mt-4 flex gap-3">
+          <button class="btn-small open-program-details" data-program="nursery">Details</button>
+          <button class="btn-small open-contact-modal" data-program="nursery">Enquire</button>
         </div>
       </article>
 
+      <!-- PP1 Card -->
       <article class="p-6 bg-white rounded-xl shadow-lg">
-        <h3 class="text-xl font-semibold">Pre-Primary</h3>
-        <p class="mt-2 text-gray-600">Age: 3–6 years. Structured preparation for primary school.</p>
+        <h3 class="text-xl font-semibold">Pre-Primary 1 (PP1)</h3>
+        <p class="mt-2 text-gray-600">Age: 3.5–4.5 years</p>
         <ul class="mt-3 text-sm text-gray-600 space-y-1">
-          <li>Classroom routines & readiness</li>
-          <li>Phonics & maths introduction</li>
-          <li>Communication & social skills</li>
+          <li>Pre-writing & phonemic awareness</li>
+          <li>Structured classroom routines</li>
         </ul>
-        <div class="mt-4 flex gap-2">
-          <button class="btn-small open-program-details" data-program="Pre-Primary">Details</button>
-          <button class="btn-small open-contact-modal" data-program="Pre-Primary">Enquire</button>
+        <div class="mt-4 flex gap-3">
+          <button class="btn-small open-program-details" data-program="lkg">Details</button>
+          <button class="btn-small open-contact-modal" data-program="lkg">Enquire</button>
+        </div>
+      </article>
+
+      <!-- PP2 Card -->
+      <article class="p-6 bg-white rounded-xl shadow-lg">
+        <h3 class="text-xl font-semibold">Pre-Primary 2 (PP2)</h3>
+        <p class="mt-2 text-gray-600">Age: 4.5–6 years</p>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1">
+          <li>Reading fluency & basic arithmetic</li>
+          <li>School readiness</li>
+        </ul>
+        <div class="mt-4 flex gap-3">
+          <button class="btn-small open-program-details" data-program="ukg">Details</button>
+          <button class="btn-small open-contact-modal" data-program="ukg">Enquire</button>
+        </div>
+      </article>
+
+      <!-- Daycare Card -->
+      <article class="p-6 bg-white rounded-xl shadow-lg md:col-span-3">
+        <h3 class="text-xl font-semibold">Day Care</h3>
+        <p class="mt-2 text-gray-600">Age: 1.5–6 years — extended care</p>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1">
+          <li>Meals, rest, and supervised activities</li>
+          <li>Continuity of care for working parents</li>
+        </ul>
+        <div class="mt-4 flex gap-3">
+          <button class="btn-small open-program-details" data-program="daycare">Details</button>
+          <button class="btn-small open-contact-modal" data-program="daycare">Enquire</button>
         </div>
       </article>
     </div>
   </main>
 
-  <!-- Contact modal (same as index) -->
-  <div id="contact-modal" class="modal hidden fixed inset-0 z-50 items-center justify-center bg-black/50" role="dialog" aria-modal="true">
-    <div class="modal-panel bg-white rounded-xl w-full max-w-md p-6 relative">
-      <button data-close-modal class="absolute right-4 top-4 text-gray-500" aria-label="Close">✕</button>
-      <h3 class="text-2xl font-semibold">Enquiry / Schedule a Visit</h3>
-      <form id="contact-form" class="mt-4 space-y-3" aria-live="polite">
-        <div>
-          <label for="parentName" class="text-sm font-medium">Parent's Name</label>
-          <input type="text" id="parentName" name="parentName" class="w-full p-3 crayon-border rounded" required>
-        </div>
-        <div>
-          <label for="phone" class="text-sm font-medium">Phone</label>
-          <input type="tel" id="phone" name="phone" class="w-full p-3 crayon-border rounded" required>
-        </div>
-        <div>
-          <label for="childAge" class="text-sm font-medium">Child's Age</label>
-          <select id="childAge" name="childAge" class="w-full p-3 crayon-border rounded" required>
-            <option value="">Select age</option>
-            <option value="1.5 to 2 years">1.5 to 2 years</option>
-            <option value="2 to 3 years">2 to 3 years</option>
-            <option value="3 to 4 years">3 to 4 years</option>
-            <option value="4 to 5 years">4 to 5 years</option>
-            <option value="5 to 6 years">5 to 6 years</option>
-          </select>
-        </div>
-        <div>
-          <label for="program" class="text-sm font-medium">Program</label>
-          <select id="program" name="program" class="w-full p-3 crayon-border rounded">
-            <option value="">Select program</option>
-            <option value="Playgroup">Playgroup</option>
-            <option value="Nursery">Nursery</option>
-            <option value="Pre-Primary">Pre-Primary</option>
-          </select>
-        </div>
-        <div>
-          <label for="message" class="text-sm font-medium">Message (optional)</label>
-          <textarea id="message" name="message" class="w-full p-3 crayon-border rounded" rows="3"></textarea>
-        </div>
-        <button type="submit" class="w-full btn-primary">Submit Inquiry</button>
-        <p id="contact-form-success-message" class="text-green-600 text-center mt-2 hidden">Thanks — we'll contact you soon.</p>
-        <p id="contact-form-error-message" class="text-red-600 text-center mt-2 hidden">There was an error; try again later.</p>
-      </form>
-    </div>
-  </div>
-
-  <!-- Footer + WhatsApp -->
-  <footer class="site-footer bg-gray-900 text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-6">
-      <div>
-        <h3 class="text-xl font-bold">St. Vincent's Preschool</h3>
-        <p class="mt-2 text-gray-400">Nurturing early learning.</p>
-      </div>
-      <div>
-        <h4>Links</h4>
-        <ul class="space-y-2 mt-3 text-gray-300"><li><a href="index.html">Home</a></li><li><a href="gallery.html">Gallery</a></li></ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <p class="mt-2 text-gray-300">+91 9032249494</p>
-      </div>
-      <div>
-        <h4>Hours</h4>
-        <p class="mt-2 text-gray-300">Mon–Fri 08:00–18:00</p>
-      </div>
-    </div>
-    <div class="text-center py-4 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
-  </footer>
-
-  <a id="whatsapp-fab" href="https://wa.me/919032249494" target="_blank" class="fixed right-6 bottom-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg">💬</a>
+  <footer class="site-footer bg-gray-900 text-white mt-12 p-6 text-center">© 2025 St. Vincent's Preschool</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap" async defer></script>
-  <script src="js/main.js"></script>
+  <script src="js/site-core.js"></script>
 </body>
 </html>
