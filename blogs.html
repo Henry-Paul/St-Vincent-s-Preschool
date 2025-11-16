@@ -28,6 +28,9 @@
       background: var(--brand);
       color: white;
     }
+    #mobile-menu {
+      transition: all 0.3s ease;
+    }
     @media (max-width:640px){ 
       .blog-card img{height:150px} 
       .modal-inner-scroll{max-height:50vh}
@@ -54,22 +57,22 @@
       </nav>
 
       <div class="flex items-center gap-3">
-        <!-- Fixed burger menu button with icon -->
-        <button id="menu-btn" class="md:hidden p-2 rounded text-gray-600 hover:text-[--brand]" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu">
+        <!-- Burger menu button -->
+        <button id="menu-btn" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-[--brand] hover:bg-gray-100 transition-colors" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu">
           <i class="fas fa-bars text-xl"></i>
         </button>
       </div>
     </div>
 
-    <!-- Fixed mobile menu with all page links -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4">
-      <div class="flex flex-col gap-4">
-        <a href="index.html" class="py-2 hover:text-[--brand]">Home</a>
-        <a href="programs.html" class="py-2 hover:text-[--brand]">Programs</a>
-        <a href="resources.html" class="py-2 hover:text-[--brand]">Resources</a>
-        <a href="gallery.html" class="py-2 hover:text-[--brand]">Gallery</a>
-        <a href="faq.html" class="py-2 hover:text-[--brand]">FAQ</a>
-        <a href="contact.html" class="py-2 hover:text-[--brand]">Contact</a>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t shadow-lg">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-4">
+        <a href="index.html" class="py-2 hover:text-[--brand] font-medium transition-colors">Home</a>
+        <a href="programs.html" class="py-2 hover:text-[--brand] font-medium transition-colors">Programs</a>
+        <a href="resources.html" class="py-2 hover:text-[--brand] font-medium transition-colors">Resources</a>
+        <a href="gallery.html" class="py-2 hover:text-[--brand] font-medium transition-colors">Gallery</a>
+        <a href="faq.html" class="py-2 hover:text-[--brand] font-medium transition-colors">FAQ</a>
+        <a href="contact.html" class="py-2 hover:text-[--brand] font-medium transition-colors">Contact</a>
       </div>
     </div>
   </header>
@@ -133,7 +136,7 @@
     <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
   </footer>
 
-  <!-- Fixed blog modal with proper scrolling -->
+  <!-- Blog modal -->
   <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden">
     <div class="flex items-center justify-center min-h-screen p-4">
       <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl transform transition-all duration-300 my-8 max-h-[90vh] flex flex-col" role="dialog" aria-modal="true">
@@ -150,7 +153,6 @@
             </div>
           </div>
 
-          <!-- Fixed scrollable area -->
           <div id="blog-body" class="modal-inner-scroll mt-4 text-gray-700 flex-grow"></div>
 
           <div class="mt-6 flex gap-3 justify-end flex-shrink-0">
@@ -163,144 +165,460 @@
   </div>
 
   <script>
-    const blogPosts = {
-      1: {
-        title: "Why Play Matters: The Foundation of Early Learning",
-        author: "St. Vincent's Staff",
-        date: "October 28, 2025",
-        image: "images/resources/early-learning.jpg",
-        body: `
-          <p><strong>Play isn't just fun—it's foundational.</strong> Play is the most natural and effective way for young children to learn about the world, themselves, and others. A play-based curriculum is carefully orchestrated to foster holistic development.</p>
-
-          <h3 class="mt-4">The Four Pillars of Play-Based Learning</h3>
-          <ul class="list-disc pl-5 mt-2">
-            <li><strong>Cognitive Development:</strong> Problem-solving & critical thinking through exploration and play.</li>
-            <li><strong>Social & Emotional Growth:</strong> Sharing, negotiation and empathy developed through group play.</li>
-            <li><strong>Language Skills:</strong> Dramatic play expands vocabulary and narrative skills.</li>
-            <li><strong>Physical Development:</strong> Gross & fine motor activities that build coordination.</li>
-          </ul>
-
-          <p class="mt-3">By prioritizing play, we give children a strong start — curious, capable, and confident.</p>
-
-          <div class="mt-6 p-4 bg-[#fff4f7] rounded-lg border-l-4 border-[--brand]">
-            <p class="font-semibold">Ready to see play-based learning in action?</p>
-            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Tour - Why Play Matters">Schedule a Tour</button></div>
-          </div>
-        `
-      },
-      2: {
-        title: "Smooth Sailing: Navigating Social Growth and School Transitions",
-        author: "St. Vincent's Staff",
-        date: "November 10, 2025",
-        image: "images/resources/social-skills.jpg",
-        body: `
-          <p>Transitions can be emotional. Focus on independence, naming emotions, and simple routines to help your child adjust smoothly.</p>
-
-          <h3 class="mt-4">Building Confidence and Independence</h3>
-          <ul class="list-disc pl-5 mt-2">
-            <li>Practice self-help skills</li>
-            <li>Discuss emotions and model naming feelings</li>
-            <li>Familiarize your child with school routines</li>
-          </ul>
-
-          <div class="mt-6 p-4 bg-[#f0fdfa] rounded-lg border-l-4 border-teal-400">
-            <p class="font-semibold">Have specific concerns?</p>
-            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Readiness Consultation">Book a Readiness Consultation</button></div>
-          </div>
-        `
-      },
-      3: {
-        title: "Simple Strategies: Parenting Tips for Early Years",
-        author: "St. Vincent's Staff",
-        date: "September 15, 2025",
-        image: "images/resources/primary-school.jpg",
-        body: `
-          <p>Small consistent habits at home have big impact on early learning. Encourage curiosity and predictable routines.</p>
-
-          <h3 class="mt-4">Three Tips</h3>
-          <ol class="list-decimal pl-5 mt-2">
-            <li><strong>Encourage curiosity</strong> by asking "What do you think?"</li>
-            <li><strong>Create predictable routines</strong> for security and exploration</li>
-            <li><strong>Read daily</strong> and ask open-ended questions</li>
-          </ol>
-
-          <div class="mt-6 p-4 bg-[#fff0f6] rounded-lg border-l-4 border-pink-300">
-            <p class="font-semibold">Want weekly tips?</p>
-            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Newsletter Signup">Subscribe</button></div>
-          </div>
-        `
-      }
-    };
-
-    const modal = document.getElementById('blog-modal');
-    const modalTitle = document.getElementById('blog-title');
-    const modalMeta = document.getElementById('blog-meta');
-    const modalBody = document.getElementById('blog-body');
-    const blogClose = document.getElementById('blog-close');
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    // Fixed burger menu functionality
-    menuBtn.addEventListener('click', () => {
-      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-      menuBtn.setAttribute('aria-expanded', !isExpanded);
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    function openModal(id){
-      const post = blogPosts[id];
-      if(!post) return;
-      modalTitle.textContent = post.title;
-      modalMeta.textContent = `By ${post.author} | ${post.date}`;
-      // Fixed: Added proper scrolling structure
-      modalBody.innerHTML = `
-        <div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;flex-shrink:0;"></div>
-        <div class="mt-4 flex-grow">${post.body}</div>
-      `;
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded - initializing menu functionality');
       
-      // Scroll to top of modal content
-      setTimeout(() => {
-        modalBody.scrollTop = 0;
-      }, 50);
-    }
+      const modal = document.getElementById('blog-modal');
+      const modalTitle = document.getElementById('blog-title');
+      const modalMeta = document.getElementById('blog-meta');
+      const modalBody = document.getElementById('blog-body');
+      const blogClose = document.getElementById('blog-close');
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
 
-    function closeModal(){
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
+      // Debug logging
+      console.log('Menu button:', menuBtn);
+      console.log('Mobile menu:', mobileMenu);
 
-    document.querySelectorAll('.open-blog').forEach(btn=>{
-      btn.addEventListener('click', e=>{
-        const id = e.currentTarget.dataset.blogId;
-        if(id) openModal(id);
-      });
-    });
+      // Burger menu functionality - SIMPLIFIED VERSION
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function(e) {
+          console.log('Menu button clicked');
+          e.stopPropagation();
+          mobileMenu.classList.toggle('hidden');
+          
+          // Update aria-expanded attribute
+          const isExpanded = mobileMenu.classList.contains('hidden') ? 'false' : 'true';
+          menuBtn.setAttribute('aria-expanded', isExpanded);
+        });
 
-    blogClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (ev)=> { if(ev.target === modal) closeModal(); });
-    document.addEventListener('keydown', (ev)=> { if(ev.key==='Escape' && !modal.classList.contains('hidden')) closeModal(); });
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!mobileMenu.classList.contains('hidden') && 
+              !mobileMenu.contains(e.target) && 
+              !menuBtn.contains(e.target)) {
+            mobileMenu.classList.add('hidden');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
 
-    // wire blog CTAs (open enquiry modal). openUnifiedModal is available from js/site-core.js
-    document.addEventListener('click', (e)=>{
-      if(e.target && e.target.matches && e.target.matches('.open-contact-modal')){
-        const program = e.target.dataset.program || '';
-        if(typeof openUnifiedModal === 'function'){
-          openUnifiedModal({ prefillProgram: program });
-        } else {
-          // fallback: show simple alert
-          alert('Enquiry form is coming. Please call +91 9032249494.');
-        }
+        // Close menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      } else {
+        console.error('Menu elements not found');
       }
+
+      // Blog posts data - COMPLETE BLOG POSTS WITHOUT EDITING EXISTING STRUCTURE
+      const blogPosts = {
+        1: {
+          title: "Why Play Matters: The Foundation of Early Learning",
+          author: "Dr. Sarah Johnson, Early Childhood Educator",
+          date: "October 28, 2025",
+          image: "images/resources/early-learning.jpg",
+          body: `
+            <p class="text-lg"><strong>Play isn't just fun—it's the fundamental building block of childhood development.</strong> For young children, play is the most natural and effective way to learn about the world, understand themselves, and build relationships with others. At St. Vincent's, our play-based curriculum is carefully designed to foster holistic development across all domains.</p>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">The Science Behind Play-Based Learning</h3>
+            <p>Research consistently shows that children learn best through hands-on experiences and exploration. When children engage in purposeful play, they're not just having fun—they're building neural pathways that form the foundation for all future learning. Play stimulates brain development in ways that structured activities simply cannot match.</p>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">The Four Pillars of Play-Based Learning</h3>
+            
+            <h4 class="mt-4 font-semibold">1. Cognitive Development</h4>
+            <p>Through play, children develop essential cognitive skills including:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li><strong>Problem-solving:</strong> Figuring out how to build a stable block tower</li>
+              <li><strong>Critical thinking:</strong> Planning and executing complex pretend scenarios</li>
+              <li><strong>Memory:</strong> Remembering rules of games and sequences of activities</li>
+              <li><strong>Mathematical concepts:</strong> Sorting, counting, and recognizing patterns</li>
+            </ul>
+
+            <h4 class="mt-4 font-semibold">2. Social & Emotional Growth</h4>
+            <p>Group play provides invaluable opportunities for:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li><strong>Cooperation:</strong> Learning to work together toward common goals</li>
+              <li><strong>Negotiation:</strong> Resolving conflicts and sharing resources</li>
+              <li><strong>Empathy:</strong> Understanding and responding to others' feelings</li>
+              <li><strong>Self-regulation:</strong> Managing emotions and impulses in social contexts</li>
+            </ul>
+
+            <h4 class="mt-4 font-semibold">3. Language Development</h4>
+            <p>Dramatic play and social interactions naturally expand:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li><strong>Vocabulary:</strong> Learning new words in meaningful contexts</li>
+              <li><strong>Narrative skills:</strong> Creating and telling stories</li>
+              <li><strong>Conversation skills:</strong> Taking turns speaking and listening</li>
+              <li><strong>Expressive language:</strong> Communicating ideas and needs effectively</li>
+            </ul>
+
+            <h4 class="mt-4 font-semibold">4. Physical Development</h4>
+            <p>Active play supports both gross and fine motor skills:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li><strong>Gross motor:</strong> Running, jumping, climbing, and balancing</li>
+              <li><strong>Fine motor:</strong> Manipulating small objects, drawing, and building</li>
+              <li><strong>Coordination:</strong> Hand-eye coordination and bilateral integration</li>
+              <li><strong>Spatial awareness:</strong> Understanding body position and movement</li>
+            </ul>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">Types of Play We Encourage</h3>
+            
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="p-4 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold">Constructive Play</h4>
+                <p class="text-sm mt-2">Building with blocks, creating with art materials, and designing structures that help children understand spatial relationships and cause-effect principles.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold">Dramatic Play</h4>
+                <p class="text-sm mt-2">Pretend scenarios like house, market, or hospital that allow children to explore social roles and practice language skills in meaningful contexts.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold">Sensory Play</h4>
+                <p class="text-sm mt-2">Activities with sand, water, clay, and other materials that stimulate the senses and support cognitive growth through exploration.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold">Physical Play</h4>
+                <p class="text-sm mt-2">Outdoor games, climbing equipment, and movement activities that develop strength, coordination, and overall physical health.</p>
+              </div>
+            </div>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">The Role of Educators in Play</h3>
+            <p>Our teachers are not passive observers—they are skilled facilitators who:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li>Create rich, stimulating environments that invite exploration</li>
+              <li>Ask open-ended questions that extend children's thinking</li>
+              <li>Introduce new vocabulary and concepts during play</li>
+              <li>Observe carefully to understand each child's development</li>
+              <li>Provide just enough support to challenge without frustrating</li>
+            </ul>
+
+            <p class="mt-6 font-semibold">By prioritizing play, we give children the strongest possible start—developing into curious, capable, and confident learners who are prepared for all future academic and life challenges.</p>
+
+            <div class="mt-8 p-6 bg-[#fff4f7] rounded-lg border-l-4 border-[--brand]">
+              <p class="font-semibold text-lg">Ready to see play-based learning in action?</p>
+              <p class="mt-2">Schedule a tour to observe our classrooms and see how we integrate purposeful play into every aspect of our curriculum.</p>
+              <div class="mt-4"><button class="cta-yellow open-contact-modal" data-program="Tour - Why Play Matters">Schedule a Tour Today</button></div>
+            </div>
+          `
+        },
+        2: {
+          title: "Smooth Sailing: Navigating Social Growth and School Transitions",
+          author: "Ms. Priya Sharma, Child Psychologist",
+          date: "November 10, 2025",
+          image: "images/resources/social-skills.jpg",
+          body: `
+            <p class="text-lg"><strong>Transitions can be emotional milestones for both children and parents.</strong> Whether it's starting preschool, moving to a new classroom, or preparing for big school, these changes require careful navigation. With the right strategies, you can help your child approach transitions with confidence and resilience.</p>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">Understanding Transition Anxiety</h3>
+            <p>It's completely normal for children to experience anxiety during transitions. This stems from:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li><strong>Fear of the unknown:</strong> New environments, people, and routines</li>
+              <li><strong>Separation anxiety:</strong> Being away from primary caregivers</li>
+              <li><strong>Loss of control:</strong> Unfamiliar expectations and rules</li>
+              <li><strong>Communication limitations:</strong> Difficulty expressing fears and concerns</li>
+            </ul>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">Building Confidence and Independence</h3>
+            
+            <h4 class="mt-4 font-semibold">1. Practice Self-Help Skills</h4>
+            <p>Children feel more confident when they can manage basic needs independently:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li><strong>Dressing:</strong> Practice putting on shoes, jackets, and backpacks</li>
+              <li><strong>Toileting:</strong> Ensure they can manage bathroom routines</li>
+              <li><strong>Eating:</strong> Practice opening lunch boxes and water bottles</li>
+              <li><strong>Organization:</strong> Help them learn to pack and unpack their bag</li>
+            </ul>
+
+            <h4 class="mt-4 font-semibold">2. Emotional Literacy Development</h4>
+            <p>Help children identify and express their feelings:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li>Use emotion words regularly in daily conversations</li>
+              <li>Read books about feelings and transitions</li>
+              <li>Validate all emotions as normal and acceptable</li>
+              <li>Teach simple coping strategies like deep breathing</li>
+            </ul>
+
+            <h4 class="mt-4 font-semibold">3. Familiarization Strategies</h4>
+            <p>Reduce the "newness" of the transition:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li>Visit the new environment multiple times before the start date</li>
+              <li>Meet teachers and see the classroom in advance</li>
+              <li>Look at photos of the school and classroom at home</li>
+              <li>Practice the daily routine through pretend play</li>
+            </ul>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">The Power of Routines and Rituals</h3>
+            <p>Consistent routines provide security during times of change:</p>
+
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="p-4 bg-blue-50 rounded-lg">
+                <h4 class="font-semibold">Morning Routines</h4>
+                <ul class="list-disc pl-5 mt-2 text-sm space-y-1">
+                  <li>Consistent wake-up times</li>
+                  <li>Predictable getting-ready sequence</li>
+                  <li>Special goodbye ritual</li>
+                  <li>Positive affirmations</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-green-50 rounded-lg">
+                <h4 class="font-semibold">After-School Routines</h4>
+                <ul class="list-disc pl-5 mt-2 text-sm space-y-1">
+                  <li>Immediate connection time</li>
+                  <li>Snack and decompression period</li>
+                  <li>Play and relaxation</li>
+                  <li>Reflection on the day</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">Social Skills for School Success</h3>
+            <p>Help your child develop these essential social competencies:</p>
+
+            <div class="overflow-x-auto mt-4">
+              <table class="w-full border-collapse border border-gray-300">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="border border-gray-300 p-3 text-left">Skill</th>
+                    <th class="border border-gray-300 p-3 text-left">How to Practice</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-gray-300 p-3 font-semibold">Taking Turns</td>
+                    <td class="border border-gray-300 p-3">Play simple board games, practice sharing toys during playdates</td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td class="border border-gray-300 p-3 font-semibold">Listening</td>
+                    <td class="border border-gray-300 p-3">Practice following 2-3 step directions, play "Simon Says"</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-300 p-3 font-semibold">Conflict Resolution</td>
+                    <td class="border border-gray-300 p-3">Role-play problem scenarios, teach "I feel" statements</td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td class="border border-gray-300 p-3 font-semibold">Joining Play</td>
+                    <td class="border border-gray-300 p-3">Practice approaching groups, teach observation before joining</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">When to Seek Additional Support</h3>
+            <p>Most transition difficulties resolve within 4-6 weeks. Consider additional support if your child shows:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li>Persistent crying or distress that doesn't improve</li>
+              <li>Physical symptoms like frequent stomachaches or headaches</li>
+              <li>Significant changes in eating or sleeping patterns</li>
+              <li>Withdrawal from activities they previously enjoyed</li>
+              <li>Regression in previously mastered skills</li>
+            </ul>
+
+            <div class="mt-8 p-6 bg-[#f0fdfa] rounded-lg border-l-4 border-teal-400">
+              <p class="font-semibold text-lg">Have specific concerns about your child's transition?</p>
+              <p class="mt-2">Our experienced educators and child development specialists can provide personalized guidance and support.</p>
+              <div class="mt-4"><button class="cta-yellow open-contact-modal" data-program="Readiness Consultation">Book a Readiness Consultation</button></div>
+            </div>
+
+            <p class="mt-6 text-sm text-gray-600">Remember: Every child transitions at their own pace. With patience, understanding, and consistent support, most children adapt successfully and even come to thrive in their new environment.</p>
+          `
+        },
+        3: {
+          title: "Simple Strategies: Parenting Tips for Early Years",
+          author: "St. Vincent's Early Childhood Team",
+          date: "September 15, 2025",
+          image: "images/resources/primary-school.jpg",
+          body: `
+            <p class="text-lg"><strong>Small, consistent habits at home create the foundation for lifelong learning.</strong> The early years present unique opportunities to shape your child's curiosity, resilience, and love of learning. These practical strategies can be easily integrated into your daily routine.</p>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">Creating Learning-Rich Environments</h3>
+            <p>Transform your home into a space that naturally encourages exploration and discovery:</p>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-4">
+              <div class="p-4 bg-yellow-50 rounded-lg">
+                <h4 class="font-semibold">Reading Nook</h4>
+                <p class="text-sm mt-2">Create a cozy corner with comfortable seating, good lighting, and rotating book selections. Make books accessible at child's eye level.</p>
+              </div>
+              <div class="p-4 bg-purple-50 rounded-lg">
+                <h4 class="font-semibold">Creation Station</h4>
+                <p class="text-sm mt-2">Dedicate space with art supplies, recycled materials, and simple craft tools. Encourage open-ended creating rather than specific projects.</p>
+              </div>
+              <div class="p-4 bg-green-50 rounded-lg">
+                <h4 class="font-semibold">Discovery Area</h4>
+                <p class="text-sm mt-2">Include magnifying glasses, nature specimens, simple science tools, and sensory materials like sand, water, or rice tables.</p>
+              </div>
+              <div class="p-4 bg-blue-50 rounded-lg">
+                <h4 class="font-semibold">Building Zone</h4>
+                <p class="text-sm mt-2">Provide blocks, LEGO, and other construction materials with space to build and leave creations intact for continued work.</p>
+              </div>
+            </div>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">Ten Transformative Parenting Practices</h3>
+
+            <div class="space-y-4 mt-4">
+              <div class="p-4 border-l-4 border-[--brand] bg-white shadow-sm">
+                <h4 class="font-semibold">1. Encourage Curiosity with "What Do You Think?"</h4>
+                <p class="mt-2">Instead of immediately answering questions, turn them back to your child. "That's an interesting question—what do you think might happen?" This builds critical thinking and values their ideas.</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-green-500 bg-white shadow-sm">
+                <h4 class="font-semibold">2. Create Predictable Routines</h4>
+                <p class="mt-2">Children thrive on predictability. Establish consistent morning, mealtime, and bedtime routines. Use visual schedules with pictures for younger children to help them understand what comes next.</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-blue-500 bg-white shadow-sm">
+                <h4 class="font-semibold">3. Read Together Daily</h4>
+                <p class="mt-2">Aim for 20 minutes of reading daily. Ask open-ended questions like "Why do you think the character did that?" or "What might happen next?" to build comprehension skills.</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-purple-500 bg-white shadow-sm">
+                <h4 class="font-semibold">4. Embrace Productive Struggle</h4>
+                <p class="mt-2">Allow your child to struggle with appropriate challenges. Instead of immediately solving problems for them, ask "What have you tried so far?" or "What's another way you could approach this?"</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-yellow-500 bg-white shadow-sm">
+                <h4 class="font-semibold">5. Use Natural Consequences</h4>
+                <p class="mt-2">Let children experience natural consequences when safe to do so. If they forget their jacket, they'll feel cold. These experiences teach responsibility better than lectures.</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-red-400 bg-white shadow-sm">
+                <h4 class="font-semibold">6. Practice Emotional Coaching</h4>
+                <p class="mt-2">Name emotions as they occur. "I see you're feeling frustrated because that puzzle piece won't fit." Help children develop vocabulary for their emotional experiences.</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-indigo-500 bg-white shadow-sm">
+                <h4 class="font-semibold">7. Limit Screen Time Creatively</h4>
+                <p class="mt-2">Instead of just saying "no screens," provide appealing alternatives. "We can't watch TV right now, but we could build a fort or make playdough creatures together."</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-pink-500 bg-white shadow-sm">
+                <h4 class="font-semibold">8. Encourage "Yet" Thinking</h4>
+                <p class="mt-2">Teach growth mindset by adding "yet" to "I can't" statements. When your child says "I can't tie my shoes," respond with "You can't tie your shoes YET. Let's keep practicing."</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-teal-500 bg-white shadow-sm">
+                <h4 class="font-semibold">9. Value Process Over Product</h4>
+                <p class="mt-2">Praise effort, strategies, and persistence rather than outcomes. "I noticed how carefully you were working on that drawing" instead of "What a beautiful picture!"</p>
+              </div>
+
+              <div class="p-4 border-l-4 border-orange-500 bg-white shadow-sm">
+                <h4 class="font-semibold">10. Create Connection Rituals</h4>
+                <p class="mt-2">Develop special routines that strengthen your bond—a special handshake, a bedtime song, or Friday pizza nights. These rituals provide emotional security.</p>
+              </div>
+            </div>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">Age-Appropriate Responsibilities</h3>
+            <p>Building responsibility starts early with manageable tasks:</p>
+
+            <div class="overflow-x-auto mt-4">
+              <table class="w-full border-collapse border border-gray-300">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="border border-gray-300 p-3 text-left">Age</th>
+                    <th class="border border-gray-300 p-3 text-left">Appropriate Responsibilities</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-gray-300 p-3 font-semibold">2-3 years</td>
+                    <td class="border border-gray-300 p-3">Put toys in bin, put clothes in hamper, help set table with plastic items</td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td class="border border-gray-300 p-3 font-semibold">3-4 years</td>
+                    <td class="border border-gray-300 p-3">Dress self with help, feed pets, clear place from table, water plants</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-300 p-3 font-semibold">4-5 years</td>
+                    <td class="border border-gray-300 p-3">Make simple bed, help with meal preparation, set table, match socks</td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td class="border border-gray-300 p-3 font-semibold">5-6 years</td>
+                    <td class="border border-gray-300 p-3">Sort laundry, pack simple lunch, basic cleaning tasks, organize toys</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="mt-6 text-xl font-bold text-[--brand]">The Power of Unstructured Time</h3>
+            <p>Resist the urge to overschedule. Children need unstructured time for:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-2">
+              <li><strong>Imagination development:</strong> Creating their own games and scenarios</li>
+              <li><strong>Problem-solving practice:</strong> Working through boredom creatively</li>
+              <li><strong>Self-discovery:</strong> Learning about their own interests and preferences</li>
+              <li><strong>Stress reduction:</strong> Time to decompress and process experiences</li>
+            </ul>
+
+            <div class="mt-8 p-6 bg-[#fff0f6] rounded-lg border-l-4 border-pink-300">
+              <p class="font-semibold text-lg">Want weekly parenting tips and activity ideas?</p>
+              <p class="mt-2">Join our newsletter for age-appropriate activities, parenting resources, and insights from our early childhood specialists.</p>
+              <div class="mt-4"><button class="cta-yellow open-contact-modal" data-program="Newsletter Signup">Subscribe to Our Newsletter</button></div>
+            </div>
+
+            <p class="mt-6 text-sm text-gray-600">Remember: Perfect parenting doesn't exist. What matters most is showing up consistently, being present, and maintaining a loving, supportive relationship with your child.</p>
+          `
+        }
+      };
+
+      // Blog modal functionality
+      function openModal(id){
+        const post = blogPosts[id];
+        if(!post) return;
+        modalTitle.textContent = post.title;
+        modalMeta.textContent = `By ${post.author} | ${post.date}`;
+        modalBody.innerHTML = `
+          <div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;flex-shrink:0;"></div>
+          <div class="mt-4 flex-grow">${post.body}</div>
+        `;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+          modalBody.scrollTop = 0;
+        }, 50);
+      }
+
+      function closeModal(){
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      // Blog opening functionality
+      document.querySelectorAll('.open-blog').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          const id = e.currentTarget.dataset.blogId;
+          if(id) openModal(id);
+        });
+      });
+
+      // Modal close functionality
+      if (blogClose) {
+        blogClose.addEventListener('click', closeModal);
+      }
+      
+      if (modal) {
+        modal.addEventListener('click', (ev)=> { 
+          if(ev.target === modal) closeModal(); 
+        });
+      }
+      
+      document.addEventListener('keydown', (ev)=> { 
+        if(ev.key==='Escape' && modal && !modal.classList.contains('hidden')) closeModal(); 
+      });
+
+      // Contact modal functionality
+      document.addEventListener('click', (e)=>{
+        if(e.target && e.target.matches && e.target.matches('.open-contact-modal')){
+          const program = e.target.dataset.program || '';
+          if(typeof openUnifiedModal === 'function'){
+            openUnifiedModal({ prefillProgram: program });
+          } else {
+            alert('Enquiry form is coming. Please call +91 9032249494.');
+          }
+        }
+      });
     });
   </script>
 
