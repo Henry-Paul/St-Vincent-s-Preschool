@@ -1,6 +1,6 @@
-// js/site-core.js - consolidated site logic (burger, modals, testimonials, slider, resources, FAQ, WhatsApp fab)
+// js/site-core.js - final site logic with multi-badge testimonial placement and T1 slider + resource modal scroll fix
 
-/* --------------- EmailJS config (replace with real keys if needed) --------------- */
+/* EMAILJS config - replace with your real keys */
 const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_14zrdg6',
   TEMPLATE_ID: 'template_snxhxlk',
@@ -10,19 +10,19 @@ if (window.emailjs && EMAILJS_CONFIG.PUBLIC_KEY) {
   try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); } catch (e) { console.warn('EmailJS init error', e); }
 }
 
-/* ----- helpers ----- */
+/* helpers */
 const $ = (s, ctx=document) => ctx.querySelector(s);
 const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
-function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-/* ----- universal burger (works on all pages) ----- */
+/* ---------- Universal burger ---------- */
 function initUniversalBurger(){
   $$('#menu-btn').forEach(btn=>{
     const header = btn.closest('header') || document;
     const mobileMenu = header.querySelector('#mobile-menu') || document.getElementById('mobile-menu');
-    const setIcon = open => {
+    function setIcon(open){
       btn.innerHTML = open ? '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    };
+    }
     setIcon(false);
     btn.addEventListener('click', e=>{
       e.stopPropagation();
@@ -45,6 +45,7 @@ function initUniversalBurger(){
       });
     }
   });
+
   document.addEventListener('click', ev=>{
     $$('#mobile-menu').forEach(menu=>{
       if(!menu.classList.contains('hidden') && !menu.contains(ev.target)){
@@ -58,7 +59,7 @@ function initUniversalBurger(){
   document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
 }
 
-/* ----- gallery slider ----- */
+/* ---------- Gallery slider ---------- */
 function initImageSlider(){
   const slider = document.getElementById('image-slider'); if(!slider) return;
   const slides = slider.querySelectorAll('.image-slide'); if(!slides.length) return;
@@ -68,12 +69,12 @@ function initImageSlider(){
   function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
   prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
   next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
-  dots.forEach(d=> d.addEventListener('click', e=> { idx=Number(e.currentTarget.dataset.index); update(); }));
+  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); }));
   setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
   update();
 }
 
-/* ----- testimonials (render provided existing testimonials) ----- */
+/* ---------- Testimonials slider (T1) with multi-badge placement ---------- */
 const TESTIMONIALS = [
   { name: "Sai Ram", text: "My child has shown lot of development and he is now more confident after joining st vincent's school." },
   { name: "Latha B.", text: "St. Vincent School has excellent facilities and a clean, well-maintained campus that supports learning. The classrooms are modern and well-equipped. What truly stands out is how friendly and approachable the teachers are... One of the Best Schools in ChandaNagar" },
@@ -81,35 +82,131 @@ const TESTIMONIALS = [
   { name: "Saurabh Shourie.", text: "Great environment with lesser fees in comparison to other schools nearby . My child loves the school. Highly recommended.!" },
   { name: "Anita Singha.", text: "Recently my daughter joined school and she's very happy and she's hyperactive kid so, I am happy that school is very spacious , hygienic plus we got good experienced teachers as well" }
 ];
-function renderTestimonials(){
-  const c = document.getElementById('testimonials-grid'); if(!c) return;
-  c.innerHTML = TESTIMONIALS.map((t,i)=> `
-    <article class="testimonial-card bg-white p-6 rounded-2xl shadow-lg">
-      <div class="flex items-start gap-4">
-        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-2xl text-yellow-600">★</div>
-        <div class="flex-1">
-          <div class="flex justify-between items-start">
-            <h3 class="text-lg font-semibold">${escapeHtml(t.name)}</h3>
-            <div class="text-yellow-500 text-lg font-bold">5.0</div>
+
+function renderTestimonialsSlider(){
+  const wrapper = document.getElementById('testimonial-slider'); if(!wrapper) return;
+  wrapper.innerHTML = '';
+  TESTIMONIALS.forEach((t,i) => {
+    const card = document.createElement('article');
+    card.className = 'testimonial-card bg-white p-6 rounded-2xl shadow-lg flex-shrink-0';
+    card.style.minWidth = '320px';
+    card.style.maxWidth = '360px';
+    card.style.position = 'relative';
+    card.innerHTML = `
+      <div class="test-card-badge-top" aria-hidden="true">
+        <span class="badge-google"><svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.25rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</span>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="width:56px;height:56px;border-radius:12px;background:#fff8f9;display:flex;align-items:center;justify-content:center;font-size:20px;color:#f59e0b">★</div>
+        <div class="content">
+          <div style="display:flex;align-items:center;justify-content:space-between; gap:.5rem; flex-wrap:wrap;">
+            <div>
+              <h3 style="font-weight:600;margin:0">${escapeHtml(t.name)}</h3>
+              <div class="test-card-badge-name" aria-hidden="true"><span class="badge-google"><svg width="12" height="12" viewBox="0 0 24 24" style="margin-right:.2rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</span></div>
+            </div>
+            <div style="font-weight:700;color:#f59e0b">5.0</div>
           </div>
-          <p class="mt-3 text-gray-600">${escapeHtml(t.text)}</p>
+          <p style="margin-top:.6rem;color:#475569">${escapeHtml(t.text)}</p>
         </div>
       </div>
-      <div class="mt-4 flex justify-end"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal" data-program="Enquiry from testimonial ${i+1}">Enquire</button></div>
-    </article>
-  `).join('');
-  // wire newly rendered buttons
-  $$('.open-contact-modal').forEach(b=>{
-    b.addEventListener('click', e => { openUnifiedModal({ prefillProgram: b.dataset.program || '' }); });
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+        <div class="test-card-badge-bottom" aria-hidden="true"><span class="badge-google"><svg width="12" height="12" viewBox="0 0 24 24" style="margin-right:.2rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</span></div>
+        <div><button class="btn-primary open-contact-modal" data-program="Enquiry from ${escapeHtml(t.name)}">Enquire</button></div>
+      </div>
+    `;
+    wrapper.appendChild(card);
   });
+
+  // dots
+  const dotsContainer = document.getElementById('test-dots'); if(!dotsContainer) return;
+  dotsContainer.innerHTML = '';
+  for(let i=0;i<TESTIMONIALS.length;i++){
+    const d = document.createElement('button');
+    d.className = 'slider-dot';
+    d.dataset.index = i;
+    d.ariaLabel = `testimonial ${i+1}`;
+    d.addEventListener('click', ()=> jumpToTestimonial(i));
+    dotsContainer.appendChild(d);
+  }
+
+  $$('.open-contact-modal').forEach(b => b.addEventListener('click', e => openUnifiedModal({ prefillProgram: b.dataset.program || '' })));
 }
 
-/* ----- unified enquiry modal ----- */
+/* slider mechanics */
+let testIdx = 0;
+let testInterval = null;
+let testAutoplay = true;
+const TEST_AUTOPLAY_DELAY = 4000;
+
+function updateTestimonialPosition(){
+  const wrapper = document.getElementById('testimonial-slider');
+  if(!wrapper) return;
+  const card = wrapper.querySelector('.testimonial-card');
+  if(!card) return;
+  const style = getComputedStyle(card);
+  const gap = parseInt(style.marginRight || 24, 10) || 24;
+  const cardWidth = card.getBoundingClientRect().width + gap;
+  wrapper.style.transform = `translateX(-${testIdx * cardWidth}px)`;
+  const dots = Array.from(document.querySelectorAll('#test-dots .slider-dot'));
+  dots.forEach((d,i)=> d.classList.toggle('active', i===testIdx));
+}
+
+function startTestAutoplay(){
+  stopTestAutoplay();
+  if(!testAutoplay) return;
+  testInterval = setInterval(()=> {
+    testIdx = (testIdx + 1) % TESTIMONIALS.length;
+    updateTestimonialPosition();
+  }, TEST_AUTOPLAY_DELAY);
+}
+
+function stopTestAutoplay(){
+  if(testInterval) { clearInterval(testInterval); testInterval = null; }
+}
+
+function jumpToTestimonial(i){
+  testIdx = i % TESTIMONIALS.length;
+  updateTestimonialPosition();
+  pauseAutoplayUntilPlay();
+}
+
+function pauseAutoplayUntilPlay(){
+  testAutoplay = false;
+  stopTestAutoplay();
+  const toggle = document.getElementById('test-play-toggle');
+  if(toggle) toggle.textContent = '▶';
+}
+
+/* Play/pause toggle */
+function toggleTestPlay(){
+  const toggle = document.getElementById('test-play-toggle');
+  if(!toggle) return;
+  if(testAutoplay){
+    testAutoplay = false; stopTestAutoplay(); toggle.textContent = '▶';
+  } else {
+    testAutoplay = true; toggle.textContent = '⏸'; startTestAutoplay();
+  }
+}
+
+/* Prev/next */
+function testPrev(){ testIdx = (testIdx - 1 + TESTIMONIALS.length) % TESTIMONIALS.length; updateTestimonialPosition(); pauseAutoplayUntilPlay(); }
+function testNext(){ testIdx = (testIdx + 1) % TESTIMONIALS.length; updateTestimonialPosition(); pauseAutoplayUntilPlay(); }
+
+/* Pause on hover */
+function wireTestHoverPause(){
+  const wrap = document.querySelector('.testimonial-slider-wrapper');
+  if(!wrap) return;
+  wrap.addEventListener('mouseenter', ()=> { stopTestAutoplay(); });
+  wrap.addEventListener('mouseleave', ()=> { if(testAutoplay) startTestAutoplay(); });
+}
+
+/* ---------- Unified enquiry modal (unchanged fields) ---------- */
 function openUnifiedModal({ prefillProgram = '' } = {}){
   const existing = document.getElementById('sv-contact-modal'); if(existing) existing.remove();
+  lockBodyScroll(true);
   const overlay = document.createElement('div');
   overlay.id = 'sv-contact-modal';
-  overlay.className = 'fixed inset-0 z-60 flex items-center justify-center bg-black/60 p-4';
+  overlay.className = 'fixed inset-0 z-90 flex items-center justify-center bg-black/60 p-4';
   overlay.innerHTML = `
     <div class="bg-white rounded-xl p-6 w-full max-w-lg relative sv-modal-enter sv-modal-show" role="dialog" aria-modal="true">
       <button id="sv-close" class="absolute right-4 top-4 text-gray-600" aria-label="Close modal">✕</button>
@@ -130,9 +227,10 @@ function openUnifiedModal({ prefillProgram = '' } = {}){
     </div>
   `;
   document.body.appendChild(overlay);
-  overlay.querySelector('#sv-close').addEventListener('click', ()=> overlay.remove());
-  overlay.querySelector('#sv-cancel').addEventListener('click', ()=> overlay.remove());
-  document.addEventListener('keydown', e=> { if(e.key === 'Escape'){ const el=document.getElementById('sv-contact-modal'); if(el) el.remove(); } });
+
+  overlay.querySelector('#sv-close').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
+  overlay.querySelector('#sv-cancel').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
+  document.addEventListener('keydown', e=> { if(e.key==='Escape'){ const el=document.getElementById('sv-contact-modal'); if(el){ el.remove(); lockBodyScroll(false); } } });
 
   overlay.querySelector('#schedule-visit-form').addEventListener('submit', function(e){
     e.preventDefault();
@@ -149,15 +247,15 @@ function openUnifiedModal({ prefillProgram = '' } = {}){
     };
     if(window.emailjs && EMAILJS_CONFIG.SERVICE_ID){
       emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, payload)
-        .then(()=> { res.textContent='Thanks — we will contact you shortly.'; setTimeout(()=> overlay.remove(), 1100); })
+        .then(()=> { res.textContent='Thanks — we will contact you shortly.'; setTimeout(()=> { overlay.remove(); lockBodyScroll(false); }, 1100); })
         .catch(err=> { console.error('EmailJS error', err); res.textContent='Submission failed — please call +91 9032249494'; });
     } else {
-      setTimeout(()=> { res.textContent='Thanks — we will contact you shortly.'; setTimeout(()=> overlay.remove(), 900); }, 900);
+      setTimeout(()=> { res.textContent='Thanks — we will contact you shortly.'; setTimeout(()=> { overlay.remove(); lockBodyScroll(false); }, 900); }, 900);
     }
   });
 }
 
-/* ----- resource modals content ----- */
+/* ---------- Resource modal (scrollable) ---------- */
 const RESOURCE_CONTENT = {
   "early-learning": {
     title: "The Science of Early Learning",
@@ -203,21 +301,24 @@ const RESOURCE_CONTENT = {
 };
 
 function openResourceModal(key){
-  const data = RESOURCE_CONTENT[key]; if(!data) return;
+  const data = RESOURCE_CONTENT[key];
+  if(!data) return;
   const existing = document.getElementById('resource-modal'); if(existing) existing.remove();
+  lockBodyScroll(true);
+
   const overlay = document.createElement('div');
-  overlay.id='resource-modal';
-  overlay.className='fixed inset-0 z-70 flex items-start justify-center bg-black/60 p-4';
+  overlay.id = 'resource-modal';
+  overlay.className = 'fixed inset-0 z-95 flex items-start justify-center bg-black/60 p-4';
   overlay.innerHTML = `
-    <div class="bg-white rounded-xl w-full max-w-2xl overflow-hidden sv-modal-enter sv-modal-show" role="dialog" aria-modal="true">
-      <div style="height:220px; background:url('${data.image}') center/cover no-repeat"></div>
-      <div class="p-6">
-        <div class="flex justify-between">
-          <h3 class="text-2xl font-bold">${escapeHtml(data.title)}</h3>
-          <button id="resource-close" class="text-gray-600" aria-label="Close resource modal">✕</button>
+    <div class="bg-white rounded-xl w-full max-w-2xl overflow-hidden sv-modal-enter sv-modal-show" role="dialog" aria-modal="true" style="max-height:90vh; display:flex; flex-direction:column;">
+      <div style="height:220px; background:url('${data.image}') center/cover no-repeat;"></div>
+      <div style="padding:1.25rem; overflow:auto; flex:1;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="font-size:1.25rem; font-weight:700;">${escapeHtml(data.title)}</h3>
+          <button id="resource-close" aria-label="Close resource modal" style="background:transparent;border:none;font-size:20px;">✕</button>
         </div>
         <div class="mt-4 text-gray-700">${data.html}</div>
-        <div class="mt-6 flex gap-3">
+        <div style="margin-top:1rem; display:flex; gap:.5rem; flex-wrap:wrap;">
           <button class="btn-primary open-contact-modal" data-program="${escapeHtml(data.title)}">Schedule a Visit</button>
           <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
           <a class="btn-primary-outline" href="https://wa.me/919032249494" target="_blank" rel="noopener">Chat on WhatsApp</a>
@@ -226,17 +327,14 @@ function openResourceModal(key){
     </div>
   `;
   document.body.appendChild(overlay);
-  overlay.querySelector('#resource-close').addEventListener('click', ()=> overlay.remove());
-  document.addEventListener('keydown', e=> { if(e.key==='Escape'){ const el=document.getElementById('resource-modal'); if(el) el.remove(); } });
+
+  overlay.querySelector('#resource-close').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
+  document.addEventListener('keydown', e=> { if(e.key==='Escape'){ const el=document.getElementById('resource-modal'); if(el){ el.remove(); lockBodyScroll(false); } } });
+
   overlay.querySelectorAll('.open-contact-modal').forEach(b => b.addEventListener('click', ()=> openUnifiedModal({ prefillProgram: b.dataset.program || '' })));
 }
 
-/* ----- wire resource buttons ----- */
-function wireResourceButtons(){
-  $$('[data-resource]').forEach(b => b.addEventListener('click', e => openResourceModal(e.currentTarget.dataset.resource)));
-}
-
-/* ----- FAQ accordion with + / - ----- */
+/* ---------- FAQ accordion ---------- */
 function initFAQAccordion(){
   $$('.faq-q').forEach(q=>{
     q.addEventListener('click', ()=>{
@@ -257,7 +355,7 @@ function initFAQAccordion(){
   });
 }
 
-/* ----- WhatsApp floating button ----- */
+/* ---------- WhatsApp floating fab ---------- */
 function initWhatsAppFab(){
   if(document.getElementById('whatsapp-fab-global')) return;
   const phone = '919032249494';
@@ -311,23 +409,55 @@ function initWhatsAppFab(){
   a.addEventListener('mouseleave', ()=> { tip.style.opacity='0'; tip.style.transform='translateY(6px)'; });
 }
 
-/* ----- wire global CTAs ----- */
+/* ---------- wire resource buttons ---------- */
+function wireResourceButtons(){
+  $$('[data-resource]').forEach(b => b.addEventListener('click', e => openResourceModal(e.currentTarget.dataset.resource)));
+}
+
+/* ---------- wire global CTAs ---------- */
 function wireGlobalCTAs(){
-  $$('.open-contact-modal').forEach(btn=>{
-    btn.addEventListener('click', e=> openUnifiedModal({ prefillProgram: btn.dataset.program || '' }));
+  $$('.open-contact-modal').forEach(btn => {
+    btn.addEventListener('click', e => openUnifiedModal({ prefillProgram: btn.dataset.program || '' }));
   });
   const mainBtn = document.getElementById('schedule-visit-btn-main'); if(mainBtn) mainBtn.addEventListener('click', ()=> openUnifiedModal({}));
 }
 
-/* ----- init everything ----- */
+/* ---------- Body scroll lock helper ---------- */
+function lockBodyScroll(lock){
+  if(lock){
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = window.innerWidth - document.documentElement.clientWidth + 'px';
+  } else {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+}
+
+/* ---------- init ---------- */
 document.addEventListener('DOMContentLoaded', ()=>{
   initUniversalBurger();
   initImageSlider();
-  renderTestimonials();
+  renderTestimonialsSlider();
+  // set initial testimonial position and start autoplay
+  setTimeout(()=> { updateTestimonialPosition(); startTestAutoplay(); }, 120);
+  wireTestHoverPause();
+  document.getElementById('test-play-toggle')?.addEventListener('click', toggleTestPlay);
+  document.getElementById('test-prev')?.addEventListener('click', ()=> { testPrev(); });
+  document.getElementById('test-next')?.addEventListener('click', ()=> { testNext(); });
+
   wireResourceButtons();
   wireGlobalCTAs();
   initFAQAccordion();
   initWhatsAppFab();
 
-  // Accessibility: enable focus trap for modals could be added later if required
+  // pause autoplay by default when user clicks inside slider wrapper (explicit stop)
+  const wrap = document.querySelector('.testimonial-slider-wrapper');
+  if(wrap){
+    wrap.addEventListener('click', ()=> { pauseAutoplayUntilPlay(); });
+  }
+
+  // sync dots occasionally to current index
+  setInterval(()=> updateTestimonialPosition(), 200);
 });
