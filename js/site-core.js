@@ -1,4 +1,4 @@
-// js/site-core.js - final consolidated script (testimonial slider T1 + resource modal scroll fix + others)
+// js/site-core.js - final consolidated script (autoplay slider T1, hover pause, resource modal R1, no play/pause control)
 
 /* EMAILJS config (replace with real keys when ready) */
 const EMAILJS_CONFIG = {
@@ -10,12 +10,10 @@ if (window.emailjs && EMAILJS_CONFIG.PUBLIC_KEY) {
   try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); } catch (e) { console.warn('EmailJS init error', e); }
 }
 
-/* helpers */
 const $ = (s, ctx=document) => ctx.querySelector(s);
 const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
 function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-/* ---------- Burger menu (universal) ---------- */
 function initUniversalBurger(){
   $$('#menu-btn').forEach(btn=>{
     const header = btn.closest('header') || document;
@@ -59,7 +57,6 @@ function initUniversalBurger(){
   document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
 }
 
-/* ---------- Gallery slider ---------- */
 function initImageSlider(){
   const slider = document.getElementById('image-slider'); if(!slider) return;
   const slides = slider.querySelectorAll('.image-slide'); if(!slides.length) return;
@@ -69,12 +66,11 @@ function initImageSlider(){
   function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
   prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
   next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
-  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); }));
+  dots.forEach(d=> d.addEventListener('click', e=> { idx=Number(e.currentTarget.dataset.index); update(); }));
   setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
   update();
 }
 
-/* ---------- Testimonials slider (T1) ---------- */
 const TESTIMONIALS = [
   { name: "Sai Ram", text: "My child has shown lot of development and he is now more confident after joining st vincent's school." },
   { name: "Latha B.", text: "St. Vincent School has excellent facilities and a clean, well-maintained campus that supports learning. The classrooms are modern and well-equipped. What truly stands out is how friendly and approachable the teachers are... One of the Best Schools in ChandaNagar" },
@@ -85,7 +81,7 @@ const TESTIMONIALS = [
 
 function renderTestimonialsSlider(){
   const wrapper = document.getElementById('testimonial-slider'); if(!wrapper) return;
-  wrapper.innerHTML = ''; // clear
+  wrapper.innerHTML = '';
   TESTIMONIALS.forEach((t,i) => {
     const card = document.createElement('article');
     card.className = 'testimonial-card bg-white p-6 rounded-2xl shadow-lg flex-shrink-0';
@@ -102,15 +98,14 @@ function renderTestimonialsSlider(){
           <p style="margin-top:.6rem;color:#475569">${escapeHtml(t.text)}</p>
         </div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
-        <div class="badge-google" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.25rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</div>
-        <div><button class="btn-primary open-contact-modal" data-program="Enquiry from ${escapeHtml(t.name)}">Enquire</button></div>
+      <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1rem">
+        <button class="btn-primary open-contact-modal" data-program="Enquiry from ${escapeHtml(t.name)}">Enquire</button>
       </div>
+      <div class="badge-google" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.25rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</div>
     `;
     wrapper.appendChild(card);
   });
 
-  // dots
   const dotsContainer = document.getElementById('test-dots'); if(!dotsContainer) return;
   dotsContainer.innerHTML = '';
   for(let i=0;i<TESTIMONIALS.length;i++){
@@ -122,24 +117,27 @@ function renderTestimonialsSlider(){
     dotsContainer.appendChild(d);
   }
 
-  // wire enquire buttons
-  $$('.open-contact-modal').forEach(b => {
-    b.addEventListener('click', e => openUnifiedModal({ prefillProgram: b.dataset.program || '' }));
+  $$('.open-contact-modal').forEach(b=>{
+    b.addEventListener('click', e=> openUnifiedModal({ prefillProgram: b.dataset.program || '' }));
   });
 }
 
-/* slider mechanics */
 let testIdx = 0;
 let testInterval = null;
 let testAutoplay = true;
-const TEST_AUTOPLAY_DELAY = 4000;
+const TEST_AUTOPLAY_DELAY = 3800;
 
 function updateTestimonialPosition(){
   const wrapper = document.getElementById('testimonial-slider');
   if(!wrapper) return;
-  const card = wrapper.querySelector('.testimonial-card');
-  const cardWidth = card ? card.getBoundingClientRect().width + 24 : 360;
-  wrapper.style.transform = `translateX(-${testIdx * (cardWidth)}px)`;
+  const cards = wrapper.querySelectorAll('.testimonial-card');
+  if(!cards.length) return;
+  // calculate width from first card (includes gap)
+  const first = cards[0];
+  const style = getComputedStyle(first);
+  const gap = 24; // matches CSS gap used
+  const width = first.getBoundingClientRect().width + gap;
+  wrapper.style.transform = `translateX(-${testIdx * width}px)`;
   const dots = Array.from(document.querySelectorAll('#test-dots .slider-dot'));
   dots.forEach((d,i)=> d.classList.toggle('active', i===testIdx));
 }
@@ -154,56 +152,30 @@ function startTestAutoplay(){
 }
 
 function stopTestAutoplay(){
-  if(testInterval) { clearInterval(testInterval); testInterval = null; }
+  if(testInterval){ clearInterval(testInterval); testInterval = null; }
 }
 
 function jumpToTestimonial(i){
   testIdx = i % TESTIMONIALS.length;
   updateTestimonialPosition();
-  // when user manually jumps, pause autoplay until play clicked (we keep autoplay paused)
-  pauseAutoplayUntilPlay();
-}
-
-function pauseAutoplayUntilPlay(){
-  testAutoplay = false;
+  // when user manually jumps, pause autoplay temporarily until mouseleave resumes
   stopTestAutoplay();
-  const toggle = document.getElementById('test-play-toggle');
-  if(toggle) toggle.textContent = '▶';
 }
 
-/* Play/pause toggle */
-function toggleTestPlay(){
-  const toggle = document.getElementById('test-play-toggle');
-  if(!toggle) return;
-  if(testAutoplay){
-    // pause
-    testAutoplay = false;
-    stopTestAutoplay();
-    toggle.textContent = '▶';
-  } else {
-    testAutoplay = true;
-    toggle.textContent = '⏸';
-    startTestAutoplay();
-  }
-}
+function testPrev(){ testIdx = (testIdx - 1 + TESTIMONIALS.length) % TESTIMONIALS.length; updateTestimonialPosition(); stopTestAutoplay(); }
+function testNext(){ testIdx = (testIdx + 1) % TESTIMONIALS.length; updateTestimonialPosition(); stopTestAutoplay(); }
 
-/* Prev/next */
-function testPrev(){ testIdx = (testIdx - 1 + TESTIMONIALS.length) % TESTIMONIALS.length; updateTestimonialPosition(); pauseAutoplayUntilPlay(); }
-function testNext(){ testIdx = (testIdx + 1) % TESTIMONIALS.length; updateTestimonialPosition(); pauseAutoplayUntilPlay(); }
-
-/* Pause on hover */
 function wireTestHoverPause(){
   const wrap = document.querySelector('.testimonial-slider-wrapper');
   if(!wrap) return;
-  wrap.addEventListener('mouseenter', ()=> {
-    stopTestAutoplay();
-  });
-  wrap.addEventListener('mouseleave', ()=> {
-    if(testAutoplay) startTestAutoplay();
-  });
+  wrap.addEventListener('mouseenter', ()=> { stopTestAutoplay(); });
+  wrap.addEventListener('mouseleave', ()=> { if(testAutoplay) startTestAutoplay(); });
+  // touch behavior for mobile: stop autoplay when user touches
+  wrap.addEventListener('touchstart', ()=> { stopTestAutoplay(); }, {passive:true});
+  wrap.addEventListener('touchend', ()=> { if(testAutoplay) startTestAutoplay(); }, {passive:true});
 }
 
-/* ---------- Unified enquiry modal (unchanged fields) ---------- */
+/* Unified enquiry modal */
 function openUnifiedModal({ prefillProgram = '' } = {}){
   const existing = document.getElementById('sv-contact-modal'); if(existing) existing.remove();
   lockBodyScroll(true);
@@ -258,7 +230,7 @@ function openUnifiedModal({ prefillProgram = '' } = {}){
   });
 }
 
-/* ---------- Resource modal (scrollable) ---------- */
+/* Resource modal (R1) */
 const RESOURCE_CONTENT = {
   "early-learning": {
     title: "The Science of Early Learning",
@@ -304,18 +276,15 @@ const RESOURCE_CONTENT = {
 };
 
 function openResourceModal(key){
-  const data = RESOURCE_CONTENT[key];
-  if(!data) return;
+  const data = RESOURCE_CONTENT[key]; if(!data) return;
   const existing = document.getElementById('resource-modal'); if(existing) existing.remove();
   lockBodyScroll(true);
-
-  // The modal has a scrollable content container (max-height)
   const overlay = document.createElement('div');
   overlay.id = 'resource-modal';
   overlay.className = 'fixed inset-0 z-95 flex items-start justify-center bg-black/60 p-4';
   overlay.innerHTML = `
     <div class="bg-white rounded-xl w-full max-w-2xl overflow-hidden sv-modal-enter sv-modal-show" role="dialog" aria-modal="true" style="max-height:90vh; display:flex; flex-direction:column;">
-      <div style="height:220px; background:url('${data.image}') center/cover no-repeat;"></div>
+      <div style="position:relative; height:220px; background:url('${data.image}') center/cover no-repeat;"></div>
       <div style="padding:1.25rem; overflow:auto; flex:1;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <h3 style="font-size:1.25rem; font-weight:700;">${escapeHtml(data.title)}</h3>
@@ -331,15 +300,11 @@ function openResourceModal(key){
     </div>
   `;
   document.body.appendChild(overlay);
-
   overlay.querySelector('#resource-close').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
   document.addEventListener('keydown', e=> { if(e.key==='Escape'){ const el=document.getElementById('resource-modal'); if(el){ el.remove(); lockBodyScroll(false); } } });
-
-  // wire contact buttons inside modal
   overlay.querySelectorAll('.open-contact-modal').forEach(b => b.addEventListener('click', ()=> openUnifiedModal({ prefillProgram: b.dataset.program || '' })));
 }
 
-/* ---------- FAQ accordion ---------- */
 function initFAQAccordion(){
   $$('.faq-q').forEach(q=>{
     q.addEventListener('click', ()=>{
@@ -360,20 +325,17 @@ function initFAQAccordion(){
   });
 }
 
-/* ---------- WhatsApp floating fab ---------- */
 function initWhatsAppFab(){
   if(document.getElementById('whatsapp-fab-global')) return;
   const phone = '919032249494';
   const text = encodeURIComponent("Hello, I am interested in St. Vincent's Preschool programs.");
   const url = `https://wa.me/${phone}?text=${text}`;
-
   const wrapper = document.createElement('div');
   wrapper.style.position='fixed';
   wrapper.style.right='1.5rem';
   wrapper.style.bottom='1.5rem';
   wrapper.style.zIndex='80';
   wrapper.className='whatsapp-wrapper';
-
   const a = document.createElement('a');
   a.id='whatsapp-fab-global';
   a.href=url;
@@ -389,7 +351,6 @@ function initWhatsAppFab(){
   a.style.borderRadius='999px';
   a.setAttribute('aria-label','Chat on WhatsApp');
   a.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.672.15-.198.297-.768.966-.942 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.173.2-.298.3-.497.1-.198.05-.372-.025-.52-.074-.149-.672-1.618-.922-2.214-.243-.579-.49-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.064 2.876 1.212 3.074c.149.198 2.095 3.2 5.077 4.487  .709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="white"/></svg>`;
-
   const tip = document.createElement('div');
   tip.style.position='absolute';
   tip.style.right='70px';
@@ -404,7 +365,6 @@ function initWhatsAppFab(){
   tip.style.transform='translateY(6px)';
   tip.style.transition='opacity .28s, transform .28s';
   tip.textContent='Chat with us on WhatsApp';
-
   wrapper.appendChild(a);
   wrapper.appendChild(tip);
   document.body.appendChild(wrapper);
@@ -414,12 +374,10 @@ function initWhatsAppFab(){
   a.addEventListener('mouseleave', ()=> { tip.style.opacity='0'; tip.style.transform='translateY(6px)'; });
 }
 
-/* ---------- wire resource buttons ---------- */
 function wireResourceButtons(){
   $$('[data-resource]').forEach(b => b.addEventListener('click', e => openResourceModal(e.currentTarget.dataset.resource)));
 }
 
-/* ---------- wire global CTAs ---------- */
 function wireGlobalCTAs(){
   $$('.open-contact-modal').forEach(btn => {
     btn.addEventListener('click', e => openUnifiedModal({ prefillProgram: btn.dataset.program || '' }));
@@ -427,7 +385,6 @@ function wireGlobalCTAs(){
   const mainBtn = document.getElementById('schedule-visit-btn-main'); if(mainBtn) mainBtn.addEventListener('click', ()=> openUnifiedModal({}));
 }
 
-/* ---------- Body scroll lock helper ---------- */
 function lockBodyScroll(lock){
   if(lock){
     document.documentElement.style.overflow = 'hidden';
@@ -440,32 +397,26 @@ function lockBodyScroll(lock){
   }
 }
 
-/* ---------- init ---------- */
 document.addEventListener('DOMContentLoaded', ()=>{
   initUniversalBurger();
   initImageSlider();
   renderTestimonialsSlider();
-  // set initial testimonial position and start autoplay
   updateTestimonialPosition();
   startTestAutoplay();
   wireTestHoverPause();
 
-  // play/pause and next/prev buttons
-  document.getElementById('test-play-toggle')?.addEventListener('click', toggleTestPlay);
-  document.getElementById('test-prev')?.addEventListener('click', ()=> { testPrev(); });
-  document.getElementById('test-next')?.addEventListener('click', ()=> { testNext(); });
+  document.getElementById('test-prev')?.addEventListener('click', ()=> testPrev());
+  document.getElementById('test-next')?.addEventListener('click', ()=> testNext());
 
   wireResourceButtons();
   wireGlobalCTAs();
   initFAQAccordion();
   initWhatsAppFab();
 
-  // pause autoplay by default when user clicks inside slider wrapper (explicit stop)
   const wrap = document.querySelector('.testimonial-slider-wrapper');
   if(wrap){
-    wrap.addEventListener('click', ()=> { pauseAutoplayUntilPlay(); });
+    wrap.addEventListener('click', ()=> { stopTestAutoplay(); });
   }
 
-  // Make sure dots reflect current index
   setInterval(()=> updateTestimonialPosition(), 250);
 });
