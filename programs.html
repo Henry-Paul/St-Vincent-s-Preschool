@@ -8,19 +8,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <!-- header (same as index) -->
-  <header class="bg-white shadow fixed w-full z-40">
+  <!-- header (same markup as index) -->
+  <header class="bg-white shadow fixed w-full z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
-      <nav class="hidden md:flex gap-6 items-center">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="programs.html" class="nav-link">Programs</a>
-        <a href="gallery.html" class="nav-link">Gallery</a>
-        <a href="faq.html" class="nav-link">FAQ</a>
-        <a href="blogs.html" class="nav-link">Blog</a>
-      </nav>
-      <div class="flex items-center gap-3">
-        <button id="menu-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu"></button>
+      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
+        <img src="images/logo.png" alt="logo" class="w-12 h-12 object-contain">
+        <div><div class="text-xl font-semibold">St. Vincent's</div><div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div></div>
+      </a>
+      <nav class="hidden md:flex gap-6 items-center" role="navigation"><a href="index.html" class="nav-link">Home</a><a href="programs.html" class="nav-link">Programs</a><a href="gallery.html" class="nav-link">Gallery</a><a href="faq.html" class="nav-link">FAQ</a><a href="blogs.html" class="nav-link">Blog</a></nav>
+      <div class="flex items-center gap-3"><button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button></div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
+        <a href="index.html" class="py-2">Home</a>
+        <a href="programs.html" class="py-2">Programs</a>
+        <a href="gallery.html" class="py-2">Gallery</a>
+        <a href="faq.html" class="py-2">FAQ</a>
+        <a href="blogs.html" class="py-2">Blog</a>
+        <a href="contact.html" class="py-2">Contact</a>
       </div>
     </div>
   </header>
@@ -31,7 +36,7 @@
     <p class="mt-2 text-gray-700">Click a program to read full details and enquire.</p>
 
     <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <!-- Playgroup Card -->
+      <!-- Playgroup -->
       <article class="p-6 bg-white rounded-xl shadow-lg">
         <h3 class="text-xl font-semibold">Playgroup</h3>
         <p class="mt-2 text-gray-600">Age: 1.5–2.5 years</p>
@@ -46,60 +51,36 @@
         </div>
       </article>
 
-      <!-- Nursery Card -->
+      <!-- Nursery -->
       <article class="p-6 bg-white rounded-xl shadow-lg">
         <h3 class="text-xl font-semibold">Nursery</h3>
         <p class="mt-2 text-gray-600">Age: 2.5–3.5 years</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1">
-          <li>Phonics-focused activities</li>
-          <li>Counting & social skills</li>
-        </ul>
-        <div class="mt-4 flex gap-3">
-          <button class="btn-small open-program-details" data-program="nursery">Details</button>
-          <button class="btn-small open-contact-modal" data-program="nursery">Enquire</button>
-        </div>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Phonics-focused activities</li><li>Counting & social skills</li></ul>
+        <div class="mt-4 flex gap-3"><button class="btn-small open-program-details" data-program="nursery">Details</button><button class="btn-small open-contact-modal" data-program="nursery">Enquire</button></div>
       </article>
 
-      <!-- PP1 Card -->
+      <!-- PP1 -->
       <article class="p-6 bg-white rounded-xl shadow-lg">
         <h3 class="text-xl font-semibold">Pre-Primary 1 (PP1)</h3>
         <p class="mt-2 text-gray-600">Age: 3.5–4.5 years</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1">
-          <li>Pre-writing & phonemic awareness</li>
-          <li>Structured classroom routines</li>
-        </ul>
-        <div class="mt-4 flex gap-3">
-          <button class="btn-small open-program-details" data-program="lkg">Details</button>
-          <button class="btn-small open-contact-modal" data-program="lkg">Enquire</button>
-        </div>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Pre-writing & phonemic awareness</li><li>Structured classroom routines</li></ul>
+        <div class="mt-4 flex gap-3"><button class="btn-small open-program-details" data-program="lkg">Details</button><button class="btn-small open-contact-modal" data-program="lkg">Enquire</button></div>
       </article>
 
-      <!-- PP2 Card -->
+      <!-- PP2 -->
       <article class="p-6 bg-white rounded-xl shadow-lg">
         <h3 class="text-xl font-semibold">Pre-Primary 2 (PP2)</h3>
         <p class="mt-2 text-gray-600">Age: 4.5–6 years</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1">
-          <li>Reading fluency & basic arithmetic</li>
-          <li>School readiness</li>
-        </ul>
-        <div class="mt-4 flex gap-3">
-          <button class="btn-small open-program-details" data-program="ukg">Details</button>
-          <button class="btn-small open-contact-modal" data-program="ukg">Enquire</button>
-        </div>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Reading fluency & basic arithmetic</li><li>School readiness</li></ul>
+        <div class="mt-4 flex gap-3"><button class="btn-small open-program-details" data-program="ukg">Details</button><button class="btn-small open-contact-modal" data-program="ukg">Enquire</button></div>
       </article>
 
-      <!-- Daycare Card -->
+      <!-- Daycare -->
       <article class="p-6 bg-white rounded-xl shadow-lg md:col-span-3">
         <h3 class="text-xl font-semibold">Day Care</h3>
         <p class="mt-2 text-gray-600">Age: 1.5–6 years — extended care</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1">
-          <li>Meals, rest, and supervised activities</li>
-          <li>Continuity of care for working parents</li>
-        </ul>
-        <div class="mt-4 flex gap-3">
-          <button class="btn-small open-program-details" data-program="daycare">Details</button>
-          <button class="btn-small open-contact-modal" data-program="daycare">Enquire</button>
-        </div>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Meals, rest, and supervised activities</li><li>Continuity of care</li></ul>
+        <div class="mt-4 flex gap-3"><button class="btn-small open-program-details" data-program="daycare">Details</button><button class="btn-small open-contact-modal" data-program="daycare">Enquire</button></div>
       </article>
     </div>
   </main>
