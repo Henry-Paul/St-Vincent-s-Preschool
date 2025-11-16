@@ -1,44 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>St. Vincent's Preschool — Home</title>
-  <meta name="description" content="St. Vincent's Preschool — play-based early learning in Chandanagar. Book a tour or enquire online." />
-  <link rel="manifest" href="manifest.json">
-
-  <!-- Tailwind utilities (fast) -->
+  <meta name="description" content="St. Vincent's Preschool — premium preschool & daycare in Chandanagar. Play-based EYFS curriculum."/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-[--bg] text-gray-900">
 
-  <!-- Header (consistent across pages) -->
-  <header class="site-header bg-white shadow fixed w-full z-40">
+  <!-- Header (shared across pages) -->
+  <header class="bg-white shadow fixed w-full z-40">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-3" aria-label="Home">
-          <img src="images/logo.png" alt="St Vincent's Preschool logo" class="w-12 h-12 object-contain">
-          <div>
-            <div class="text-xl font-semibold">St. Vincent's</div>
-            <div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div>
-          </div>
-        </a>
-      </div>
+      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
+        <img src="images/logo.png" alt="logo" class="w-12 h-12 object-contain">
+        <div>
+          <div class="text-xl font-semibold">St. Vincent's</div>
+          <div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div>
+        </div>
+      </a>
 
-      <nav class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Main">
+      <nav class="hidden md:flex gap-6 items-center" role="navigation">
         <a href="index.html" class="nav-link">Home</a>
         <a href="programs.html" class="nav-link">Programs</a>
         <a href="gallery.html" class="nav-link">Gallery</a>
         <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="blogs.html" class="nav-link">Blog</a>
         <a href="contact.html" class="btn-outline">Contact</a>
       </nav>
 
       <div class="flex items-center gap-3">
-        <button id="back-btn" class="hidden md:inline-flex items-center gap-2 text-sm text-gray-600" title="Go back">
-          ← Back
-        </button>
-
+        <button id="back-btn" class="hidden md:inline-flex items-center gap-2 text-sm text-gray-600">← Back</button>
         <button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button>
       </div>
     </div>
@@ -50,21 +44,21 @@
         <a href="programs.html" class="py-2">Programs</a>
         <a href="gallery.html" class="py-2">Gallery</a>
         <a href="faq.html" class="py-2">FAQ</a>
+        <a href="blogs.html" class="py-2">Blog</a>
         <a href="contact.html" class="py-2">Contact</a>
       </div>
     </div>
   </header>
 
-  <!-- Scrollable main (desktop friendly) -->
-  <main class="site-main max-w-6xl mx-auto px-4 pt-28 pb-16">
+  <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
     <!-- Hero -->
-    <section class="grid md:grid-cols-2 gap-8 items-center py-8">
+    <section class="grid md:grid-cols-2 gap-8 items-center py-12">
       <div>
         <h1 class="text-4xl md:text-5xl font-extrabold">Where Every Child Learns, Plays & Grows</h1>
-        <p class="mt-4 text-lg text-gray-700 max-w-xl">Play-based curriculum, experienced teachers, safe campus — nurturing early learners in Chandanagar.</p>
+        <p class="mt-4 text-lg text-gray-700 max-w-xl">Play-based EYFS-inspired curriculum, experienced teachers, safe campus — nurturing early learners.</p>
         <div class="mt-6 flex gap-3 flex-wrap">
           <a href="programs.html" class="btn-primary">Programs</a>
-          <button class="btn-primary-outline open-contact-modal" data-program="" aria-haspopup="dialog">Book a Visit</button>
+          <button class="btn-primary-outline open-contact-modal" data-program="" aria-haspopup="dialog">Schedule a Tour</button>
           <a href="tel:+919032249494" class="btn-ghost">Call Us</a>
         </div>
       </div>
@@ -76,49 +70,129 @@
       </div>
     </section>
 
-    <!-- Programs preview -->
-    <section class="py-8">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-semibold">Programs</h2>
-        <a href="programs.html" class="text-sm text-gray-600 hover:underline">View all</a>
+    <!-- Programs (REPLACED with your snippet content; upgraded styling & Details button) -->
+    <section class="pt-12">
+      <header class="text-center mb-8">
+        <h2 class="text-3xl font-bold">Our Curriculum & Programs</h2>
+        <p class="mt-2 text-gray-600 max-w-3xl mx-auto">A foundation for lifelong learning through the EYFS framework. Find the perfect program for your child's age and developmental stage.</p>
+      </header>
+
+      <div class="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Playgroup -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-yellow-500">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-baby text-3xl text-yellow-500 p-3 bg-yellow-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Playgroup</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 1.5 – 2.5 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Social & Sensory Exploration. A gentle introduction to school life.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Focus on <strong>separation comfort</strong> and building secure attachments.</li>
+            <li>Activities include <strong>sensory play</strong> (sand, water, textures).</li>
+            <li>Goal: Mastering basic routines and independent play.</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-program-details" data-program="playgroup">Details</button>
+            <button class="btn-small open-contact-modal" data-program="playgroup">Enquire</button>
+          </div>
+        </div>
+
+        <!-- Nursery -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-green-500">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-pencil-ruler text-3xl text-green-500 p-3 bg-green-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Nursery</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 2.5 – 3.5 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Foundation Literacy & Numeracy. Learning through fun, thematic activities.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Introduces basic <strong>pre-reading skills</strong> (phonics awareness).</li>
+            <li>Activities for <strong>number recognition</strong> (1-10) and basic counting.</li>
+            <li>Goal: Confident verbal communication and group engagement.</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-program-details" data-program="nursery">Details</button>
+            <button class="btn-small open-contact-modal" data-program="nursery">Enquire</button>
+          </div>
+        </div>
+
+        <!-- Pre-Primary 1 (PP1) -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-blue-500">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-book-open text-3xl text-blue-500 p-3 bg-blue-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 1 (PP1)</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 3.5 – 4.5 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Concept Application & Pre-Writing. Developing foundational academic skills.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Strengthens <strong>phonemic awareness</strong> and sound recognition.</li>
+            <li>Focus on <strong>pre-writing strokes</strong> and early letter formation.</li>
+            <li>Goal: Understanding simple math and mastering early writing skills.</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-program-details" data-program="lkg">Details</button>
+            <button class="btn-small open-contact-modal" data-program="lkg">Enquire</button>
+          </div>
+        </div>
+
+        <!-- Pre-Primary 2 (PP2) -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-red-500">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-graduation-cap text-3xl text-red-500 p-3 bg-red-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 2 (PP2)</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 4.5 – 6 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Primary School Readiness. Comprehensive skill development for Grade 1.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Focus on <strong>fluency in reading</strong> and basic arithmetic (addition/subtraction).</li>
+            <li>Emphasis on <strong>independent work habits</strong> and social maturity.</li>
+            <li>Goal: Smooth and confident transition into primary school.</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-program-details" data-program="ukg">Details</button>
+            <button class="btn-small open-contact-modal" data-program="ukg">Enquire</button>
+          </div>
+        </div>
+
+        <!-- Day Care -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 md:col-span-2 lg:col-span-1 mx-auto md:w-full lg:w-full max-w-lg">
+          <div class="flex items-center space-x-4 mb-4">
+            <i class="fas fa-clock text-3xl text-purple-500 p-3 bg-purple-100 rounded-full"></i>
+            <h3 class="text-2xl font-bold text-gray-800">Day Care</h3>
+          </div>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 1.5 – 6 Years</p>
+          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Safe, Structured Extended Care for children of working parents.</p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
+            <li>Provides a seamless <strong>extension of the school day</strong>.</li>
+            <li>Includes supervised <strong>rest periods</strong> and nutritious meals/snacks.</li>
+            <li>Goal: Continuity of care in a productive, secure environment.</li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <button class="btn-small open-program-details" data-program="daycare">Details</button>
+            <button class="btn-small open-contact-modal" data-program="daycare">Enquire</button>
+          </div>
+        </div>
       </div>
-      <div class="mt-4 grid md:grid-cols-3 gap-6">
-        <article class="p-5 bg-white rounded-xl shadow">
-          <h3 class="font-semibold">Playgroup (1.5–2 yrs)</h3>
-          <p class="text-sm mt-2 text-gray-600">Gentle routines, sensory play and initial social skills.</p>
-          <div class="mt-4 flex gap-2">
-            <button class="btn-small open-program-details" data-program="Playgroup">Details</button>
-            <button class="btn-small open-contact-modal" data-program="Playgroup">Enquire</button>
-          </div>
-        </article>
 
-        <article class="p-5 bg-white rounded-xl shadow">
-          <h3 class="font-semibold">Nursery (2–3 yrs)</h3>
-          <p class="text-sm mt-2 text-gray-600">Foundational literacy and numeracy through play.</p>
-          <div class="mt-4 flex gap-2">
-            <button class="btn-small open-program-details" data-program="Nursery">Details</button>
-            <button class="btn-small open-contact-modal" data-program="Nursery">Enquire</button>
-          </div>
-        </article>
-
-        <article class="p-5 bg-white rounded-xl shadow">
-          <h3 class="font-semibold">Pre-Primary (3–6 yrs)</h3>
-          <p class="text-sm mt-2 text-gray-600">Structured learning to prepare for primary school.</p>
-          <div class="mt-4 flex gap-2">
-            <button class="btn-small open-program-details" data-program="Pre-Primary">Details</button>
-            <button class="btn-small open-contact-modal" data-program="Pre-Primary">Enquire</button>
-          </div>
-        </article>
+      <div class="flex justify-center mt-12">
+        <button id="schedule-visit-btn-main" class="px-8 py-3 text-lg font-semibold text-white bg-red-600 hover:bg-red-700 rounded-full shadow-xl transition">Schedule a Tour Today</button>
       </div>
     </section>
 
-    <!-- Testimonial placeholder — optional integration with Google Places if configured -->
-    <section class="py-8 bg-white rounded-xl p-6 shadow">
-      <h2 class="text-2xl font-semibold">What Parents Say</h2>
-      <div id="reviews-container" class="mt-4 grid md:grid-cols-2 gap-4" aria-live="polite"></div>
+    <!-- Testimonials (3 columns desktop) -->
+    <section class="py-12">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-bold">What Parents Say</h2>
+          <p class="text-gray-600 mt-2">Top 5-star feedback chosen for clarity and helpfulness.</p>
+        </div>
+        <div id="testimonials-grid" class="grid md:grid-cols-3 gap-6">
+          <!-- populated by JS -->
+        </div>
+      </div>
     </section>
 
-    <!-- Gallery preview + video -->
+    <!-- Gallery preview -->
     <section class="py-8">
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-semibold">Gallery & Tour</h2>
@@ -153,63 +227,6 @@
 
   </main>
 
-  <!-- Contact Form Modal (exact fields as requested) -->
-  <div id="contact-modal" class="modal hidden fixed inset-0 z-50 items-center justify-center bg-black/50" role="dialog" aria-modal="true">
-    <div class="modal-panel bg-white rounded-xl w-full max-w-md p-6 relative">
-      <button data-close-modal class="absolute right-4 top-4 text-gray-500" aria-label="Close">✕</button>
-      <h3 class="text-2xl font-semibold">Enquiry / Schedule a Visit</h3>
-
-      <form id="contact-form" class="mt-4 space-y-3" aria-live="polite">
-        <div>
-          <label for="parentName" class="text-sm font-medium">Parent's Name</label>
-          <input type="text" id="parentName" name="parentName" class="w-full p-3 crayon-border rounded" required>
-        </div>
-
-        <div>
-          <label for="phone" class="text-sm font-medium">Phone Number</label>
-          <input type="tel" id="phone" name="phone" class="w-full p-3 crayon-border rounded" required>
-        </div>
-
-        <div>
-          <label for="childAge" class="text-sm font-medium">Child's Age</label>
-          <select id="childAge" name="childAge" class="w-full p-3 crayon-border rounded" required>
-            <option value="">Select age range</option>
-            <option value="1.5 to 2 years">1.5 to 2 years</option>
-            <option value="2 to 3 years">2 to 3 years</option>
-            <option value="3 to 4 years">3 to 4 years</option>
-            <option value="4 to 5 years">4 to 5 years</option>
-            <option value="5 to 6 years">5 to 6 years</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="program" class="text-sm font-medium">Program</label>
-          <select id="program" name="program" class="w-full p-3 crayon-border rounded">
-            <option value="">Select program</option>
-            <option value="Playgroup">Playgroup</option>
-            <option value="Nursery">Nursery</option>
-            <option value="Pre-Primary 1">Pre-Primary 1</option>
-            <option value="Pre-Primary 2">Pre-Primary 2</option>
-            <option value="Day Care">Day Care</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="message" class="text-sm font-medium">Message (optional)</label>
-          <textarea id="message" name="message" rows="3" class="w-full p-3 crayon-border rounded"></textarea>
-        </div>
-
-        <button type="submit" class="w-full btn-primary flex items-center justify-center gap-3">
-          <span id="submit-text">Submit Inquiry</span>
-          <span id="submit-spinner" class="spinner hidden" aria-hidden="true"></span>
-        </button>
-
-        <p id="contact-form-success-message" class="text-green-600 text-center mt-2 hidden">Thanks — we'll call you soon.</p>
-        <p id="contact-form-error-message" class="text-red-600 text-center mt-2 hidden">There was an error — please try again.</p>
-      </form>
-    </div>
-  </div>
-
   <!-- Footer -->
   <footer class="site-footer bg-gray-900 text-white mt-12">
     <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-6">
@@ -223,7 +240,7 @@
           <li><a href="programs.html">Programs</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="faq.html">FAQ</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blogs.html">Blog</a></li>
         </ul>
       </div>
       <div>
@@ -238,16 +255,13 @@
     <div class="text-center py-4 text-sm bg-[#2a0b2b]">© 2025 St. Vincent's Preschool</div>
   </footer>
 
-  <!-- WhatsApp Floating Button (real number icon; opens WhatsApp) -->
-  <a id="whatsapp-fab" href="https://wa.me/919032249494" target="_blank" rel="noopener" class="fixed right-6 bottom-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg" aria-label="Chat on WhatsApp">💬</a>
+  <!-- WhatsApp Floating Button -->
+  <a id="whatsapp-fab" href="https://wa.me/919032249494" target="_blank" rel="noopener" class="fixed right-6 bottom-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg" aria-label="Chat on WhatsApp">💬</a>
 
-  <!-- Google Maps JS (for reviews on home or map on contact) -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap" async defer></script>
-
-  <!-- EmailJS -->
+  <!-- EmailJS (from your upload) -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-  <!-- Main JS -->
-  <script src="js/main.js"></script>
+  <!-- Site core JS -->
+  <script src="js/site-core.js"></script>
 </body>
 </html>
