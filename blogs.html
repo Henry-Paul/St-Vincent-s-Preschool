@@ -14,45 +14,23 @@
     .nav-link{color:#475569}
     .blog-card img{height:200px;object-fit:cover;border-radius:12px}
     .cta-yellow{background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:600}
-    .modal-inner-scroll{max-height:70vh;overflow-y:auto;padding-right:8px}
+    .modal-inner-scroll{max-height:60vh;overflow-y:auto;padding-right:8px}
     .blog-meta{color:#6b7280;font-size:0.95rem}
-    @media (max-width:640px){ .blog-card img{height:150px} }
-    
-    /* Burger menu styling */
-    #menu-btn {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 24px;
-      height: 18px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
-    
-    #menu-btn span {
-      display: block;
-      height: 2px;
-      width: 100%;
-      background-color: var(--brand);
+    .btn-primary-outline {
+      border: 2px solid var(--brand);
+      color: var(--brand);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-weight: 600;
       transition: all 0.3s ease;
     }
-    
-    /* Mobile menu links styling */
-    #mobile-menu a {
-      display: block;
-      padding: 12px 0;
-      color: #475569;
-      text-decoration: none;
-      border-bottom: 1px solid #f1f5f9;
+    .btn-primary-outline:hover {
+      background: var(--brand);
+      color: white;
     }
-    
-    #mobile-menu a:last-child {
-      border-bottom: none;
-    }
-    
-    #mobile-menu a:hover {
-      color: var(--brand);
+    @media (max-width:640px){ 
+      .blog-card img{height:150px} 
+      .modal-inner-scroll{max-height:50vh}
     }
   </style>
 </head>
@@ -76,21 +54,22 @@
       </nav>
 
       <div class="flex items-center gap-3">
-        <button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
+        <!-- Fixed burger menu button with icon -->
+        <button id="menu-btn" class="md:hidden p-2 rounded text-gray-600 hover:text-[--brand]" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu">
+          <i class="fas fa-bars text-xl"></i>
         </button>
       </div>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="index.html" class="py-2">Home</a>
-        <a href="programs.html" class="py-2">Programs</a>
-        <a href="gallery.html" class="py-2">Gallery</a>
-        <a href="faq.html" class="py-2">FAQ</a>
-        <a href="contact.html" class="py-2">Contact</a>
+    <!-- Fixed mobile menu with all page links -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4">
+      <div class="flex flex-col gap-4">
+        <a href="index.html" class="py-2 hover:text-[--brand]">Home</a>
+        <a href="programs.html" class="py-2 hover:text-[--brand]">Programs</a>
+        <a href="resources.html" class="py-2 hover:text-[--brand]">Resources</a>
+        <a href="gallery.html" class="py-2 hover:text-[--brand]">Gallery</a>
+        <a href="faq.html" class="py-2 hover:text-[--brand]">FAQ</a>
+        <a href="contact.html" class="py-2 hover:text-[--brand]">Contact</a>
       </div>
     </div>
   </header>
@@ -154,10 +133,11 @@
     <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
   </footer>
 
+  <!-- Fixed blog modal with proper scrolling -->
   <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden">
     <div class="flex items-center justify-center min-h-screen p-4">
-      <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col" role="dialog" aria-modal="true">
-        <div class="p-6 md:p-8 flex flex-col h-full">
+      <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl transform transition-all duration-300 my-8 max-h-[90vh] flex flex-col" role="dialog" aria-modal="true">
+        <div class="p-6 md:p-8 flex flex-col flex-grow overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
               <h2 id="blog-title" class="text-2xl font-bold text-[--brand]"></h2>
@@ -170,9 +150,10 @@
             </div>
           </div>
 
-          <div id="blog-body" class="modal-inner-scroll mt-4 text-gray-700"></div>
+          <!-- Fixed scrollable area -->
+          <div id="blog-body" class="modal-inner-scroll mt-4 text-gray-700 flex-grow"></div>
 
-          <div class="mt-6 flex gap-3 justify-end">
+          <div class="mt-6 flex gap-3 justify-end flex-shrink-0">
             <button class="cta-yellow open-contact-modal" data-program="General Enquiry from Blog">Enquire</button>
             <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
           </div>
@@ -259,11 +240,11 @@
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    // Burger menu functionality
+    // Fixed burger menu functionality
     menuBtn.addEventListener('click', () => {
+      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', !isExpanded);
       mobileMenu.classList.toggle('hidden');
-      const isExpanded = mobileMenu.classList.contains('hidden') ? 'false' : 'true';
-      menuBtn.setAttribute('aria-expanded', isExpanded);
     });
 
     // Close mobile menu when clicking on a link
@@ -279,16 +260,18 @@
       if(!post) return;
       modalTitle.textContent = post.title;
       modalMeta.textContent = `By ${post.author} | ${post.date}`;
-      // build body: include image and body html. make scrollable area
-      modalBody.innerHTML = `<div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;"></div>
-                             <div class="mt-4">${post.body}</div>`;
+      // Fixed: Added proper scrolling structure
+      modalBody.innerHTML = `
+        <div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;flex-shrink:0;"></div>
+        <div class="mt-4 flex-grow">${post.body}</div>
+      `;
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
-      // ensure inner scroll container is focused
-      setTimeout(()=> {
-        const inner = modalBody.querySelector('.modal-inner-scroll') || modalBody;
-        inner.scrollTop = 0;
-      }, 60);
+      
+      // Scroll to top of modal content
+      setTimeout(() => {
+        modalBody.scrollTop = 0;
+      }, 50);
     }
 
     function closeModal(){
