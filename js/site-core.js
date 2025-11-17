@@ -57,53 +57,18 @@ function initUniversalBurger(){
   document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
 }
 
-// Image slider functionality - UPDATED: No autoplay, supports 5 slides
 function initImageSlider(){
-  const slider = document.getElementById('image-slider');
-  const dots = document.querySelectorAll('.slider-dot');
-  const prevBtn = document.getElementById('slider-prev');
-  const nextBtn = document.getElementById('slider-next');
-
-  // Check if slider elements exist on the page
-  if (!slider || dots.length === 0 || !prevBtn || !nextBtn) {
-    return; // Exit if slider doesn't exist on this page
-  }
-
-  let currentSlide = 0;
-  const totalSlides = document.querySelectorAll('.image-slide').length;
-
-  function updateSlider() {
-    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-    
-    // Update dots
-    dots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentSlide);
-    });
-  }
-
-  // Event listeners for navigation
-  prevBtn.addEventListener('click', () => {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateSlider();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlider();
-  });
-
-  // Dot navigation
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-      currentSlide = index;
-      updateSlider();
-    });
-  });
-
-  // Initialize first dot as active
-  if (dots.length > 0) {
-    dots[0].classList.add('active');
-  }
+  const slider = document.getElementById('image-slider'); if(!slider) return;
+  const slides = slider.querySelectorAll('.image-slide'); if(!slides.length) return;
+  let idx = 0, total = slides.length;
+  const prev = document.getElementById('slider-prev'), next = document.getElementById('slider-next');
+  const dots = Array.from(document.querySelectorAll('.slider-dot'));
+  function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
+  prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
+  next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
+  dots.forEach(d=> d.addEventListener('click', e=> { idx=Number(e.currentTarget.dataset.index); update(); }));
+  setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
+  update();
 }
 
 const TESTIMONIALS = [
@@ -434,7 +399,7 @@ function lockBodyScroll(lock){
 
 document.addEventListener('DOMContentLoaded', ()=>{
   initUniversalBurger();
-  initImageSlider(); // Updated image slider without autoplay
+  initImageSlider();
   renderTestimonialsSlider();
   updateTestimonialPosition();
   startTestAutoplay();
