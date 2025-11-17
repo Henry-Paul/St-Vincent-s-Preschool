@@ -4,16 +4,25 @@
 :root {
   --brand: #8b2b58;
   --brand-dark: #6f1f44;
+  --brand-light: #a34274;
   --text-dark: #1f1f1f;
   --text-muted: #6b7280;
   --surface: #fffaf8;
   --radius: 14px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--surface);
   color: var(--text-dark);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.6;
 }
 
 /* -----------------------------------------------------
@@ -23,20 +32,43 @@ header {
   background: #ffffffcc;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #f2e4eb;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 header a {
-  transition: color .25s;
+  transition: color .25s ease;
+  text-decoration: none;
 }
 
 header a:hover {
   color: var(--brand);
 }
 
+#mobile-menu {
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
 #mobile-menu a {
   padding: .7rem 0;
   font-size: 1rem;
   border-bottom: 1px solid #f5e8ef;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+#mobile-menu a:hover {
+  color: var(--brand);
+  background: #fffaf8;
+  padding-left: 8px;
+}
+
+#mobile-menu a:last-child {
+  border-bottom: none;
 }
 
 /* -----------------------------------------------------
@@ -48,12 +80,19 @@ header a:hover {
   padding: .7rem 1.4rem;
   border-radius: 50px;
   font-weight: 600;
-  transition: background .25s, transform .25s;
+  transition: all .25s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
   background: var(--brand-dark);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-primary-outline {
@@ -63,13 +102,17 @@ header a:hover {
   border-radius: 50px;
   font-weight: 600;
   background: transparent;
-  transition: all .25s;
+  transition: all .25s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .btn-primary-outline:hover {
   background: var(--brand);
   color: #fff;
   transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-small {
@@ -78,12 +121,17 @@ header a:hover {
   font-size: .85rem;
   padding: .45rem 1rem;
   border-radius: 50px;
-  transition: .25s;
+  transition: all .25s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-small:hover {
   background: var(--brand-dark);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 /* -----------------------------------------------------
@@ -91,7 +139,12 @@ header a:hover {
 ----------------------------------------------------- */
 .hero-frame img {
   border-radius: var(--radius);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.3s ease;
+}
+
+.hero-frame img:hover {
+  transform: scale(1.02);
 }
 
 /* -----------------------------------------------------
@@ -99,73 +152,155 @@ header a:hover {
 ----------------------------------------------------- */
 .program-card {
   border-radius: 18px;
-  transition: transform .25s, box-shadow .25s;
+  transition: all .3s ease;
+  background: white;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 .program-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 40px rgba(0,0,0,0.07);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.program-card img {
+  transition: transform 0.3s ease;
+}
+
+.program-card:hover img {
+  transform: scale(1.05);
 }
 
 /* -----------------------------------------------------
-   Gallery Slider
+   Gallery Slider - UPDATED
 ----------------------------------------------------- */
 .gallery-frame {
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid white;
+  background: white;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-slider {
+  width: 100%;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.image-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
 }
 
 .image-slide img {
-  border-radius: 16px;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
 }
 
 /* Slider buttons */
 .slider-btn {
-  background: #ffffff;
-  padding: .4rem .8rem;
-  border-radius: 8px;
-  border: 1px solid #eee;
-  transition: .2s;
+  background: var(--brand);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: var(--shadow-md);
+  z-index: 10;
 }
 
 .slider-btn:hover {
-  background: var(--brand);
-  color: #fff;
+  background: var(--brand-dark);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.slider-btn:active {
+  transform: scale(0.95);
+}
+
+.slider-dots {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .slider-dot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #ddd;
+  background: #e5e7eb;
   cursor: pointer;
   border: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.slider-dot:hover {
+  background: #d1d5db;
+  transform: scale(1.2);
 }
 
 .slider-dot.active {
   background: var(--brand);
+  transform: scale(1.3);
+  box-shadow: 0 0 0 3px rgba(139, 43, 88, 0.2);
 }
 
 /* -----------------------------------------------------
    Why Parents Trust Us visuals
 ----------------------------------------------------- */
 .trust-visual img {
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.trust-visual img:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* -----------------------------------------------------
    Testimonials
 ----------------------------------------------------- */
 .testimonial-card {
-  border-radius: 18px;
+  border-radius: 20px;
   background: #fff;
-  transition: transform .25s, box-shadow .25s;
+  transition: all .3s ease;
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 4rem;
+  color: var(--brand);
+  opacity: 0.1;
+  font-family: serif;
 }
 
 .testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 38px rgba(0,0,0,0.08);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* -----------------------------------------------------
@@ -173,53 +308,103 @@ header a:hover {
 ----------------------------------------------------- */
 .resource-card {
   border-radius: 18px;
-  transition: .25s;
+  transition: all .3s ease;
   border: 1px solid #f0dfe7;
+  background: white;
+  overflow: hidden;
 }
 
 .resource-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 26px 48px rgba(0,0,0,0.08);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-light);
 }
 
 .resource-card img {
-  border-radius: 14px;
+  border-radius: 14px 14px 0 0;
+  transition: transform 0.3s ease;
+}
+
+.resource-card:hover img {
+  transform: scale(1.05);
 }
 
 /* -----------------------------------------------------
    FAQ Accordion
 ----------------------------------------------------- */
 #faq .faq-q {
-  padding: .7rem .4rem;
+  padding: 1.2rem 1rem;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1rem;
-  transition: color .25s;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f0f0f0;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: between;
+  align-items: center;
 }
 
 #faq .faq-q:hover {
   color: var(--brand);
+  background: #fffaf8;
+  box-shadow: var(--shadow-sm);
+}
+
+#faq .faq-q.active {
+  color: var(--brand);
+  background: #fffaf8;
+  border-bottom: 1px solid var(--brand-light);
 }
 
 #faq .sign {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 8px;
   background: #fff;
   border: 1px solid #e8dce6;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+#faq .faq-q:hover .sign {
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+
+#faq .faq-a {
+  padding: 1rem 1.5rem;
+  background: #fdf8f7;
+  border-radius: 0 0 12px 12px;
+  margin-top: -8px;
+  border: 1px solid #f0dfe7;
+  border-top: none;
 }
 
 #faq .faq-a p {
-  line-height: 1.6;
+  line-height: 1.7;
+  color: var(--text-muted);
 }
 
 /* -----------------------------------------------------
    Visit Us Map
 ----------------------------------------------------- */
 #visitus iframe {
-  border-radius: 18px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  border: 2px solid white;
+  transition: all 0.3s ease;
+}
+
+#visitus iframe:hover {
+  box-shadow: var(--shadow-lg), 0 0 0 4px rgba(139, 43, 88, 0.1);
 }
 
 /* -----------------------------------------------------
@@ -229,23 +414,60 @@ header a:hover {
   background: var(--brand);
   color: #fff;
   padding-top: 3rem;
+  position: relative;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand-dark), var(--brand-light), var(--brand-dark));
 }
 
 .site-footer a {
   color: #f7ddec;
-  transition: .25s;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .site-footer a:hover {
   color: #fff;
   text-decoration: underline;
+  transform: translateX(4px);
 }
 
 /* -----------------------------------------------------
    WhatsApp Floating Button
 ----------------------------------------------------- */
+.whatsapp-wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+}
+
 .whatsapp-wrapper a {
-  animation: popIn .35s ease-out;
+  animation: popIn 0.5s ease-out;
+  display: block;
+  background: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.whatsapp-wrapper a:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
 }
 
 @keyframes popIn {
@@ -262,23 +484,47 @@ header a:hover {
 /* -----------------------------------------------------
    Modal Enhancements
 ----------------------------------------------------- */
+#sv-contact-modal, #resource-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
 #sv-contact-modal .sv-modal-enter,
 #resource-modal .sv-modal-enter {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(20px) scale(0.95);
 }
 
 #sv-contact-modal .sv-modal-show,
 #resource-modal .sv-modal-show {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity .28s ease, transform .28s ease;
+  transform: translateY(0) scale(1);
+  transition: all 0.3s ease;
 }
 
 #sv-contact-modal input,
+#sv-contact-modal textarea,
 #sv-contact-modal button,
 #resource-modal button {
   font-size: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+#sv-contact-modal input:focus,
+#sv-contact-modal textarea:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(139, 43, 88, 0.1);
+  transform: translateY(-2px);
 }
 
 /* -----------------------------------------------------
@@ -286,8 +532,8 @@ header a:hover {
 ----------------------------------------------------- */
 .fade-up {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp .8s ease forwards;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease forwards;
 }
 
 @keyframes fadeUp {
@@ -297,24 +543,154 @@ header a:hover {
   }
 }
 
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInLeft 0.8s ease forwards;
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  animation: slideInRight 0.8s ease forwards;
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* -----------------------------------------------------
+   Utility Classes
+----------------------------------------------------- */
+.text-brand {
+  color: var(--brand);
+}
+
+.bg-brand {
+  background: var(--brand);
+}
+
+.border-brand {
+  border-color: var(--brand);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
 /* -----------------------------------------------------
    Mobile Responsiveness
 ----------------------------------------------------- */
 @media (max-width: 768px) {
   .program-card {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .resource-card img {
-    height: 120px;
+    height: 160px;
   }
 
   .trust-visual img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 
   .testimonial-card {
-    min-height: 200px;
+    min-height: auto;
+    padding: 1.5rem;
+  }
+
+  .image-slide img {
+    height: 280px;
+  }
+
+  .gallery-frame {
+    border-width: 2px;
+    border-radius: 16px;
+    margin: 0 1rem;
+  }
+
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .slider-dots {
+    gap: 8px;
+  }
+
+  .slider-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  #faq .faq-q {
+    padding: 1rem 0.8rem;
+    font-size: 1rem;
+  }
+
+  .whatsapp-wrapper {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .whatsapp-wrapper a {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-slide img {
+    height: 220px;
+  }
+
+  .gallery-frame {
+    margin: 0 0.5rem;
+  }
+
+  .slider-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .whatsapp-wrapper,
+  .slider-btn,
+  #mobile-menu {
+    display: none !important;
+  }
+  
+  .program-card,
+  .testimonial-card {
+    break-inside: avoid;
   }
 }
