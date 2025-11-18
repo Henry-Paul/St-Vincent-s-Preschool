@@ -240,3 +240,40 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus {
 .center { text-align:center; }
 .rounded-lg { border-radius:12px; }
 .shadow-lg { box-shadow:var(--shadow-2); }
+
+/* css/styles-patch.css - append to bottom of your css/styles.css */
+
+/* Testimonials slider small scoped styles */
+.testimonials-wrapper { padding: 14px; background: transparent; }
+.testi-header h3 { color: #111827; margin:0; font-size:1.13rem; }
+.testi-inner { display:flex; gap:12px; align-items:stretch; }
+.testi-card { min-width: 280px; box-sizing:border-box; }
+.testi-card .btn-small { background:var(--brand, #8b2b58); color:#fff; padding:.5rem .75rem; border-radius:8px; }
+
+/* Nav buttons for testimonials */
+.testi-nav { background: #fff; border:1px solid rgba(15,23,42,0.06); padding:6px 8px; border-radius:8px; cursor:pointer; }
+
+/* Media modal */
+#scc-media-modal { display:none; align-items:center; justify-content:center; }
+#scc-media-modal .media-close { position:fixed; right:20px; top:20px; z-index:10010; }
+
+/* Make inner modal content responsive */
+#scc-media-inner { background:#000; border-radius:10px; overflow:auto; padding:6px; }
+
+/* Form message styling (non-invasive) */
+.scc-success { color: #059669; font-weight:700; margin-top:8px; }
+.scc-error { color: #dc2626; font-weight:700; margin-top:8px; }
+
+/* Ensure responsive frames do not break layout */
+.scc-responsive-frame img, .scc-responsive-frame video { width:100%; height:auto; display:block; border-radius:8px; }
+
+/* Small accessibility focus */
+.testi-nav:focus, .open-contact-modal:focus { outline: 3px solid rgba(139,43,88,0.12); outline-offset:2px; }
+
+/* Make sure the testimonial area adapts */
+@media (min-width:768px) {
+  .testi-inner .testi-card { min-width: 45%; flex: 0 0 45%; }
+}
+@media (min-width:992px) {
+  .testi-inner .testi-card { min-width: 33%; flex: 0 0 33%; }
+}
