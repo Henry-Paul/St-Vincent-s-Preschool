@@ -1,320 +1,242 @@
-/* -----------------------------------------------------
-   Global Theme
------------------------------------------------------ */
-:root {
+/* css/styles.css - site-wide theme for St. Vincent's Preschool */
+
+/* ---------------------------
+   Design tokens
+   --------------------------- */
+:root{
   --brand: #8b2b58;
   --brand-dark: #6f1f44;
-  --text-dark: #1f1f1f;
-  --text-muted: #6b7280;
-  --surface: #fffaf8;
-  --radius: 14px;
+  --accent: #fef2f7;
+  --muted: #6b7280;
+  --bg: #fffaf8;
+  --card: #ffffff;
+  --shadow-1: 0 6px 20px rgba(15, 23, 42, 0.06);
+  --shadow-2: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --glass: rgba(255,255,255,0.6);
+  --max-width: 1200px;
+  --transition: 250ms cubic-bezier(.2,.9,.3,1);
 }
 
+/* ---------------------------
+   Base
+   --------------------------- */
+* { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+html,body { height:100%; }
 body {
-  background: var(--surface);
-  color: var(--text-dark);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: #0f172a;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  line-height:1.45;
+}
+img, video { display:block; max-width:100%; height:auto; }
+
+/* ---------------------------
+   Utility containers
+   --------------------------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-/* -----------------------------------------------------
-   Header
------------------------------------------------------ */
+/* ---------------------------
+   Header / Nav
+   --------------------------- */
 header {
-  background: #ffffffcc;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #f2e4eb;
-}
-
-header a {
-  transition: color .25s;
-}
-
-header a:hover {
-  color: var(--brand);
-}
-
-#mobile-menu a {
-  padding: .7rem 0;
-  font-size: 1rem;
-  border-bottom: 1px solid #f5e8ef;
-}
-
-/* -----------------------------------------------------
-   Buttons
------------------------------------------------------ */
-.btn-primary {
-  background: var(--brand);
-  color: #fff;
-  padding: .7rem 1.4rem;
-  border-radius: 50px;
-  font-weight: 600;
-  transition: background .25s, transform .25s;
-}
-
-.btn-primary:hover {
-  background: var(--brand-dark);
-  transform: translateY(-2px);
-}
-
-.btn-primary-outline {
-  border: 2px solid var(--brand);
-  color: var(--brand);
-  padding: .6rem 1.2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  background: transparent;
-  transition: all .25s;
-}
-
-.btn-primary-outline:hover {
-  background: var(--brand);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.btn-small {
-  background: var(--brand);
-  color: #fff;
-  font-size: .85rem;
-  padding: .45rem 1rem;
-  border-radius: 50px;
-  transition: .25s;
-}
-
-.btn-small:hover {
-  background: var(--brand-dark);
-  transform: translateY(-2px);
-}
-
-/* -----------------------------------------------------
-   Hero
------------------------------------------------------ */
-.hero-frame img {
-  border-radius: var(--radius);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
-}
-
-/* -----------------------------------------------------
-   Program Cards
------------------------------------------------------ */
-.program-card {
-  border-radius: 18px;
-  transition: transform .25s, box-shadow .25s;
-}
-
-.program-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 40px rgba(0,0,0,0.07);
-}
-
-/* -----------------------------------------------------
-   Gallery Slider
------------------------------------------------------ */
-.gallery-frame {
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-.image-slide img {
-  border-radius: 16px;
-}
-
-/* Slider buttons */
-.slider-btn {
+  backdrop-filter: blur(6px);
   background: #ffffff;
-  padding: .4rem .8rem;
-  border-radius: 8px;
-  border: 1px solid #eee;
-  transition: .2s;
+  border-bottom: 1px solid rgba(15,23,42,0.04);
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+header .container { display:flex; align-items:center; justify-content:space-between; padding:0.6rem 1rem; }
+header a { text-decoration:none; color:inherit; }
+.logo {
+  display:flex; align-items:center; gap:.75rem;
+}
+.logo img { width:48px; height:48px; object-fit:contain; border-radius:10px; }
+.site-title { font-weight:700; color:var(--brand); font-size:1.05rem;}
+.site-sub { font-size:.78rem; color:var(--muted); margin-top:-3px; }
+
+/* Desktop nav */
+nav[role="navigation"] { display:flex; gap:1.25rem; align-items:center; }
+nav a { color:#334155; padding:.35rem .5rem; border-radius:8px; transition: color var(--transition); font-weight:600; }
+nav a:hover { color:var(--brand); transform:translateY(-1px); }
+
+/* CTA in header (outline) */
+.btn-primary-outline {
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  border:2px solid var(--brand); color:var(--brand); background:transparent;
+  padding:.5rem .9rem; border-radius:999px; font-weight:700; transition:all var(--transition);
+}
+.btn-primary-outline:hover { background:var(--brand); color:white; transform:translateY(-2px); box-shadow:var(--shadow-1) }
+
+/* Mobile menu button */
+#menu-btn { background:transparent; border:none; display:inline-flex; align-items:center; justify-content:center; padding:.35rem; border-radius:8px; transition:all var(--transition) }
+#menu-btn svg { width:22px; height:22px; color:#374151; }
+#menu-btn:focus { outline: 3px solid rgba(139,43,88,0.12); outline-offset:3px; }
+
+/* Mobile menu panel */
+#mobile-menu { display:none; }
+#mobile-menu a { display:block; padding:.75rem 1rem; color:#334155; border-radius:8px; }
+#mobile-menu a:hover { background:rgba(243,244,246,0.6); color:var(--brand); }
+
+/* ---------------------------
+   Buttons (global)
+   --------------------------- */
+.btn-primary {
+  background:var(--brand); color:#fff; padding:.7rem 1.1rem; border-radius:999px; font-weight:700; display:inline-flex; gap:.5rem; align-items:center;
+  box-shadow: var(--shadow-1); border:none; transition: transform var(--transition), box-shadow var(--transition);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+.btn-ghost { background:transparent; color:var(--brand); border:1px dashed rgba(139,43,88,0.12); padding:.45rem .9rem; border-radius:10px; }
+
+/* Compact CTA used in cards */
+.btn-small { padding:.45rem .8rem; border-radius:10px; font-weight:700; background:var(--brand); color:#fff; border:none; cursor:pointer; }
+
+/* ---------------------------
+   Cards & Program blocks
+   --------------------------- */
+.card {
+  background:var(--card);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-1);
+  padding:1rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover { transform: translateY(-6px); box-shadow:var(--shadow-2); }
+
+.program-card { background:var(--card); border-radius:14px; padding:1.1rem; }
+
+/* program icons bubble */
+.program-card i { width:46px; height:46px; display:inline-flex; align-items:center; justify-content:center; border-radius:12px; }
+
+/* ---------------------------
+   Gallery / image slider
+   --------------------------- */
+.gallery-frame { border-radius:12px; overflow:hidden; background:linear-gradient(180deg,#fff,#fff); box-shadow:var(--shadow-1) }
+.image-slide { min-width:100%; flex-shrink:0; }
+#image-slider { display:flex; transition: transform 450ms cubic-bezier(.22,.9,.3,1); }
+
+/* Slider controls */
+.slider-btn { background:#f3f4f6; border: none; padding:.45rem .6rem; border-radius:10px; cursor:pointer; }
+.slider-dots { display:inline-flex; gap:.5rem; align-items:center; }
+
+/* Slider dots */
+.slider-dot { width:10px; height:10px; border-radius:999px; background:#e6e7ea; border:0; cursor:pointer; }
+.slider-dot.active { background:var(--brand); transform:scale(1.05); }
+
+/* ---------------------------
+   Testimonials widget
+   --------------------------- */
+#testimonials { padding: 1rem 0; }
+.testi-track { width:100%; overflow:hidden; }
+.testi-inner { display:flex; gap:1rem; transition: transform 500ms cubic-bezier(.2,.9,.3,1); }
+.testi-card { min-width: 280px; max-width: 360px; }
+.testi-card .card { background: #fff; padding: 1.1rem; border-radius:12px; }
+.testi-card p { margin:0; color:#334155; line-height:1.5; }
+#testi-prev, #testi-next { background:transparent; border:1px solid rgba(15,23,42,0.06); padding:.5rem .65rem; border-radius:8px; cursor:pointer; }
+
+/* responsive: show 1 on small, 2 on tablet, 3 on desktop */
+@media (min-width:768px){
+  .testi-inner .testi-card { min-width: 45%; flex: 0 0 45%; }
+}
+@media (min-width:992px){
+  .testi-inner .testi-card { min-width: 33%; flex: 0 0 33%; }
 }
 
-.slider-btn:hover {
-  background: var(--brand);
-  color: #fff;
+/* ---------------------------
+   Media Frame / Lightbox
+   --------------------------- */
+.responsive-frame { display:block; width:100%; overflow:hidden; border-radius:12px; background:#fff; cursor:pointer; position:relative; }
+.responsive-frame img, .responsive-frame video { display:block; width:100%; height:auto; object-fit:cover; }
+.media-modal-inner { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+#media-modal { z-index:70; }
+
+/* close button */
+.media-close { background:rgba(255,255,255,0.95); border-radius:999px; padding:.35rem; border:0; box-shadow:var(--shadow-1); cursor:pointer; }
+
+/* ---------------------------
+   Blog modal & contact modal
+   --------------------------- */
+.modal-overlay.contact-modal { z-index: 90; }
+.modal-content { border-radius:14px; box-shadow:var(--shadow-2); }
+
+/* scrollable inner content used by blog modal */
+.modal-inner-scroll { overflow-y:auto; -webkit-overflow-scrolling:touch; padding-right: 8px; }
+
+/* small improvements for the blog/contact modal content */
+.modal-content input, .modal-content select, .modal-content textarea {
+  width:100%; padding:.9rem; border-radius:10px; border:1px solid rgba(15,23,42,0.06); font-size:1rem; color:#111827;
+}
+.modal-content input:focus, .modal-content select:focus, .modal-content textarea:focus {
+  outline: none; box-shadow:0 6px 20px rgba(139,43,88,0.08); border-color: var(--brand);
 }
 
-.slider-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #ddd;
-  cursor: pointer;
-  border: none;
-}
+/* success & error message */
+.contact-success { color: #059669; font-weight:700; }
+.contact-error { color: #dc2626; font-weight:700; }
 
-.slider-dot.active {
-  background: var(--brand);
-}
+/* ---------------------------
+   FAQ accordion
+   --------------------------- */
+.faq-q { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:.8rem; cursor:pointer; user-select:none; }
+.faq-q .sign { width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; background:#fff; border:1px solid rgba(15,23,42,0.04); }
+.faq-a { transition: max-height 280ms cubic-bezier(.2,.9,.3,1); overflow:hidden }
 
-/* -----------------------------------------------------
-   Why Parents Trust Us visuals
------------------------------------------------------ */
-.trust-visual img {
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-}
+/* ---------------------------
+   Forms
+   --------------------------- */
+form label { font-weight:600; color:#374151; font-size:.95rem; display:block; margin-bottom:.35rem; }
+form .field { margin-bottom:.8rem; }
 
-/* -----------------------------------------------------
-   Testimonials
------------------------------------------------------ */
-.testimonial-card {
-  border-radius: 18px;
-  background: #fff;
-  transition: transform .25s, box-shadow .25s;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 38px rgba(0,0,0,0.08);
-}
-
-/* -----------------------------------------------------
-   Resources Section
------------------------------------------------------ */
-.resource-card {
-  border-radius: 18px;
-  transition: .25s;
-  border: 1px solid #f0dfe7;
-}
-
-.resource-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 26px 48px rgba(0,0,0,0.08);
-}
-
-.resource-card img {
-  border-radius: 14px;
-}
-
-/* -----------------------------------------------------
-   FAQ Accordion
------------------------------------------------------ */
-#faq .faq-q {
-  padding: .7rem .4rem;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color .25s;
-}
-
-#faq .faq-q:hover {
-  color: var(--brand);
-}
-
-#faq .sign {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: #fff;
-  border: 1px solid #e8dce6;
-  font-weight: bold;
-}
-
-#faq .faq-a p {
-  line-height: 1.6;
-}
-
-/* -----------------------------------------------------
-   Visit Us Map
------------------------------------------------------ */
-#visitus iframe {
-  border-radius: 18px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-}
-
-/* -----------------------------------------------------
-   Footer
------------------------------------------------------ */
-.site-footer {
-  background: var(--brand);
-  color: #fff;
-  padding-top: 3rem;
-}
-
-.site-footer a {
-  color: #f7ddec;
-  transition: .25s;
-}
-
-.site-footer a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-/* -----------------------------------------------------
+/* ---------------------------
    WhatsApp Floating Button
------------------------------------------------------ */
-.whatsapp-wrapper a {
-  animation: popIn .35s ease-out;
+   --------------------------- */
+.whatsapp-chat-button, #whatsapp-chat-button {
+  position:fixed; right:1.25rem; bottom:1.25rem; z-index:80; width:56px; height:56px; border-radius:999px;
+  display:flex; align-items:center; justify-content:center; background:#25D366; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.12);
+  transition: transform var(--transition);
+}
+.whatsapp-chat-button:hover, #whatsapp-chat-button:hover { transform:translateY(-4px); }
+
+/* Tooltip style for whatsapp (if used) */
+.whatsapp-tooltip { position:absolute; right:72px; bottom:10px; background: #111827; color:#fff; padding:.45rem .7rem; border-radius:8px; font-size:.85rem; box-shadow:var(--shadow-1); }
+
+/* ---------------------------
+   Accessibility & focus
+   --------------------------- */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 3px solid rgba(139,43,88,0.12);
+  outline-offset:3px;
 }
 
-@keyframes popIn {
-  from {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+/* ---------------------------
+   Footer
+   --------------------------- */
+.site-footer { background:var(--brand); color:white; padding:2rem 1rem; border-top:4px solid rgba(255,255,255,0.04); }
+.site-footer a { color:rgba(255,255,255,0.95); text-decoration:none; }
+
+/* ---------------------------
+   Small screen adjustments
+   --------------------------- */
+@media (max-width:767px) {
+  .container { padding: 0 0.75rem; }
+  nav[role="navigation"] { display:none !important; }
+  #mobile-menu { display:block; }
+  header .site-title { font-size:1rem; }
 }
 
-/* -----------------------------------------------------
-   Modal Enhancements
------------------------------------------------------ */
-#sv-contact-modal .sv-modal-enter,
-#resource-modal .sv-modal-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-#sv-contact-modal .sv-modal-show,
-#resource-modal .sv-modal-show {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity .28s ease, transform .28s ease;
-}
-
-#sv-contact-modal input,
-#sv-contact-modal button,
-#resource-modal button {
-  font-size: 1rem;
-}
-
-/* -----------------------------------------------------
-   Animations
------------------------------------------------------ */
-.fade-up {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp .8s ease forwards;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* -----------------------------------------------------
-   Mobile Responsiveness
------------------------------------------------------ */
-@media (max-width: 768px) {
-  .program-card {
-    margin-bottom: 1rem;
-  }
-
-  .resource-card img {
-    height: 120px;
-  }
-
-  .trust-visual img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .testimonial-card {
-    min-height: 200px;
-  }
-}
+/* ---------------------------
+   Tiny utilities (do not edit)
+   --------------------------- */
+.hidden { display:none!important; }
+.center { text-align:center; }
+.rounded-lg { border-radius:12px; }
+.shadow-lg { box-shadow:var(--shadow-2); }
