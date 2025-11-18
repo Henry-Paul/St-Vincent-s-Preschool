@@ -1,398 +1,499 @@
-/* js/site-core.js
-   Master site script for St. Vincent's Preschool
-   - Contact modal & EmailJS form submission
-   - Testimonial slider (manual arrows only)
-   - WhatsApp floating button
-   - Mobile burger menu
-   - Exposes openUnifiedModal({ prefillProgram })
+/* site-core.js
+   Revised: update form submission, replace live reviews with manual testimonials slider,
+   add responsive media frame for images/videos, ensure burger + WhatsApp behavior works.
+   Drop this file into: js/site-core.js (overwrite existing)
 */
 
-/* ========= CONFIG ========= */
+/* ======================
+   Configuration
+   ====================== */
 const EMAILJS_CONFIG = {
-  SERVICE_ID: 'service_14zrdg6',
-  TEMPLATE_ID: 'template_snxhxlk',
-  PUBLIC_KEY: '5SyxCT8kGY0_H51dC'
+  SERVICE_ID: 'service_14zrdg6',    // from uploaded HTML file
+  TEMPLATE_ID: 'template_snxhxlk',  // from uploaded HTML file
+  PUBLIC_KEY: '5SyxCT8kGY0_H51dC'   // from uploaded HTML file
 };
 
-// Initialize EmailJS if available
-if (window.emailjs && typeof emailjs.init === 'function') {
-  try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); console.info('EmailJS initialized'); }
-  catch (e) { console.warn('EmailJS init failed', e); }
-}
-
-/* ========= UTILITIES ========= */
-function disableBodyScroll() {
-  document.documentElement.style.overflow = 'hidden';
-  document.body.style.overflow = 'hidden';
-}
-function enableBodyScroll() {
-  document.documentElement.style.overflow = '';
-  document.body.style.overflow = '';
-}
-function createEl(tag, attrs = {}, html = '') {
+/* ======================
+   Utilities
+   ====================== */
+function $q(sel, ctx = document) { return ctx.querySelector(sel); }
+function $qa(sel, ctx = document) { return Array.from(ctx.querySelectorAll(sel)); }
+function createEl(tag, attrs = {}, children = []) {
   const el = document.createElement(tag);
   for (const k in attrs) {
     if (k === 'class') el.className = attrs[k];
-    else if (k === 'style') el.style.cssText = attrs[k];
+    else if (k === 'html') el.innerHTML = attrs[k];
     else el.setAttribute(k, attrs[k]);
   }
-  if (html) el.innerHTML = html;
+  (Array.isArray(children) ? children : [children]).forEach(ch => {
+    if (!ch) return;
+    if (typeof ch === 'string') el.appendChild(document.createTextNode(ch));
+    else el.appendChild(ch);
+  });
   return el;
 }
 
-/* ========= WHATSAPP FAB ========= */
-function ensureWhatsAppFab() {
-  if (document.getElementById('whatsapp-chat-button')) return;
-
-  const a = createEl('a', {
-    id: 'whatsapp-chat-button',
-    href: 'https://wa.me/919032249494?text=Hello%2C%20I%20am%20interested%20in%20St.%20Vincent%27s%20Preschool%20programs.',
-    target: '_blank',
-    class: 'fixed bottom-6 right-6 z-50 transition-transform',
-    title: 'Chat on WhatsApp'
-  });
-
-  a.style.zIndex = 9999;
-  a.innerHTML = `
-    <div style="width:64px;height:64px;border-radius:999px;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.15);">
-      <i class="fab fa-whatsapp" style="color:white;font-size:28px"></i>
-    </div>
-  `;
-  document.body.appendChild(a);
+/* ======================
+   Initialize EmailJS
+   ====================== */
+if (window.emailjs && typeof emailjs.init === 'function') {
+  try {
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    console.info('EmailJS initialized');
+  } catch (err) {
+    console.warn('EmailJS init failed', err);
+  }
+} else {
+  console.warn('EmailJS library not loaded. Ensure <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> is on the page.');
 }
 
-/* ========= MOBILE MENU ========= */
-function initMobileMenu() {
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+/* ======================
+   Contact Modal (unified)
+   - Creates the contact modal using the exact fields seen in your uploaded HTML:
+     parentName, phone, childAge, program, message
+   - Sends via emailjs.send( SERVICE_ID, TEMPLATE_ID, formData )
+   - Shows success / error messages inside the modal
+   ====================== */
+function createContactModal(prefill = {}) {
+  // container in HTML: <div id="contact-modal-container"></div> (from your uploaded HTML)
+  const container = document.getElementById('contact-modal-container') || document.body;
+  // Remove any existing modal
+  const existing = container.querySelector('.modal-overlay.contact-modal');
+  if (existing) existing.remove();
 
-  if (!menuBtn || !mobileMenu) return;
-  menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-    menuBtn.setAttribute('aria-expanded', String(!mobileMenu.classList.contains('hidden')));
-  });
-}
+  const isAutoPopup = !!prefill.isAutoPopup;
 
-/* ========= CONTACT / ENQUIRY MODAL =========
-   Modal HTML uses the *same fields* found in your source:
-   parentName, phone, childAge, program, message
-   (Structure referenced from your uploaded file.) 4
-*/
-function buildContactModalHTML(prefill = {}) {
-  // childAge options and program values match your HTML
-  return `
-  <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true">
-    <div class="modal-content bg-white w-full max-w-2xl max-h-[90vh] overflow-hidden rounded-xl">
-      <div style="display:flex;flex-direction:column;height:100%;">
-        <div class="p-6 border-b" style="display:flex;justify-content:space-between;align-items:flex-start;">
-          <div>
-            <h2 style="font-size:20px;margin:0;color:#111;font-weight:700;">${prefill.isAutoPopup ? 'Get Started Today!' : 'Schedule a Visit'}</h2>
-            <p style="margin:6px 0 0;color:#555;">${prefill.isAutoPopup ? 'Let us help you find the perfect program for your child!' : 'We\'d love to show you around our campus!'}</p>
+  const modalHTML = `
+    <div class="modal-overlay contact-modal fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+      <div class="modal-content bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-100">
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <h2 class="text-2xl font-bold">${isAutoPopup ? 'Get Started Today!' : 'Schedule a Visit'}</h2>
+              <p class="text-sm text-gray-600 mt-1">${isAutoPopup ? 'Let us help you find the perfect program for your child!' : 'We\'d love to show you around our campus!'}</p>
+            </div>
+            <button class="close-modal-btn" aria-label="Close contact modal">&times;</button>
           </div>
-          <button class="close-modal-btn" aria-label="Close" style="background:none;border:none;font-size:20px;cursor:pointer;">✕</button>
-        </div>
 
-        <div class="p-6 overflow-auto" style="flex:1;">
-          <form id="contact-form" class="space-y-4" novalidate>
+          <form id="contact-form" class="space-y-4">
             <div>
-              <label for="parentName" style="font-weight:600;">Parent's Name</label>
-              <input type="text" id="parentName" name="parentName" required style="width:100%;padding:12px;margin-top:6px;font-size:16px;">
+              <label for="parentName" class="block font-medium text-gray-700">Parent's Name</label>
+              <input type="text" id="parentName" name="parentName" class="w-full p-3 border rounded" required value="${escapeHtml(prefill.parentName || '')}">
             </div>
 
             <div>
-              <label for="phone" style="font-weight:600;">Phone Number</label>
-              <input type="tel" id="phone" name="phone" required style="width:100%;padding:12px;margin-top:6px;font-size:16px;">
+              <label for="phone" class="block font-medium text-gray-700">Phone Number</label>
+              <input type="tel" id="phone" name="phone" class="w-full p-3 border rounded" placeholder="+91 9xxxxxxxxx" required value="${escapeHtml(prefill.phone || '')}">
             </div>
 
             <div>
-              <label for="childAge" style="font-weight:600;">Child's Age</label>
-              <select id="childAge" name="childAge" required style="width:100%;padding:12px;margin-top:6px;font-size:16px;">
-                <option value="">Select age range</option>
-                <option value="1.5 to 2 years">1.5 to 2 years</option>
-                <option value="2 to 3 years">2 to 3 years</option>
-                <option value="3 to 4 years">3 to 4 years</option>
-                <option value="4 to 5 years">4 to 5 years</option>
-                <option value="5 to 6 years">5 to 6 years</option>
+              <label for="childAge" class="block font-medium text-gray-700">Child's Age</label>
+              <input type="text" id="childAge" name="childAge" class="w-full p-3 border rounded" placeholder="e.g., 2.5 years" required value="${escapeHtml(prefill.childAge || '')}">
+            </div>
+
+            <div>
+              <label for="program" class="block font-medium text-gray-700">Program of Interest</label>
+              <select id="program" name="program" class="w-full p-3 border rounded" required>
+                <option value="">Select a program</option>
+                <option value="Playgroup">Playgroup (1.5–2.5 yrs)</option>
+                <option value="Nursery">Nursery (2.5–3.5 yrs)</option>
+                <option value="Pre-Primary 1">Pre-Primary 1 (3.5–4.5 yrs)</option>
+                <option value="Pre-Primary 2">Pre-Primary 2 (4.5–6 yrs)</option>
+                <option value="Day Care">Day Care (1.5–6 yrs)</option>
               </select>
             </div>
 
             <div>
-              <label for="program" style="font-weight:600;">Program</label>
-              <select id="program" name="program" required style="width:100%;padding:12px;margin-top:6px;font-size:16px;">
-                <option value="">Select program</option>
-                <option value="playgroup">Playgroup</option>
-                <option value="nursery">Nursery</option>
-                <option value="lkg">Pre-Primary 1</option>
-                <option value="ukg">Pre-Primary 2</option>
-                <option value="daycare">Day Care</option>
-              </select>
+              <label for="message" class="block font-medium text-gray-700">Additional Message (Optional)</label>
+              <textarea id="message" name="message" class="w-full p-3 border rounded" rows="3">${escapeHtml(prefill.message || '')}</textarea>
             </div>
 
             <div>
-              <label for="message" style="font-weight:600;">Additional Message (Optional)</label>
-              <textarea id="message" name="message" rows="3" style="width:100%;padding:12px;margin-top:6px;font-size:16px;"></textarea>
-            </div>
-
-            <div style="margin-top:12px;">
-              <button type="submit" id="contact-submit" style="width:100%;background:#d33f5a;color:white;padding:14px;font-size:18px;border:none;border-radius:8px;cursor:pointer;">
-                <span id="submit-text">${prefill.isAutoPopup ? 'Get Started' : 'Submit Inquiry'}</span>
-                <span id="submit-spinner" style="display:none;margin-left:8px;">⟳</span>
+              <button type="submit" id="contact-submit" class="w-full inline-flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-3 rounded font-semibold">
+                <span id="submit-text">${isAutoPopup ? 'Get Started' : 'Submit Inquiry'}</span>
+                <span id="submit-spinner" class="sr-only" aria-hidden="true"></span>
               </button>
             </div>
 
-            <p id="contact-form-success-message" style="display:none;color:#1e7f1e;font-weight:700;margin-top:12px;text-align:center;">Thank you! We'll call you soon!</p>
-            <p id="contact-form-error-message" style="display:none;color:#b91c1c;font-weight:700;margin-top:12px;text-align:center;">There was an error submitting your form. Please try again or call us directly.</p>
+            <p id="contact-form-success-message" class="text-green-600 text-center font-semibold hidden">Thank you! We'll call you soon!</p>
+            <p id="contact-form-error-message" class="text-red-600 text-center font-semibold hidden">There was an error submitting your form. Please try again or call us directly.</p>
           </form>
+
         </div>
       </div>
     </div>
-  </div>
   `;
-}
 
-let currentModalOverlay = null;
+  container.insertAdjacentHTML('beforeend', modalHTML);
+  const overlay = container.querySelector('.modal-overlay.contact-modal');
+  const closeBtn = overlay.querySelector('.close-modal-btn');
+  const contactForm = overlay.querySelector('#contact-form');
+  const successMsg = overlay.querySelector('#contact-form-success-message');
+  const errorMsg = overlay.querySelector('#contact-form-error-message');
+  const submitText = overlay.querySelector('#submit-text');
+  const submitSpinner = overlay.querySelector('#submit-spinner');
 
-function openContactModal(prefill = {}) {
-  // If already open, ignore
-  if (currentModalOverlay) return;
+  // close handlers
+  closeBtn.addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
 
-  const container = document.createElement('div');
-  container.innerHTML = buildContactModalHTML(prefill);
-  document.body.appendChild(container);
-
-  currentModalOverlay = container.querySelector('.modal-overlay');
-  if (!currentModalOverlay) return;
-
-  // prevent background scroll
-  disableBodyScroll();
-
-  // Attach close handlers
-  const closeButtons = container.querySelectorAll('.close-modal-btn');
-  closeButtons.forEach(btn => btn.addEventListener('click', () => closeContactModal()));
-
-  // Close when clicking overlay outside content
-  currentModalOverlay.addEventListener('click', (e) => {
-    if (e.target === currentModalOverlay) closeContactModal();
-  });
-
-  // Hook form submission
-  const contactForm = container.querySelector('#contact-form');
-  const successMessage = container.querySelector('#contact-form-success-message');
-  const errorMessage = container.querySelector('#contact-form-error-message');
-  const submitText = container.querySelector('#submit-text');
-  const submitSpinner = container.querySelector('#submit-spinner');
-
-  if (contactForm) {
-    // Pre-fill if provided
-    if (prefill.parentName) contactForm.querySelector('#parentName').value = prefill.parentName;
-    if (prefill.phone) contactForm.querySelector('#phone').value = prefill.phone;
-    if (prefill.childAge) contactForm.querySelector('#childAge').value = prefill.childAge;
-    if (prefill.program) contactForm.querySelector('#program').value = prefill.program;
-    if (prefill.message) contactForm.querySelector('#message').value = prefill.message;
-
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      // show loading
-      submitText.style.display = 'none';
-      submitSpinner.style.display = 'inline-block';
-      successMessage.style.display = 'none';
-      errorMessage.style.display = 'none';
-
-      // collect form data (match uploaded html structure). 5
-      const formData = {
-        parentName: (document.getElementById('parentName') || {}).value || '',
-        phone: (document.getElementById('phone') || {}).value || '',
-        childAge: (document.getElementById('childAge') || {}).value || '',
-        program: (document.getElementById('program') || {}).value || '',
-        message: (document.getElementById('message') || {}).value || '',
-        timestamp: new Date().toLocaleString(),
-        source: prefill.isAutoPopup ? 'Auto Popup Form' : 'Website Contact Form'
-      };
-
-      // Validate minimal
-      if (!formData.parentName || !formData.phone || !formData.program) {
-        errorMessage.innerText = 'Please fill in required fields: name, phone, program.';
-        errorMessage.style.display = 'block';
-        submitText.style.display = '';
-        submitSpinner.style.display = 'none';
-        return;
-      }
-
-      // Send via EmailJS
-      if (window.emailjs && typeof emailjs.send === 'function') {
-        emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, formData)
-          .then(function (response) {
-            successMessage.style.display = 'block';
-            contactForm.reset();
-            submitText.style.display = '';
-            submitSpinner.style.display = 'none';
-            setTimeout(() => {
-              closeContactModal();
-            }, 2000);
-          }, function (err) {
-            console.error('EmailJS send error', err);
-            errorMessage.style.display = 'block';
-            submitText.style.display = '';
-            submitSpinner.style.display = 'none';
-          });
-      } else {
-        // fallback: show success and log
-        console.warn('EmailJS not available, logging form data:', formData);
-        successMessage.style.display = 'block';
-        submitText.style.display = '';
-        submitSpinner.style.display = 'none';
-        setTimeout(closeContactModal, 1500);
-      }
-    });
+  // validation helper (basic)
+  function validateContactForm(form) {
+    const name = form.parentName.value.trim();
+    const phone = form.phone.value.trim();
+    const childAge = form.childAge.value.trim();
+    const program = form.program.value.trim();
+    if (!name || !phone || !childAge || !program) {
+      return { ok: false, msg: 'Please fill all required fields.' };
+    }
+    // basic phone check (India)
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 7) return { ok: false, msg: 'Please enter a valid phone number.' };
+    return { ok: true };
   }
-}
 
-function closeContactModal() {
-  if (!currentModalOverlay) return;
-  const overlayParent = currentModalOverlay.parentElement;
-  if (overlayParent) overlayParent.remove();
-  currentModalOverlay = null;
-  enableBodyScroll();
-}
+  // submit handler
+  contactForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    successMsg.classList.add('hidden');
+    errorMsg.classList.add('hidden');
 
-/* expose global function to open contact modal and prefill */
-window.openUnifiedModal = function (opts = {}) {
-  // opts: { prefillProgram, parentName, phone, childAge, message, isAutoPopup }
-  const prefill = {
-    program: opts.prefillProgram || opts.program || '',
-    parentName: opts.parentName || '',
-    phone: opts.phone || '',
-    childAge: opts.childAge || '',
-    message: opts.message || '',
-    isAutoPopup: !!opts.isAutoPopup
-  };
-  openContactModal(prefill);
-};
+    const validation = validateContactForm(contactForm);
+    if (!validation.ok) {
+      errorMsg.textContent = validation.msg;
+      errorMsg.classList.remove('hidden');
+      return;
+    }
 
-/* ========= BLOG / PROGRAM MODAL HELPERS =========
-   Provide createBlogModal(container, data) or usage; pages already create their own modals.
-   We ensure any .open-contact-modal elements call openUnifiedModal.
-*/
-function wireContactButtons() {
-  document.addEventListener('click', function (e) {
-    const el = e.target.closest && e.target.closest('.open-contact-modal');
-    if (!el) return;
-    const program = el.dataset.program || el.getAttribute('data-program') || '';
-    openUnifiedModal({ prefillProgram: program });
+    // loading UI
+    submitText.setAttribute('disabled', 'true');
+    submitSpinner.classList.remove('sr-only');
+
+    // prepare data exactly as the template expects
+    const formData = {
+      parentName: contactForm.parentName.value.trim(),
+      phone: contactForm.phone.value.trim(),
+      childAge: contactForm.childAge.value.trim(),
+      program: contactForm.program.value.trim(),
+      message: contactForm.message.value.trim() || 'N/A',
+      timestamp: new Date().toLocaleString(),
+      source: isAutoPopup ? 'Auto Popup Form' : 'Website Contact Form'
+    };
+
+    // Send via EmailJS
+    if (window.emailjs && typeof emailjs.send === 'function') {
+      emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, formData)
+        .then(function (resp) {
+          successMsg.classList.remove('hidden');
+          contactForm.reset();
+          submitText.removeAttribute('disabled');
+          submitSpinner.classList.add('sr-only');
+          // close after short delay (user sees success)
+          setTimeout(() => overlay.remove(), 2500);
+        })
+        .catch(function (err) {
+          console.error('EmailJS error', err);
+          errorMsg.textContent = 'Submission failed. Please try again or call +91 9032249494.';
+          errorMsg.classList.remove('hidden');
+          submitText.removeAttribute('disabled');
+          submitSpinner.classList.add('sr-only');
+        });
+    } else {
+      console.warn('emailjs.send not available');
+      // fallback - simply show success and print data to console
+      console.log('FORM SUBMISSION (fallback)', formData);
+      successMsg.classList.remove('hidden');
+      submitText.removeAttribute('disabled');
+      submitSpinner.classList.add('sr-only');
+      setTimeout(() => overlay.remove(), 2000);
+    }
   });
+
+  // Accessibility focus
+  overlay.querySelector('input, select, textarea').focus();
+  return overlay;
 }
 
-/* ========= TESTIMONIALS (MANUAL SLIDER, MANUAL NAV ARROWS) =========
-   Remove any live review fetching. Use the 5 review objects from your uploaded file. 6
-*/
-const MANUAL_TESTIMONIALS = [
-  { name: "Sai Ram", text: "My child has shown lot of development and he is now more confident after joining st vincent's school." },
-  { name: "Latha B.", text: "St. Vincent School has excellent facilities and a clean, well-maintained campus that supports learning. The classrooms are modern and well-equipped. What truly stands out is how friendly and approachable the teachers are... One of the Best Schools in ChandaNagar" },
-  { name: "Shashank Bhardwaj.", text: "My child loves going to this preschool! The teachers are caring, the environment is safe and nurturing, and I've seen amazing growth in my little one's confidence and skills." },
-  { name: "Saurabh Shourie.", text: "Great environment with lesser fees in comparison to other schools nearby . My child loves the school. Highly recommended.!" },
-  { name: "Anita Singha.", text: "Recently my daughter joined school and she's very happy and she's hyperactive kid so, I am happy that school is very spacious , hygienic plus we got good experienced teachers as well" }
+/* ======================
+   openUnifiedModal(prefill)
+   Called by other components to open the same modal.
+   Keeps single source of truth.
+   ====================== */
+function openUnifiedModal(prefill = {}) {
+  // If contact modal already exists, reuse and prefill fields if possible
+  // For simplicity we destroy and recreate so prefill works reliably.
+  const overlay = createContactModal(prefill);
+  return overlay;
+}
+
+/* ======================
+   Testimonials
+   - Replace live review fetch with manual 5-item array (top five five-star feedback)
+   - Render a simple responsive slider with prev/next and auto-rotate
+   - No Google badges
+   ====================== */
+const TESTIMONIALS = [
+  { name: "Sai Ram", quote: "My child has shown lot of development and he is now more confident after joining st vincent's school." },
+  { name: "Latha B.", quote: "St. Vincent School has excellent facilities and a clean, well-maintained campus that supports learning." },
+  { name: "Shashank Bhardwaj", quote: "My child loves going to this preschool! The teachers are caring, the environment is safe and nurturing." },
+  { name: "Saurabh Shourie", quote: "Great environment with lesser fees in comparison to other schools nearby. Highly recommended!" },
+  { name: "Anita Singha", quote: "Recently my daughter joined and she's very happy. Spacious, hygienic and experienced teachers." }
 ];
 
-function initManualTestimonialSlider() {
-  const sliderRoot = document.getElementById('testimonial-slider');
-  if (!sliderRoot) return;
+/**
+ * Injects or replaces the testimonials widget in the page.
+ * Looks for an element with id="testimonials" to render into. If missing,
+ * it creates a section above the footer.
+ */
+function renderTestimonialsWidget() {
+  let container = document.getElementById('testimonials');
+  let created = false;
+  if (!container) {
+    // try to place above footer
+    const footer = document.querySelector('footer') || document.body;
+    container = createEl('section', { id: 'testimonials', class: 'max-w-6xl mx-auto px-4 py-10' });
+    footer.parentNode.insertBefore(container, footer);
+    created = true;
+  }
 
-  // Build basic markup: container, slides, arrows
-  sliderRoot.innerHTML = '';
-  const wrapper = createEl('div', { class: 'testimonial-wrapper', style: 'position:relative;overflow:hidden;' });
-  const track = createEl('div', { class: 'testimonial-track', style: 'display:flex;transition:transform 400ms ease;' });
-
-  // create slides
-  MANUAL_TESTIMONIALS.forEach((t, idx) => {
-    const slide = createEl('div', { class: 'testimonial-slide', style: 'min-width:100%;box-sizing:border-box;padding:16px;' });
-    slide.innerHTML = `
-      <div style="position:relative;background:#fff7eb;border-radius:12px;padding:28px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <div style="flex:1;">
-          <p style="color:#334155;line-height:1.5;">"${t.text}"</p>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;">
-          <div style="font-weight:700;color:#0f172a;">- ${t.name}</div>
-          <div style="position:relative;display:flex;align-items:center;">
-            <div style="display:flex;gap:4px;margin-right:8px;">
-              <i class="fas fa-star" style="color:#f59e0b"></i>
-              <i class="fas fa-star" style="color:#f59e0b"></i>
-              <i class="fas fa-star" style="color:#f59e0b"></i>
-              <i class="fas fa-star" style="color:#f59e0b"></i>
-              <i class="fas fa-star" style="color:#f59e0b"></i>
-            </div>
-            <!-- Google badge bottom-left inside slide - represented as a small rounded label -->
-            <div style="position:absolute;left:-120px;bottom:-12px;display:none"></div>
-          </div>
+  // build markup
+  container.innerHTML = `
+    <div class="bg-white shadow rounded-xl p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-2xl font-bold">What Our Parents Say</h3>
+        <div class="flex gap-2">
+          <button id="testi-prev" class="p-2 rounded border">←</button>
+          <button id="testi-next" class="p-2 rounded border">→</button>
         </div>
       </div>
-    `;
-    // add google badge bottom-left inside slide (absolute)
-    const badge = createEl('div', { class: 'google-badge', style: 'position:absolute;left:12px;bottom:12px;background:white;border-radius:6px;padding:6px 8px;display:flex;align-items:center;box-shadow:0 6px 12px rgba(0,0,0,0.08);' });
-    badge.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" style="margin-right:6px"><path fill="#4285F4" d="M12 11.5V14l3-3-3-3v2.5c-4.8 0-8.6 1.5-11 4.5 2.5 3 6.4 4.5 11 4.5 3.4 0 6.4-.9 9-2.5v-3c-3.1 2-6.6 3-9 3-3.9 0-7.6-1.3-10-3.5 2.4-2.2 6.1-3.5 10-3.5z"></path></svg><span style="font-size:12px;color:#111;font-weight:700">Google</span>`;
-    slide.querySelector('.testimonial-slide > div')?.appendChild(badge);
-    track.appendChild(slide);
+      <div id="testi-track" class="testi-track relative overflow-hidden">
+        <div class="testi-inner flex transition-transform duration-500"></div>
+      </div>
+    </div>
+  `;
+
+  const inner = container.querySelector('.testi-inner');
+  TESTIMONIALS.forEach((t, i) => {
+    const card = createEl('div', {
+      class: 'testi-card p-4 min-w-[280px] md:min-w-[33%] flex-shrink-0'
+    }, [
+      createEl('div', { class: 'shadow-sm rounded-lg p-4 bg-gray-50' }, [
+        createEl('p', { class: 'text-lg text-gray-800', html: `“${escapeHtml(t.quote)}”` }),
+        createEl('p', { class: 'mt-3 text-sm font-semibold text-gray-700', html: `<strong>${escapeHtml(t.name)}</strong>` }),
+        // small CTA
+        createEl('div', { class: 'mt-4' }, [
+          createEl('button', { class: 'open-contact-modal btn-small', type: 'button', 'data-program': `Enquiry for ${escapeHtml(t.name)}` , html: 'Enquire' })
+        ])
+      ])
+    ]);
+    inner.appendChild(card);
   });
 
-  wrapper.appendChild(track);
-
-  // arrows
-  const left = createEl('button', { class: 'testimonial-left', style: 'position:absolute;left:8px;top:50%;transform:translateY(-50%);z-index:10;background:white;border-radius:999px;padding:10px;border:none;box-shadow:0 6px 14px rgba(0,0,0,0.08);cursor:pointer;' }, '<i class="fas fa-chevron-left"></i>');
-  const right = createEl('button', { class: 'testimonial-right', style: 'position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:10;background:white;border-radius:999px;padding:10px;border:none;box-shadow:0 6px 14px rgba(0,0,0,0.08);cursor:pointer;' }, '<i class="fas fa-chevron-right"></i>');
-
-  sliderRoot.appendChild(wrapper);
-  sliderRoot.appendChild(left);
-  sliderRoot.appendChild(right);
-
-  // state
-  let idx = 0;
-  function render() {
-    track.style.transform = `translateX(-${idx * 100}%)`;
+  // slider logic
+  const track = container.querySelector('.testi-track');
+  const cards = Array.from(container.querySelectorAll('.testi-card'));
+  let index = 0;
+  function updateTrack() {
+    const cardWidth = cards[0] ? cards[0].getBoundingClientRect().width : 300;
+    const visible = Math.floor(track.getBoundingClientRect().width / cardWidth) || 1;
+    const maxIndex = Math.max(0, TESTIMONIALS.length - visible);
+    if (index > maxIndex) index = maxIndex;
+    const translateX = -(cardWidth * index);
+    container.querySelector('.testi-inner').style.transform = `translateX(${translateX}px)`;
   }
-  left.addEventListener('click', () => {
-    idx = (idx - 1 + MANUAL_TESTIMONIALS.length) % MANUAL_TESTIMONIALS.length;
-    render();
-  });
-  right.addEventListener('click', () => {
-    idx = (idx + 1) % MANUAL_TESTIMONIALS.length;
-    render();
-  });
 
-  // allow swipe on mobile
-  let startX = 0;
-  let moving = false;
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    moving = true;
-  }, { passive: true });
-  track.addEventListener('touchmove', (e) => {
-    if (!moving) return;
-    const dx = e.touches[0].clientX - startX;
-    // small threshold
-    if (Math.abs(dx) > 60) {
-      if (dx > 0) left.click(); else right.click();
-      moving = false;
+  // previous/next handlers
+  const prevBtn = container.querySelector('#testi-prev');
+  const nextBtn = container.querySelector('#testi-next');
+  prevBtn.addEventListener('click', () => { index = Math.max(0, index - 1); updateTrack(); });
+  nextBtn.addEventListener('click', () => { index = Math.min(TESTIMONIALS.length - 1, index + 1); updateTrack(); });
+
+  // auto-resize
+  window.addEventListener('resize', throttle(updateTrack, 150));
+  // initial update
+  setTimeout(updateTrack, 60);
+
+  // auto-rotate (optional)
+  let auto = setInterval(() => { index = (index + 1) % TESTIMONIALS.length; updateTrack(); }, 6000);
+  // pause on hover
+  container.addEventListener('mouseenter', () => clearInterval(auto));
+  container.addEventListener('mouseleave', () => auto = setInterval(() => { index = (index + 1) % TESTIMONIALS.length; updateTrack(); }, 6000));
+}
+
+/* ======================
+   Media Frame / Lightbox
+   - Finds elements with classes: responsive-img, gallery-item, video-poster
+   - Wraps them with a responsive frame and sets up a clickable lightbox/modal
+   - Ensures videos use <video> tag or youtube embed if data attributes provided
+   ====================== */
+function enhanceMediaFrames() {
+  // create media modal if absent
+  if (!document.getElementById('media-modal')) {
+    const modal = createEl('div', { id: 'media-modal', class: 'fixed inset-0 bg-black bg-opacity-80 z-60 hidden flex items-center justify-center p-4' }, [
+      createEl('div', { class: 'max-w-5xl w-full rounded-lg overflow-hidden bg-transparent' }, [
+        createEl('div', { class: 'media-modal-inner relative bg-white rounded-lg overflow-hidden' }, [
+          createEl('button', { class: 'media-close absolute top-3 right-3 z-50 bg-white rounded-full p-2' , html: '&times;'}),
+          createEl('div', { class: 'media-content p-4' }, [])
+        ])
+      ])
+    ]);
+    document.body.appendChild(modal);
+
+    // close handlers
+    modal.querySelector('.media-close').addEventListener('click', () => {
+      modal.classList.add('hidden');
+      const content = modal.querySelector('.media-content');
+      content.innerHTML = '';
+    });
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+  }
+
+  const mediaModal = document.getElementById('media-modal');
+  const mediaContent = mediaModal.querySelector('.media-content');
+
+  // target images & video posters
+  const selectors = [
+    'img.responsive-img',
+    '.gallery-item img',
+    'img[data-media="true"]',
+    'picture[data-media="true"]',
+    '.video-poster'
+  ];
+  const els = $qa(selectors.join(',')).filter(Boolean);
+
+  els.forEach(el => {
+    // ensure wrapped in a frame
+    const parent = el.parentElement;
+    if (!parent.classList.contains('responsive-frame')) {
+      const frame = createEl('div', { class: 'responsive-frame rounded-lg overflow-hidden shadow-md', style: 'display:inline-block; width:100%; cursor:pointer;' });
+      parent.replaceChild(frame, el);
+      frame.appendChild(el);
+      // style (lightweight)
+      el.style.width = '100%';
+      el.style.height = 'auto';
+      // click -> open modal
+      frame.addEventListener('click', () => {
+        const src = el.getAttribute('data-full') || el.src || el.getAttribute('data-src');
+        if (!src) return;
+        // if the element is a video poster and has data-video attribute, embed video
+        const videoUrl = el.getAttribute('data-video');
+        mediaContent.innerHTML = ''; // reset
+        if (videoUrl) {
+          // embed video (YouTube or mp4)
+          if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+            // convert to embed
+            let id = '';
+            if (videoUrl.includes('youtu.be')) id = videoUrl.split('/').pop();
+            else {
+              const urlObj = new URL(videoUrl);
+              id = urlObj.searchParams.get('v');
+            }
+            if (id) {
+              mediaContent.innerHTML = `<div style="position:relative;padding-top:56.25%"><iframe src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen style="position:absolute;left:0;top:0;width:100%;height:100%"></iframe></div>`;
+            } else {
+              mediaContent.innerHTML = `<p>Video unavailable</p>`;
+            }
+          } else {
+            // assume MP4
+            mediaContent.innerHTML = `<video controls playsinline style="width:100%;height:auto"><source src="${escapeHtml(videoUrl)}" type="video/mp4">Your browser does not support video.</video>`;
+          }
+        } else {
+          mediaContent.innerHTML = `<img src="${escapeHtml(src)}" alt="" style="width:100%;height:auto;display:block" />`;
+        }
+        mediaModal.classList.remove('hidden');
+      });
     }
-  }, { passive: true });
+  });
 }
 
-/* ========= INIT ========= */
-function initSiteCore() {
-  ensureWhatsAppFab();
-  initMobileMenu();
-  wireContactButtons();
-  initManualTestimonialSlider();
-
-  // Expose small helper for pages to ensure whatsapp is present
-  window.ensureWhatsAppFab = ensureWhatsAppFab;
+/* ======================
+   Mobile menu toggle (robust)
+   ====================== */
+function initMobileMenu() {
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (!menuBtn || !mobileMenu) return;
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', (!expanded).toString());
+  });
 }
 
-document.addEventListener('DOMContentLoaded', initSiteCore);
+/* ======================
+   WhatsApp FAB fallback injection (ensures presence on every page)
+   ====================== */
+function ensureWhatsAppFab() {
+  const existing = document.getElementById('whatsapp-chat-button') || document.querySelector('.whatsapp-chat-button');
+  if (existing) return; // already present
+  const fab = createEl('a', {
+    id: 'whatsapp-chat-button',
+    class: 'whatsapp-chat-button fixed bottom-6 right-6 z-50',
+    href: 'https://wa.me/919032249494?text=Hi%20St.%20Vincent%27s%20Preschool%20I%20would%20like%20to%20know%20more',
+    target: '_blank',
+    title: 'Chat on WhatsApp'
+  }, [
+    createEl('div', { class: 'w-14 h-14 rounded-full bg-green-500 flex items-center justify-center text-white shadow-lg' }, [
+      createEl('i', { class: 'fab fa-whatsapp', html: '' })
+    ])
+  ]);
+  document.body.appendChild(fab);
+}
 
-/* ========= NOTES =========
- - Form structure and field names were taken from your uploaded html (live-output (11).html). 7
- - EmailJS config (SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY) copied from the uploaded file. Make sure these stay correct in your deployment. 8
- - Testimonials used are the five manual top-5 reviews you provided in the uploaded file. 9
- - This file intentionally avoids attempting live Google API calls.
- - If you want the Google badge image to be an actual PNG, place `images/google-badge.png` and update the badge innerHTML to use an <img> tag.
-*/
+/* ======================
+   Helpers: throttle, escapeHtml
+   ====================== */
+function throttle(fn, wait) {
+  let t = null, last = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (!last || now - last >= wait) {
+      fn.apply(this, args);
+      last = now;
+    } else {
+      clearTimeout(t);
+      t = setTimeout(() => fn.apply(this, args), wait - (now - last));
+    }
+  };
+}
+
+function escapeHtml(str = '') {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+/* ======================
+   Boot - init everything
+   ====================== */
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    initMobileMenu();
+    ensureWhatsAppFab();
+    renderTestimonialsWidget();  // manual testimonials (no Google live fetch)
+    enhanceMediaFrames();        // wrap gallery images / video posters with frames & lightbox
+
+    // hook any elements that should open the contact modal
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest && e.target.closest('.open-contact-modal');
+      if (!el) return;
+      const program = el.dataset.program || '';
+      openUnifiedModal({ parentName: '', phone: '', childAge: '', program, message: '' });
+    });
+
+    // If you still have existing modal triggers in your HTML, we keep compatibility:
+    $qa('[data-open-contact]').forEach(btn => {
+      btn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        openUnifiedModal({});
+      });
+    });
+
+    console.info('site-core.js initialized: contact modal, testimonials, media frames, menu, whatsapp.');
+  } catch (err) {
+    console.error('site-core init error', err);
+  }
+});
