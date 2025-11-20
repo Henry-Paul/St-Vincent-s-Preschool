@@ -27,7 +27,7 @@
     .sv-modal-enter{opacity:0;transform:translateY(12px)}
     .sv-modal-enter.sv-modal-show{opacity:1;transform:none;transition:all .28s ease}
     a:focus, button:focus, input:focus { outline: 3px solid rgba(139,43,88,0.18); outline-offset: 3px; }
-    .testimonial-slider-wrapper { position: relative; }
+    .-slider-wrapper { position: relative; }
     .testimonial-controls { position: absolute; right: 1rem; top: -2.2rem; display:flex; gap:.5rem; align-items:center; }
     .badge-google { background: linear-gradient(90deg,#fff8f9,#fff); border-radius:10px; padding:.25rem .5rem; display:inline-flex; gap:.4rem; align-items:center; font-weight:600; color:#1f2937; box-shadow:0 6px 18px rgba(0,0,0,0.06); font-size:.85rem; position:absolute; left:16px; bottom:12px; }
     .testimonial-card { position: relative; padding-bottom: 48px; }
@@ -283,29 +283,33 @@
       </div>
     </section>
 
-    <section class="py-12">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h2 class="text-3xl font-bold">What Parents Say</h2>
-            <p class="text-gray-600 mt-2">Top 5-star feedback, curated and polished.</p>
-          </div>
-
-          <div class="testimonial-controls" aria-hidden="false">
-            <button id="test-prev" class="slider-btn" aria-label="Previous testimonial">‹</button>
-            <button id="test-next" class="slider-btn" aria-label="Next testimonial">›</button>
-          </div>
-        </div>
-
-        <div class="testimonial-slider-wrapper overflow-hidden">
-          <div id="testimonial-slider" class="flex gap-6 transition-transform duration-500" style="will-change:transform;">
-            <!-- JS populates testimonial cards -->
-          </div>
-
-          <div class="flex gap-2 justify-center mt-4" id="test-dots" aria-hidden="false"></div>
-        </div>
+    <!-- START: Upgraded Testimonial Widget (T1 - 3 cards desktop) -->
+<section id="testimonials-widget" class="testimonials-widget container" aria-label="Parent testimonials">
+  <div class="tw-card">
+    <div class="tw-head" style="display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <h3 class="tw-title">What Our Parents Say</h3>
+        <p class="tw-sub">Real reviews from parents — top-rated feedback from Google & our families.</p>
       </div>
-    </section>
+
+      <!-- If you already have a Google badge/link, move it inside tw-badge-wrap to avoid duplicates -->
+      <div class="tw-badge-wrap">
+        <!-- Optional pre-existing badge (leave empty if not needed) -->
+        <!-- <a class="google-badge" href="..." target="_blank" rel="noopener noreferrer">Google</a> -->
+      </div>
+    </div>
+
+    <div class="tw-controls" aria-hidden="true">
+      <button id="tw-prev" class="tw-nav" aria-label="Previous testimonial">◀</button>
+      <button id="tw-next" class="tw-nav" aria-label="Next testimonial">▶</button>
+    </div>
+
+    <div class="tw-track-wrap" role="region" aria-live="polite">
+      <div class="tw-track" id="tw-track" ></div>
+    </div>
+  </div>
+</section>
+<!-- END: Upgraded Testimonial Widget -->
 
     <section id="resources" class="py-12">
       <div class="max-w-6xl mx-auto px-4">
