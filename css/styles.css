@@ -318,3 +318,54 @@ header a:hover {
     min-height: 200px;
   }
 }
+
+
+
+
+
+/* ---------- Upgraded Testimonial Widget (T1) ---------- */
+.testimonials-widget { margin: 2.25rem 0; }
+.tw-card { background: transparent; padding: 0.6rem 0; }
+.tw-head { margin-bottom: 12px; }
+.tw-title { margin: 0; font-size: 1.25rem; color: #0f172a; font-weight: 700; }
+.tw-sub { margin: 2px 0 0; color: #6b7280; font-size: .95rem; }
+.tw-badge-wrap { display:flex; align-items:center; gap:.5rem; }
+
+/* Controls */
+.tw-controls { display:flex; justify-content:flex-end; gap:.5rem; margin-bottom:8px; }
+.tw-nav { background:#ffffff; border:1px solid rgba(15,23,42,0.06); padding:.45rem .6rem; border-radius:8px; cursor:pointer; font-weight:700; }
+
+/* Track & slides */
+.tw-track-wrap { overflow:hidden; }
+.tw-track { display:flex; gap:12px; transition: transform .45s cubic-bezier(.2,.9,.2,1); will-change: transform; padding-bottom:6px; }
+
+/* Single card */
+.tw-slide { min-width:280px; flex:0 0 280px; box-sizing:border-box; }
+.tw-slide .card { background:#fff; border-radius:12px; padding:16px; box-shadow: 0 10px 30px rgba(15,23,42,0.06); height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+.tw-quote { color:#111827; line-height:1.5; font-size:0.98rem; margin:0 0 12px; white-space:pre-wrap; }
+.tw-author { margin-top:8px; font-weight:700; color:#0f172a; }
+.tw-stars { color:#f59e0b; margin-bottom:8px; }
+
+/* CTA on card */
+.tw-card-cta { margin-top:12px; align-self:flex-start; background: #8b2b58; color:#fff; padding:8px 12px; border-radius:8px; border:0; cursor:pointer; font-weight:700; }
+
+/* Responsive columns:
+   Desktop (>=992px): show 3
+   Tablet (>=768px): show 2
+   Mobile: 1
+*/
+@media (min-width:992px) {
+  .tw-slide { min-width: calc((100% - 24px) / 3); flex:0 0 calc((100% - 24px) / 3); }
+}
+@media (min-width:768px) and (max-width:991px) {
+  .tw-slide { min-width: calc((100% - 12px) / 2); flex:0 0 calc((100% - 12px) / 2); }
+}
+@media (max-width:767px) {
+  .tw-slide { min-width: 100%; flex:0 0 100%; }
+}
+
+/* Accessibility focus */
+.tw-nav:focus, .tw-card-cta:focus { outline: 3px solid rgba(139,43,88,0.18); outline-offset:2px; }
+
+/* Hide duplicates of google-badge if inadvertently present elsewhere - we won't create one */
+.google-badge.duplicate-hidden { display: none !important; }
