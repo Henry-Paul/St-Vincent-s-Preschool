@@ -282,35 +282,9 @@
         </div>
       </div>
     </section>
-    <!-- Testimonials placeholder (paste into index.html where you want them) -->
-<section id="testimonials-widget" class="testimonials-widget container" aria-label="Parent testimonials"></section>
-    <!-- START: Upgraded Testimonial Widget (T1 - 3 cards desktop) -->
-<section id="testimonials-widget" class="testimonials-widget container" aria-label="Parent testimonials">
-  <div class="tw-card">
-    <div class="tw-head" style="display:flex;justify-content:space-between;align-items:center;">
-      <div>
-        <h3 class="tw-title">What Our Parents Say</h3>
-        <p class="tw-sub">Real reviews from parents — top-rated feedback from Google & our families.</p>
-      </div>
 
-      <!-- If you already have a Google badge/link, move it inside tw-badge-wrap to avoid duplicates -->
-      <div class="tw-badge-wrap">
-        <!-- Optional pre-existing badge (leave empty if not needed) -->
-        <!-- <a class="google-badge" href="..." target="_blank" rel="noopener noreferrer">Google</a> -->
-      </div>
-    </div>
-
-    <div class="tw-controls" aria-hidden="true">
-      <button id="tw-prev" class="tw-nav" aria-label="Previous testimonial">◀</button>
-      <button id="tw-next" class="tw-nav" aria-label="Next testimonial">▶</button>
-    </div>
-
-    <div class="tw-track-wrap" role="region" aria-live="polite">
-      <div class="tw-track" id="tw-track" ></div>
-    </div>
-  </div>
-</section>
-<!-- END: Upgraded Testimonial Widget -->
+    <!-- KEEP THIS SINGLE placeholder only (do NOT duplicate) -->
+    <section id="testimonials-widget" class="testimonials-widget container" aria-label="Parent testimonials"></section>
 
     <section id="resources" class="py-12">
       <div class="max-w-6xl mx-auto px-4">
@@ -503,5 +477,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="js/site-core.js"></script>
+  <!-- Testimonials widget script (make sure this file exists at js/testimonials-widget.js) -->
+  <script src="js/testimonials-widget.js"></script>
 </body>
 </html>
