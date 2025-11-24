@@ -4,7 +4,6 @@
 const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_up2vw5t',
   TEMPLATE_ID: 'template_s7ly8in',
-  TEMPLATE_ID: 'template_24c5ckh',
   PUBLIC_KEY: '_XSR5F_xlm5cYAcra'
 };
 if (window.emailjs && EMAILJS_CONFIG.PUBLIC_KEY) {
