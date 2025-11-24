@@ -284,48 +284,25 @@
     </section>
 
     <!-- KEEP THIS SINGLE placeholder only (do NOT duplicate) -->
-    <section id="testimonials-widget" class="testimonials-widget container" aria-label="Parent testimonials"></section>
-
-    <section id="resources" class="py-12">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-6">
-          <h2 class="text-3xl font-bold">Resources for Parents</h2>
-          <p class="text-gray-600 mt-2">Expert insights to help your child thrive in their early years.</p>
+    <section id="testimonials-widget" class="testimonials-widget container">
+    <div class="tw-card">
+        <div class="tw-head">
+            <div>
+                <h3 class="tw-title">What Our Parents Say</h3>
+                <p class="tw-sub">Top ⭐⭐⭐⭐⭐ reviews from Google</p>
+            </div>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
-          <article class="bg-white p-6 rounded-xl shadow-lg resource-card">
-            <img src="images/trust/early-learning.png" alt="Early learning banner">
-            <h3 class="text-xl font-semibold mt-4">The Science of Early Learning</h3>
-            <p class="mt-3 text-gray-600">Discover how preschool shapes your child's brain development and sets the foundation for lifelong learning.</p>
-            <div class="mt-4 flex gap-3">
-              <button class="btn-primary" data-resource="early-learning">Read More</button>
-              <button class="btn-primary-outline open-contact-modal" data-program="Early Learning">Enquire</button>
-            </div>
-          </article>
-
-          <article class="bg-white p-6 rounded-xl shadow-lg resource-card">
-            <img src="images/trust/social-skills.png" alt="Social skills banner">
-            <h3 class="text-xl font-semibold mt-4">Social Skills Development</h3>
-            <p class="mt-3 text-gray-600">Learn how preschool helps children develop crucial social skills like sharing, empathy, and cooperation.</p>
-            <div class="mt-4 flex gap-3">
-              <button class="btn-primary" data-resource="social-skills">Read More</button>
-              <button class="btn-primary-outline open-contact-modal" data-program="Social Skills">Enquire</button>
-            </div>
-          </article>
-
-          <article class="bg-white p-6 rounded-xl shadow-lg resource-card">
-            <img src="images/trust/primary-school.png" alt="Preparing for primary school">
-            <h3 class="text-xl font-semibold mt-4">Preparing for Primary School</h3>
-            <p class="mt-3 text-gray-600">How our curriculum ensures a smooth transition to formal schooling with confidence and enthusiasm.</p>
-            <div class="mt-4 flex gap-3">
-              <button class="btn-primary" data-resource="primary-school">Read More</button>
-              <button class="btn-primary-outline open-contact-modal" data-program="Preparing for Primary">Enquire</button>
-            </div>
-          </article>
+        <div class="tw-controls">
+            <button id="tw-prev" class="tw-nav">◀</button>
+            <button id="tw-next" class="tw-nav">▶</button>
         </div>
-      </div>
-    </section>
+
+        <div class="tw-track-wrap">
+            <div class="tw-track" id="tw-track"></div>
+        </div>
+    </div>
+</section>
 
     <section class="py-10">
       <div class="max-w-6xl mx-auto bg-[#fff] rounded-xl p-8 shadow-lg text-center">
