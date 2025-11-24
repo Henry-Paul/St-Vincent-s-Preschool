@@ -13,7 +13,49 @@ if (window.emailjs && EMAILJS_CONFIG.PUBLIC_KEY) {
 /* helpers */
 const $ = (s, ctx=document) => ctx.querySelector(s);
 const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
-function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ---------- PROGRAM OPTIONS (shared across forms) ---------- */
+const PROGRAM_OPTIONS = [
+  { val: '', label: 'Select a program' },
+  { val: 'Playgroup (Ages 1.5-2.5)', label: 'Playgroup (Ages 1.5-2.5)' },
+  { val: 'Nursery (Ages 2.5-3.5)', label: 'Nursery (Ages 2.5-3.5)' },
+  { val: 'Pre-Primary 1 (LKG) (Ages 3.5-4.5)', label: 'Pre-Primary 1 (LKG) (Ages 3.5-4.5)' },
+  { val: 'Pre-Primary 2 (UKG) (Ages 4.5-6)', label: 'Pre-Primary 2 (UKG) (Ages 4.5-6)' },
+  { val: 'Day Care (Full Day)', label: 'Day Care (Full Day)' }
+];
+
+function buildProgramOptionsHTML(selected = '') {
+  return PROGRAM_OPTIONS.map(o => {
+    const sel = (String(o.val) === String(selected)) ? ' selected' : '';
+    return `<option value="${escapeHtml(o.val)}"${sel}>${escapeHtml(o.label)}</option>`;
+  }).join('');
+}
+
+function createProgramSelectElement() {
+  // returns a DOM wrapper for insertion into forms
+  const wrapper = document.createElement('div');
+  wrapper.className = 'form-group program-select-wrapper';
+  wrapper.style.marginTop = '8px';
+
+  const label = document.createElement('label');
+  label.htmlFor = 'program';
+  label.textContent = 'Program Interested In';
+  label.style.fontWeight = '600';
+  label.style.fontSize = '13px';
+  wrapper.appendChild(label);
+
+  const select = document.createElement('select');
+  select.id = 'program';
+  select.name = 'program';
+  select.required = true;
+  select.className = 'w-full p-3 border rounded';
+  select.style.marginTop = '6px';
+  select.innerHTML = buildProgramOptionsHTML('');
+  wrapper.appendChild(select);
+
+  return wrapper;
+}
 
 /* ---------- Burger menu (universal) ---------- */
 function initUniversalBurger(){
@@ -203,13 +245,14 @@ function wireTestHoverPause(){
   });
 }
 
-/* ---------- Unified enquiry modal (unchanged fields) ---------- */
+/* ---------- Unified enquiry modal (visible program select) ---------- */
 function openUnifiedModal({ prefillProgram = '' } = {}){
   const existing = document.getElementById('sv-contact-modal'); if(existing) existing.remove();
   lockBodyScroll(true);
   const overlay = document.createElement('div');
   overlay.id = 'sv-contact-modal';
   overlay.className = 'fixed inset-0 z-90 flex items-center justify-center bg-black/60 p-4';
+  // Use buildProgramOptionsHTML to populate the select options
   overlay.innerHTML = `
     <div class="bg-white rounded-xl p-6 w-full max-w-lg relative sv-modal-enter sv-modal-show" role="dialog" aria-modal="true">
       <button id="sv-close" class="absolute right-4 top-4 text-gray-600" aria-label="Close modal">✕</button>
@@ -220,7 +263,14 @@ function openUnifiedModal({ prefillProgram = '' } = {}){
         <div><input type="tel" id="phone_number" name="phone_number" placeholder="Phone Number" required class="w-full p-3 border rounded" /></div>
         <div><input type="text" id="child_age" name="child_age" placeholder="Child's Age (e.g., 2.5 years)" required class="w-full p-3 border rounded" /></div>
         <div><label class="text-sm">Preferred Visit Date</label><input type="date" id="preferred_date" name="preferred_date" required class="w-full p-3 border rounded" /></div>
-        <input type="hidden" id="program" name="program" value="${escapeHtml(prefillProgram || '')}" />
+
+        <div>
+          <label class="text-sm" for="program">Program Interested In</label>
+          <select id="program" name="program" required class="w-full p-3 border rounded" style="margin-top:6px;">
+            ${buildProgramOptionsHTML('')}
+          </select>
+        </div>
+
         <div class="flex gap-3">
           <button type="submit" class="btn-primary w-full">Send Request</button>
           <button type="button" id="sv-cancel" class="btn-primary-outline w-full">Cancel</button>
@@ -230,6 +280,22 @@ function openUnifiedModal({ prefillProgram = '' } = {}){
     </div>
   `;
   document.body.appendChild(overlay);
+
+  // prefill program if provided (set after element exists)
+  if(prefillProgram){
+    const sel = overlay.querySelector('#program');
+    if(sel){
+      // try to match exact value or label fuzzy
+      let matchedValue = '';
+      for(const o of PROGRAM_OPTIONS){
+        if(String(o.val).toLowerCase() === String(prefillProgram).toLowerCase() || String(o.label).toLowerCase().includes(String(prefillProgram).toLowerCase())){
+          matchedValue = o.val; break;
+        }
+      }
+      if(!matchedValue) matchedValue = prefillProgram;
+      sel.value = matchedValue;
+    }
+  }
 
   overlay.querySelector('#sv-close').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
   overlay.querySelector('#sv-cancel').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
@@ -245,7 +311,7 @@ function openUnifiedModal({ prefillProgram = '' } = {}){
       phone_number: form.phone_number.value,
       child_age: form.child_age.value,
       preferred_date: form.preferred_date.value,
-      program: form.program.value,
+      program: (form.program ? form.program.value : ''),
       timestamp: new Date().toLocaleString()
     };
     if(window.emailjs && EMAILJS_CONFIG.SERVICE_ID){
@@ -440,6 +506,24 @@ function lockBodyScroll(lock){
   }
 }
 
+/* ---------- Inject program select into other existing forms (idempotent) ---------- */
+function injectProgramSelectToExistingForms(){
+  // selectors for known contact forms in your repo
+  const selectors = ['#unified-contact-form', 'form#contact-form', 'form.contact-form', 'form#schedule-visit-form', 'form#some-other-contact'];
+  selectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(form => {
+      if(!form) return;
+      // skip if already has a program field (select or input)
+      if(form.querySelector('select[name="program"], input[name="program"]')) return;
+      // find a good insertion point: before the last button or before textarea
+      const insertBefore = form.querySelector('button[type="submit"], input[type="submit"], textarea, .form-actions') || form.lastElementChild;
+      const wrapper = createProgramSelectElement();
+      if(insertBefore && insertBefore.parentNode) insertBefore.parentNode.insertBefore(wrapper, insertBefore);
+      else form.appendChild(wrapper);
+    });
+  });
+}
+
 /* ---------- init ---------- */
 document.addEventListener('DOMContentLoaded', ()=>{
   initUniversalBurger();
@@ -459,6 +543,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   wireGlobalCTAs();
   initFAQAccordion();
   initWhatsAppFab();
+
+  // ensure selects exist on page-level forms (in case contact.html or other pages have inline forms)
+  injectProgramSelectToExistingForms();
 
   // pause autoplay by default when user clicks inside slider wrapper (explicit stop)
   const wrap = document.querySelector('.testimonial-slider-wrapper');
