@@ -70,7 +70,7 @@
       .tw-slide { min-width: 100%; flex:0 0 100%; }
     }
 
-    /* modal for full review (kept, but Read more now toggles inline) */
+    /* modal for full review */
     .review-modal {
       position: fixed;
       inset: 0;
@@ -97,6 +97,75 @@
     .review-modal .meta .rating { color:#f59e0b; }
     .review-modal .close-btn { background:transparent;border:none;font-size:18px;cursor:pointer }
     /* end modal */
+
+    /* ---------- MEDIA FRAME STYLES (Soft Rounded) ---------- */
+    .media-frame {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,0.06);
+      box-shadow: 0 12px 28px rgba(15,23,42,0.06);
+      overflow: hidden;
+    }
+
+    .media-frame .frame-inner {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #f3f4f6;
+      position: relative;
+    }
+
+    .media-frame img,
+    .media-frame video,
+    .media-frame iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: 0;
+      vertical-align: middle;
+    }
+
+    /* Gallery slider specific (small visual tweaks) */
+    .gallery-slider {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .gallery-slider .slide {
+      flex: 0 0 auto;
+      width: calc(33.333% - 8px);
+      min-width: 220px;
+    }
+    @media (max-width: 991px) {
+      .gallery-slider .slide { width: calc(50% - 8px); }
+    }
+    @media (max-width: 640px) {
+      .gallery-slider .slide { width: 100%; }
+    }
+
+    /* small play overlay for poster */
+    .video-poster {
+      position: relative;
+      cursor: pointer;
+    }
+    .video-play {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.5);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: #fff;
+      font-size: 22px;
+      box-shadow: 0 8px 24px rgba(2,6,23,0.28);
+    }
+
   </style>
 </head>
 <body>
@@ -165,109 +234,81 @@
       </header>
 
       <div class="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Program Card 1 -->
         <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-yellow-500">
           <div class="flex items-center space-x-4 mb-4">
             <i class="fas fa-baby text-3xl text-yellow-500 p-3 bg-yellow-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Playgroup</h3>
+            <h3 class="text-2xl font-bold text-gray-800">1. Playgroup</h3>
           </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Age: 1.5 – 3 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Social & Sensory Exploration. Gentle introduction to school.</p>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 1.5 – 2.5 Years</p>
+          <p class="text-base text-gray-700 mb-4">Core Objective: Social & Sensory Exploration. A gentle introduction to school life.</p>
           <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Separation comfort & secure attachments</li>
-            <li>Sensory Play (sand, water, textures)</li>
-            <li>Gross Motor Skills development</li>
-            <li>Fine Motor Development activities</li>
-            <li>Music & Movement</li>
-            <li>Early Language acquisition</li>
-            <li>Group Play and social interaction</li>
-            <li>Basic routines & independent play</li>
+            <li>Focus on separation comfort and building secure attachments.</li>
+            <li>Activities include sensory play (sand, water, textures).</li>
+            <li>Goal: Mastering basic routines and independent play.</li>
           </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="Playgroup">Enquire</button>
-          </div>
         </div>
 
+        <!-- Program Card 2 -->
         <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-green-500">
           <div class="flex items-center space-x-4 mb-4">
             <i class="fas fa-pencil-ruler text-3xl text-green-500 p-3 bg-green-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Nursery</h3>
+            <h3 class="text-2xl font-bold text-gray-800">2. Nursery</h3>
           </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Age: 3 – 4 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Building Blocks for a Bright Future.</p>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 2.5 – 3.5 Years</p>
+          <p class="text-base text-gray-700 mb-4">Core Objective: Foundation Literacy & Numeracy. Learning through fun, thematic activities.</p>
           <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Pre-reading & phonics awareness</li>
-            <li>Phonics (In-depth focus)</li>
-            <li>Pre-writing Skills</li>
-            <li>Number recognition & counting</li>
-            <li>Number Recognition (In-depth focus)</li>
-            <li>Physical Development</li>
-            <li>Colors & Shapes recognition</li>
-            <li>Storytelling and comprehension</li>
-            <li>Confidence in group activities</li>
+            <li>Introduces basic pre-reading skills (phonics awareness).</li>
+            <li>Activities for number recognition (1-10) and basic counting.</li>
+            <li>Goal: Confident verbal communication and group engagement.</li>
           </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="Nursery">Enquire</button>
-          </div>
         </div>
 
+        <!-- Program Card 3 -->
         <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-blue-500">
           <div class="flex items-center space-x-4 mb-4">
             <i class="fas fa-book-open text-3xl text-blue-500 p-3 bg-blue-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 1 (LKG)</h3>
+            <h3 class="text-2xl font-bold text-gray-800">3. Pre-Primary 1 (PP1)</h3>
           </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Age: 4 – 5 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Our program focuses on developing foundational academic skills and preparing children for formal schooling.</p>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 3.5 – 4.5 Years</p>
+          <p class="text-base text-gray-700 mb-4">Core Objective: Concept Application & Pre-Writing. Developing foundational academic skills.</p>
           <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Reading & Writing</li>
-            <li>Basic Numeracy</li>
-            <li>Physical Development</li>
-            <li>EVS Concepts (Environmental Science)</li>
-            <li>Logical Reasoning</li>
-            <li>Creative Expression</li>
+            <li>Strengthens phonemic awareness and sound recognition.</li>
+            <li>Focus on pre-writing strokes and early letter formation.</li>
+            <li>Goal: Understanding simple math and mastering early writing skills.</li>
           </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="PP1">Enquire</button>
-          </div>
         </div>
 
+        <!-- Program Card 4 -->
         <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-red-500">
           <div class="flex items-center space-x-4 mb-4">
             <i class="fas fa-graduation-cap text-3xl text-red-500 p-3 bg-red-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 2 (UKG)</h3>
+            <h3 class="text-2xl font-bold text-gray-800">4. Pre-Primary 2 (PP2)</h3>
           </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2"> Age: 5 – 6 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Reading fluency, arithmetic basics & school readiness.</p>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 4.5 – 6 Years</p>
+          <p class="text-base text-gray-700 mb-4">Core Objective: Primary School Readiness. Comprehensive skill development for Grade 1.</p>
           <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Advanced Reading & Writing</li>
-            <li>Mathematical Concepts</li>
-            <li>Physical Development</li>
-            <li>Science Exploration</li>
-            <li>Problem Solving</li>
-            <li>Public Speaking</li>
+            <li>Focus on fluency in reading and basic arithmetic (addition/subtraction).</li>
+            <li>Emphasis on independent work habits and social maturity.</li>
+            <li>Goal: Smooth and confident transition into primary school.</li>
           </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="PP2">Enquire</button>
-          </div>
         </div>
 
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 md:col-span-2 lg:col-span-1 mx-auto md:w-full lg:w-full max-w-lg">
+        <!-- Program Card 5 -->
+        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 lg:col-span-1 md:col-span-2 mx-auto md:w-full lg:w-full max-w-lg md:max-w-3xl">
           <div class="flex items-center space-x-4 mb-4">
             <i class="fas fa-clock text-3xl text-purple-500 p-3 bg-purple-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Day Care</h3>
+            <h3 class="text-2xl font-bold text-gray-800">5. Day Care</h3>
           </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2"> Age: 1.5 Years Onwards</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Safe, structured extended care for working parents.</p>
+          <p class="text-sm font-semibold text-gray-500 mb-2">Target Age: 1.5 – 6 Years</p>
+          <p class="text-base text-gray-700 mb-4">Core Objective: Safe, Structured Extended Care for children of working parents.</p>
           <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Homework Assistance</li>
-            <li>Hobby Classes</li>
-            <li>Structured Play</li>
-            <li>Nap Time</li>
-            <li>Indoor Activities</li>
+            <li>Provides a seamless extension of the school day.</li>
+            <li>Includes supervised rest periods and nutritious meals/snacks.</li>
+            <li>Goal: Continuity of care in a productive, secure environment.</li>
           </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="Day Care">Enquire</button>
-          </div>
         </div>
+
       </div>
 
       <div class="flex justify-center mt-12">
@@ -275,76 +316,72 @@
       </div>
     </section>
 
-    <section class="py-8">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-semibold">Gallery & Tour</h2>
-        <a href="gallery.html" class="text-sm text-gray-600 hover:underline">See all</a>
-      </div>
+    <!-- GALLERY + VIDEO (added framed layout) -->
+    <section id="gallery" class="pt-16">
+      <header class="text-center mb-6">
+        <h2 class="text-3xl font-bold">Our Gallery & Video</h2>
+        <p class="mt-2 text-gray-600 max-w-3xl mx-auto">Take a peek inside our classrooms, activities, and campus.</p>
+      </header>
 
-      <div class="mt-4 grid md:grid-cols-2 gap-6">
+      <div class="max-w-7xl mx-auto grid gap-8 grid-cols-1 lg:grid-cols-2 items-start">
+
+        <!-- Image slider framed -->
         <div>
-          <video controls poster="images/preschool-7.jpeg" class="w-full h-64 rounded-lg object-cover shadow">
-            <source src="videos/videos-poster.mp4" type="video/mp4">
-            Your browser does not support video.
-          </video>
+          <div class="media-frame">
+            <div class="frame-inner p-0" style="padding:0;">
+              <!-- Simple responsive slider (static, no external plugin) -->
+              <div class="gallery-slider" aria-hidden="false" role="list">
+                <div class="slide">
+                  <div class="media-frame" style="border-radius:0;">
+                    <div class="frame-inner">
+                      <img src="images/gallery/preschool-1.jpeg" alt="Preschool 1">
+                    </div>
+                  </div>
+                </div>
+                <div class="slide">
+                  <div class="media-frame" style="border-radius:0;">
+                    <div class="frame-inner">
+                      <img src="images/gallery/preschool-2.jpeg" alt="Preschool 2">
+                    </div>
+                  </div>
+                </div>
+                <div class="slide">
+                  <div class="media-frame" style="border-radius:0;">
+                    <div class="frame-inner">
+                      <img src="images/gallery/preschool-3.jpeg" alt="Preschool 3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- small caption / controls area -->
+          <div class="mt-3 text-sm text-gray-600">Swipe on mobile • Click images to enlarge</div>
         </div>
 
-        <div class="gallery-frame overflow-hidden rounded-lg">
-          <div id="image-slider" class="image-slider flex transition-transform duration-500">
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-1.jpeg" alt="gallery 1" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-2.jpeg" alt="gallery 2" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-3.jpeg" alt="gallery 3" class="w-full h-64 object-cover"></div>
+        <!-- Video framed -->
+        <div>
+          <div class="media-frame">
+            <div class="frame-inner video-poster" id="video-poster">
+              <!-- Use video tag with poster for direct playback on supported devices -->
+              <video id="promo-video" controls preload="none" poster="images/gallery/video-poster.jpg" style="width:100%;height:100%;display:block;">
+                <!-- Put your video file or hosted video source here -->
+                <source src="videos/promo.mp4" type="video/mp4">
+                <!-- fallback -->
+                <img src="images/gallery/video-poster.jpg" alt="Video preview" style="width:100%;height:100%;object-fit:cover;">
+              </video>
+
+              <!-- Play overlay (in case you want a custom opener) -->
+              <div class="video-play" aria-hidden="true" style="display:none;">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
           </div>
 
-          <div class="flex justify-between items-center p-2">
-            <button id="slider-prev" class="slider-btn">‹</button>
-            <div class="slider-dots flex gap-2">
-              <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
-              <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
-              <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
-            </div>
-            <button id="slider-next" class="slider-btn">›</button>
-          </div>
+          <div class="mt-3 text-sm text-gray-600">Our classrooms, activities and play areas — watch the quick tour.</div>
         </div>
-      </div>
-    </section>
 
-    <section class="py-8">
-      <div class="max-w-6xl mx-auto bg-white rounded-xl p-6 shadow">
-        <h3 class="text-2xl font-bold">Why Parents Trust Us</h3>
-        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/safe-secure.png" alt="Safe and Secure">
-            <div>
-              <h4 class="font-semibold">Safe & Secure</h4>
-              <p class="text-gray-700">CCTV, child-proofed campus and strict hygiene protocols ensure a safe environment.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/play-based.png" alt="Play-Based Learning">
-            <div>
-              <h4 class="font-semibold">Play-Based Learning</h4>
-              <p class="text-gray-700">Our curriculum fosters creativity and critical thinking through hands-on activities.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/caring-teacher.png" alt="Caring Teachers">
-            <div>
-              <h4 class="font-semibold">Caring Teachers</h4>
-              <p class="text-gray-700">Passionate educators dedicated to each child's growth and happiness.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/personalized-care.png" alt="Personalized Care">
-            <div>
-              <h4 class="font-semibold">Personalized Care</h4>
-              <p class="text-gray-700">Low student-teacher ratio ensures every child receives the attention they need.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -353,7 +390,7 @@
       <!-- content injected by Maps Places JS -->
     </section>
 
-    <!-- Review modal (kept, but Read more toggles inline) -->
+    <!-- Review modal (for Read more) -->
     <div id="review-modal" class="review-modal" role="dialog" aria-modal="true" aria-hidden="true">
       <div class="panel" role="document">
         <div class="meta">
@@ -373,102 +410,85 @@
       </div>
     </div>
 
-    <section class="py-10">
-      <div class="max-w-6xl mx-auto bg-[#fff] rounded-xl p-8 shadow-lg text-center">
-        <h3 class="text-2xl font-bold">Ready to Give Your Child a Premium Preschool Experience?</h3>
-        <p class="text-gray-600 mt-2">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
-        <div class="mt-6 flex justify-center gap-4">
-          <button class="btn-primary open-contact-modal">Schedule a Tour Today</button>
-          <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
+    <!-- remainder of page (resources, CTA, FAQ, map, footer) unchanged -->
+    <section id="resources" class="pt-16">
+      <div class="max-w-7xl mx-auto">
+        <h3 class="text-2xl font-semibold mb-4">Resources for Parents</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="resource-card bg-white p-4 rounded-lg shadow">
+            <img src="images/resources/early-learning.jpg" alt="Early learning" class="w-full h-36 object-cover rounded-md mb-3">
+            <h4 class="font-bold">The Science of Early Learning</h4>
+            <p class="text-sm text-gray-600 mt-2">Discover how preschool shapes your child's brain development and sets the foundation for lifelong learning.</p>
+            <div class="mt-3">
+              <button class="btn-primary-outline open-blog" data-resource="early-learning">Read More</button>
+            </div>
+          </div>
+
+          <div class="resource-card bg-white p-4 rounded-lg shadow">
+            <img src="images/resources/social-skills.jpg" alt="Social skills" class="w-full h-36 object-cover rounded-md mb-3">
+            <h4 class="font-bold">Social Skills Development</h4>
+            <p class="text-sm text-gray-600 mt-2">Learn how preschool helps children develop crucial social skills like sharing, empathy, and cooperation.</p>
+            <div class="mt-3">
+              <button class="btn-primary-outline open-blog" data-resource="social-skills">Read More</button>
+            </div>
+          </div>
+
+          <div class="resource-card bg-white p-4 rounded-lg shadow">
+            <img src="images/resources/primary-school.jpg" alt="Primary school" class="w-full h-36 object-cover rounded-md mb-3">
+            <h4 class="font-bold">Preparing for Primary School</h4>
+            <p class="text-sm text-gray-600 mt-2">How our curriculum ensures a smooth transition to formal schooling with confidence and enthusiasm.</p>
+            <div class="mt-3">
+              <button class="btn-primary-outline open-blog" data-resource="primary-school">Read More</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="py-12">
-      <div class="max-w-6xl mx-auto px-4 bg-white rounded-xl p-6 shadow">
-        <h3 class="text-2xl font-bold text-center">Frequently Asked Questions</h3>
-        <p class="text-center text-gray-600 mt-2">Answers to common questions asked by parents on Google.</p>
-
-        <div class="mt-6 grid md:grid-cols-2 gap-4">
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
+    <!-- CTA & FAQ condensed -->
+    <section id="cta-faq" class="pt-12">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-8 rounded-lg shadow">
+          <h3 class="text-2xl font-semibold mb-3">Ready to Give Your Child a Premium Preschool Experience?</h3>
+          <p class="text-gray-700">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
+          <div class="mt-6">
+            <button class="btn-primary">Schedule a Tour Today</button>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow">
+          <h3 class="text-2xl font-semibold mb-3">Frequently Asked Questions</h3>
+          <div class="space-y-3">
+            <div class="faq-q p-3 rounded-lg bg-gray-50">
               <div>What is the ideal age to start preschool?</div>
               <div class="sign">+</div>
             </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Children typically start between 1.5–3 years depending on readiness. Our Playgroup caters to 1.5+ with gentle settling and sensory play.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
+            <div class="faq-q p-3 rounded-lg bg-gray-50">
               <div>How can I prepare my toddler for preschool?</div>
               <div class="sign">+</div>
             </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Start short separation practices, encourage simple routines (handwashing, snack time), read books daily, and practice simple self-help tasks.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
+            <div class="faq-q p-3 rounded-lg bg-gray-50">
               <div>What should I look for in a quality preschool?</div>
               <div class="sign">+</div>
             </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Safe environment, trained teachers, play-based curriculum, low student-teacher ratio, hygiene & clear communication with parents.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
           </div>
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
-              <div>How does preschool help with separation anxiety?</div>
-              <div class="sign">+</div>
-            </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Gradual settling, consistent routines, familiar staff, and parent partnership help children feel secure and reduce separation anxiety.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
-              <div>Do you provide meals and manage allergies?</div>
-              <div class="sign">+</div>
-            </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Yes — nutritious meals and snack plans are provided. Please share allergy details at enrolment; strict protocols are followed to prevent cross contamination.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
-              <div>How do you handle emergencies or sickness?</div>
-              <div class="sign">+</div>
-            </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>First-aid trained staff, parent notification protocols, and quick access to local medical support. Serious cases are immediately escalated.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
         </div>
-
       </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-4 pb-8">
-      <div class="bg-white p-6 rounded-xl shadow-lg">
-        <h3 class="text-xl font-bold">Visit Us Now</h3>
-        <p class="text-gray-600 mt-2">Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout, Chandanagar, Hyderabad</p>
-        <div class="mt-4 w-full h-80 rounded-lg overflow-hidden">
-          <iframe src="https://www.google.com/maps?q=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad&output=embed" style="border:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <!-- Visit & Map -->
+    <section id="visit" class="pt-12">
+      <div class="max-w-7xl mx-auto bg-white p-8 rounded-lg shadow">
+        <h3 class="text-2xl font-semibold mb-3">Visit Our Campus</h3>
+        <p class="text-gray-700 mb-4">Located in the heart of Chandanagar with easy access from all major landmarks.</p>
+        <!-- Embedded Google Maps iframe -->
+        <div class="media-frame">
+          <div class="frame-inner" style="aspect-ratio: 16/7;">
+            <iframe src="https://www.google.com/maps?q=St+Vincent's+Preschool+Chandanagar&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
         </div>
-        <div class="mt-4 flex gap-3"><a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=Street+1,+Plot+454,+Aparna+Hillpark+Road,+Chandanagar+Hyderabad" ="_blank" rel="noopener">Get Directions</a><a class="btn-primary-outline" href="tel:+919032249494">Call Us</a></div>
+        <div class="mt-4">
+          <a href="https://maps.app.goo.gl/KsS1VMHppwR6ZxU37" target="_blank" class="btn-primary-outline">Get Directions</a>
+        </div>
       </div>
     </section>
 
@@ -589,89 +609,25 @@
         }, 60);
       }
 
-      // NEW: ensure uniform heights, detect overflow, show readmore toggle, and inline expand/collapse.
       function ensureTruncationAndReadMore() {
         const slides = Array.from(track.querySelectorAll('.tw-slide'));
-        if (!slides.length) return;
-
-        // 1) Determine the tallest card height (after truncation applied)
-        // Apply truncation class already present; measure heights
-        let maxCardHeight = 0;
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          card.style.minHeight = ''; // reset
-        });
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          // force browser to layout
-          const h = card.getBoundingClientRect().height;
-          if (h > maxCardHeight) maxCardHeight = h;
-        });
-
-        // 2) Apply minHeight to all cards so slides visually match
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          card.style.minHeight = (maxCardHeight) + 'px';
-        });
-
-        // 3) Show Read more only for overflowing quotes and attach toggle behavior
         slides.forEach(slide => {
           const q = slide.querySelector('.tw-quote');
           const btn = slide.querySelector('.tw-readmore');
           if (!q || !btn) return;
-          // If content is taller than truncated height, enable Read more
-          const computedTruncHeight = parseFloat(getComputedStyle(q).lineHeight || 1.45) * 4.5;
-          const isOverflowing = q.scrollHeight > Math.ceil(computedTruncHeight) + 2;
+          // If content overflows the truncated height, show Read more
+          const isOverflowing = q.scrollHeight > q.clientHeight + 2;
           if (isOverflowing) {
             btn.classList.remove('tw-readmore-hidden');
-            btn.textContent = 'Read more';
-            // toggle inline expansion
-            btn.onclick = () => {
-              const expanded = !q.classList.contains('truncated') || q.dataset.expanded === 'true';
-              if (expanded) {
-                // collapse
-                q.classList.add('truncated');
-                q.dataset.expanded = 'false';
-                btn.textContent = 'Read more';
-                // restore uniform heights (recompute)
-                recomputeCardHeights();
-              } else {
-                // expand
-                q.classList.remove('truncated');
-                q.dataset.expanded = 'true';
-                btn.textContent = 'Read less';
-                // expand this card visually (set minHeight auto so content fits)
-                const card = slide.querySelector('.card');
-                card.style.minHeight = card.scrollHeight + 'px';
-              }
-            };
+            btn.onclick = () => openReviewModal(slide);
           } else {
             btn.classList.add('tw-readmore-hidden');
           }
         });
-      }
-
-      // recompute heights after collapse/expand
-      function recomputeCardHeights() {
-        const slides = Array.from(track.querySelectorAll('.tw-slide'));
-        let maxCardHeight = 0;
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          card.style.minHeight = ''; // reset to natural
-        });
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          const h = card.getBoundingClientRect().height;
-          if (h > maxCardHeight) maxCardHeight = h;
-        });
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          card.style.minHeight = (maxCardHeight) + 'px';
-        });
+        // ensure all cards visually balanced by setting min-height (already set via .testimonial-card)
       }
 
       function openReviewModal(slide) {
-        // not used by readmore now, but kept for compatibility
         const text = slide.querySelector('.tw-quote')?.textContent || '';
         const author = slide.querySelector('.tw-author')?.textContent || '';
         const stars = slide.querySelector('.tw-stars')?.innerHTML || '';
@@ -681,9 +637,23 @@
         const modal = document.getElementById('review-modal');
         modal.classList.add('show');
         modal.setAttribute('aria-hidden','false');
+        // wire enquire button in modal to existing open modal or scroll-to-form
+        document.getElementById('modal-enquire').onclick = () => {
+          const programVal = slide.querySelector('.open-contact-modal')?.dataset?.program || '';
+          if (typeof window.openUnifiedModal === 'function') {
+            window.openUnifiedModal({ program: programVal });
+          } else {
+            const form = document.querySelector('form#contact-form, form.contact-form');
+            if (form) {
+              const p = form.querySelector('select[name="program"], input[name="program"]');
+              if (p && programVal) p.value = programVal;
+              form.scrollIntoView({behavior:'smooth', block:'center'});
+            }
+          }
+        };
       }
 
-      // modal close handlers
+      // modal close
       document.getElementById('modal-close').onclick = closeModal;
       document.getElementById('modal-close-2').onclick = closeModal;
       function closeModal(){
@@ -797,6 +767,36 @@
 
   <!-- Load Maps JS asynchronously (Places library). The callback param will call initTestimonialsWidget once loaded. -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtmtPmYd3XN2LbsZaTGD2wjMwVbnyLo4&libraries=places&callback=initTestimonialsWidget"></script>
+
+  <!-- Optional: small script to make gallery images clickable to open in a new tab (no external library) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      // mobile-friendly gallery click: open full image in new tab
+      document.querySelectorAll('.gallery-slider .slide img').forEach(img=>{
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', ()=> window.open(img.src, '_blank'));
+      });
+
+      // ensure video poster overlay toggles if needed (we used native controls)
+      const poster = document.getElementById('video-poster');
+      const player = document.getElementById('promo-video');
+      if(poster && player){
+        // hide custom play overlay if using native controls
+        const overlay = poster.querySelector('.video-play');
+        if(overlay) overlay.style.display = 'none';
+      }
+    });
+
+    // mobile menu toggle
+    (function(){
+      const menuBtn = document.getElementById('menu-btn');
+      const mobile = document.getElementById('mobile-menu');
+      menuBtn && menuBtn.addEventListener('click', function(){
+        const showing = mobile.classList.toggle('hidden');
+        this.setAttribute('aria-expanded', !showing);
+      });
+    })();
+  </script>
 
 </body>
 </html>
