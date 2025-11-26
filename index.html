@@ -21,7 +21,7 @@
     .testimonial-card{min-height:220px}
     .faq-q{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
     .faq-q .sign{width:28px;height:28px;border-radius:6px;background:#fff;border:1px solid #eee;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(15,23,42,0.04)}
-    .resource-card img{height:140px;object-fit:cover;border-radius:8px}
+    .resource-card img{height:140px;object-fit:contain;border-radius:8px}
     .trust-visual{display:flex;gap:12px;align-items:center}
     .trust-visual img{width:64px;height:64px;object-fit:cover;border-radius:10px}
     .sv-modal-enter{opacity:0;transform:translateY(12px)}
@@ -113,17 +113,23 @@
       aspect-ratio: 16 / 9;
       background: #f3f4f6;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
+    /* Use 'contain' so the entire image or video is visible without cropping.
+       This preserves aspect ratio and avoids distortion on all devices. */
     .media-frame img,
     .media-frame video,
     .media-frame iframe {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       border: 0;
       vertical-align: middle;
+      background: #f3f4f6;
     }
 
     /* Gallery slider specific (small visual tweaks) */
@@ -165,7 +171,8 @@
       font-size: 22px;
       box-shadow: 0 8px 24px rgba(2,6,23,0.28);
     }
-
+    /* accessibility helper for visually-hidden */
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   </style>
 </head>
 <body>
@@ -215,14 +222,18 @@
         <p class="mt-4 text-lg text-gray-700 max-w-xl">A premium, nurturing, and joyful environment for early childhood education. With secure facilities (including CCTV monitoring) and a safe learning environment, our play-based curriculum and caring teachers help your child grow.</p>
         <div class="mt-6 flex gap-3 flex-wrap">
           <a href="programs.html" class="btn-primary">Programs</a>
+          <!-- data-program is intentionally left empty for Schedule Tour -->
           <button class="btn-primary-outline open-contact-modal" data-program="" aria-haspopup="dialog">Schedule a Tour</button>
           <a href="tel:+919032249494" class="btn-ghost">Call Us</a>
         </div>
       </div>
 
       <div class="mx-auto">
-        <div class="hero-frame max-w-[520px]">
-          <img src="images/hero-children.jpg" alt="Children smiling" class="w-full h-auto rounded-lg object-cover shadow-lg">
+        <!-- HERO framed to preserve full image aspect on all devices -->
+        <div class="media-frame max-w-[520px]">
+          <div class="frame-inner" style="aspect-ratio:4/3;">
+            <img src="images/hero-children.jpg" alt="Children smiling">
+          </div>
         </div>
       </div>
     </section>
@@ -247,6 +258,9 @@
             <li>Activities include sensory play (sand, water, textures).</li>
             <li>Goal: Mastering basic routines and independent play.</li>
           </ul>
+          <div class="mt-4">
+            <button class="open-contact-modal btn-primary-outline" data-program="Playgroup">Enquire</button>
+          </div>
         </div>
 
         <!-- Program Card 2 -->
@@ -262,6 +276,9 @@
             <li>Activities for number recognition (1-10) and basic counting.</li>
             <li>Goal: Confident verbal communication and group engagement.</li>
           </ul>
+          <div class="mt-4">
+            <button class="open-contact-modal btn-primary-outline" data-program="Nursery">Enquire</button>
+          </div>
         </div>
 
         <!-- Program Card 3 -->
@@ -277,6 +294,9 @@
             <li>Focus on pre-writing strokes and early letter formation.</li>
             <li>Goal: Understanding simple math and mastering early writing skills.</li>
           </ul>
+          <div class="mt-4">
+            <button class="open-contact-modal btn-primary-outline" data-program="Pre-Primary 1 (PP1)">Enquire</button>
+          </div>
         </div>
 
         <!-- Program Card 4 -->
@@ -292,6 +312,9 @@
             <li>Emphasis on independent work habits and social maturity.</li>
             <li>Goal: Smooth and confident transition into primary school.</li>
           </ul>
+          <div class="mt-4">
+            <button class="open-contact-modal btn-primary-outline" data-program="Pre-Primary 2 (PP2)">Enquire</button>
+          </div>
         </div>
 
         <!-- Program Card 5 -->
@@ -307,6 +330,9 @@
             <li>Includes supervised rest periods and nutritious meals/snacks.</li>
             <li>Goal: Continuity of care in a productive, secure environment.</li>
           </ul>
+          <div class="mt-4">
+            <button class="open-contact-modal btn-primary-outline" data-program="Day Care">Enquire</button>
+          </div>
         </div>
 
       </div>
@@ -316,7 +342,7 @@
       </div>
     </section>
 
-    <!-- GALLERY + VIDEO (added framed layout) -->
+    <!-- GALLERY + VIDEO (framed layout) -->
     <section id="gallery" class="pt-16">
       <header class="text-center mb-6">
         <h2 class="text-3xl font-bold">Our Gallery & Video</h2>
@@ -327,9 +353,8 @@
 
         <!-- Image slider framed -->
         <div>
-          <div class="media-frame">
+          <div class="media-frame" aria-hidden="false" role="region" aria-label="Image gallery">
             <div class="frame-inner p-0" style="padding:0;">
-              <!-- Simple responsive slider (static, no external plugin) -->
               <div class="gallery-slider" aria-hidden="false" role="list">
                 <div class="slide">
                   <div class="media-frame" style="border-radius:0;">
@@ -364,15 +389,11 @@
         <div>
           <div class="media-frame">
             <div class="frame-inner video-poster" id="video-poster">
-              <!-- Use video tag with poster for direct playback on supported devices -->
               <video id="promo-video" controls preload="none" poster="images/gallery/video-poster.jpg" style="width:100%;height:100%;display:block;">
-                <!-- Put your video file or hosted video source here -->
                 <source src="videos/promo.mp4" type="video/mp4">
-                <!-- fallback -->
-                <img src="images/gallery/video-poster.jpg" alt="Video preview" style="width:100%;height:100%;object-fit:cover;">
+                <img src="images/gallery/video-poster.jpg" alt="Video preview" style="width:100%;height:100%;object-fit:contain;">
               </video>
 
-              <!-- Play overlay (in case you want a custom opener) -->
               <div class="video-play" aria-hidden="true" style="display:none;">
                 <i class="fas fa-play"></i>
               </div>
@@ -410,14 +431,18 @@
       </div>
     </div>
 
-    <!-- remainder of page (resources, CTA, FAQ, map, footer) unchanged -->
+    <!-- Resources for Parents (images framed) -->
     <section id="resources" class="pt-16">
       <div class="max-w-7xl mx-auto">
         <h3 class="text-2xl font-semibold mb-4">Resources for Parents</h3>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="resource-card bg-white p-4 rounded-lg shadow">
-            <img src="images/resources/early-learning.jpg" alt="Early learning" class="w-full h-36 object-cover rounded-md mb-3">
-            <h4 class="font-bold">The Science of Early Learning</h4>
+            <div class="media-frame">
+              <div class="frame-inner" style="aspect-ratio:16/9;">
+                <img src="images/resources/early-learning.jpg" alt="Early learning">
+              </div>
+            </div>
+            <h4 class="font-bold mt-3">The Science of Early Learning</h4>
             <p class="text-sm text-gray-600 mt-2">Discover how preschool shapes your child's brain development and sets the foundation for lifelong learning.</p>
             <div class="mt-3">
               <button class="btn-primary-outline open-blog" data-resource="early-learning">Read More</button>
@@ -425,8 +450,12 @@
           </div>
 
           <div class="resource-card bg-white p-4 rounded-lg shadow">
-            <img src="images/resources/social-skills.jpg" alt="Social skills" class="w-full h-36 object-cover rounded-md mb-3">
-            <h4 class="font-bold">Social Skills Development</h4>
+            <div class="media-frame">
+              <div class="frame-inner" style="aspect-ratio:16/9;">
+                <img src="images/resources/social-skills.jpg" alt="Social skills">
+              </div>
+            </div>
+            <h4 class="font-bold mt-3">Social Skills Development</h4>
             <p class="text-sm text-gray-600 mt-2">Learn how preschool helps children develop crucial social skills like sharing, empathy, and cooperation.</p>
             <div class="mt-3">
               <button class="btn-primary-outline open-blog" data-resource="social-skills">Read More</button>
@@ -434,8 +463,12 @@
           </div>
 
           <div class="resource-card bg-white p-4 rounded-lg shadow">
-            <img src="images/resources/primary-school.jpg" alt="Primary school" class="w-full h-36 object-cover rounded-md mb-3">
-            <h4 class="font-bold">Preparing for Primary School</h4>
+            <div class="media-frame">
+              <div class="frame-inner" style="aspect-ratio:16/9;">
+                <img src="images/resources/primary-school.jpg" alt="Primary school">
+              </div>
+            </div>
+            <h4 class="font-bold mt-3">Preparing for Primary School</h4>
             <p class="text-sm text-gray-600 mt-2">How our curriculum ensures a smooth transition to formal schooling with confidence and enthusiasm.</p>
             <div class="mt-3">
               <button class="btn-primary-outline open-blog" data-resource="primary-school">Read More</button>
