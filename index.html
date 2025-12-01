@@ -273,26 +273,66 @@
           </video>
         </div>
 
-      <!-- START: Adaptive gallery slider (DROP-IN REPLACEMENT) -->
-<div class="gallery-frame overflow-hidden rounded-lg">
-          <div id="image-slider" class="image-slider flex transition-transform duration-500">
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-1.jpeg" alt="gallery 1" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-2.jpeg" alt="gallery 2" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-3.jpeg" alt="gallery 3" class="w-full h-64 object-cover"></div>
-          </div>
-
-          <div class="flex justify-between items-center p-2">
-            <button id="slider-prev" class="slider-btn">‹</button>
-            <div class="slider-dots flex gap-2">
-              <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
-              <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
-              <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+      <!-- Universal Adaptive Gallery Section -->
+<section class="py-12 bg-gradient-to-b from-blue-50 to-white">
+  <div class="container-narrow px-4">
+    <div class="text-center mb-10">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-800">Our Learning Environment</h2>
+      <p class="text-gray-600 mt-3 max-w-2xl mx-auto">View our vibrant classrooms and activities</p>
+    </div>
+    
+    <!-- Universal Adaptive Gallery Container -->
+    <div class="universal-gallery-wrapper">
+      <!-- Gallery Viewport -->
+      <div class="universal-viewport" id="universal-viewport">
+        <!-- Slider Container -->
+        <div class="universal-slider" id="universal-slider">
+          <!-- Images will be dynamically loaded here -->
+          <!-- Example structure for each slide: -->
+          <!-- <div class="universal-slide" data-index="0">
+            <div class="image-container">
+              <img src="images/gallery/preschool-1.jpeg" alt="Preschool activity" loading="lazy">
             </div>
-            <button id="slider-next" class="slider-btn">›</button>
-          </div>
+          </div> -->
         </div>
+        
+        <!-- Navigation Arrows -->
+        <button class="nav-arrow prev-arrow" aria-label="Previous image">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <button class="nav-arrow next-arrow" aria-label="Next image">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+        
+        <!-- Fullscreen Toggle -->
+        <button class="fullscreen-toggle" aria-label="View fullscreen">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"/>
+          </svg>
+        </button>
       </div>
-    </section>
+      
+      <!-- Dots Navigation -->
+      <div class="universal-dots" id="universal-dots">
+        <!-- Dots will be dynamically created -->
+      </div>
+      
+      <!-- Image Counter -->
+      <div class="image-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">0</span>
+      </div>
+      
+      <!-- Image Upload Notice (for admin) -->
+      <div class="upload-notice text-sm text-gray-500 mt-4 text-center">
+        <p>Tip: Upload images in any dimension (portrait, landscape, square) - all will display perfectly</p>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- END: Adaptive gallery slider -->
 
     <section class="py-8">
