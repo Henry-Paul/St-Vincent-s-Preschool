@@ -111,66 +111,173 @@ header a:hover {
    Gallery Slider
 ----------------------------------------------------- */
 .universal-gallery-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  padding: 0 10px;
+/* Enhanced Adaptive Gallery for ALL Image Dimensions */
+.adaptive-gallery { 
+  width: 100%; 
+  max-width: 100%; 
+  margin: 0 auto; 
 }
 
-/* Viewport - Responsive container */
-.universal-viewport {
+.adaptive-viewport { 
+  overflow: hidden; 
+  width: 100%; 
+  border-radius: 12px; 
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06); 
+  background: #f7f7f8; 
+  transition: height .28s ease;
+  /* Remove fixed height - it will auto-adjust */
+}
+
+.adaptive-slider { 
+  display: flex; 
+  transition: transform .45s cubic-bezier(.2, .9, .2, 1); 
+  will-change: transform;
+}
+
+.adaptive-slide { 
+  flex: 0 0 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  box-sizing: border-box; 
+  padding: 0;
+  /* No fixed dimensions */
+}
+
+.adaptive-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  /* Add smooth transition for container */
+  transition: all 0.3s ease;
+}
+
+.adaptive-inner img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  /* Ensure images are never cropped */
+  object-position: center;
+}
+
+/* Frame styling to match your beautiful UI */
+.gallery-frame {
   position: relative;
-  overflow: hidden;
+  border: 12px solid #3b82f6;
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  margin-bottom: 20px;
-  /* Dynamic height handled by JS */
-  height: 500px; /* Default, will be updated by JS */
-  transition: height 0.3s ease;
+  padding: 12px;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  /* Frame expands to content */
+  min-height: 200px;
 }
 
-/* For mobile */
-@media (max-width: 768px) {
-  .universal-viewport {
-    height: 400px; /* Mobile default */
-    border-radius: 16px;
+.gallery-frame::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: 3px dashed #60a5fa;
+  border-radius: 25px;
+  pointer-events: none;
+}
+
+.gallery-frame::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  border: 2px solid #f59e0b;
+  border-radius: 30px;
+  pointer-events: none;
+}
+
+/* Responsive height control */
+.adaptive-viewport {
+  /* Auto height based on content */
+  height: auto;
+  min-height: 200px;
+}
+
+@media (min-width: 768px) {
+  .adaptive-viewport {
+    /* Set a max height for desktop but allow smaller */
+    max-height: 500px;
   }
 }
 
-@media (max-width: 480px) {
-  .universal-viewport {
-    height: 350px;
+@media (max-width: 767px) {
+  .adaptive-viewport {
+    /* More compact on mobile but still shows full image */
+    max-height: 400px;
   }
 }
 
-/* Slider container */
-.universal-slider {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  height: 100%;
-  width: 100%;
+/* Touch/swipe improvements */
+.adaptive-slider {
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Individual slide - takes full viewport */
-.universal-slide {
-  flex: 0 0 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
+/* Controls */
+.gallery-controls { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 12px; 
+  padding: 10px 6px; 
+  margin-top: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
 }
 
-/* Image container with adaptive sizing */
-.universal-slide .image-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+.slider-btn { 
+  background: #ffffff; 
+  border: 1px solid rgba(15, 23, 42, 0.06); 
+  padding: .45rem .7rem; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.slider-btn:hover {
+  background: #f0f9ff;
+  transform: translateY(-1px);
+}
+
+.slider-dots { 
+  display: flex; 
+  gap: 8px; 
+  align-items: center; 
+  justify-content: center; 
+  flex: 1;
+}
+
+.slider-dot { 
+  width: 10px; 
+  height: 10px; 
+  border-radius: 50%; 
+  background: #e6e6e9; 
+  border: 0; 
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.slider-dot.active { 
+  background: var(--brand, #8b2b58); 
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  transform: scale(1.2);
 }
 
 /* THE MAGIC: Image scaling that preserves aspect ratio */
