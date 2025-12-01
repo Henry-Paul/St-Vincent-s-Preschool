@@ -275,60 +275,71 @@
 
       <!-- Universal Adaptive Gallery Section -->
 <section class="py-12 bg-gradient-to-b from-blue-50 to-white">
-  <div class="container-narrow px-4">
-    <div class="text-center mb-10">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-800">Our Learning Environment</h2>
-      <p class="text-gray-600 mt-3 max-w-2xl mx-auto">View our vibrant classrooms and activities</p>
+<section class="py-8">
+  <div class="flex items-center justify-between">
+    <h2 class="text-2xl font-semibold">Gallery & Tour</h2>
+    <a href="gallery.html" class="text-sm text-gray-600 hover:underline">See all</a>
+  </div>
+
+  <div class="mt-4 grid md:grid-cols-2 gap-6">
+    <!-- Video section (unchanged) -->
+    <div>
+      <video controls poster="images/preschool-7.jpeg" class="w-full h-64 rounded-lg object-cover shadow">
+        <source src="videos/videos-poster.mp4" type="video/mp4">
+        Your browser does not support video.
+      </video>
     </div>
-    
-    <!-- Universal Adaptive Gallery Container -->
-    <div class="universal-gallery-wrapper">
-      <!-- Gallery Viewport -->
-      <div class="universal-viewport" id="universal-viewport">
-        <!-- Slider Container -->
-        <div class="universal-slider" id="universal-slider">
-          <!-- Images will be dynamically loaded here -->
-          <!-- Example structure for each slide: -->
-          <!-- <div class="universal-slide" data-index="0">
-            <div class="image-container">
-              <img src="images/gallery/preschool-1.jpeg" alt="Preschool activity" loading="lazy">
+
+    <!-- ENHANCED IMAGE SLIDER - WORKS WITH ANY IMAGE DIMENSIONS -->
+    <div class="gallery-frame">
+      <div class="adaptive-viewport">
+        <div id="image-slider" class="adaptive-slider">
+          <!-- Images with ANY dimensions - system will auto-adjust -->
+          <div class="adaptive-slide">
+            <div class="adaptive-inner">
+              <img src="images/gallery/preschool-1.jpeg" 
+                   alt="Preschool classroom" 
+                   loading="lazy"
+                   onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" fill=\"%23f3f4f6\"><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"%239ca3af\" font-size=\"20\">Image</text></svg>'">
+            </div>
+          </div>
+          
+          <div class="adaptive-slide">
+            <div class="adaptive-inner">
+              <img src="images/gallery/preschool-2.jpeg" 
+                   alt="Children playing" 
+                   loading="lazy"
+                   onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" fill=\"%23f3f4f6\"><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"%239ca3af\" font-size=\"20\">Image</text></svg>'">
+            </div>
+          </div>
+          
+          <div class="adaptive-slide">
+            <div class="adaptive-inner">
+              <img src="images/gallery/preschool-3.jpeg" 
+                   alt="Art activities" 
+                   loading="lazy"
+                   onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" fill=\"%23f3f4f6\"><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"%239ca3af\" font-size=\"20\">Image</text></svg>'">
+            </div>
+          </div>
+          
+          <!-- ADD MORE IMAGES HERE WITH ANY DIMENSIONS -->
+          <!-- <div class="adaptive-slide">
+            <div class="adaptive-inner">
+              <img src="images/gallery/your-image.jpg" alt="Description">
             </div>
           </div> -->
         </div>
-        
-        <!-- Navigation Arrows -->
-        <button class="nav-arrow prev-arrow" aria-label="Previous image">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="nav-arrow next-arrow" aria-label="Next image">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-        
-        <!-- Fullscreen Toggle -->
-        <button class="fullscreen-toggle" aria-label="View fullscreen">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"/>
-          </svg>
-        </button>
       </div>
-      
-      <!-- Dots Navigation -->
-      <div class="universal-dots" id="universal-dots">
-        <!-- Dots will be dynamically created -->
-      </div>
-      
-      <!-- Image Counter -->
-      <div class="image-counter">
-        <span id="current-slide">1</span> / <span id="total-slides">0</span>
-      </div>
-      
-      <!-- Image Upload Notice (for admin) -->
-      <div class="upload-notice text-sm text-gray-500 mt-4 text-center">
-        <p>Tip: Upload images in any dimension (portrait, landscape, square) - all will display perfectly</p>
+
+      <!-- Navigation Controls -->
+      <div class="gallery-controls">
+        <button id="slider-prev" class="slider-btn" aria-label="Previous image">‹</button>
+        <div class="slider-dots">
+          <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
+          <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
+          <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+        </div>
+        <button id="slider-next" class="slider-btn" aria-label="Next image">›</button>
       </div>
     </div>
   </div>
