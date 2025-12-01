@@ -101,38 +101,161 @@ function initUniversalBurger(){
   document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
 }
 
-/* ---------- Gallery slider ---------- */
-/* ================= UNIVERSAL ADAPTIVE IMAGE SLIDER ================= */
-/* Handles ANY image dimensions, responsive, touch/swipe enabled */
-
-function initUniversalImageSlider() {
-  const slider = document.getElementById('universal-slider');
-  const viewport = document.getElementById('universal-viewport');
-  const dotsContainer = document.getElementById('universal-dots');
-  const currentSlideSpan = document.getElementById('current-slide');
-  const totalSlidesSpan = document.getElementById('total-slides');
+/* ---------- Enhanced Gallery slider for ALL Image Dimensions ---------- */
+function initImageSlider() {
+  const slider = document.getElementById('image-slider');
+  if (!slider) return;
   
-  if (!slider || !viewport) return;
+  const slides = slider.querySelectorAll('.adaptive-slide');
+  if (!slides.length) return;
   
-  // Configuration
-  const config = {
-    autoPlay: true,
-    autoPlayDelay: 5000,
-    transitionSpeed: 500,
-    touchSensitivity: 50, // pixels to trigger swipe
-    maxViewportHeight: 700, // Max height in pixels
-    minViewportHeight: 300  // Min height in pixels
-  };
+  let idx = 0, total = slides.length;
+  const prev = document.getElementById('slider-prev');
+  const next = document.getElementById('slider-next');
+  const dots = Array.from(document.querySelectorAll('.slider-dot'));
+  const viewport = document.querySelector('.adaptive-viewport');
   
-  // State
-  let currentIndex = 0;
-  let totalSlides = 0;
-  let autoPlayInterval = null;
-  let touchStartX = 0;
-  let touchEndX = 0;
-  let imagesLoaded = 0;
-  let imageDimensions = [];
-  let viewportHeight = 500; // Default
+  // Function to adjust viewport height based on current image
+  function adjustViewportHeight() {
+    if (!viewport) return;
+    
+    const currentSlide = slides[idx];
+    const img = currentSlide.querySelector('img');
+    
+    if (img && img.complete) {
+      // Calculate optimal height based on image aspect ratio
+      const imgWidth = img.naturalWidth;
+      const imgHeight = img.naturalHeight;
+      const containerWidth = viewport.clientWidth;
+      
+      // Calculate height that maintains aspect ratio
+      const calculatedHeight = (imgHeight / imgWidth) * containerWidth;
+      
+      // Set reasonable bounds
+      const minHeight = 200;
+      const maxHeight = window.innerWidth > 768 ? 500 : 400;
+      
+      let finalHeight = Math.min(Math.max(calculatedHeight, minHeight), maxHeight);
+      
+      // Apply with smooth transition
+      viewport.style.height = `${finalHeight}px`;
+    }
+  }
+  
+  // Preload images and adjust heights
+  function preloadAndAdjust() {
+    slides.forEach((slide, index) => {
+      const img = slide.querySelector('img');
+      if (img) {
+        // If image is already loaded, adjust immediately
+        if (img.complete) {
+          if (index === 0) adjustViewportHeight();
+        } else {
+          // Wait for image to load
+          img.addEventListener('load', function() {
+            if (index === 0) adjustViewportHeight();
+          });
+        }
+        
+        // Add error handling
+        img.addEventListener('error', function() {
+          console.warn('Image failed to load:', img.src);
+          // Use fallback styling
+          slide.style.backgroundColor = '#f3f4f6';
+          slide.innerHTML = `<div style="text-align:center;padding:20px;color:#6b7280">
+                              <div style="font-size:24px;margin-bottom:8px">📷</div>
+                              <div>Image not available</div>
+                            </div>`;
+        });
+      }
+    });
+  }
+  
+  function update() {
+    // Slide transition
+    slider.style.transform = `translateX(-${idx * 100}%)`;
+    
+    // Update active dot
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    
+    // Adjust viewport height for current image
+    setTimeout(adjustViewportHeight, 50);
+  }
+  
+  // Navigation
+  prev?.addEventListener('click', () => {
+    idx = (idx - 1 + total) % total;
+    update();
+  });
+  
+  next?.addEventListener('click', () => {
+    idx = (idx + 1) % total;
+    update();
+  });
+  
+  // Dot navigation
+  dots.forEach(d => {
+    d.addEventListener('click', e => {
+      idx = Number(e.currentTarget.dataset.index);
+      update();
+    });
+  });
+  
+  // Touch/swipe support
+  let startX = 0;
+  let endX = 0;
+  
+  slider.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+  
+  slider.addEventListener('touchend', e => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+  
+  function handleSwipe() {
+    const threshold = 50;
+    const diff = startX - endX;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // Swipe left
+        idx = (idx + 1) % total;
+      } else {
+        // Swipe right
+        idx = (idx - 1 + total) % total;
+      }
+      update();
+    }
+  }
+  
+  // Auto-slide (optional - remove if you don't want auto-advance)
+  let autoSlideInterval = setInterval(() => {
+    idx = (idx + 1) % total;
+    update();
+  }, 6000);
+  
+  // Pause auto-slide on hover/touch
+  slider.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+  slider.addEventListener('mouseleave', () => {
+    autoSlideInterval = setInterval(() => {
+      idx = (idx + 1) % total;
+      update();
+    }, 6000);
+  });
+  
+  // Initial setup
+  preloadAndAdjust();
+  update();
+  
+  // Adjust on window resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(adjustViewportHeight, 100);
+  });
+}
   
   // Image data - YOU CAN ADD/REMOVE IMAGES HERE
   const imagePaths = [
