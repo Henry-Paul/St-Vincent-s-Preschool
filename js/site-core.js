@@ -102,19 +102,405 @@ function initUniversalBurger(){
 }
 
 /* ---------- Gallery slider ---------- */
-function initImageSlider(){
-  const slider = document.getElementById('image-slider'); if(!slider) return;
-  const slides = slider.querySelectorAll('.image-slide'); if(!slides.length) return;
-  let idx = 0, total = slides.length;
-  const prev = document.getElementById('slider-prev'), next = document.getElementById('slider-next');
-  const dots = Array.from(document.querySelectorAll('.slider-dot'));
-  function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
-  prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
-  next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
-  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); }));
-  setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
-  update();
+/* ================= UNIVERSAL ADAPTIVE IMAGE SLIDER ================= */
+/* Handles ANY image dimensions, responsive, touch/swipe enabled */
+
+function initUniversalImageSlider() {
+  const slider = document.getElementById('universal-slider');
+  const viewport = document.getElementById('universal-viewport');
+  const dotsContainer = document.getElementById('universal-dots');
+  const currentSlideSpan = document.getElementById('current-slide');
+  const totalSlidesSpan = document.getElementById('total-slides');
+  
+  if (!slider || !viewport) return;
+  
+  // Configuration
+  const config = {
+    autoPlay: true,
+    autoPlayDelay: 5000,
+    transitionSpeed: 500,
+    touchSensitivity: 50, // pixels to trigger swipe
+    maxViewportHeight: 700, // Max height in pixels
+    minViewportHeight: 300  // Min height in pixels
+  };
+  
+  // State
+  let currentIndex = 0;
+  let totalSlides = 0;
+  let autoPlayInterval = null;
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let imagesLoaded = 0;
+  let imageDimensions = [];
+  let viewportHeight = 500; // Default
+  
+  // Image data - YOU CAN ADD/REMOVE IMAGES HERE
+  const imagePaths = [
+    'images/gallery/preschool-1.jpeg',
+    'images/gallery/preschool-2.jpeg',
+    'images/gallery/preschool-3.jpeg',
+    'images/gallery/preschool-4.jpeg',
+    'images/gallery/preschool-5.jpeg',
+    'images/gallery/preschool-6.jpeg',
+    'images/gallery/preschool-7.jpeg'
+  ];
+  
+  // Initialize the slider
+  function initSlider() {
+    // Clear existing content
+    slider.innerHTML = '';
+    dotsContainer.innerHTML = '';
+    
+    totalSlides = imagePaths.length;
+    totalSlidesSpan.textContent = totalSlides;
+    
+    // Create slides
+    imagePaths.forEach((path, index) => {
+      // Create slide container
+      const slide = document.createElement('div');
+      slide.className = 'universal-slide';
+      slide.dataset.index = index;
+      
+      // Create image container
+      const imgContainer = document.createElement('div');
+      imgContainer.className = 'image-container loading';
+      
+      // Create image element
+      const img = document.createElement('img');
+      img.src = path;
+      img.alt = `Gallery image ${index + 1}`;
+      img.loading = 'lazy';
+      img.onload = () => handleImageLoad(img, index);
+      img.onerror = () => handleImageError(img, index);
+      
+      // Assemble
+      imgContainer.appendChild(img);
+      slide.appendChild(imgContainer);
+      slider.appendChild(slide);
+      
+      // Create dot
+      const dot = document.createElement('button');
+      dot.className = `dot ${index === 0 ? 'active' : ''}`;
+      dot.dataset.index = index;
+      dot.setAttribute('aria-label', `Go to image ${index + 1}`);
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+    
+    // Set up navigation
+    setupNavigation();
+    
+    // Set up touch/swipe
+    setupTouchEvents();
+    
+    // Set up fullscreen
+    setupFullscreen();
+    
+    // Start autoplay if enabled
+    if (config.autoPlay) {
+      startAutoPlay();
+    }
+    
+    // Initial update
+    updateSlider();
+  }
+  
+  // Handle image loading
+  function handleImageLoad(img, index) {
+    imagesLoaded++;
+    
+    // Store dimensions for responsive adjustments
+    imageDimensions[index] = {
+      width: img.naturalWidth,
+      height: img.naturalHeight,
+      aspectRatio: img.naturalHeight / img.naturalWidth
+    };
+    
+    // Remove loading class
+    img.parentElement.classList.remove('loading');
+    
+    // If all images loaded, adjust viewport
+    if (imagesLoaded === totalSlides) {
+      adjustViewportHeight();
+    }
+  }
+  
+  // Handle image error
+  function handleImageError(img, index) {
+    console.warn(`Failed to load image: ${imagePaths[index]}`);
+    img.parentElement.classList.remove('loading');
+    img.parentElement.innerHTML = `
+      <div class="text-gray-400 text-center p-8">
+        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <p>Image not available</p>
+      </div>
+    `;
+  }
+  
+  // Adjust viewport height based on images
+  function adjustViewportHeight() {
+    if (imageDimensions.length === 0) return;
+    
+    // Get viewport width
+    const viewportWidth = viewport.offsetWidth;
+    
+    // Calculate optimal height based on current image's aspect ratio
+    const currentAspectRatio = imageDimensions[currentIndex]?.aspectRatio || 0.75;
+    let calculatedHeight = viewportWidth * currentAspectRatio;
+    
+    // Constrain height
+    calculatedHeight = Math.max(config.minViewportHeight, 
+                              Math.min(config.maxViewportHeight, calculatedHeight));
+    
+    // Apply with smooth transition
+    viewport.style.height = `${calculatedHeight}px`;
+    viewportHeight = calculatedHeight;
+  }
+  
+  // Update slider position
+  function updateSlider() {
+    // Move slider
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Update active dot
+    document.querySelectorAll('.dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+    
+    // Update counter
+    currentSlideSpan.textContent = currentIndex + 1;
+    
+    // Adjust viewport height for current image
+    if (imagesLoaded === totalSlides) {
+      adjustViewportHeight();
+    }
+    
+    // Dispatch custom event
+    viewport.dispatchEvent(new CustomEvent('slidechange', {
+      detail: { currentIndex, totalSlides }
+    }));
+  }
+  
+  // Navigate to specific slide
+  function goToSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    
+    currentIndex = index;
+    updateSlider();
+    resetAutoPlay();
+  }
+  
+  // Next slide
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+  
+  // Previous slide
+  function prevSlide() {
+    goToSlide(currentIndex - 1);
+  }
+  
+  // Setup navigation buttons
+  function setupNavigation() {
+    // Previous arrow
+    const prevArrow = viewport.querySelector('.prev-arrow');
+    if (prevArrow) {
+      prevArrow.addEventListener('click', prevSlide);
+    }
+    
+    // Next arrow
+    const nextArrow = viewport.querySelector('.next-arrow');
+    if (nextArrow) {
+      nextArrow.addEventListener('click', nextSlide);
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'Escape') exitFullscreen();
+    });
+  }
+  
+  // Setup touch/swipe events
+  function setupTouchEvents() {
+    viewport.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoPlay();
+    }, { passive: true });
+    
+    viewport.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      if (config.autoPlay) startAutoPlay();
+    }, { passive: true });
+    
+    // Mouse drag support
+    let mouseDown = false;
+    let mouseStartX = 0;
+    
+    viewport.addEventListener('mousedown', (e) => {
+      mouseDown = true;
+      mouseStartX = e.clientX;
+      stopAutoPlay();
+    });
+    
+    viewport.addEventListener('mouseup', (e) => {
+      if (!mouseDown) return;
+      mouseDown = false;
+      const mouseEndX = e.clientX;
+      
+      if (Math.abs(mouseEndX - mouseStartX) > config.touchSensitivity) {
+        if (mouseEndX < mouseStartX) nextSlide();
+        else prevSlide();
+      }
+      
+      if (config.autoPlay) startAutoPlay();
+    });
+    
+    viewport.addEventListener('mouseleave', () => {
+      mouseDown = false;
+    });
+  }
+  
+  // Handle swipe gesture
+  function handleSwipe() {
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > config.touchSensitivity) {
+      if (diff > 0) {
+        nextSlide(); // Swipe left
+      } else {
+        prevSlide(); // Swipe right
+      }
+    }
+  }
+  
+  // Fullscreen functionality
+  function setupFullscreen() {
+    const fullscreenBtn = viewport.querySelector('.fullscreen-toggle');
+    if (!fullscreenBtn) return;
+    
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    
+    // Exit fullscreen on ESC
+    document.addEventListener('fullscreenchange', exitFullscreenHandler);
+    document.addEventListener('webkitfullscreenchange', exitFullscreenHandler);
+    document.addEventListener('mozfullscreenchange', exitFullscreenHandler);
+    document.addEventListener('MSFullscreenChange', exitFullscreenHandler);
+  }
+  
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      enterFullscreen();
+    } else {
+      exitFullscreen();
+    }
+  }
+  
+  function enterFullscreen() {
+    viewport.classList.add('fullscreen');
+    
+    if (viewport.requestFullscreen) {
+      viewport.requestFullscreen();
+    } else if (viewport.webkitRequestFullscreen) {
+      viewport.webkitRequestFullscreen();
+    } else if (viewport.msRequestFullscreen) {
+      viewport.msRequestFullscreen();
+    }
+    
+    // Update button
+    const icon = viewport.querySelector('.fullscreen-toggle svg');
+    if (icon) {
+      icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9V4.5a.5.5 0 00-.5-.5H4m5 14.5V19a.5.5 0 01-.5.5H4m14-5V14a.5.5 0 00.5-.5H19m-5-9.5V4a.5.5 0 01.5-.5H19"/>`;
+    }
+  }
+  
+  function exitFullscreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+  
+  function exitFullscreenHandler() {
+    if (!document.fullscreenElement && 
+        !document.webkitFullscreenElement && 
+        !document.msFullscreenElement) {
+      viewport.classList.remove('fullscreen');
+      
+      // Restore button icon
+      const icon = viewport.querySelector('.fullscreen-toggle svg');
+      if (icon) {
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"/>`;
+      }
+    }
+  }
+  
+  // Autoplay controls
+  function startAutoPlay() {
+    if (autoPlayInterval) clearInterval(autoPlayInterval);
+    autoPlayInterval = setInterval(nextSlide, config.autoPlayDelay);
+  }
+  
+  function stopAutoPlay() {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+    }
+  }
+  
+  function resetAutoPlay() {
+    stopAutoPlay();
+    if (config.autoPlay) startAutoPlay();
+  }
+  
+  // Pause autoplay on hover
+  viewport.addEventListener('mouseenter', stopAutoPlay);
+  viewport.addEventListener('mouseleave', () => {
+    if (config.autoPlay) startAutoPlay();
+  });
+  
+  // Handle window resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      adjustViewportHeight();
+      updateSlider();
+    }, 250);
+  });
+  
+  // Initialize everything
+  initSlider();
+  
+  // Public API (optional, for external control)
+  return {
+    next: nextSlide,
+    prev: prevSlide,
+    goTo: goToSlide,
+    currentIndex: () => currentIndex,
+    totalSlides: () => totalSlides,
+    stopAutoPlay,
+    startAutoPlay
+  };
 }
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  // Remove the old gallery slider initialization
+  // And replace with:
+  const universalSlider = initUniversalImageSlider();
+  
+  // Optional: You can control the slider from other parts of your code
+  // Example: window.imageSlider = universalSlider;
+});
 
 /* ---------- Testimonials slider (T1) ---------- */
 const TESTIMONIALS = [
