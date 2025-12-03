@@ -276,59 +276,34 @@
         </div>
 
       
-    
-
-
-    <!-- ENHANCED IMAGE SLIDER - WORKS WITH ANY IMAGE DIMENSIONS -->
-    <div class="gallery-frame">
-      <div class="adaptive-viewport">
-        <div id="image-slider" class="adaptive-slider">
-          <!-- Images with ANY dimensions - system will auto-adjust -->
-          <div class="adaptive-slide">
-            <div class="adaptive-inner">
-              <img src="images/gallery/preschool-1.jpeg" 
-                   alt="Preschool classroom" 
-                   loading="lazy"
-                   onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" fill=\"%23f3f4f6\"><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"%239ca3af\" font-size=\"20\">Image</text></svg>'">
-            </div>
-          </div>
-          
-          <div class="adaptive-slide">
-            <div class="adaptive-inner">
-              <img src="images/gallery/preschool-2.jpeg" 
-                   alt="Children playing" 
-                   loading="lazy"
-                   onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" fill=\"%23f3f4f6\"><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"%239ca3af\" font-size=\"20\">Image</text></svg>'">
-            </div>
-          </div>
-          
-          <div class="adaptive-slide">
-            <div class="adaptive-inner">
-              <img src="images/gallery/preschool-3.jpeg" 
-                   alt="Art activities" 
-                   loading="lazy"
-                   onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" fill=\"%23f3f4f6\"><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"%239ca3af\" font-size=\"20\">Image</text></svg>'">
-            </div>
-          </div>
-          
-          <!-- ADD MORE IMAGES HERE WITH ANY DIMENSIONS -->
-          
-        </div>
+  
+<!-- Gallery frame (adaptive) -->
+<div class="adaptive-gallery">
+  <div class="adaptive-viewport" id="adaptive-viewport">
+    <div id="image-slider" class="adaptive-slider">
+      <div class="adaptive-slide">
+        <div class="adaptive-inner"><img src="images/gallery/preschool-1.jpeg" alt="gallery 1"></div>
       </div>
-
-      <!-- Navigation Controls -->
-      <div class="gallery-controls">
-        <button id="slider-prev" class="slider-btn" aria-label="Previous image">‹</button>
-        <div class="slider-dots">
-          <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
-          <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
-          <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
-        </div>
-        <button id="slider-next" class="slider-btn" aria-label="Next image">›</button>
+      <div class="adaptive-slide">
+        <div class="adaptive-inner"><img src="images/gallery/preschool-2.jpeg" alt="gallery 2"></div>
+      </div>
+      <div class="adaptive-slide">
+        <div class="adaptive-inner"><img src="images/gallery/preschool-3.jpeg" alt="gallery 3"></div>
       </div>
     </div>
   </div>
-</section>
+
+  <div class="gallery-controls">
+    <button id="slider-prev" class="slider-btn" aria-label="Previous slide">‹</button>
+    <div class="slider-dots" role="tablist" aria-label="Gallery slides">
+      <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
+      <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
+      <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+    </div>
+    <button id="slider-next" class="slider-btn" aria-label="Next slide">›</button>
+  </div>
+</div>      
+
     
 <!-- END: Adaptive gallery slider -->
 
