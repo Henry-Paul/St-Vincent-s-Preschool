@@ -1,610 +1,729 @@
-// js/site-core.js - final consolidated script (testimonial slider T1 + resource modal scroll fix + others)
-
-/* EMAILJS config (replace with real keys when ready) */
-const EMAILJS_CONFIG = {
-  SERVICE_ID: 'service_up2vw5t',
-  TEMPLATE_ID: 'template_s7ly8in',
-  PUBLIC_KEY: '_XSR5F_xlm5cYAcra'
-};
-if (window.emailjs && EMAILJS_CONFIG.PUBLIC_KEY) {
-  try { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); } catch (e) { console.warn('EmailJS init error', e); }
-}
-
-/* helpers */
-const $ = (s, ctx=document) => ctx.querySelector(s);
-const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
-function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-/* ---------- PROGRAM OPTIONS (shared across forms) ---------- */
-const PROGRAM_OPTIONS = [
-  { val: '', label: 'Select a program' },
-  { val: 'Playgroup (Ages 1.5-2.5)', label: 'Playgroup (Ages 1.5-2.5)' },
-  { val: 'Nursery (Ages 2.5-3.5)', label: 'Nursery (Ages 2.5-3.5)' },
-  { val: 'Pre-Primary 1 (LKG) (Ages 3.5-4.5)', label: 'Pre-Primary 1 (LKG) (Ages 3.5-4.5)' },
-  { val: 'Pre-Primary 2 (UKG) (Ages 4.5-6)', label: 'Pre-Primary 2 (UKG) (Ages 4.5-6)' },
-  { val: 'Day Care (Full Day)', label: 'Day Care (Full Day)' }
-];
-
-function buildProgramOptionsHTML(selected = '') {
-  return PROGRAM_OPTIONS.map(o => {
-    const sel = (String(o.val) === String(selected)) ? ' selected' : '';
-    return `<option value="${escapeHtml(o.val)}"${sel}>${escapeHtml(o.label)}</option>`;
-  }).join('');
-}
-
-function createProgramSelectElement() {
-  // returns a DOM wrapper for insertion into forms
-  const wrapper = document.createElement('div');
-  wrapper.className = 'form-group program-select-wrapper';
-  wrapper.style.marginTop = '8px';
-
-  const label = document.createElement('label');
-  label.htmlFor = 'program';
-  label.textContent = 'Program Interested In';
-  label.style.fontWeight = '600';
-  label.style.fontSize = '13px';
-  wrapper.appendChild(label);
-
-  const select = document.createElement('select');
-  select.id = 'program';
-  select.name = 'program';
-  select.required = true;
-  select.className = 'w-full p-3 border rounded';
-  select.style.marginTop = '6px';
-  select.innerHTML = buildProgramOptionsHTML('');
-  wrapper.appendChild(select);
-
-  return wrapper;
-}
-
-/* ---------- Burger menu (universal) ---------- */
-function initUniversalBurger(){
-  $$('#menu-btn').forEach(btn=>{
-    const header = btn.closest('header') || document;
-    const mobileMenu = header.querySelector('#mobile-menu') || document.getElementById('mobile-menu');
-    function setIcon(open){
-      btn.innerHTML = open ? '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    }
-    setIcon(false);
-    btn.addEventListener('click', e=>{
-      e.stopPropagation();
-      if(!mobileMenu) return;
-      const hidden = mobileMenu.classList.toggle('hidden');
-      setIcon(!hidden);
-      btn.setAttribute('aria-expanded', String(!hidden));
-      if(!hidden){ const first = mobileMenu.querySelector('a,button,[tabindex]'); if(first) first.focus(); }
-    });
-    if(mobileMenu){
-      mobileMenu.querySelectorAll('a').forEach(a=>{
-        a.addEventListener('click', ev=>{
-          mobileMenu.classList.add('hidden'); setIcon(false); btn.setAttribute('aria-expanded','false');
-          const href = a.getAttribute('href');
-          if(href && !href.startsWith('#') && !href.startsWith('javascript:')){
-            ev.preventDefault();
-            setTimeout(()=> window.location.href = href, 90);
-          }
-        });
-      });
-    }
-  });
-
-  document.addEventListener('click', ev=>{
-    $$('#mobile-menu').forEach(menu=>{
-      if(!menu.classList.contains('hidden') && !menu.contains(ev.target)){
-        menu.classList.add('hidden');
-        const header = menu.closest('header');
-        const btn = header ? header.querySelector('#menu-btn') : document.getElementById('menu-btn');
-        if(btn){ btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; btn.setAttribute('aria-expanded','false'); }
-      }
-    });
-  });
-  document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
-}
-
-
-/* ---------- Enhanced Gallery slider for ALL Image Dimensions ---------- */
-
-      
-    /* ---------- Gallery slider (improved, adaptive, swipe) ---------- */
-function initImageSlider(){
-  const slider = document.getElementById('image-slider');
-  if(!slider) return;
-  const slides = Array.from(slider.querySelectorAll('.adaptive-slide'));
-  if(!slides.length) return;
-
-  const prev = document.getElementById('slider-prev');
-  const next = document.getElementById('slider-next');
-  const dots = Array.from(document.querySelectorAll('.slider-dot'));
-  let idx = 0;
-  let width = slider.getBoundingClientRect().width;
-  let autoTimer = null;
-
-  function update(){
-    width = slider.getBoundingClientRect().width;
-    slider.style.transform = `translateX(-${idx * width}px)`;
-    dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
-  }
-
-  // Previous / Next handlers
-  prev?.addEventListener('click', ()=> { idx = (idx - 1 + slides.length) % slides.length; update(); resetAuto(); });
-  next?.addEventListener('click', ()=> { idx = (idx + 1) % slides.length; update(); resetAuto(); });
-  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); resetAuto(); }));
-
-  // Auto-play
-  function startAuto(){ autoTimer = setInterval(()=> { idx = (idx + 1) % slides.length; update(); }, 6000); }
-  function resetAuto(){ clearInterval(autoTimer); startAuto(); }
-
-  // Resize handler to recalc transform
-  window.addEventListener('resize', debounce(()=> {
-    // reposition to the same slide with new width
-    update();
-  }, 120));
-
-  // Touch swipe (basic)
-  let startX = 0, deltaX = 0, isTouch = false;
-  slider.addEventListener('touchstart', e => { isTouch = true; startX = e.touches[0].clientX; clearInterval(autoTimer); });
-  slider.addEventListener('touchmove', e => { if(!isTouch) return; deltaX = e.touches[0].clientX - startX; slider.style.transform = `translateX(${ -idx * width + deltaX }px)`; });
-  slider.addEventListener('touchend', e => {
-    isTouch = false;
-    if (Math.abs(deltaX) > (width * 0.18)) {
-      if (deltaX < 0) idx = Math.min(idx + 1, slides.length - 1);
-      else idx = Math.max(idx - 1, 0);
-    }
-    deltaX = 0;
-    update();
-    resetAuto();
-  });
-
-  // Initial setup: ensure slider children have same width (css already handles, but set transform in px for precision)
-  // Make sure slider children fill the width
-  slides.forEach(s => s.style.minWidth = '100%');
-
-  update();
-  startAuto();
-}
-
-// small debounce helper
-function debounce(fn, ms=80){ let t; return (...a)=>{ clearTimeout(t); t = setTimeout(()=>fn.apply(this,a), ms); }; }    
-  
-  
-  
-/* ---------- Testimonials slider (T1) ---------- */
-const TESTIMONIALS = [
-  { name: "Sai Ram", text: "My child has shown lot of development and he is now more confident after joining st vincent's school." },
-  { name: "Latha B.", text: "St. Vincent School has excellent facilities and a clean, well-maintained campus that supports learning. The classrooms are modern and well-equipped. What truly stands out is how friendly and approachable the teachers are... One of the Best Schools in ChandaNagar" },
-  { name: "Shashank Bhardwaj.", text: "My child loves going to this preschool! The teachers are caring, the environment is safe and nurturing, and I've seen amazing growth in my little one's confidence and skills." },
-  { name: "Saurabh Shourie.", text: "Great environment with lesser fees in comparison to other schools nearby . My child loves the school. Highly recommended.!" },
-  { name: "Anita Singha.", text: "Recently my daughter joined school and she's very happy and she's hyperactive kid so, I am happy that school is very spacious , hygienic plus we got good experienced teachers as well" }
-];
-
-function renderTestimonialsSlider(){
-  const wrapper = document.getElementById('testimonial-slider'); if(!wrapper) return;
-  wrapper.innerHTML = ''; // clear
-  TESTIMONIALS.forEach((t,i) => {
-    const card = document.createElement('article');
-    card.className = 'testimonial-card bg-white p-6 rounded-2xl shadow-lg flex-shrink-0';
-    card.style.minWidth = '320px';
-    card.style.maxWidth = '360px';
-    card.innerHTML = `
-      <div style="display:flex;gap:12px;align-items:flex-start;">
-        <div style="width:56px;height:56px;border-radius:12px;background:#fff8f9;display:flex;align-items:center;justify-content:center;font-size:20px;color:#f59e0b">★</div>
-        <div style="flex:1">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
-            <h3 style="font-weight:600">${escapeHtml(t.name)}</h3>
-            <div style="font-weight:700;color:#f59e0b">5.0</div>
-          </div>
-          <p style="margin-top:.6rem;color:#475569">${escapeHtml(t.text)}</p>
-        </div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
-        <div class="badge-google" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.25rem"><path fill="#4285F4" d="M12 11.5v3.5h5.2c-.2 1.1-.9 2.1-1.8 2.9L12 20.6l-3.4-2.0c-.6-.4-1.1-1-1.4-1.7H3.6v-2.4H6.6c.1-.5.4-1 1-1.4L12 11.5"/></svg>Google ★★★★★</div>
-        <div><button class="btn-primary open-contact-modal" data-program="Enquiry from ${escapeHtml(t.name)}">Enquire</button></div>
-      </div>
-    `;
-    wrapper.appendChild(card);
-  });
-
-  // dots
-  const dotsContainer = document.getElementById('test-dots'); if(!dotsContainer) return;
-  dotsContainer.innerHTML = '';
-  for(let i=0;i<TESTIMONIALS.length;i++){
-    const d = document.createElement('button');
-    d.className = 'slider-dot';
-    d.dataset.index = i;
-    d.ariaLabel = `testimonial ${i+1}`;
-    d.addEventListener('click', ()=> jumpToTestimonial(i));
-    dotsContainer.appendChild(d);
-  }
-
-  // wire enquire buttons
-  $$('.open-contact-modal').forEach(b => {
-    b.addEventListener('click', e => openUnifiedModal({ prefillProgram: b.dataset.program || '' }));
-  });
-}
-
-/* slider mechanics */
-let testIdx = 0;
-let testInterval = null;
-let testAutoplay = true;
-const TEST_AUTOPLAY_DELAY = 4000;
-
-function updateTestimonialPosition(){
-  const wrapper = document.getElementById('testimonial-slider');
-  if(!wrapper) return;
-  const card = wrapper.querySelector('.testimonial-card');
-  const cardWidth = card ? card.getBoundingClientRect().width + 24 : 360;
-  wrapper.style.transform = `translateX(-${testIdx * (cardWidth)}px)`;
-  const dots = Array.from(document.querySelectorAll('#test-dots .slider-dot'));
-  dots.forEach((d,i)=> d.classList.toggle('active', i===testIdx));
-}
-
-function startTestAutoplay(){
-  stopTestAutoplay();
-  if(!testAutoplay) return;
-  testInterval = setInterval(()=> {
-    testIdx = (testIdx + 1) % TESTIMONIALS.length;
-    updateTestimonialPosition();
-  }, TEST_AUTOPLAY_DELAY);
-}
-
-function stopTestAutoplay(){
-  if(testInterval) { clearInterval(testInterval); testInterval = null; }
-}
-
-function jumpToTestimonial(i){
-  testIdx = i % TESTIMONIALS.length;
-  updateTestimonialPosition();
-  // when user manually jumps, pause autoplay until play clicked (we keep autoplay paused)
-  pauseAutoplayUntilPlay();
-}
-
-function pauseAutoplayUntilPlay(){
-  testAutoplay = false;
-  stopTestAutoplay();
-  const toggle = document.getElementById('test-play-toggle');
-  if(toggle) toggle.textContent = '▶';
-}
-
-/* Play/pause toggle */
-function toggleTestPlay(){
-  const toggle = document.getElementById('test-play-toggle');
-  if(!toggle) return;
-  if(testAutoplay){
-    // pause
-    testAutoplay = false;
-    stopTestAutoplay();
-    toggle.textContent = '▶';
-  } else {
-    testAutoplay = true;
-    toggle.textContent = '⏸';
-    startTestAutoplay();
-  }
-}
-
-/* Prev/next */
-function testPrev(){ testIdx = (testIdx - 1 + TESTIMONIALS.length) % TESTIMONIALS.length; updateTestimonialPosition(); pauseAutoplayUntilPlay(); }
-function testNext(){ testIdx = (testIdx + 1) % TESTIMONIALS.length; updateTestimonialPosition(); pauseAutoplayUntilPlay(); }
-
-/* Pause on hover */
-function wireTestHoverPause(){
-  const wrap = document.querySelector('.testimonial-slider-wrapper');
-  if(!wrap) return;
-  wrap.addEventListener('mouseenter', ()=> {
-    stopTestAutoplay();
-  });
-  wrap.addEventListener('mouseleave', ()=> {
-    if(testAutoplay) startTestAutoplay();
-  });
-}
-
-/* ---------- Unified enquiry modal (visible program select) ---------- */
-function openUnifiedModal({ prefillProgram = '' } = {}){
-  const existing = document.getElementById('sv-contact-modal'); if(existing) existing.remove();
-  lockBodyScroll(true);
-  const overlay = document.createElement('div');
-  overlay.id = 'sv-contact-modal';
-  overlay.className = 'fixed inset-0 z-90 flex items-center justify-center bg-black/60 p-4';
-  // Use buildProgramOptionsHTML to populate the select options
-  overlay.innerHTML = `
-    <div class="bg-white rounded-xl p-6 w-full max-w-lg relative sv-modal-enter sv-modal-show" role="dialog" aria-modal="true">
-      <button id="sv-close" class="absolute right-4 top-4 text-gray-600" aria-label="Close modal">✕</button>
-      <h3 class="text-2xl font-bold mb-3">Schedule a Visit / Enquiry</h3>
-      <form id="schedule-visit-form" class="space-y-3">
-        <div><input type="text" id="user_name" name="user_name" placeholder="Your Name" required class="w-full p-3 border rounded" /></div>
-        <div><input type="email" id="user_email" name="user_email" placeholder="Your Email" required class="w-full p-3 border rounded" /></div>
-        <div><input type="tel" id="phone_number" name="phone_number" placeholder="Phone Number" required class="w-full p-3 border rounded" /></div>
-        <div><input type="text" id="child_age" name="child_age" placeholder="Child's Age (e.g., 2.5 years)" required class="w-full p-3 border rounded" /></div>
-        <div><label class="text-sm">Preferred Visit Date</label><input type="date" id="preferred_date" name="preferred_date" required class="w-full p-3 border rounded" /></div>
-
-        <div>
-          <label class="text-sm" for="program">Program Interested In</label>
-          <select id="program" name="program" required class="w-full p-3 border rounded" style="margin-top:6px;">
-            ${buildProgramOptionsHTML('')}
-          </select>
-        </div>
-
-        <div class="flex gap-3">
-          <button type="submit" class="btn-primary w-full">Send Request</button>
-          <button type="button" id="sv-cancel" class="btn-primary-outline w-full">Cancel</button>
-        </div>
-        <p id="sv-result" class="text-center text-sm mt-2 hidden" role="status"></p>
-      </form>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-
-  // prefill program if provided (set after element exists)
-  if(prefillProgram){
-    const sel = overlay.querySelector('#program');
-    if(sel){
-      // try to match exact value or label fuzzy
-      let matchedValue = '';
-      for(const o of PROGRAM_OPTIONS){
-        if(String(o.val).toLowerCase() === String(prefillProgram).toLowerCase() || String(o.label).toLowerCase().includes(String(prefillProgram).toLowerCase())){
-          matchedValue = o.val; break;
-        }
-      }
-      if(!matchedValue) matchedValue = prefillProgram;
-      sel.value = matchedValue;
-    }
-  }
-
-  overlay.querySelector('#sv-close').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
-  overlay.querySelector('#sv-cancel').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
-  document.addEventListener('keydown', e=> { if(e.key==='Escape'){ const el=document.getElementById('sv-contact-modal'); if(el){ el.remove(); lockBodyScroll(false); } } });
-
-  overlay.querySelector('#schedule-visit-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    const res = overlay.querySelector('#sv-result'); res.classList.remove('hidden'); res.textContent='Sending...';
-    const form = e.target;
-    const payload = {
-      user_name: form.user_name.value,
-      user_email: form.user_email.value,
-      phone_number: form.phone_number.value,
-      child_age: form.child_age.value,
-      preferred_date: form.preferred_date.value,
-      program: (form.program ? form.program.value : ''),
-      timestamp: new Date().toLocaleString()
-    };
-    if(window.emailjs && EMAILJS_CONFIG.SERVICE_ID){
-      emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, payload)
-        .then(()=> { res.textContent='Thanks — we will contact you shortly.'; setTimeout(()=> { overlay.remove(); lockBodyScroll(false); }, 1100); })
-        .catch(err=> { console.error('EmailJS error', err); res.textContent='Submission failed — please call +91 9032249494'; });
-    } else {
-      setTimeout(()=> { res.textContent='Thanks — we will contact you shortly.'; setTimeout(()=> { overlay.remove(); lockBodyScroll(false); }, 900); }, 900);
-    }
-  });
-}
-
-/* ---------- Resource modal (scrollable) ---------- */
-const RESOURCE_CONTENT = {
-  "early-learning": {
-    title: "The Science of Early Learning",
-    image: "images/resources/early-learning.jpg",
-    html: `
-      <p>The early years are a critical period for brain development. Preschool experiences influence neural pathways responsible for language, social skills, and executive function.</p>
-      <h4 class="mt-4 font-semibold">What we focus on</h4>
-      <ul class="list-disc pl-5 mt-2">
-        <li>Language-rich interactions and story-based learning</li>
-        <li>Play-based activities that strengthen attention and memory</li>
-        <li>Opportunities for exploration to build curiosity and confidence</li>
-      </ul>
-      <p class="mt-3">Our teachers scaffold learning to ensure each child experiences success and joyful discovery.</p>
-    `
-  },
-  "social-skills": {
-    title: "Social Skills Development",
-    image: "images/resources/social-skills.jpg",
-    html: `
-      <p>Preschool is where children learn to share, cooperate, and express emotions positively. Peer interactions and guided group activities build empathy and communication.</p>
-      <h4 class="mt-4 font-semibold">How we support social growth</h4>
-      <ul class="list-disc pl-5 mt-2">
-        <li>Structured group play and turn-taking games</li>
-        <li>Emotion coaching and language for feelings</li>
-        <li>Conflict resolution modeled by teachers</li>
-      </ul>
-    `
-  },
-  "primary-school": {
-    title: "Preparing for Primary School",
-    image: "images/resources/primary-school.jpg",
-    html: `
-      <p>Transitioning to primary school is smoother when children have early practice with routines, basic literacy and numeracy, and confidence in group learning.</p>
-      <h4 class="mt-4 font-semibold">Key preparation areas</h4>
-      <ul class="list-disc pl-5 mt-2">
-        <li>Independence & self-help skills</li>
-        <li>Following multi-step instructions and classroom routines</li>
-        <li>Foundational literacy and numeracy concepts</li>
-      </ul>
-      <p class="mt-3">We partner with parents to scaffold these skills so each child begins primary school ready and confident.</p>
-    `
-  }
-};
-
-function openResourceModal(key){
-  const data = RESOURCE_CONTENT[key];
-  if(!data) return;
-  const existing = document.getElementById('resource-modal'); if(existing) existing.remove();
-  lockBodyScroll(true);
-
-  // The modal has a scrollable content container (max-height)
-  const overlay = document.createElement('div');
-  overlay.id = 'resource-modal';
-  overlay.className = 'fixed inset-0 z-95 flex items-start justify-center bg-black/60 p-4';
-  overlay.innerHTML = `
-    <div class="bg-white rounded-xl w-full max-w-2xl overflow-hidden sv-modal-enter sv-modal-show" role="dialog" aria-modal="true" style="max-height:90vh; display:flex; flex-direction:column;">
-      <div style="height:220px; background:url('${data.image}') center/cover no-repeat;"></div>
-      <div style="padding:1.25rem; overflow:auto; flex:1;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <h3 style="font-size:1.25rem; font-weight:700;">${escapeHtml(data.title)}</h3>
-          <button id="resource-close" aria-label="Close resource modal" style="background:transparent;border:none;font-size:20px;">✕</button>
-        </div>
-        <div class="mt-4 text-gray-700">${data.html}</div>
-        <div style="margin-top:1rem; display:flex; gap:.5rem; flex-wrap:wrap;">
-          <button class="btn-primary open-contact-modal" data-program="${escapeHtml(data.title)}">Schedule a Visit</button>
-          <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
-          <a class="btn-primary-outline" href="https://wa.me/919032249494" target="_blank" rel="noopener">Chat on WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-
-  overlay.querySelector('#resource-close').addEventListener('click', ()=> { overlay.remove(); lockBodyScroll(false); });
-  document.addEventListener('keydown', e=> { if(e.key==='Escape'){ const el=document.getElementById('resource-modal'); if(el){ el.remove(); lockBodyScroll(false); } } });
-
-  // wire contact buttons inside modal
-  overlay.querySelectorAll('.open-contact-modal').forEach(b => b.addEventListener('click', ()=> openUnifiedModal({ prefillProgram: b.dataset.program || '' })));
-}
-
-/* ---------- FAQ accordion ---------- */
-function initFAQAccordion(){
-  $$('.faq-q').forEach(q=>{
-    q.addEventListener('click', ()=>{
-      const expanded = q.getAttribute('aria-expanded') === 'true';
-      const a = q.parentElement.querySelector('.faq-a');
-      const sign = q.querySelector('.sign');
-      if(!a) return;
-      if(expanded){
-        a.style.maxHeight = '0';
-        q.setAttribute('aria-expanded','false');
-        if(sign) sign.textContent = '+';
-      } else {
-        a.style.maxHeight = a.scrollHeight + 'px';
-        q.setAttribute('aria-expanded','true');
-        if(sign) sign.textContent = '−';
-      }
-    });
-  });
-}
-
-/* ---------- WhatsApp floating fab ---------- */
-function initWhatsAppFab(){
-  if(document.getElementById('whatsapp-fab-global')) return;
-  const phone = '919032249494';
-  const text = encodeURIComponent("Hello, I am interested in St. Vincent's Preschool programs.");
-  const url = `https://wa.me/${phone}?text=${text}`;
-
-  const wrapper = document.createElement('div');
-  wrapper.style.position='fixed';
-  wrapper.style.right='1.5rem';
-  wrapper.style.bottom='1.5rem';
-  wrapper.style.zIndex='80';
-  wrapper.className='whatsapp-wrapper';
-
-  const a = document.createElement('a');
-  a.id='whatsapp-fab-global';
-  a.href=url;
-  a.target='_blank';
-  a.rel='noopener';
-  a.style.width='56px';
-  a.style.height='56px';
-  a.style.background='#25D366';
-  a.style.display='flex';
-  a.style.alignItems='center';
-  a.style.justifyContent='center';
-  a.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';
-  a.style.borderRadius='999px';
-  a.setAttribute('aria-label','Chat on WhatsApp');
-  a.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.672.15-.198.297-.768.966-.942 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.173.2-.298.3-.497.1-.198.05-.372-.025-.52-.074-.149-.672-1.618-.922-2.214-.243-.579-.49-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.064 2.876 1.212 3.074c.149.198 2.095 3.2 5.077 4.487  .709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="white"/></svg>`;
-
-  const tip = document.createElement('div');
-  tip.style.position='absolute';
-  tip.style.right='70px';
-  tip.style.bottom='10px';
-  tip.style.background='rgba(31,31,31,0.92)';
-  tip.style.color='#fff';
-  tip.style.padding='6px 10px';
-  tip.style.borderRadius='8px';
-  tip.style.fontSize='13px';
-  tip.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)';
-  tip.style.opacity='0';
-  tip.style.transform='translateY(6px)';
-  tip.style.transition='opacity .28s, transform .28s';
-  tip.textContent='Chat with us on WhatsApp';
-
-  wrapper.appendChild(a);
-  wrapper.appendChild(tip);
-  document.body.appendChild(wrapper);
-  setTimeout(()=> { tip.style.opacity='1'; tip.style.transform='translateY(0)'; }, 1200);
-  setTimeout(()=> { tip.style.opacity='0'; tip.style.transform='translateY(6px)'; }, 6500);
-  a.addEventListener('mouseenter', ()=> { tip.style.opacity='1'; tip.style.transform='translateY(0)'; });
-  a.addEventListener('mouseleave', ()=> { tip.style.opacity='0'; tip.style.transform='translateY(6px)'; });
-}
-
-/* ---------- wire resource buttons ---------- */
-function wireResourceButtons(){
-  $$('[data-resource]').forEach(b => b.addEventListener('click', e => openResourceModal(e.currentTarget.dataset.resource)));
-}
-
-/* ---------- wire global CTAs ---------- */
-function wireGlobalCTAs(){
-  $$('.open-contact-modal').forEach(btn => {
-    btn.addEventListener('click', e => openUnifiedModal({ prefillProgram: btn.dataset.program || '' }));
-  });
-  const mainBtn = document.getElementById('schedule-visit-btn-main'); if(mainBtn) mainBtn.addEventListener('click', ()=> openUnifiedModal({}));
-}
-
-/* ---------- Body scroll lock helper ---------- */
-function lockBodyScroll(lock){
-  if(lock){
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = window.innerWidth - document.documentElement.clientWidth + 'px';
-  } else {
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
-  }
-}
-
-/* ---------- Inject program select into other existing forms (idempotent) ---------- */
-function injectProgramSelectToExistingForms(){
-  // selectors for known contact forms in your repo
-  const selectors = ['#unified-contact-form', 'form#contact-form', 'form.contact-form', 'form#schedule-visit-form', 'form#some-other-contact'];
-  selectors.forEach(sel => {
-    document.querySelectorAll(sel).forEach(form => {
-      if(!form) return;
-      // skip if already has a program field (select or input)
-      if(form.querySelector('select[name="program"], input[name="program"]')) return;
-      // find a good insertion point: before the last button or before textarea
-      const insertBefore = form.querySelector('button[type="submit"], input[type="submit"], textarea, .form-actions') || form.lastElementChild;
-      const wrapper = createProgramSelectElement();
-      if(insertBefore && insertBefore.parentNode) insertBefore.parentNode.insertBefore(wrapper, insertBefore);
-      else form.appendChild(wrapper);
-    });
-  });
-}
-
-/* ---------- init ---------- */
-document.addEventListener('DOMContentLoaded', ()=>{
-  initUniversalBurger();
-  initImageSlider();
-  renderTestimonialsSlider();
-  // set initial testimonial position and start autoplay
-  updateTestimonialPosition();
-  startTestAutoplay();
-  wireTestHoverPause();
-
-  // play/pause and next/prev buttons
-  document.getElementById('test-play-toggle')?.addEventListener('click', toggleTestPlay);
-  document.getElementById('test-prev')?.addEventListener('click', ()=> { testPrev(); });
-  document.getElementById('test-next')?.addEventListener('click', ()=> { testNext(); });
-
-  wireResourceButtons();
-  wireGlobalCTAs();
-  initFAQAccordion();
-  initWhatsAppFab();
-
-  // ensure selects exist on page-level forms (in case contact.html or other pages have inline forms)
-  injectProgramSelectToExistingForms();
-
-  // pause autoplay by default when user clicks inside slider wrapper (explicit stop)
-  const wrap = document.querySelector('.testimonial-slider-wrapper');
-  if(wrap){
-    wrap.addEventListener('click', ()=> { pauseAutoplayUntilPlay(); });
-  }
-
-  // Make sure dots reflect current index
-  setInterval(()=> updateTestimonialPosition(), 250);
+// Enhanced site-core.js with futuristic features and bug fixes
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('St. Vincent\'s Preschool - Futuristic Edition v2.0');
+    
+    // Initialize all components
+    initThemeSystem();
+    initMobileMenu();
+    initSmoothScroll();
+    initGallery();
+    initFormValidation();
+    initAnimations();
+    initWhatsAppFAB();
+    initAnalytics();
+    initLazyLoading();
+    initServiceWorker();
 });
+
+// Theme System
+function initThemeSystem() {
+    const themeToggle = document.querySelector('.theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    themeToggle?.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const newTheme = current === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Animate theme transition
+        document.documentElement.style.transition = 'all 0.3s ease';
+        setTimeout(() => {
+            document.documentElement.style.transition = '';
+        }, 300);
+    });
+}
+
+// Mobile Menu with Gesture Support
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const closeBtn = document.querySelector('.close-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (!menuBtn || !mobileMenu) return;
+    
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    
+    // Open/Close with buttons
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        menuBtn.setAttribute('aria-expanded', 'true');
+    });
+    
+    closeBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        document.body.style.overflow = '';
+        menuBtn.setAttribute('aria-expanded', 'false');
+    });
+    
+    // Close on backdrop click
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = '';
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    // Swipe to close on mobile
+    const menuContent = mobileMenu.querySelector('div > div');
+    
+    menuContent.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+    });
+    
+    menuContent.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+        const diff = startX - currentX;
+        
+        if (diff > 0) {
+            menuContent.style.transform = `translateX(-${diff}px)`;
+        }
+    });
+    
+    menuContent.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        if (currentX < startX - 100) {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = '';
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+        
+        menuContent.style.transform = '';
+        startX = 0;
+        currentX = 0;
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = '';
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
+
+// Enhanced Smooth Scroll
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (!targetElement) return;
+            
+            const headerHeight = document.querySelector('.cyber-header')?.offsetHeight || 80;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition - headerHeight;
+            const duration = 1000;
+            let startTime = null;
+            
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                // Easing function
+                const ease = progress < 0.5 
+                    ? 4 * progress * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                
+                window.scrollTo(0, startPosition + distance * ease);
+                
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                } else {
+                    // Focus the target for accessibility
+                    targetElement.setAttribute('tabindex', '-1');
+                    targetElement.focus();
+                    setTimeout(() => targetElement.removeAttribute('tabindex'), 1000);
+                }
+            }
+            
+            requestAnimationFrame(animation);
+        });
+    });
+}
+
+// Futuristic Gallery with 3D Effects
+function initGallery() {
+    const gallery = document.querySelector('.holographic-gallery');
+    if (!gallery) return;
+    
+    const slides = gallery.querySelectorAll('.slide');
+    if (slides.length === 0) return;
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    
+    // Create navigation if not exists
+    const nav = document.createElement('div');
+    nav.className = 'gallery-nav flex justify-center gap-4 mt-6';
+    nav.innerHTML = `
+        <button class="gallery-prev btn-futuristic">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="gallery-dots flex gap-2"></div>
+        <button class="gallery-next btn-futuristic">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    `;
+    gallery.appendChild(nav);
+    
+    // Create dots
+    const dotsContainer = nav.querySelector('.gallery-dots');
+    slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = `w-3 h-3 rounded-full ${index === 0 ? 'bg-purple-600' : 'bg-gray-300'}`;
+        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+    
+    // Navigation functions
+    function goToSlide(index) {
+        currentSlide = (index + totalSlides) % totalSlides;
+        
+        // Animate slides
+        slides.forEach((slide, i) => {
+            slide.style.transform = `translateX(${(i - currentSlide) * 100}%)`;
+            slide.style.opacity = i === currentSlide ? '1' : '0.3';
+            slide.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+        
+        // Update dots
+        dotsContainer.querySelectorAll('button').forEach((dot, i) => {
+            dot.className = `w-3 h-3 rounded-full ${i === currentSlide ? 'bg-purple-600' : 'bg-gray-300'}`;
+        });
+    }
+    
+    // Event listeners
+    nav.querySelector('.gallery-prev').addEventListener('click', () => {
+        goToSlide(currentSlide - 1);
+    });
+    
+    nav.querySelector('.gallery-next').addEventListener('click', () => {
+        goToSlide(currentSlide + 1);
+    });
+    
+    // Auto-advance
+    let autoSlide = setInterval(() => {
+        goToSlide(currentSlide + 1);
+    }, 5000);
+    
+    // Pause on hover
+    gallery.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    gallery.addEventListener('mouseleave', () => {
+        autoSlide = setInterval(() => {
+            goToSlide(currentSlide + 1);
+        }, 5000);
+    });
+    
+    // Initialize
+    goToSlide(0);
+}
+
+// Advanced Form Validation
+function initFormValidation() {
+    const forms = document.querySelectorAll('form[data-validate]');
+    
+    forms.forEach(form => {
+        const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+        
+        inputs.forEach(input => {
+            // Real-time validation
+            input.addEventListener('blur', validateField);
+            input.addEventListener('input', clearError);
+            
+            // Add validation patterns
+            if (input.type === 'tel') {
+                input.pattern = '[0-9]{10}';
+                input.title = 'Please enter a valid 10-digit phone number';
+            }
+            
+            if (input.type === 'email') {
+                input.pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$';
+                input.title = 'Please enter a valid email address';
+            }
+        });
+        
+        // Form submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateForm(this)) return;
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                
+                // Add metadata
+                data.timestamp = new Date().toISOString();
+                data.pageUrl = window.location.href;
+                data.userAgent = navigator.userAgent;
+                
+                // Send to server (replace with your endpoint)
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    showSuccessMessage(this, 'Thank you! We\'ll contact you soon.');
+                    this.reset();
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (error) {
+                showErrorMessage(this, 'Something went wrong. Please try again or call us directly.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    });
+    
+    function validateField(e) {
+        const input = e.target;
+        const isValid = input.checkValidity();
+        
+        if (!isValid) {
+            showInputError(input, input.validationMessage);
+        } else {
+            clearError(input);
+        }
+        
+        return isValid;
+    }
+    
+    function validateForm(form) {
+        let isValid = true;
+        const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+        
+        inputs.forEach(input => {
+            if (!validateField({ target: input })) {
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+    
+    function showInputError(input, message) {
+        const formGroup = input.closest('.form-group') || input.parentElement;
+        let errorElement = formGroup.querySelector('.error-message');
+        
+        if (!errorElement) {
+            errorElement = document.createElement('div');
+            errorElement.className = 'error-message text-red-500 text-sm mt-1';
+            formGroup.appendChild(errorElement);
+        }
+        
+        errorElement.textContent = message;
+        input.classList.add('border-red-500');
+        input.classList.remove('border-green-500');
+    }
+    
+    function clearError(input) {
+        const formGroup = input.closest('.form-group') || input.parentElement;
+        const errorElement = formGroup.querySelector('.error-message');
+        
+        if (errorElement) {
+            errorElement.remove();
+        }
+        
+        input.classList.remove('border-red-500');
+        input.classList.add('border-green-500');
+    }
+    
+    function showSuccessMessage(form, message) {
+        let successElement = form.querySelector('.success-message');
+        
+        if (!successElement) {
+            successElement = document.createElement('div');
+            successElement.className = 'success-message';
+            form.insertBefore(successElement, form.firstChild);
+        }
+        
+        successElement.innerHTML = `
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            </div>
+        `;
+        
+        setTimeout(() => successElement.remove(), 5000);
+    }
+    
+    function showErrorMessage(form, message) {
+        let errorElement = form.querySelector('.form-error-message');
+        
+        if (!errorElement) {
+            errorElement = document.createElement('div');
+            errorElement.className = 'form-error-message';
+            form.insertBefore(errorElement, form.firstChild);
+        }
+        
+        errorElement.innerHTML = `
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            </div>
+        `;
+        
+        setTimeout(() => errorElement.remove(), 5000);
+    }
+}
+
+// Animation System
+function initAnimations() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements with animation classes
+    document.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Add CSS for animations
+    const style = document.createElement('style');
+    style.textContent = `
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in-up.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .slide-in-left.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .slide-in-right.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Futuristic WhatsApp FAB
+function initWhatsAppFAB() {
+    if (document.getElementById('whatsapp-fab')) return;
+    
+    const fab = document.createElement('a');
+    fab.id = 'whatsapp-fab';
+    fab.href = 'https://wa.me/919032249494?text=Hello! I am interested in St. Vincent\'s Preschool programs.';
+    fab.target = '_blank';
+    fab.rel = 'noopener noreferrer';
+    fab.setAttribute('aria-label', 'Chat on WhatsApp');
+    
+    fab.innerHTML = `
+        <div class="whatsapp-fab-inner">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-tooltip">Chat with us!</span>
+        </div>
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        #whatsapp-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            overflow: hidden;
+        }
+        
+        #whatsapp-fab:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+        
+        #whatsapp-fab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        #whatsapp-fab:hover::before {
+            opacity: 1;
+        }
+        
+        .whatsapp-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+        
+        #whatsapp-fab:hover .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            #whatsapp-fab {
+                bottom: 16px;
+                right: 16px;
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+            }
+        }
+    `;
+    
+    document.head.appendChild(style);
+    document.body.appendChild(fab);
+}
+
+// Analytics (Privacy-focused)
+function initAnalytics() {
+    // Only track if user consents (GDPR compliant)
+    if (localStorage.getItem('analytics-consent') !== 'true') return;
+    
+    // Simple pageview tracking
+    const pageviewData = {
+        url: window.location.href,
+        referrer: document.referrer,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent
+    };
+    
+    // Send to your analytics endpoint
+    fetch('/api/analytics/pageview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pageviewData)
+    }).catch(() => {
+        // Silent fail for analytics
+    });
+}
+
+// Lazy Loading for Images
+function initLazyLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute('data-src');
+                    
+                    if (src) {
+                        img.src = src;
+                        img.removeAttribute('data-src');
+                    }
+                    
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
+}
+
+// Service Worker Registration
+function initServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('ServiceWorker registered:', registration);
+                })
+                .catch(error => {
+                    console.log('ServiceWorker registration failed:', error);
+                });
+        });
+    }
+}
+
+// Global Modal System
+function openUnifiedModal(options = {}) {
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 z-9999 flex items-center justify-center p-4';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'modal-title');
+    
+    modal.innerHTML = `
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" aria-hidden="true"></div>
+        <div class="relative bg-white rounded-2xl p-8 max-w-lg w-full transform transition-all duration-300 scale-95 opacity-0">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="this.closest('[role=dialog]').remove()">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <h2 id="modal-title" class="text-2xl font-bold mb-6">Schedule a Futuristic Tour</h2>
+            
+            <form id="tour-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Your Name</label>
+                    <input type="text" required class="cyber-input" name="name">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Phone Number</label>
+                    <input type="tel" required class="cyber-input" name="phone" pattern="[0-9]{10}">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Child's Age</label>
+                    <select class="cyber-input" name="age" required>
+                        <option value="">Select Age</option>
+                        <option value="1.5-2">1.5 - 2 years</option>
+                        <option value="2-3">2 - 3 years</option>
+                        <option value="3-4">3 - 4 years</option>
+                        <option value="4-5">4 - 5 years</option>
+                        <option value="5-6">5 - 6 years</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Program Interest</label>
+                    <select class="cyber-input" name="program" required>
+                        <option value="">Select Program</option>
+                        <option ${options.program === 'AI Playgroup' ? 'selected' : ''}>AI Playgroup</option>
+                        <option ${options.program === 'Cyber Nursery' ? 'selected' : ''}>Cyber Nursery</option>
+                        <option ${options.program === 'VR Pre-Primary' ? 'selected' : ''}>VR Pre-Primary</option>
+                        <option value="Day Care">Day Care</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-futuristic btn-futuristic-primary w-full">
+                    <i class="fas fa-paper-plane mr-2"></i>Submit Request
+                </button>
+            </form>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Animate in
+    setTimeout(() => {
+        const modalContent = modal.querySelector('.relative');
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+    }, 10);
+    
+    // Handle form submission
+    modal.querySelector('#tour-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        // Form submission logic here
+    });
+    
+    // Close on Escape
+    document.addEventListener('keydown', function closeOnEscape(e) {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', closeOnEscape);
+        }
+    });
+    
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
+
+// Export for global use
+window.openUnifiedModal = openUnifiedModal;
+
+// Performance monitoring
+if ('performance' in window) {
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const perfData = window.performance.getEntriesByType('navigation')[0];
+            if (perfData && perfData.loadEventEnd) {
+                console.log(`Page loaded in ${perfData.loadEventEnd.toFixed(2)}ms`);
+            }
+        }, 0);
+    });
+}
