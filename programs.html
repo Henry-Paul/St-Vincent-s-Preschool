@@ -1,112 +1,361 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Programs — St. Vincent's Preschool</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Programs | St. Vincent's Preschool</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-  <!-- header (same markup as index) -->
-  <header class="bg-white shadow fixed w-full z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
-        <img src="images/logo.png" alt="logo" class="w-12 h-12 object-contain">
-        <div><div class="text-xl font-semibold">St. Vincent's</div><div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div></div>
-      </a>
-      <nav class="hidden md:flex gap-6 items-center" role="navigation"><a href="index.html" class="nav-link">Home</a><a href="programs.html" class="nav-link">Programs</a><a href="gallery.html" class="nav-link">Gallery</a><a href="faq.html" class="nav-link">FAQ</a><a href="blogs.html" class="nav-link">Blog</a></nav>
-      <div class="flex items-center gap-3"><button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button></div>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="index.html" class="py-2">Home</a>
-        <a href="programs.html" class="py-2">Programs</a>
-        <a href="gallery.html" class="py-2">Gallery</a>
-        <a href="faq.html" class="py-2">FAQ</a>
-        <a href="blogs.html" class="py-2">Blog</a>
-        <a href="contact.html" class="py-2">Contact</a>
-      </div>
-    </div>
-  </header>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">SV</div>
+                    <div class="logo-text">
+                        <h1>St. Vincent's</h1>
+                        <p>Preschool</p>
+                    </div>
+                </a>
 
-  <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
-    <a href="index.html" class="inline-block mb-4 text-blue-600">← Back to Home</a>
-    <h1 class="text-3xl font-bold">Programs — Details</h1>
-    <p class="mt-2 text-gray-700">Click a program to read full details and enquire.</p>
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="programs.html" class="nav-link active">Programs</a>
+                    <a href="blogs.html" class="nav-link">Resources</a>
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
 
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <!-- Playgroup -->
-      <article class="p-6 bg-white rounded-xl shadow-lg">
-        <h3 class="text-xl font-semibold">Playgroup</h3>
-        <p class="mt-2 text-gray-600">Age: 1.5–3 years</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1">
-          <li>Short sessions & gentle settling</li>
-          <li>Sensory and social play</li>
-        </ul>
-        <div class="mt-4 flex gap-3">
-          <button class="btn-small open-contact-modal" data-program="playgroup">Enquire</button>
+                <!-- Mobile Menu Button -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
         </div>
-      </article>
+    </header>
 
-      <!-- Nursery -->
-      <article class="p-6 bg-white rounded-xl shadow-lg">
-        <h3 class="text-xl font-semibold">Nursery</h3>
-        <p class="mt-2 text-gray-600">Age: 3-4 years</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Phonics-focused activities</li><li>Counting & social skills</li></ul>
-        <button class="btn-small open-contact-modal" data-program="nursery">Enquire</button></div>
-      </article>
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="programs.html" class="mobile-nav-link active">Programs</a>
+            <a href="blogs.html" class="mobile-nav-link">Resources</a>
+            <a href="gallery.html" class="mobile-nav-link">Gallery</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
+            <a href="contact.html" class="mobile-nav-link">Contact</a>
+            <div class="mobile-contact">
+                <p><i class="fas fa-phone"></i> +91 9032249494</p>
+                <p><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</p>
+            </div>
+        </div>
+    </nav>
 
-      <!-- PP1 -->
-      <article class="p-6 bg-white rounded-xl shadow-lg">
-        <h3 class="text-xl font-semibold">Pre-Primary 1 (LKG)</h3>
-        <p class="mt-2 text-gray-600">Age: 4–5 years</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Pre-writing & phonemic awareness</li><li>Structured classroom routines</li></ul>
-        <button class="btn-small open-contact-modal" data-program="lkg">Enquire</button></div>
-      </article>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Our Programs</h1>
+                    <p class="hero-subtitle">Choose the perfect program for your child's developmental stage</p>
+                    <div class="hero-buttons">
+                        <a href="contact.html" class="btn btn-primary">Enquire Now</a>
+                        <a href="tel:+919032249494" class="btn btn-outline"><i class="fas fa-phone"></i> Call Us</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-book-open"></i>
+                        <p>Programs Hero Image</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <!-- PP2 -->
-      <article class="p-6 bg-white rounded-xl shadow-lg">
-        <h3 class="text-xl font-semibold">Pre-Primary 2 (UKG)</h3>
-        <p class="mt-2 text-gray-600">Age: 5–6 years</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Reading fluency & basic arithmetic</li><li>School readiness</li></ul>
-        <button class="btn-small open-contact-modal" data-program="ukg">Enquire</button></div>
-      </article>
+    <!-- Programs Details -->
+    <section class="section programs-details">
+        <div class="container">
+            <div class="program-card-detailed" id="playgroup">
+                <div class="program-header">
+                    <div class="program-badge-large">1.5 - 3 Years</div>
+                    <h2 class="program-title-large">Playgroup</h2>
+                </div>
+                
+                <div class="program-content">
+                    <div class="program-description">
+                        <h3><i class="fas fa-bullseye"></i> Objective</h3>
+                        <p>Social & Sensory Exploration - Building the foundation for learning through structured play and sensory activities.</p>
+                        
+                        <h3><i class="fas fa-star"></i> Key Features</h3>
+                        <ul class="program-feature-list">
+                            <li><i class="fas fa-check-circle"></i> Structured play activities for motor skills</li>
+                            <li><i class="fas fa-check-circle"></i> Language development through songs & rhymes</li>
+                            <li><i class="fas fa-check-circle"></i> Social interaction with peers</li>
+                            <li><i class="fas fa-check-circle"></i> Sensory exploration activities</li>
+                            <li><i class="fas fa-check-circle"></i> Safe, child-friendly environment</li>
+                            <li><i class="fas fa-check-circle"></i> Daily progress tracking</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="program-cta">
+                        <div class="program-timing">
+                            <h4><i class="fas fa-clock"></i> Timing</h4>
+                            <p>9:00 AM - 12:00 PM (Flexible options available)</p>
+                        </div>
+                        <a href="contact.html?program=Playgroup" class="btn btn-primary btn-large">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="program-card-detailed" id="nursery">
+                <div class="program-header">
+                    <div class="program-badge-large">3 - 4 Years</div>
+                    <h2 class="program-title-large">Nursery</h2>
+                </div>
+                
+                <div class="program-content">
+                    <div class="program-description">
+                        <h3><i class="fas fa-bullseye"></i> Objective</h3>
+                        <p>Building Blocks for a Bright Future - Developing pre-academic skills and social competence.</p>
+                        
+                        <h3><i class="fas fa-star"></i> Key Features</h3>
+                        <ul class="program-feature-list">
+                            <li><i class="fas fa-check-circle"></i> Pre-writing and pre-reading skills</li>
+                            <li><i class="fas fa-check-circle"></i> Number recognition and counting</li>
+                            <li><i class="fas fa-check-circle"></i> Creative arts and crafts</li>
+                            <li><i class="fas fa-check-circle"></i> Music and movement activities</li>
+                            <li><i class="fas fa-check-circle"></i> Storytelling and role play</li>
+                            <li><i class="fas fa-check-circle"></i> Outdoor play and physical development</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="program-cta">
+                        <div class="program-timing">
+                            <h4><i class="fas fa-clock"></i> Timing</h4>
+                            <p>9:00 AM - 12:30 PM</p>
+                        </div>
+                        <a href="contact.html?program=Nursery" class="btn btn-primary btn-large">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="program-card-detailed" id="lkg">
+                <div class="program-header">
+                    <div class="program-badge-large">4 - 5 Years</div>
+                    <h2 class="program-title-large">LKG (Pre-Primary 1)</h2>
+                </div>
+                
+                <div class="program-content">
+                    <div class="program-description">
+                        <h3><i class="fas fa-bullseye"></i> Objective</h3>
+                        <p>Foundational Academic Skills - Preparing for formal schooling with structured learning activities.</p>
+                        
+                        <h3><i class="fas fa-star"></i> Key Features</h3>
+                        <ul class="program-feature-list">
+                            <li><i class="fas fa-check-circle"></i> Reading readiness and phonics</li>
+                            <li><i class="fas fa-check-circle"></i> Basic arithmetic operations</li>
+                            <li><i class="fas fa-check-circle"></i> Environmental science concepts</li>
+                            <li><i class="fas fa-check-circle"></i> Creative writing skills</li>
+                            <li><i class="fas fa-check-circle"></i> Computer literacy basics</li>
+                            <li><i class="fas fa-check-circle"></i> Teamwork and collaboration</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="program-cta">
+                        <div class="program-timing">
+                            <h4><i class="fas fa-clock"></i> Timing</h4>
+                            <p>9:00 AM - 1:00 PM</p>
+                        </div>
+                        <a href="contact.html?program=LKG" class="btn btn-primary btn-large">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="program-card-detailed" id="ukg">
+                <div class="program-header">
+                    <div class="program-badge-large">5 - 6 Years</div>
+                    <h2 class="program-title-large">UKG (Pre-Primary 2)</h2>
+                </div>
+                
+                <div class="program-content">
+                    <div class="program-description">
+                        <h3><i class="fas fa-bullseye"></i> Objective</h3>
+                        <p>Reading Fluency & School Readiness - Ensuring smooth transition to primary school.</p>
+                        
+                        <h3><i class="fas fa-star"></i> Key Features</h3>
+                        <ul class="program-feature-list">
+                            <li><i class="fas fa-check-circle"></i> Fluent reading and comprehension</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced arithmetic skills</li>
+                            <li><i class="fas fa-check-circle"></i> General knowledge enhancement</li>
+                            <li><i class="fas fa-check-circle"></i> Public speaking and confidence building</li>
+                            <li><i class="fas fa-check-circle"></i> Problem-solving activities</li>
+                            <li><i class="fas fa-check-circle"></i> Examination preparation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="program-cta">
+                        <div class="program-timing">
+                            <h4><i class="fas fa-clock"></i> Timing</h4>
+                            <p>9:00 AM - 1:30 PM</p>
+                        </div>
+                        <a href="contact.html?program=UKG" class="btn btn-primary btn-large">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="program-card-detailed" id="daycare">
+                <div class="program-header">
+                    <div class="program-badge-large">1.5+ Years</div>
+                    <h2 class="program-title-large">Day Care</h2>
+                </div>
+                
+                <div class="program-content">
+                    <div class="program-description">
+                        <h3><i class="fas fa-bullseye"></i> Objective</h3>
+                        <p>Safe, Structured Extended Care - Providing a nurturing environment for working parents.</p>
+                        
+                        <h3><i class="fas fa-star"></i> Key Features</h3>
+                        <ul class="program-feature-list">
+                            <li><i class="fas fa-check-circle"></i> Extended hours (8:00 AM - 6:00 PM)</li>
+                            <li><i class="fas fa-check-circle"></i> Nutritious meals and snacks</li>
+                            <li><i class="fas fa-check-circle"></i> Nap/rest facilities</li>
+                            <li><i class="fas fa-check-circle"></i> Supervised play and activities</li>
+                            <li><i class="fas fa-check-circle"></i> Homework assistance (for older kids)</li>
+                            <li><i class="fas fa-check-circle"></i> Flexible drop-off and pick-up</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="program-cta">
+                        <div class="program-timing">
+                            <h4><i class="fas fa-clock"></i> Timing</h4>
+                            <p>8:00 AM - 6:00 PM (Flexible)</p>
+                        </div>
+                        <a href="contact.html?program=Day%20Care" class="btn btn-primary btn-large">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <!-- Daycare -->
-      <article class="p-6 bg-white rounded-xl shadow-lg md:col-span-3">
-        <h3 class="text-xl font-semibold">Day Care</h3>
-        <p class="mt-2 text-gray-600">Age: 1.5 years onwards</p>
-        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Meals, rest, and supervised activities</li><li>Continuity of care</li></ul>
-        <button class="btn-small open-contact-modal" data-program="daycare">Enquire</button></div>
-      </article>
-    </div>
-  </main>
+    <!-- Age Guide -->
+    <section class="section age-guide">
+        <div class="container">
+            <h2 class="section-title">Age Group Guide</h2>
+            <p class="section-subtitle">Find the right program for your child's age</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-point">1.5-3</div>
+                    <div class="timeline-content">
+                        <h3>Playgroup</h3>
+                        <p>Focus on social skills and sensory development</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-point">3-4</div>
+                    <div class="timeline-content">
+                        <h3>Nursery</h3>
+                        <p>Introduction to basic concepts and structured play</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-point">4-5</div>
+                    <div class="timeline-content">
+                        <h3>LKG</h3>
+                        <p>Foundational academic skills preparation</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-point">5-6</div>
+                    <div class="timeline-content">
+                        <h3>UKG</h3>
+                        <p>School readiness and advanced learning</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-point">1.5+</div>
+                    <div class="timeline-content">
+                        <h3>Day Care</h3>
+                        <p>Extended care for working parents</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-   <footer class="site-footer bg-[--brand] text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
-      <div>
-        <img src="images/logo.png" alt="logo" class="w-20 mb-3">
-        <p class="text-gray-200">St. Vincent's Preschool — Nurturing early learning in Chandanagar.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <ul class="mt-3 space-y-2 text-gray-200">
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-2 text-gray-200">+91 9032249494<br/>Stvincent.school25@gmail.com</p>
-      </div>
-    </div>
-    <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">St. Vincent's Preschool</div>
+                    <p class="footer-tagline">"Where Every Child Shines"</p>
+                    <p class="footer-address">
+                        <i class="fas fa-map-marker-alt"></i> Street 1, Plot 454, Aparna Hillpark Rd,<br>
+                        KSR Layout, PJR Layout, Chandanagar, Hyderabad
+                    </p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="blogs.html">Resources</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +91 9032249494</li>
+                        <li><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM</li>
+                        <li><i class="fas fa-clock"></i> Saturday: 8:00 AM - 4:00 PM</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 St. Vincent's Preschool. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="js/site-core.js"></script>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool%20-%20I%20have%20a%20question%20about%20your%20programs" 
+       class="whatsapp-float" 
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="js/site-core.js"></script>
 </body>
 </html>
