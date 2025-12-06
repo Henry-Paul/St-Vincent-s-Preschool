@@ -1,287 +1,318 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blog — St. Vincent's Preschool</title>
-  <meta name="description" content="Parenting & early learning blog - St. Vincent's Preschool" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    :root { --brand: #8b2b58; --brand-dark: #6f1f44; }
-    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#fffaf8; color:#0f172a; }
-    .btn-primary{background:var(--brand);color:#fff;padding:.65rem 1rem;border-radius:999px;font-weight:600;display:inline-flex;gap:.5rem;align-items:center}
-    .btn-primary-outline{border:2px solid var(--brand);color:var(--brand);padding:.5rem .9rem;border-radius:999px;font-weight:600;background:transparent}
-    .cta-yellow{background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:600}
-    .blog-card img{height:200px;object-fit:cover;border-radius:12px}
-    .modal-inner-scroll{max-height:calc(100vh - 180px);overflow:auto;padding-right:8px;-webkit-overflow-scrolling:touch}
-    .blog-meta{color:#6b7280;font-size:.95rem}
-    .open-contact-modal{cursor:pointer}
-    @media (max-width:640px){ .blog-card img{height:150px} .modal-inner-scroll{max-height:calc(100vh - 120px);} }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources & Insights | St. Vincent's Preschool</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">SV</div>
+                    <div class="logo-text">
+                        <h1>St. Vincent's</h1>
+                        <p>Preschool</p>
+                    </div>
+                </a>
 
-  <header class="bg-white shadow fixed w-full z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
-        <img src="images/logo.png" alt="logo" class="w-12 h-12 object-contain">
-        <div>
-          <div class="text-xl font-semibold" style="color:var(--brand)">St. Vincent's</div>
-          <div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div>
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="programs.html" class="nav-link">Programs</a>
+                    <a href="blogs.html" class="nav-link active">Resources</a>
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
         </div>
-      </a>
+    </header>
 
-      <nav class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav-link text-gray-700 hover:text-[--brand]">Home</a>
-        <a href="programs.html" class="nav-link text-gray-700 hover:text-[--brand]">Programs</a>
-        <a href="gallery.html" class="nav-link text-gray-700 hover:text-[--brand]">Gallery</a>
-        <a href="faq.html" class="nav-link text-gray-700 hover:text-[--brand]">FAQ</a>
-        <a href="contact.html" class="btn-primary-outline">Contact</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <button id="back-btn" class="hidden md:inline-flex items-center gap-2 text-sm text-gray-600" onclick="history.back()">← Back</button>
-        <button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="index.html" class="py-2">Home</a>
-        <a href="programs.html" class="py-2">Programs</a>
-        <a href="gallery.html" class="py-2">Gallery</a>
-        <a href="faq.html" class="py-2">FAQ</a>
-        <a href="contact.html" class="py-2">Contact</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
-    <div class="flex items-center justify-between mb-8">
-      <div>
-        <h1 class="text-4xl font-bold text-gray-900">Parenting & Early Learning Blog</h1>
-        <p class="text-gray-600 mt-2">Helpful guides, research-backed insights and practical tips for parents.</p>
-      </div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8">
-      <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
-        <img src="images/blog/blog-1.jpeg" alt="Why play matters">
-        <h3 class="text-2xl font-semibold text-gray-800 mt-4">Why Play Matters</h3>
-        <p class="text-gray-600 mt-2">How play-based learning supports cognitive, social, and physical development in early childhood.</p>
-        <div class="mt-6 flex gap-3">
-          <button class="open-blog cta-yellow" data-blog-id="1" aria-haspopup="dialog">Read Blog</button>
-          <button class="open-contact-modal btn-primary-outline" data-program="Why Play Matters">Enquire</button>
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="programs.html" class="mobile-nav-link">Programs</a>
+            <a href="blogs.html" class="mobile-nav-link active">Resources</a>
+            <a href="gallery.html" class="mobile-nav-link">Gallery</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
+            <a href="contact.html" class="mobile-nav-link">Contact</a>
+            <div class="mobile-contact">
+                <p><i class="fas fa-phone"></i> +91 9032249494</p>
+                <p><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</p>
+            </div>
         </div>
-      </article>
+    </nav>
 
-      <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
-        <img src="images/blog/blog-2.jpeg" alt="Social growth">
-        <h3 class="text-2xl font-semibold text-gray-800 mt-4">Social Growth & Transitions</h3>
-        <p class="text-gray-600 mt-2">Essential strategies for helping your child transition to school with confidence and ease.</p>
-        <div class="mt-6 flex gap-3">
-          <button class="open-blog cta-yellow" data-blog-id="2" aria-haspopup="dialog">Read Blog</button>
-          <button class="open-contact-modal btn-primary-outline" data-program="Social Growth & Transitions">Enquire</button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Resources & Insights</h1>
+                    <p class="hero-subtitle">Expert tips and research-backed articles for parents</p>
+                    <div class="hero-buttons">
+                        <a href="#featured" class="btn btn-primary">Read Featured</a>
+                        <a href="#all-articles" class="btn btn-outline">Browse All</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-book-reader"></i>
+                        <p>Resources Hero Image</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </article>
+    </section>
 
-      <article class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 blog-card">
-        <img src="images/blog/blog-3.jpeg" alt="Parenting tips">
-        <h3 class="text-2xl font-semibold text-gray-800 mt-4">Parenting Tips for Early Years</h3>
-        <p class="text-gray-600 mt-2">Short, actionable tips to encourage curiosity and maintain a supportive routine at home.</p>
-        <div class="mt-6 flex gap-3">
-          <button class="open-blog cta-yellow" data-blog-id="3" aria-haspopup="dialog">Read Blog</button>
-          <button class="open-contact-modal btn-primary-outline" data-program="Parenting Tips">Enquire</button>
+    <!-- Featured Articles -->
+    <section class="section featured-articles" id="featured">
+        <div class="container">
+            <h2 class="section-title">Featured Articles</h2>
+            <p class="section-subtitle">Must-read guides for parents</p>
+            
+            <div class="featured-grid">
+                <article class="featured-article featured-main">
+                    <div class="featured-badge">Featured</div>
+                    <div class="article-content">
+                        <span class="article-category">Child Development</span>
+                        <h3 class="article-title">Why Play Matters: The Science Behind Play-Based Learning</h3>
+                        <p class="article-excerpt">Discover how structured play activities contribute to cognitive, social, and emotional development in early childhood...</p>
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar"></i> March 15, 2025</span>
+                            <span class="article-author"><i class="far fa-user"></i> Dr. Anjali Mehta</span>
+                        </div>
+                        <a href="#" class="article-link">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="featured-article">
+                    <div class="featured-badge">Popular</div>
+                    <div class="article-content">
+                        <span class="article-category">Parenting Tips</span>
+                        <h3 class="article-title">School Transition Guide: Preparing Your Child for Preschool</h3>
+                        <p class="article-excerpt">Practical tips for smooth transition to preschool, including routines, emotional preparation, and what to expect...</p>
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar"></i> March 10, 2025</span>
+                            <span class="article-author"><i class="far fa-user"></i> Sarah Johnson</span>
+                        </div>
+                        <a href="#" class="article-link">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
         </div>
-      </article>
-    </div>
-  </main>
+    </section>
 
-  <footer class="site-footer bg-[--brand] text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
-      <div>
-        <img src="images/logo.png" alt="logo" class="w-20 mb-3">
-        <p class="text-gray-200">St. Vincent's Preschool — Nurturing early learning in Chandanagar.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <ul class="mt-3 space-y-2 text-gray-200">
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="index.html">Home</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-2 text-gray-200">+91 9032249494<br/>Stvincent.school25@gmail.com</p>
-      </div>
-    </div>
-    <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
-  </footer>
-
-  <!-- Fixed, scrollable blog modal (overlay scroll enabled, inner scroll smooth on mobile) -->
-  <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden overflow-y-auto">
-    <div class="min-h-screen flex items-start md:items-center justify-center p-4">
-      <div id="blog-modal-inner" class="bg-white rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden" role="dialog" aria-modal="true"
-           style="max-height: calc(100vh - 48px); display:flex; flex-direction:column;">
-        <div class="p-6 pb-3 border-b flex justify-between items-start">
-          <div>
-            <h2 id="blog-title" class="text-2xl font-bold text-[--brand]"></h2>
-            <p id="blog-meta" class="blog-meta mt-1"></p>
-          </div>
-          <div>
-            <button id="blog-close" aria-label="Close blog" class="text-gray-500 hover:text-gray-700">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-          </div>
+    <!-- All Articles -->
+    <section class="section all-articles" id="all-articles">
+        <div class="container">
+            <h2 class="section-title">All Articles</h2>
+            <p class="section-subtitle">Browse our complete resource library</p>
+            
+            <div class="articles-grid">
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="image-placeholder-small">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                    </div>
+                    <div class="article-card-content">
+                        <span class="article-category">Science & Research</span>
+                        <h3 class="article-card-title">Early Brain Development: What Every Parent Should Know</h3>
+                        <p class="article-card-excerpt">Understanding how preschool experiences shape neural connections and lifelong learning abilities...</p>
+                        <div class="article-card-meta">
+                            <span class="article-date"><i class="far fa-calendar"></i> Feb 28, 2025</span>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="image-placeholder-small">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                    </div>
+                    <div class="article-card-content">
+                        <span class="article-category">Social Skills</span>
+                        <h3 class="article-card-title">Building Social Skills: How Preschool Helps</h3>
+                        <p class="article-card-excerpt">Learn how peer interaction, sharing, and group activities develop emotional intelligence...</p>
+                        <div class="article-card-meta">
+                            <span class="article-date"><i class="far fa-calendar"></i> Feb 20, 2025</span>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="image-placeholder-small">
+                            <i class="fas fa-home"></i>
+                        </div>
+                    </div>
+                    <div class="article-card-content">
+                        <span class="article-category">Activities</span>
+                        <h3 class="article-card-title">Home Learning Activities: Simple Ideas for Parents</h3>
+                        <p class="article-card-excerpt">Easy, development-focused activities you can do at home to reinforce preschool learning...</p>
+                        <div class="article-card-meta">
+                            <span class="article-date"><i class="far fa-calendar"></i> Feb 15, 2025</span>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="image-placeholder-small">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                    </div>
+                    <div class="article-card-content">
+                        <span class="article-category">Nutrition</span>
+                        <h3 class="article-card-title">Nutrition for Growing Minds: Healthy Eating Habits</h3>
+                        <p class="article-card-excerpt">Essential nutrients for brain development and tips for encouraging healthy eating habits...</p>
+                        <div class="article-card-meta">
+                            <span class="article-date"><i class="far fa-calendar"></i> Feb 10, 2025</span>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="image-placeholder-small">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                    </div>
+                    <div class="article-card-content">
+                        <span class="article-category">Routine</span>
+                        <h3 class="article-card-title">Importance of Routine in Early Childhood</h3>
+                        <p class="article-card-excerpt">How consistent routines help children feel secure and support their development...</p>
+                        <div class="article-card-meta">
+                            <span class="article-date"><i class="far fa-calendar"></i> Feb 5, 2025</span>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="image-placeholder-small">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                    </div>
+                    <div class="article-card-content">
+                        <span class="article-category">Communication</span>
+                        <h3 class="article-card-title">Effective Parent-Teacher Communication</h3>
+                        <p class="article-card-excerpt">Strategies for building strong partnerships with your child's teachers for better outcomes...</p>
+                        <div class="article-card-meta">
+                            <span class="article-date"><i class="far fa-calendar"></i> Jan 30, 2025</span>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="text-center">
+                <button class="btn btn-outline" id="loadMore">Load More Articles</button>
+            </div>
         </div>
+    </section>
 
-        <div id="blog-body" class="p-6 modal-inner-scroll" tabindex="0" aria-live="polite">
-          <!-- injected content -->
+    <!-- Newsletter -->
+    <section class="section newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for parenting tips, articles, and preschool updates</p>
+                
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </div>
+                    <p class="form-note">We respect your privacy. Unsubscribe at any time.</p>
+                </form>
+            </div>
         </div>
+    </section>
 
-        <div class="p-6 pt-3 border-t flex justify-end gap-3 bg-gray-50">
-          <button class="cta-yellow open-contact-modal" data-program="General Enquiry from Blog">Enquire</button>
-          <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">St. Vincent's Preschool</div>
+                    <p class="footer-tagline">"Where Every Child Shines"</p>
+                    <p class="footer-address">
+                        <i class="fas fa-map-marker-alt"></i> Street 1, Plot 454, Aparna Hillpark Rd,<br>
+                        KSR Layout, PJR Layout, Chandanagar, Hyderabad
+                    </p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="blogs.html">Resources</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +91 9032249494</li>
+                        <li><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM</li>
+                        <li><i class="fas fa-clock"></i> Saturday: 8:00 AM - 4:00 PM</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 St. Vincent's Preschool. All Rights Reserved.</p>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </footer>
 
-  <!-- Optional fallback WhatsApp if site-core doesn't inject one -->
-  <div id="whatsapp-fab-fallback" style="display:none;"></div>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool%20-%20I%20have%20a%20question%20about%20parenting" 
+       class="whatsapp-float" 
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-  <script>
-    const blogPosts = {
-      1: {
-        title: "Why Play Matters: The Foundation of Early Learning",
-        author: "St. Vincent's Staff",
-        date: "October 28, 2025",
-        image: "images/blog/blog-1.jpeg",
-        body: `
-          <p><strong>Play isn't just fun—it's foundational.</strong> Play is the most natural and effective way for young children to learn about the world, themselves, and others. A play-based curriculum is carefully orchestrated to foster holistic development.</p>
-          <h3 class="mt-4">The Four Pillars of Play-Based Learning</h3>
-          <ul class="list-disc pl-5 mt-2">
-            <li><strong>Cognitive Development:</strong> Problem-solving & critical thinking through exploration and play.</li>
-            <li><strong>Social & Emotional Growth:</strong> Sharing, negotiation and empathy developed through group play.</li>
-            <li><strong>Language Skills:</strong> Dramatic play expands vocabulary and narrative skills.</li>
-            <li><strong>Physical Development:</strong> Gross & fine motor activities that build coordination.</li>
-          </ul>
-          <p class="mt-3">By prioritizing play, we give children a strong start — curious, capable, and confident.</p>
-          <div class="mt-6 p-4 bg-[#fff4f7] rounded-lg border-l-4 border-[--brand]">
-            <p class="font-semibold">Ready to see play-based learning in action?</p>
-            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Tour - Why Play Matters">Schedule a Tour</button></div>
-          </div>
-        `
-      },
-      2: {
-        title: "Smooth Sailing: Navigating Social Growth and School Transitions",
-        author: "St. Vincent's Staff",
-        date: "November 10, 2025",
-        image: "images/blog/blog-2.jpeg",
-        body: `
-          <p>Transitions can be emotional. Focus on independence, naming emotions, and simple routines to help your child adjust smoothly.</p>
-          <h3 class="mt-4">Building Confidence and Independence</h3>
-          <ul class="list-disc pl-5 mt-2">
-            <li>Practice self-help skills</li>
-            <li>Discuss emotions and model naming feelings</li>
-            <li>Familiarize your child with school routines</li>
-          </ul>
-          <div class="mt-6 p-4 bg-[#f0fdfa] rounded-lg border-l-4 border-teal-400">
-            <p class="font-semibold">Have specific concerns?</p>
-            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Readiness Consultation">Book a Readiness Consultation</button></div>
-          </div>
-        `
-      },
-      3: {
-        title: "Simple Strategies: Parenting Tips for Early Years",
-        author: "St. Vincent's Staff",
-        date: "September 15, 2025",
-        image: "images/blog/blog-3.jpeg",
-        body: `
-          <p>Small consistent habits at home have big impact on early learning. Encourage curiosity and predictable routines.</p>
-          <h3 class="mt-4">Three Tips</h3>
-          <ol class="list-decimal pl-5 mt-2">
-            <li><strong>Encourage curiosity</strong> by asking "What do you think?"</li>
-            <li><strong>Create predictable routines</strong> for security and exploration</li>
-            <li><strong>Read daily</strong> and ask open-ended questions</li>
-          </ol>
-          <div class="mt-6 p-4 bg-[#fff0f6] rounded-lg border-l-4 border-pink-300">
-            <p class="font-semibold">Want weekly tips?</p>
-            <div class="mt-3"><button class="cta-yellow open-contact-modal" data-program="Newsletter Signup">Subscribe</button></div>
-          </div>
-        `
-      }
-    };
-
-    const overlay = document.getElementById('blog-modal');
-    const modalInner = document.getElementById('blog-modal-inner');
-    const modalTitle = document.getElementById('blog-title');
-    const modalMeta = document.getElementById('blog-meta');
-    const modalBody = document.getElementById('blog-body');
-    const blogClose = document.getElementById('blog-close');
-
-    function openBlogModal(id) {
-      const post = blogPosts[id];
-      if (!post) return;
-      modalTitle.textContent = post.title;
-      modalMeta.textContent = `By ${post.author} • ${post.date}`;
-      modalBody.innerHTML = `<div style="width:100%;height:220px;background:url('${post.image}') center/cover no-repeat;border-radius:8px;"></div>
-                             <div class="mt-4 text-gray-700">${post.body}</div>`;
-
-      overlay.classList.remove('hidden');
-      // lock page scroll but allow inner scrolling
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-      // for mobile touch behavior: prevent overlay from intercepting touchmove while allowing inner scroll
-      overlay.addEventListener('touchmove', overlayTouchHandler, { passive: false });
-      setTimeout(()=> modalBody.scrollTop = 0, 30);
-      // focus the inner scrollable area for accessibility
-      modalBody.focus();
-    }
-
-    function closeBlogModal() {
-      overlay.classList.add('hidden');
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      overlay.removeEventListener('touchmove', overlayTouchHandler);
-      modalBody.innerHTML = '';
-    }
-
-    function overlayTouchHandler(e){
-      // if the touch is on the overlay (outside modal inner), prevent body scroll
-      if (!modalInner.contains(e.target)) {
-        e.preventDefault();
-      }
-      // allow scrolling when touch is inside modalBody (inner scroll container)
-    }
-
-    document.querySelectorAll('.open-blog').forEach(btn => {
-      btn.addEventListener('click', () => openBlogModal(btn.dataset.blogId));
-    });
-
-    blogClose.addEventListener('click', closeBlogModal);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeBlogModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeBlogModal(); });
-
-    // wire open-contact-modal to site-wide modal (site-core.js should provide openUnifiedModal)
-    document.addEventListener('click', (e) => {
-      const el = e.target.closest && e.target.closest('.open-contact-modal');
-      if (!el) return;
-      const program = el.dataset.program || '';
-      if (typeof openUnifiedModal === 'function') {
-        openUnifiedModal({ prefillProgram: program });
-      } else {
-        // fallback attempt after slight delay in case site-core loads later
-        setTimeout(()=> { if (typeof openUnifiedModal === 'function') openUnifiedModal({ prefillProgram: program }); else alert('Enquiry form is not available — please call +91 9032249494'); }, 300);
-      }
-    });
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="js/site-core.js"></script>
+    <!-- Scripts -->
+    <script src="js/site-core.js"></script>
 </body>
 </html>
