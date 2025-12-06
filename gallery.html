@@ -1,87 +1,337 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Gallery — St. Vincent's Preschool</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery & Video Tour | St. Vincent's Preschool</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-  <!-- header (same) -->
-  <header class="bg-white shadow fixed w-full z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
-      <nav class="hidden md:flex gap-6 items-center"><a href="index.html" class="nav-link">Home</a><a href="programs.html" class="nav-link">Programs</a><a href="gallery.html" class="nav-link">Gallery</a><a href="faq.html" class="nav-link">FAQ</a></nav>
-      <div class="flex items-center gap-3"><button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button></div>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="index.html" class="py-2">Home</a>
-        <a href="programs.html" class="py-2">Programs</a>
-        <a href="gallery.html" class="py-2">Gallery</a>
-        <a href="faq.html" class="py-2">FAQ</a>
-        <a href="blogs.html" class="py-2">Blog</a>
-        <a href="contact.html" class="py-2">Contact</a>
-      </div>
-    </div>
-  </header>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">SV</div>
+                    <div class="logo-text">
+                        <h1>St. Vincent's</h1>
+                        <p>Preschool</p>
+                    </div>
+                </a>
 
-  <main class="max-w-6xl mx-auto px-4 pt-28 pb-16">
-    <a href="index.html" class="inline-block text-blue-600 mb-4">← Back to Home</a>
-    <h1 class="text-3xl font-bold">Gallery & Video Tour</h1>
-    <p class="mt-2 text-gray-700">View photos and our video tour.</p>
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="programs.html" class="nav-link">Programs</a>
+                    <a href="blogs.html" class="nav-link">Resources</a>
+                    <a href="gallery.html" class="nav-link active">Gallery</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
 
-    <section class="mt-6">
-      <video controls poster="images/gallery/preschool-7.jpeg" class="w-full h-96 rounded-lg object-cover mb-6">
-        <source src="videos/videos-poster.mp4" type="video/mp4">
-      </video>
-
-      <div class="gallery-frame overflow-hidden rounded-lg">
-          <div id="image-slider" class="image-slider flex transition-transform duration-500">
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-1.jpg" alt="gallery 1" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-2.jpg" alt="gallery 2" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-4.jpg" alt="gallery 3" class="w-full h-64 object-cover"></div>
-          </div>
-
-          <div class="flex justify-between items-center p-2">
-            <button id="slider-prev" class="slider-btn">‹</button>
-            <div class="slider-dots flex gap-2">
-              <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
-              <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
-              <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+                <!-- Mobile Menu Button -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                </button>
             </div>
-            <button id="slider-next" class="slider-btn">›</button>
-          </div>
         </div>
-      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="programs.html" class="mobile-nav-link">Programs</a>
+            <a href="blogs.html" class="mobile-nav-link">Resources</a>
+            <a href="gallery.html" class="mobile-nav-link active">Gallery</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
+            <a href="contact.html" class="mobile-nav-link">Contact</a>
+            <div class="mobile-contact">
+                <p><i class="fas fa-phone"></i> +91 9032249494</p>
+                <p><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Gallery & Video Tour</h1>
+                    <p class="hero-subtitle">See our facilities, classrooms, and joyful learning environment</p>
+                    <div class="hero-buttons">
+                        <a href="#photo-gallery" class="btn btn-primary">View Photos</a>
+                        <a href="#video-tour" class="btn btn-outline">Watch Video</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-images"></i>
+                        <p>Gallery Hero Image</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-  </main>
+    <!-- Photo Gallery -->
+    <section class="section photo-gallery" id="photo-gallery">
+        <div class="container">
+            <h2 class="section-title">Photo Gallery</h2>
+            <p class="section-subtitle">A glimpse into our preschool life</p>
+            
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All Photos</button>
+                <button class="filter-btn" data-filter="classrooms">Classrooms</button>
+                <button class="filter-btn" data-filter="playarea">Play Area</button>
+                <button class="filter-btn" data-filter="activities">Activities</button>
+                <button class="filter-btn" data-filter="events">Events</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="classrooms">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>Classroom 1</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Bright and colorful classroom with learning materials</div>
+                </div>
+                
+                <div class="gallery-item" data-category="playarea">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-child"></i>
+                            <p>Outdoor Play</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Safe outdoor play area with age-appropriate equipment</div>
+                </div>
+                
+                <div class="gallery-item" data-category="activities">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-paint-brush"></i>
+                            <p>Art Activity</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Creative art and craft activities</div>
+                </div>
+                
+                <div class="gallery-item" data-category="classrooms">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-book"></i>
+                            <p>Reading Corner</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Cozy reading corner with age-appropriate books</div>
+                </div>
+                
+                <div class="gallery-item" data-category="events">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-birthday-cake"></i>
+                            <p>Birthday Celebration</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Celebrating special moments together</div>
+                </div>
+                
+                <div class="gallery-item" data-category="activities">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-music"></i>
+                            <p>Music Time</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Music and movement activities</div>
+                </div>
+                
+                <div class="gallery-item" data-category="playarea">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-gamepad"></i>
+                            <p>Indoor Games</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Indoor play and learning games</div>
+                </div>
+                
+                <div class="gallery-item" data-category="events">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-graduation-cap"></i>
+                            <p>Annual Day</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Annual function and celebrations</div>
+                </div>
+                
+                <div class="gallery-item" data-category="classrooms">
+                    <div class="gallery-image">
+                        <div class="image-placeholder-gallery">
+                            <i class="fas fa-cubes"></i>
+                            <p>Learning Materials</p>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Educational toys and learning materials</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
- <footer class="site-footer bg-[--brand] text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
-      <div>
-        <img src="images/logo.png" alt="logo" class="w-20 mb-3">
-        <p class="text-gray-200">St. Vincent's Preschool — Nurturing early learning in Chandanagar.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <ul class="mt-3 space-y-2 text-gray-200">
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-2 text-gray-200">+91 9032249494<br/>Stvincent.school25@gmail.com</p>
-      </div>
-    </div>
-    <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
-  </footer>
+    <!-- Image Slider -->
+    <section class="section image-slider">
+        <div class="container">
+            <h2 class="section-title">Virtual Tour</h2>
+            <p class="section-subtitle">Swipe through our preschool highlights</p>
+            
+            <div class="slider-container">
+                <div class="slider" id="imageSlider">
+                    <div class="slider-track">
+                        <div class="slide active">
+                            <div class="slide-image">
+                                <div class="image-placeholder-slide">
+                                    <i class="fas fa-school"></i>
+                                    <p>Main Entrance</p>
+                                </div>
+                            </div>
+                            <div class="slide-caption">Welcome to our preschool - Safe and welcoming entrance</div>
+                        </div>
+                        
+                        <div class="slide">
+                            <div class="slide-image">
+                                <div class="image-placeholder-slide">
+                                    <i class="fas fa-users"></i>
+                                    <p>Group Activity</p>
+                                </div>
+                            </div>
+                            <div class="slide-caption">Group learning activities promoting teamwork</div>
+                        </div>
+                        
+                        <div class="slide">
+                            <div class="slide-image">
+                                <div class="image-placeholder-slide">
+                                    <i class="fas fa-utensils"></i>
+                                    <p>Dining Area</p>
+                                </div>
+                            </div>
+                            <div class="slide-caption">Clean and hygienic dining area for meal times</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-controls">
+                        <button class="slider-prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="slider-dots">
+                            <span class="dot active" data-slide="0"></span>
+                            <span class="dot" data-slide="1"></span>
+                            <span class="dot" data-slide="2"></span>
+                        </div>
+                        <button class="slider-next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="js/site-core.js"></script>
+    <!-- Video Tour -->
+    <section class="section video-tour" id="video-tour">
+        <div class="container">
+            <h2 class="section-title">Video Tour</h2>
+            <p class="section-subtitle">Take a virtual tour of our preschool</p>
+            
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <p>Virtual Tour Video</p>
+                    <p class="video-desc">A walkthrough of our facilities and daily activities</p>
+                </div>
+                
+                <div class="video-info">
+                    <h3>What you'll see in our tour:</h3>
+                    <ul class="video-features">
+                        <li><i class="fas fa-check"></i> Classrooms and learning centers</li>
+                        <li><i class="fas fa-check"></i> Play areas and equipment</li>
+                        <li><i class="fas fa-check"></i> Safety and hygiene facilities</li>
+                        <li><i class="fas fa-check"></i> Daily routines and activities</li>
+                        <li><i class="fas fa-check"></i> Teacher-student interactions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">St. Vincent's Preschool</div>
+                    <p class="footer-tagline">"Where Every Child Shines"</p>
+                    <p class="footer-address">
+                        <i class="fas fa-map-marker-alt"></i> Street 1, Plot 454, Aparna Hillpark Rd,<br>
+                        KSR Layout, PJR Layout, Chandanagar, Hyderabad
+                    </p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="blogs.html">Resources</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +91 9032249494</li>
+                        <li><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM</li>
+                        <li><i class="fas fa-clock"></i> Saturday: 8:00 AM - 4:00 PM</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 St. Vincent's Preschool. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool%20-%20I%20saw%20your%20gallery%20and%20would%20like%20to%20visit" 
+       class="whatsapp-float" 
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="js/site-core.js"></script>
 </body>
 </html>
