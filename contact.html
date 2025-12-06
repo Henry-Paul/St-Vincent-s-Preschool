@@ -1,249 +1,320 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Contact — St. Vincent's Preschool</title>
-  <meta name="description" content="Contact St. Vincent's Preschool — schedule a visit, find us on the map, call or WhatsApp." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    :root { --brand: #8b2b58; --brand-dark: #6f1f44; }
-    body { background: #fffaf8; color: #0f172a; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-    .btn-primary { background: var(--brand); color: #fff; padding: .6rem 1rem; border-radius: 999px; font-weight: 600; display:inline-flex; gap:.5rem; align-items:center; }
-    .btn-primary-outline { border:2px solid var(--brand); color:var(--brand); padding:.5rem .9rem; border-radius:999px; background:transparent; font-weight:600; }
-    .btn-outline { border:1px solid #e5e7eb; padding:.5rem .9rem; border-radius:10px; background:transparent; color:#0f172a; }
-    .card { background: #ffffff; border-radius: 12px; padding: 18px; box-shadow: 0 12px 30px rgba(2,6,23,0.06); }
-    label { display:block; font-weight:600; margin-bottom:6px; font-size:13px; }
-    input[type="text"], input[type="email"], input[type="tel"], textarea, select { width:100%; padding:10px; border-radius:8px; border:1px solid #e5e7eb; background:white; }
-    .map-frame { width:100%; height:100%; border:0; }
-    @media (min-width: 768px) { .map-area { height:420px; } }
-    @media (max-width: 767px) { .map-area { height:300px; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | St. Vincent's Preschool</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">SV</div>
+                    <div class="logo-text">
+                        <h1>St. Vincent's</h1>
+                        <p>Preschool</p>
+                    </div>
+                </a>
 
-  <!-- header (keeps same look as other pages) -->
-  <header class="bg-white shadow fixed w-full z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
-        <img src="images/logo.png" alt="logo" class="w-12 h-12 object-contain">
-        <div>
-          <div class="text-xl font-semibold">St. Vincent's</div>
-          <div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div>
-        </div>
-      </a>
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="programs.html" class="nav-link">Programs</a>
+                    <a href="blogs.html" class="nav-link">Resources</a>
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </nav>
 
-      <nav class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav-link text-gray-700 hover:text-[--brand]">Home</a>
-        <a href="programs.html" class="nav-link text-gray-700 hover:text-[--brand]">Programs</a>
-        <a href="gallery.html" class="nav-link text-gray-700 hover:text-[--brand]">Gallery</a>
-        <a href="faq.html" class="nav-link text-gray-700 hover:text-[--brand]">FAQ</a>
-        <a href="blogs.html" class="nav-link text-gray-700 hover:text-[--brand]">Blog</a>
-        <a href="contact.html" class="btn-primary-outline">Contact</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="index.html" class="py-2">Home</a>
-        <a href="programs.html" class="py-2">Programs</a>
-        <a href="gallery.html" class="py-2">Gallery</a>
-        <a href="faq.html" class="py-2">FAQ</a>
-        <a href="blogs.html" class="py-2">Blog</a>
-        <a href="contact.html" class="py-2">Contact</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- main -->
-  <main class="max-w-6xl mx-auto px-4 pt-28 pb-20">
-    <div class="grid md:grid-cols-2 gap-8 items-start">
-      <!-- left: contact info + form -->
-      <section class="space-y-6">
-        <div class="card">
-          <h1 class="text-2xl font-bold">Contact Us</h1>
-          <p class="mt-2 text-gray-700">Admissions open — schedule a campus visit or get in touch. You can use the enquiry button (modal) or submit the form below.</p>
-
-          <div class="mt-4 space-y-2 text-gray-700">
-            <div><strong>Address:</strong><br/>Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout, Chandanagar, Hyderabad</div>
-            <div><strong>Phone:</strong> <a href="tel:+919032249494" class="text-[--brand]">+91 9032249494</a></div>
-            <div><strong>Email:</strong> <a href="mailto:Stvincent.school25@gmail.com" class="text-[--brand]">Stvincent.school25@gmail.com</a></div>
-          </div>
-
-          <div class="mt-6 flex gap-3 flex-wrap">
-            <button class="btn-primary open-contact-modal" data-program="" aria-haspopup="dialog">Enquire / Schedule a Visit</button>
-            <a class="btn-outline" href="tel:+919032249494">Call Us</a>
-            <a class="btn-outline" href="https://wa.me/919032249494" target="_blank" rel="noopener">Chat on WhatsApp</a>
-          </div>
-        </div>
-
-        <!-- Inline contact form (matches your requested template) -->
-        <div class="card" aria-labelledby="contact-form-heading">
-          <h2 id="contact-form-heading" class="text-lg font-semibold">Or submit an enquiry</h2>
-          <p class="text-sm text-gray-600">Fill in the form and we'll get back to you within one business day.</p>
-
-          <form id="contact-form" class="mt-4" novalidate>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div>
-                <label for="parentName">Parent's Name</label>
-                <input type="text" id="parentName" name="parentName" required>
-              </div>
-              <div>
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
-              </div>
-              <div>
-                <label for="childAge">Child's Age</label>
-                <select id="childAge" name="childAge" required>
-                  <option value="">Select age range</option>
-                  <option value="1.5 to 2 years">1.5 to 2 years</option>
-                  <option value="2 to 3 years">2 to 3 years</option>
-                  <option value="3 to 4 years">3 to 4 years</option>
-                  <option value="4 to 5 years">4 to 5 years</option>
-                  <option value="5 to 6 years">5 to 6 years</option>
-                </select>
-              </div>
-              <div>
-                <label for="program-select">Program Interested In</label>
-                <select id="program-select" name="program" required>
-                  <option value="">Select a program</option>
-                  <option value="Playgroup">Playgroup</option>
-                  <option value="Nursery">Nursery</option>
-                  <option value="Pre-Primary 1 (LKG)">Pre-Primary 1 (LKG)</option>
-                  <option value="Pre-Primary 2 (UKG)">Pre-Primary 2 (UKG)</option>
-                  <option value="Day Care">Day Care</option>
-                </select>
-              </div>
+                <!-- Mobile Menu Button -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                </button>
             </div>
+        </div>
+    </header>
 
-           
-
-            <div class="mt-4 flex gap-3">
-              <button type="submit" class="btn-primary">Submit Inquiry</button>
-              <button type="reset" class="btn-primary-outline">Reset</button>
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="programs.html" class="mobile-nav-link">Programs</a>
+            <a href="blogs.html" class="mobile-nav-link">Resources</a>
+            <a href="gallery.html" class="mobile-nav-link">Gallery</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
+            <a href="contact.html" class="mobile-nav-link active">Contact</a>
+            <div class="mobile-contact">
+                <p><i class="fas fa-phone"></i> +91 9032249494</p>
+                <p><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</p>
             </div>
-
-            <p id="contact-form-success-message" class="form-success hidden mt-3" style="color:#065f46;font-weight:700;">Thank you! We'll call you soon!</p>
-            <p id="contact-form-error-message" class="form-error hidden mt-3" style="color:#b91c1c;font-weight:700;">There was an error submitting your form. Please try again or call us directly.</p>
-          </form>
         </div>
-      </section>
+    </nav>
 
-      <!-- right: interactive map + CTAs -->
-      <section>
-        <div class="card">
-          <h3 class="text-lg font-semibold">Visit Us Now</h3>
-          <p class="mt-2 text-gray-700">Interactive map — click "Get Directions" to open Google Maps with directions to our preschool.</p>
-
-          <div class="mt-4 map-area rounded-lg overflow-hidden shadow">
-            <!-- Google Maps Embed (Place API). Uses place id + API key passed below.
-                 Replace API_KEY and PLACE_ID with your values if they change. -->
-            <iframe
-              class="map-frame"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDxtmtPmYd3XN2LbsZaTGD2wjMwVbnyLo4&q=place_id:ChIJ57HUW3STyzsRXzMWdj4P9Cg">
-            </iframe>
-          </div>
-
-          <div class="mt-4 flex gap-3 flex-wrap">
-            <!-- Directions using place_id -->
-            <a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=place_id:ChIJ57HUW3STyzsRXzMWdj4P9Cg" target="_blank" rel="noopener">Get Directions</a>
-            <a class="btn-outline" href="https://maps.app.goo.gl/KsS1VMHppwR6ZxU37" target="_blank" rel="noopener">Open in Maps App</a>
-            <a class="btn-outline" href="https://www.google.com/search?q=St.+Vincent%27s+Preschool+Chandanagar" target="_blank" rel="noopener">Search on Google</a>
-          </div>
-        </div>
-
-        <!-- small helpful info -->
-        <div class="mt-4">
-          <div class="card">
-            <h4 class="font-semibold">Business Hours</h4>
-            <p class="mt-1 text-gray-700">Mon - Fri: 8:00 AM - 6:00 PM<br/>Saturday: 8:00 AM - 4:00 PM</p>
-            <div class="mt-3">
-              <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Get In Touch</h1>
+                    <p class="hero-subtitle">We'd love to hear from you. Reach out today!</p>
+                    <div class="hero-buttons">
+                        <a href="#contact-form" class="btn btn-primary">Send Message</a>
+                        <a href="tel:+919032249494" class="btn btn-outline"><i class="fas fa-phone"></i> Call Now</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <p>Contact Hero Image</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-    </div>
-  </main>
+    </section>
 
-  <footer class="site-footer bg-[--brand] text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
-      <div>
-        <img src="images/logo.png" alt="logo" class="w-20 mb-3">
-        <p class="text-gray-200">St. Vincent's Preschool — Nurturing early learning in Chandanagar.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <ul class="mt-3 space-y-2 text-gray-200">
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-2 text-gray-200">+91 9032249494<br/>Stvincent.school25@gmail.com</p>
-      </div>
-    </div>
-    <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
-  </footer>
+    <!-- Contact Information -->
+    <section class="section contact-info">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-details">
+                    <h2 class="section-title">Contact Information</h2>
+                    <p class="section-subtitle">Reach us through any of these channels</p>
+                    
+                    <div class="contact-cards">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-card-content">
+                                <h3>Visit Us</h3>
+                                <p>Street 1, Plot 454, Aparna Hillpark Rd,<br>
+                                KSR Layout, PJR Layout,<br>
+                                Chandanagar, Hyderabad</p>
+                                <a href="https://maps.google.com/?q=17.3850,78.4867" target="_blank" class="contact-link">Get Directions <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-card-content">
+                                <h3>Call Us</h3>
+                                <p>+91 9032249494</p>
+                                <a href="tel:+919032249494" class="contact-link">Call Now <i class="fas fa-phone"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-card-content">
+                                <h3>Email Us</h3>
+                                <p>Stvincent.school25@gmail.com</p>
+                                <a href="mailto:Stvincent.school25@gmail.com" class="contact-link">Send Email <i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-card-content">
+                                <h3>Business Hours</h3>
+                                <p><strong>Mon-Fri:</strong> 8:00 AM - 6:00 PM<br>
+                                <strong>Saturday:</strong> 8:00 AM - 4:00 PM<br>
+                                <strong>Sunday:</strong> Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-section" id="contact-form">
+                    <h2 class="section-title">Send Us a Message</h2>
+                    <p class="section-subtitle">We'll get back to you within 24 hours</p>
+                    
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                            <div class="form-error" id="nameError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <div class="form-error" id="emailError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+91" required>
+                            <div class="form-error" id="phoneError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="program" class="form-label">Program Interested In *</label>
+                            <select id="program" name="program" class="form-select" required>
+                                <option value="">Select a program</option>
+                                <option value="Playgroup">Playgroup (1.5-3 years)</option>
+                                <option value="Nursery">Nursery (3-4 years)</option>
+                                <option value="LKG">LKG (4-5 years)</option>
+                                <option value="UKG">UKG (5-6 years)</option>
+                                <option value="Day Care">Day Care (1.5+ years)</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                            <div class="form-error" id="programError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Your Message *</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="Tell us about your child and any specific questions..." required></textarea>
+                            <div class="form-error" id="messageError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-large" id="submitBtn">
+                                <span id="submitText">Send Message</span>
+                                <div class="spinner hidden" id="submitSpinner"></div>
+                            </button>
+                        </div>
+                        
+                        <div class="form-success hidden" id="formSuccess">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Thank you! Your message has been sent successfully. We'll contact you soon.</p>
+                        </div>
+                        
+                        <div class="form-error-message hidden" id="formError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>There was an error sending your message. Please try again or call us directly.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- EmailJS + site core (your site-core.js includes modal, WhatsApp etc) -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="js/site-core.js"></script>
+    <!-- Map Section -->
+    <section class="section map-section">
+        <div class="container">
+            <h2 class="section-title">Our Location</h2>
+            <p class="section-subtitle">Find us easily with these directions</p>
+            
+            <div class="map-container">
+                <div class="map-placeholder" id="mapPlaceholder">
+                    <div class="map-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Google Maps Integration</h3>
+                    <p>Latitude: 17.3850 | Longitude: 78.4867</p>
+                    <p>Place ID: ChIJ57HUW3STyzsRXzMWdj4P9Cg</p>
+                    <a href="https://maps.google.com/?q=17.3850,78.4867" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt"></i> Open in Google Maps
+                    </a>
+                </div>
+                
+                <div class="directions">
+                    <h3><i class="fas fa-directions"></i> Directions</h3>
+                    <p><strong>From Hitech City:</strong> Take Miyapur Road, turn at Chandanagar junction</p>
+                    <p><strong>From Gachibowli:</strong> Take ISB Road, turn left at Aparna Hillpark</p>
+                    <p><strong>Public Transport:</strong> Nearest bus stop - Chandanagar Bus Stand</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- CONTACT FORM HANDLER: uses EmailJS (same keys used in site-core.js)
-       This handler simply uses emailjs if present; otherwise simulates success
-  -->
-  <script>
-    // form submission (inline contact form)
-    (function(){
-      const form = document.getElementById('contact-form');
-      if(!form) return;
-      const successMsg = document.getElementById('contact-form-success-message');
-      const errorMsg = document.getElementById('contact-form-error-message');
+    <!-- Schedule Visit -->
+    <section class="section schedule-visit">
+        <div class="container">
+            <div class="visit-cta">
+                <h2>Schedule a School Visit</h2>
+                <p>Come see our facilities and meet our teachers</p>
+                <div class="cta-buttons">
+                    <a href="tel:+919032249494" class="btn btn-primary btn-large"><i class="fas fa-calendar-alt"></i> Call to Schedule</a>
+                    <button class="btn btn-outline btn-large" id="whatsappSchedule">
+                        <i class="fab fa-whatsapp"></i> Schedule via WhatsApp
+                    </button>
+                </div>
+                <p class="visit-note">Visits available Monday to Saturday. Please call ahead to confirm timing.</p>
+            </div>
+        </div>
+    </section>
 
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        successMsg.classList.add('hidden'); errorMsg.classList.add('hidden');
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">St. Vincent's Preschool</div>
+                    <p class="footer-tagline">"Where Every Child Shines"</p>
+                    <p class="footer-address">
+                        <i class="fas fa-map-marker-alt"></i> Street 1, Plot 454, Aparna Hillpark Rd,<br>
+                        KSR Layout, PJR Layout, Chandanagar, Hyderabad
+                    </p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="blogs.html">Resources</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +91 9032249494</li>
+                        <li><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM</li>
+                        <li><i class="fas fa-clock"></i> Saturday: 8:00 AM - 4:00 PM</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 St. Vincent's Preschool. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-        const payload = {
-          parentName: form.parentName.value,
-          phone: form.phone.value,
-          childAge: form.childAge.value,
-          program: form.program ? form.program.value : '',
-          message: form.message.value,
-          timestamp: new Date().toLocaleString(),
-          source: 'Contact Page Form'
-        };
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool%20-%20I'd%20like%20to%20contact%20you" 
+       class="whatsapp-float" 
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-        // Basic validation
-        if(!payload.parentName || !payload.phone || !payload.childAge || !payload.program){
-          errorMsg.textContent = 'Please fill all required fields.'; errorMsg.classList.remove('hidden'); return;
-        }
-
-        if(window.emailjs && emailjs.send){
-          // Use same config from site-core (service/template/public key)
-          // site-core.js already initialized emailjs with PUBLIC_KEY
-          emailjs.send('service_14zrdg6','template_snxhxlk', payload)
-            .then(function(){ successMsg.classList.remove('hidden'); form.reset(); setTimeout(()=> successMsg.classList.add('hidden'), 4000); })
-            .catch(function(err){ console.error(err); errorMsg.classList.remove('hidden'); errorMsg.textContent = 'Submission failed — please call +91 9032249494'; });
-        } else {
-          // fallback: simulate success
-          successMsg.classList.remove('hidden'); form.reset();
-          setTimeout(()=> successMsg.classList.add('hidden'), 3000);
-        }
-      });
-    })();
-  </script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        emailjs.init('_XSR5F_xlm5cYAcra');
+    </script>
+    <script src="js/site-core.js"></script>
 </body>
 </html>
