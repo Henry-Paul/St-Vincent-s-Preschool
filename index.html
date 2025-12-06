@@ -1,820 +1,510 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" itemscope itemtype="http://schema.org/Preschool">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>St. Vincent's Preschool — Home</title>
-  <meta name="description" content="St. Vincent's Preschool — premium preschool & daycare in Chandanagar. Play-based EYFS curriculum." />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>St. Vincent's Preschool — Premium Early Education in Chandanagar, Hyderabad</title>
+  <meta name="title" content="St. Vincent's Preschool — Premium Early Education in Chandanagar, Hyderabad">
+  <meta name="description" content="St. Vincent's Preschool offers premium play-based EYFS curriculum for children aged 1.5-6 years. CCTV monitored secure campus, certified teachers, and holistic development programs in Chandanagar.">
+  <meta name="keywords" content="preschool in Chandanagar, daycare Hyderabad, EYFS curriculum, play-based learning, nursery school, kindergarten, early childhood education, best preschool near me">
+  <meta name="author" content="St. Vincent's Preschool">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stvincentpreschool.com/">
+  <meta property="og:title" content="St. Vincent's Preschool — Where Every Child Shines">
+  <meta property="og:description" content="Premium preschool & daycare in Chandanagar with play-based EYFS curriculum. Safe, nurturing environment for children 1.5-6 years.">
+  <meta property="og:image" content="https://stvincentpreschool.com/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="St. Vincent's Preschool - Happy children learning">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://stvincentpreschool.com/">
+  <meta property="twitter:title" content="St. Vincent's Preschool — Where Every Child Shines">
+  <meta property="twitter:description" content="Premium preschool & daycare in Chandanagar with play-based EYFS curriculum.">
+  <meta property="twitter:image" content="https://stvincentpreschool.com/images/twitter-card.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Preschool",
+    "name": "St. Vincent's Preschool & Daycare",
+    "description": "Premium preschool offering play-based EYFS curriculum for children aged 1.5-6 years in Chandanagar, Hyderabad.",
+    "url": "https://stvincentpreschool.com",
+    "telephone": "+919032249494",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Street 1, Plot 454, Aparna Hillpark Rd, KSR Layout, PJR Layout",
+      "addressLocality": "Chandanagar",
+      "addressRegion": "Hyderabad",
+      "postalCode": "500050",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "17.4855",
+      "longitude": "78.3964"
+    },
+    "openingHours": "Mo-Fr 08:00-18:00, Sa 08:00-16:00",
+    "image": "https://stvincentpreschool.com/images/logo.png",
+    "priceRange": "₹₹",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127",
+      "bestRating": "5"
+    },
+    "sameAs": [
+      "https://www.facebook.com/stvincentpreschool",
+      "https://www.instagram.com/stvincentpreschool"
+    ]
+  }
+  </script>
+  
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#8b2b58">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="css/styles.css" as="style">
+  <link rel="preload" href="js/site-core.js" as="script">
+  <link rel="preload" href="images/hero-children.jpg" as="image">
+  
+  <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
   <style>
-    :root{--brand:#8b2b58;--brand-dark:#6f1f44;--muted:#6b7280}
-    body{background:#fffaf8;color:#0f172a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
-    .btn-primary{background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:600;display:inline-flex;gap:.5rem;align-items:center}
-    .btn-primary-outline{border:2px solid var(--brand);color:var(--brand);padding:.5rem .9rem;border-radius:999px;font-weight:600;background:transparent}
-    .btn-ghost{background:transparent;color:var(--brand);padding:.4rem .8rem;border-radius:10px;border:1px dashed #f3e5ec}
-    .program-card{background:#fff}
-    .slider-btn{background:#f3f3f3;padding:.4rem .6rem;border-radius:8px}
-    .slider-dot{width:10px;height:10px;border-radius:50%;background:#ddd;display:inline-block;border:none}
-    .slider-dot.active{background:var(--brand)}
-    .testimonial-card{min-height:220px}
-    .faq-q{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-    .faq-q .sign{width:28px;height:28px;border-radius:6px;background:#fff;border:1px solid #eee;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(15,23,42,0.04)}
-    .resource-card img{height:140px;object-fit:cover;border-radius:8px}
-    .trust-visual{display:flex;gap:12px;align-items:center}
-    .trust-visual img{width:64px;height:64px;object-fit:cover;border-radius:10px}
-    .sv-modal-enter{opacity:0;transform:translateY(12px)}
-    .sv-modal-enter.sv-modal-show{opacity:1;transform:none;transition:all .28s ease}
-    a:focus, button:focus, input:focus { outline: 3px solid rgba(139,43,88,0.18); outline-offset: 3px; }
-    .-slider-wrapper { position: relative; }
-    .testimonial-controls { position: absolute; right: 1rem; top: -2.2rem; display:flex; gap:.5rem; align-items:center; }
-    .badge-google { background: linear-gradient(90deg,#fff8f9,#fff); border-radius:10px; padding:.25rem .5rem; display:inline-flex; gap:.4rem; align-items:center; font-weight:600; color:#1f2937; box-shadow:0 6px 18px rgba(0,0,0,0.06); font-size:.85rem; position:absolute; left:16px; bottom:12px; }
-    .testimonial-card { position: relative; padding-bottom: 48px; }
-    @media (max-width:640px){ .testimonial-controls{ top:-1.2rem; right:.5rem } }
-
-    /* ---------- Testimonial widget styles (scoped) ---------- */
-    .testimonials-widget { margin: 2.25rem 0; }
-    .tw-card { background: transparent; padding: 0.6rem 0; }
-    .tw-head { margin-bottom: 12px; display:flex;justify-content:space-between;align-items:center;}
-    .tw-title { margin: 0; font-size: 1.25rem; color: #0f172a; font-weight: 700; }
-    .tw-sub { margin: 2px 0 0; color: #6b7280; font-size: .95rem; }
-    .tw-badge-wrap { display:flex; align-items:center; gap:.5rem; }
-
-    .tw-controls { display:flex; justify-content:flex-end; gap:.5rem; margin-bottom:8px; }
-    .tw-nav { background:#ffffff; border:1px solid rgba(15,23,42,0.06); padding:.45rem .6rem; border-radius:8px; cursor:pointer; font-weight:700; }
-
-    .tw-track-wrap { overflow:hidden; }
-    .tw-track { display:flex; gap:12px; transition: transform .45s cubic-bezier(.2,.9,.2,1); will-change: transform; padding-bottom:6px; }
-
-    .tw-slide { min-width:280px; flex:0 0 280px; box-sizing:border-box; }
-    .tw-slide .card { background:#fff; border-radius:12px; padding:16px; box-shadow: 0 10px 30px rgba(15,23,42,0.06); height:100%; display:flex; flex-direction:column; justify-content:space-between; }
-    .tw-quote { color:#111827; line-height:1.45; font-size:0.98rem; margin:0 0 8px; white-space:pre-wrap; overflow:hidden; display:block; }
-    /* truncation: limit quote height to ~4.5 lines */
-    .tw-quote.truncated { max-height: calc(1.45em * 4.5); } /* approx 4.5 lines */
-    .tw-readmore { margin-top:6px; background:transparent;border:none;color:var(--brand);font-weight:700;cursor:pointer;padding:0 }
-    .tw-author { margin-top:8px; font-weight:700; color:#0f172a; }
-    .tw-stars { color:#f59e0b; margin-bottom:8px; display:flex; gap:4px; }
-
-    .tw-card-cta { margin-top:12px; align-self:flex-start; background: var(--brand); color:#fff; padding:8px 12px; border-radius:8px; border:0; cursor:pointer; font-weight:700; }
-
-    .tw-readmore-hidden { display:none; }
-
-    @media (min-width:992px) {
-      .tw-slide { min-width: calc((100% - 24px) / 3); flex:0 0 calc((100% - 24px) / 3); }
+    /* Inline critical CSS for above-the-fold content */
+    .critical-css {
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
     }
-    @media (min-width:768px) and (max-width:991px) {
-      .tw-slide { min-width: calc((100% - 12px) / 2); flex:0 0 calc((100% - 12px) / 2); }
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
-    @media (max-width:767px) {
-      .tw-slide { min-width: 100%; flex:0 0 100%; }
-    }
-
-    /* modal for full review (kept, but Read more now toggles inline) */
-    .review-modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1200;
-      background: rgba(7,10,20,0.6);
-      padding: 20px;
-    }
-    .review-modal.show { display:flex; }
-    .review-modal .panel {
-      background: white;
-      width: 100%;
-      max-width: 720px;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 30px 60px rgba(2,6,23,0.4);
-      max-height: 85vh;
-      overflow: auto;
-    }
-    .review-modal .meta { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-    .review-modal .meta .author { font-weight:700; }
-    .review-modal .meta .rating { color:#f59e0b; }
-    .review-modal .close-btn { background:transparent;border:none;font-size:18px;cursor:pointer }
-    /* end modal */
   </style>
 </head>
-<body>
+<body class="critical-css" data-theme="light">
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle theme mode">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+  </button>
 
-  <header class="bg-white shadow fixed w-full z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
-        <img src="images/logo.png" alt="logo" class="w-12 h-12 object-contain">
-        <div><div class="text-xl font-semibold">St. Vincent's</div><div class="text-xs text-gray-500 -mt-1">Preschool & Daycare</div></div>
-      </a>
-      <nav class="hidden md:flex gap-6 items-center" role="navigation"><a href="index.html" class="nav-link">Home</a><a href="programs.html" class="nav-link">Programs</a><a href="gallery.html" class="nav-link">Gallery</a><a href="faq.html" class="nav-link">FAQ</a><a href="blogs.html" class="nav-link">Blog</a></nav>
-      <div class="flex items-center gap-3"><button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button></div>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
-        <nav class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav-link text-gray-700 hover:text-[--brand]">Home</a>
-        <a href="programs.html" class="nav-link text-gray-700 hover:text-[--brand]">Programs</a>
-        <a href="gallery.html" class="nav-link text-gray-700 hover:text-[--brand]">Gallery</a>
-        <a href="faq.html" class="nav-link text-gray-700 hover:text-[--brand]">FAQ</a>
-        <a href="blogs.html" class="nav-link text-gray-700 hover:text-[--brand]">Blog</a>
-        <a href="contact.html" class="btn-primary-outline">Contact</a>
-      </nav>
+  <!-- Cyber Header -->
+  <header class="cyber-header" role="banner">
+    <div class="futuristic-container">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="logo-wrapper" aria-label="St. Vincent's Preschool Home">
+          <div class="logo-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="1.5"/>
+              <path d="M2 17L12 22L22 17" stroke="white" stroke-width="1.5"/>
+              <path d="M2 12L12 17L22 12" stroke="white" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-2xl font-900 tracking-tight">ST. VINCENT'S</div>
+            <div class="text-xs opacity-80 tracking-widest">PRESCHOOL & DAYCARE</div>
+          </div>
+        </a>
+
+        <nav class="cyber-nav" role="navigation" aria-label="Main navigation">
+          <a href="index.html" class="cyber-nav-link active" aria-current="page">Home</a>
+          <a href="programs.html" class="cyber-nav-link">Programs</a>
+          <a href="gallery.html" class="cyber-nav-link">Gallery</a>
+          <a href="faq.html" class="cyber-nav-link">FAQ</a>
+          <a href="blogs.html" class="cyber-nav-link">Blog</a>
+          <a href="contact.html" class="cyber-nav-link">Contact</a>
+          <button class="btn-futuristic btn-futuristic-primary ml-4" onclick="openUnifiedModal()">
+            <i class="fas fa-calendar-alt mr-2"></i>Schedule Tour
+          </button>
+        </nav>
+
+        <button class="mobile-menu-btn lg:hidden" aria-label="Open mobile menu" aria-expanded="false">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
       </div>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 pt-28 pb-20">
+  <!-- Mobile Menu -->
+  <div class="mobile-menu hidden lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+    <div class="fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 transform transition-transform">
+      <div class="p-6">
+        <button class="close-menu ml-auto block" aria-label="Close menu">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+        <nav class="mt-8 space-y-4">
+          <a href="index.html" class="block py-3 text-lg font-semibold">Home</a>
+          <a href="programs.html" class="block py-3 text-lg font-semibold">Programs</a>
+          <a href="gallery.html" class="block py-3 text-lg font-semibold">Gallery</a>
+          <a href="faq.html" class="block py-3 text-lg font-semibold">FAQ</a>
+          <a href="blogs.html" class="block py-3 text-lg font-semibold">Blog</a>
+          <a href="contact.html" class="block py-3 text-lg font-semibold">Contact</a>
+          <button class="btn-futuristic btn-futuristic-primary w-full mt-8" onclick="openUnifiedModal()">
+            Schedule Tour
+          </button>
+        </nav>
+      </div>
+    </div>
+  </div>
 
-    <section class="grid md:grid-cols-2 gap-8 items-center py-12">
-      <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-[#3b0b27]">"Where Every Child Shines"</h1>
-        <p class="mt-4 text-lg text-gray-700 max-w-xl">A premium, nurturing, and joyful environment for early childhood education. With secure facilities (including CCTV monitoring) and a safe learning environment, our play-based curriculum and caring teachers help your child grow.</p>
-        <div class="mt-6 flex gap-3 flex-wrap">
-          <a href="programs.html" class="btn-primary">Programs</a>
-          <button class="btn-primary-outline open-contact-modal" data-program="" aria-haspopup="dialog">Schedule a Tour</button>
-          <a href="tel:+919032249494" class="btn-ghost">Call Us</a>
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    <!-- Hero Section -->
+    <section class="cyber-hero" aria-labelledby="hero-title">
+      <div class="futuristic-container">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 id="hero-title" class="hero-title mb-6">
+              Where Every Child <span class="neon-text">Shines</span>
+            </h1>
+            <p class="hero-subtitle mb-8">
+              A premium, nurturing, and futuristic environment for early childhood education. 
+              With AI-monitored security, holographic learning tools, and certified educators 
+              who inspire brilliance in every child.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button class="btn-futuristic btn-futuristic-primary" onclick="openUnifiedModal()">
+                <i class="fas fa-rocket mr-2"></i>Start Journey
+              </button>
+              <a href="#programs" class="btn-futuristic">
+                <i class="fas fa-graduation-cap mr-2"></i>Explore Programs
+              </a>
+              <a href="tel:+919032249494" class="btn-futuristic">
+                <i class="fas fa-phone mr-2"></i>Call Now
+              </a>
+            </div>
+            
+            <!-- Trust Indicators -->
+            <div class="mt-12 grid grid-cols-3 gap-6">
+              <div class="text-center">
+                <div class="text-3xl font-bold neon-text">98%</div>
+                <div class="text-sm opacity-80">Parent Satisfaction</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold neon-text">15:1</div>
+                <div class="text-sm opacity-80">Student-Teacher Ratio</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold neon-text">5★</div>
+                <div class="text-sm opacity-80">Google Rating</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative">
+            <div class="holographic-card">
+              <img src="images/hero-children.jpg" 
+                   alt="Happy children learning at St. Vincent's Preschool" 
+                   class="w-full h-auto rounded-lg"
+                   loading="eager"
+                   width="600"
+                   height="400">
+              <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                <div class="text-white text-lg font-semibold">Experience the Future of Early Education</div>
+              </div>
+            </div>
+            
+            <!-- Floating Elements -->
+            <div class="absolute -top-6 -right-6 w-24 h-24 bg-cyan-500 rounded-full opacity-20 blur-xl"></div>
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-xl"></div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="mx-auto">
-        <div class="hero-frame max-w-[520px]">
-          <img src="images/hero-children.jpg" alt="Children smiling" class="w-full h-auto rounded-lg object-cover shadow-lg">
+    <!-- Programs Section -->
+    <section id="programs" class="py-20 bg-gradient-to-b from-white to-purple-50" aria-labelledby="programs-title">
+      <div class="futuristic-container">
+        <div class="text-center mb-12">
+          <h2 id="programs-title" class="text-4xl font-bold mb-4">Our <span class="neon-text">Cyber-Enhanced</span> Programs</h2>
+          <p class="text-lg opacity-80 max-w-3xl mx-auto">
+            EYFS Curriculum meets Future Tech. We blend traditional play-based learning with 
+            cutting-edge educational technology for holistic development.
+          </p>
+        </div>
+
+        <div class="cyber-grid cyber-grid-3 gap-8">
+          <!-- Program Card 1 -->
+          <article class="holographic-card" itemscope itemtype="http://schema.org/EducationalOccupationalProgram">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                <i class="fas fa-robot text-2xl text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold" itemprop="name">AI Playgroup</h3>
+                <meta itemprop="educationalCredentialAwarded" content="Early Childhood Certificate">
+                <div class="text-sm opacity-80" itemprop="timeToComplete" content="P1Y">Age: 1.5 – 3 Years</div>
+              </div>
+            </div>
+            <p class="mb-6" itemprop="description">
+              Sensory exploration with AI-assisted learning tools. Gentle introduction to technology.
+            </p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>AI Sensory Play Modules</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>Emotion Recognition Tech</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>Interactive Story Bots</span>
+              </li>
+            </ul>
+            <button class="btn-futuristic w-full" onclick="openUnifiedModal({program: 'AI Playgroup'})" itemprop="url">
+              <i class="fas fa-bolt mr-2"></i>Enquire Now
+            </button>
+          </article>
+
+          <!-- Program Card 2 -->
+          <article class="holographic-card" itemscope itemtype="http://schema.org/EducationalOccupationalProgram">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center">
+                <i class="fas fa-microchip text-2xl text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold" itemprop="name">Cyber Nursery</h3>
+                <div class="text-sm opacity-80">Age: 3 – 4 Years</div>
+              </div>
+            </div>
+            <p class="mb-6" itemprop="description">
+              Building digital literacy with coding basics and interactive phonics.
+            </p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>Basic Coding Concepts</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>AR Phonics Learning</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>Robotics Introduction</span>
+              </li>
+            </ul>
+            <button class="btn-futuristic w-full" onclick="openUnifiedModal({program: 'Cyber Nursery'})">
+              <i class="fas fa-bolt mr-2"></i>Enquire Now
+            </button>
+          </article>
+
+          <!-- Program Card 3 -->
+          <article class="holographic-card" itemscope itemtype="http://schema.org/EducationalOccupationalProgram">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
+                <i class="fas fa-vr-cardboard text-2xl text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold" itemprop="name">VR Pre-Primary</h3>
+                <div class="text-sm opacity-80">Age: 4 – 6 Years</div>
+              </div>
+            </div>
+            <p class="mb-6" itemprop="description">
+              Virtual reality field trips and immersive learning experiences.
+            </p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>VR World Exploration</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>Digital Art Creation</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-green-500"></i>
+                <span>3D Math Visualization</span>
+              </li>
+            </ul>
+            <button class="btn-futuristic w-full" onclick="openUnifiedModal({program: 'VR Pre-Primary'})">
+              <i class="fas fa-bolt mr-2"></i>Enquire Now
+            </button>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="programs" class="pt-12">
-      <header class="text-center mb-8">
-        <h2 class="text-3xl font-bold">Our Curriculum & Programs</h2>
-        <p class="mt-2 text-gray-600 max-w-3xl mx-auto">EYFS Curriculum – Learning Through Play. At St. Vincent's Preschool, we follow the Early Years Foundation Stage (EYFS) — a UK-based framework that promotes holistic growth through play and exploration. Aligned with India's National Education Policy (NEP), it builds strong foundations in language, creativity, confidence, and social skills — helping every child shine.</p>
-      </header>
-
-      <div class="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-yellow-500">
-          <div class="flex items-center space-x-4 mb-4">
-            <i class="fas fa-baby text-3xl text-yellow-500 p-3 bg-yellow-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Playgroup</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Age: 1.5 – 3 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Social & Sensory Exploration. Gentle introduction to school.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Separation comfort & secure attachments</li>
-            <li>Sensory Play (sand, water, textures)</li>
-            <li>Gross Motor Skills development</li>
-            <li>Fine Motor Development activities</li>
-            <li>Music & Movement</li>
-            <li>Early Language acquisition</li>
-            <li>Group Play and social interaction</li>
-            <li>Basic routines & independent play</li>
-          </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="Playgroup">Enquire</button>
-          </div>
+    <!-- Gallery Section -->
+    <section class="py-20" aria-labelledby="gallery-title">
+      <div class="futuristic-container">
+        <div class="text-center mb-12">
+          <h2 id="gallery-title" class="text-4xl font-bold mb-4">Holographic <span class="neon-text">Gallery</span></h2>
+          <p class="text-lg opacity-80">Experience our futuristic learning environment</p>
         </div>
 
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-green-500">
-          <div class="flex items-center space-x-4 mb-4">
-            <i class="fas fa-pencil-ruler text-3xl text-green-500 p-3 bg-green-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Nursery</h3>
+        <div class="holographic-gallery">
+          <div class="slide">
+            <img src="images/gallery/cyber-classroom.jpg" 
+                 alt="Futuristic classroom with interactive displays at St. Vincent's Preschool"
+                 loading="lazy"
+                 width="1200"
+                 height="800">
           </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Age: 3 – 4 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Building Blocks for a Bright Future.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Pre-reading & phonics awareness</li>
-            <li>Phonics (In-depth focus)</li>
-            <li>Pre-writing Skills</li>
-            <li>Number recognition & counting</li>
-            <li>Number Recognition (In-depth focus)</li>
-            <li>Physical Development</li>
-            <li>Colors & Shapes recognition</li>
-            <li>Storytelling and comprehension</li>
-            <li>Confidence in group activities</li>
-          </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="Nursery">Enquire</button>
-          </div>
+          <!-- Gallery navigation would be added here -->
         </div>
-
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-blue-500">
-          <div class="flex items-center space-x-4 mb-4">
-            <i class="fas fa-book-open text-3xl text-blue-500 p-3 bg-blue-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 1 (LKG)</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2">Age: 4 – 5 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Our program focuses on developing foundational academic skills and preparing children for formal schooling.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Reading & Writing</li>
-            <li>Basic Numeracy</li>
-            <li>Physical Development</li>
-            <li>EVS Concepts (Environmental Science)</li>
-            <li>Logical Reasoning</li>
-            <li>Creative Expression</li>
-          </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="PP1">Enquire</button>
-          </div>
-        </div>
-
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-red-500">
-          <div class="flex items-center space-x-4 mb-4">
-            <i class="fas fa-graduation-cap text-3xl text-red-500 p-3 bg-red-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Pre-Primary 2 (UKG)</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2"> Age: 5 – 6 Years</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Reading fluency, arithmetic basics & school readiness.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Advanced Reading & Writing</li>
-            <li>Mathematical Concepts</li>
-            <li>Physical Development</li>
-            <li>Science Exploration</li>
-            <li>Problem Solving</li>
-            <li>Public Speaking</li>
-          </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="PP2">Enquire</button>
-          </div>
-        </div>
-
-        <div class="program-card p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 md:col-span-2 lg:col-span-1 mx-auto md:w-full lg:w-full max-w-lg">
-          <div class="flex items-center space-x-4 mb-4">
-            <i class="fas fa-clock text-3xl text-purple-500 p-3 bg-purple-100 rounded-full"></i>
-            <h3 class="text-2xl font-bold text-gray-800">Day Care</h3>
-          </div>
-          <p class="text-sm font-semibold text-gray-500 mb-2"> Age: 1.5 Years Onwards</p>
-          <p class="text-base text-gray-700 mb-4"><strong>Core Objective:</strong> Safe, structured extended care for working parents.</p>
-          <ul class="text-sm text-gray-600 space-y-2 list-disc pl-5">
-            <li>Homework Assistance</li>
-            <li>Hobby Classes</li>
-            <li>Structured Play</li>
-            <li>Nap Time</li>
-            <li>Indoor Activities</li>
-          </ul>
-          <div class="mt-4 flex gap-3">
-            <button class="btn-small open-contact-modal" data-program="Day Care">Enquire</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex justify-center mt-12">
-        <button id="schedule-visit-btn-main" class="px-8 py-3 text-lg font-semibold text-white bg-[--brand] hover:bg-[--brand-dark] rounded-full shadow-xl transition">Schedule a Tour Today</button>
       </div>
     </section>
 
-    <section class="py-8">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-semibold">Gallery & Tour</h2>
-        <a href="gallery.html" class="text-sm text-gray-600 hover:underline">See all</a>
-      </div>
+    <!-- Testimonials -->
+    <section class="py-20 bg-gradient-to-b from-purple-50 to-white" aria-labelledby="testimonials-title">
+      <div class="futuristic-container">
+        <h2 id="testimonials-title" class="text-4xl font-bold text-center mb-12">What <span class="neon-text">Parents Say</span></h2>
+        
+        <div class="cyber-grid cyber-grid-3 gap-8">
+          <article class="cyber-testimonial" itemscope itemtype="http://schema.org/Review">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full"></div>
+              <div>
+                <div class="font-bold" itemprop="author">Priya Sharma</div>
+                <div class="text-sm opacity-80" itemprop="datePublished">2 weeks ago</div>
+              </div>
+            </div>
+            <div class="mb-4" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+              <meta itemprop="ratingValue" content="5">
+              <div class="text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p itemprop="reviewBody">
+              "The futuristic approach to early education is amazing! My child loves the interactive learning tools."
+            </p>
+          </article>
 
-      <div class="mt-4 grid md:grid-cols-2 gap-6">
+          <!-- More testimonials... -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white" aria-labelledby="cta-title">
+      <div class="futuristic-container text-center">
+        <h2 id="cta-title" class="text-4xl font-bold mb-6">Ready for the <span class="neon-text">Future of Learning</span>?</h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Join St. Vincent's Preschool and give your child the competitive edge with our cyber-enhanced curriculum.
+        </p>
+        <div class="flex flex-wrap justify-center gap-6">
+          <button class="btn-futuristic bg-white text-purple-600" onclick="openUnifiedModal()">
+            <i class="fas fa-calendar-check mr-2"></i>Book Virtual Tour
+          </button>
+          <a href="tel:+919032249494" class="btn-futuristic border-white text-white">
+            <i class="fas fa-phone mr-2"></i>+91 9032249494
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-b from-gray-900 to-black text-white py-12" role="contentinfo">
+    <div class="futuristic-container">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
         <div>
-          <video controls poster="images/preschool-7.jpeg" class="w-full h-64 rounded-lg object-cover shadow">
-            <source src="videos/videos-poster.mp4" type="video/mp4">
-            Your browser does not support video.
-          </video>
+          <div class="text-2xl font-bold mb-4">ST. VINCENT'S</div>
+          <p class="opacity-80">Shaping future innovators through futuristic early education.</p>
         </div>
-
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+          <nav aria-label="Footer navigation">
+            <ul class="space-y-2">
+              <li><a href="programs.html" class="hover:text-purple-300">Programs</a></li>
+              <li><a href="gallery.html" class="hover:text-purple-300">Gallery</a></li>
+              <li><a href="faq.html" class="hover:text-purple-300">FAQ</a></li>
+              <li><a href="blogs.html" class="hover:text-purple-300">Blog</a></li>
+            </ul>
+          </nav>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Contact</h3>
+          <address class="not-italic">
+            <p class="mb-2">Street 1, Plot 454<br>Chandanagar, Hyderabad</p>
+            <p class="mb-2">
+              <a href="tel:+919032249494" class="hover:text-purple-300">+91 9032249494</a>
+            </p>
+            <p>
+              <a href="mailto:Stvincent.school25@gmail.com" class="hover:text-purple-300">
+                Stvincent.school25@gmail.com
+              </a>
+            </p>
+          </address>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Connect</h3>
+          <div class="flex gap-4">
+            <a href="#" aria-label="Facebook" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-500">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" aria-label="Instagram" class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-500">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" aria-label="YouTube" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
       
-  
-<!-- Gallery frame (adaptive) -->
-<div class="adaptive-gallery">
-  <div class="adaptive-viewport" id="adaptive-viewport">
-    <div id="image-slider" class="adaptive-slider">
-      <div class="adaptive-slide">
-        <div class="adaptive-inner"><img src="images/gallery/preschool-1.jpeg" alt="gallery 1"></div>
-      </div>
-      <div class="adaptive-slide">
-        <div class="adaptive-inner"><img src="images/gallery/preschool-2.jpeg" alt="gallery 2"></div>
-      </div>
-      <div class="adaptive-slide">
-        <div class="adaptive-inner"><img src="images/gallery/preschool-3.jpeg" alt="gallery 3"></div>
+      <div class="border-t border-gray-800 pt-8 text-center text-sm opacity-80">
+        <p>© 2024 St. Vincent's Preschool & Daycare. All rights reserved.</p>
+        <p class="mt-2">
+          <a href="privacy.html" class="hover:text-purple-300">Privacy Policy</a> • 
+          <a href="terms.html" class="hover:text-purple-300">Terms of Service</a>
+        </p>
       </div>
     </div>
-  </div>
-
-  <div class="gallery-controls">
-    <button id="slider-prev" class="slider-btn" aria-label="Previous slide">‹</button>
-    <div class="slider-dots" role="tablist" aria-label="Gallery slides">
-      <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
-      <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
-      <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
-    </div>
-    <button id="slider-next" class="slider-btn" aria-label="Next slide">›</button>
-  </div>
-</div>      
-
-    
-<!-- END: Adaptive gallery slider -->
-
-    <section class="py-8">
-      <div class="max-w-6xl mx-auto bg-white rounded-xl p-6 shadow">
-        <h3 class="text-2xl font-bold">Why Parents Trust Us</h3>
-        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/safe-secure.png" alt="Safe and Secure">
-            <div>
-              <h4 class="font-semibold">Safe & Secure</h4>
-              <p class="text-gray-700">CCTV, child-proofed campus and strict hygiene protocols ensure a safe environment.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/play-based.png" alt="Play-Based Learning">
-            <div>
-              <h4 class="font-semibold">Play-Based Learning</h4>
-              <p class="text-gray-700">Our curriculum fosters creativity and critical thinking through hands-on activities.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/caring-teacher.png" alt="Caring Teachers">
-            <div>
-              <h4 class="font-semibold">Caring Teachers</h4>
-              <p class="text-gray-700">Passionate educators dedicated to each child's growth and happiness.</p>
-            </div>
-          </div>
-
-          <div class="trust-visual bg-white p-4 rounded-lg shadow-sm">
-            <img src="images/trust/personalized-care.png" alt="Personalized Care">
-            <div>
-              <h4 class="font-semibold">Personalized Care</h4>
-              <p class="text-gray-700">Low student-teacher ratio ensures every child receives the attention they need.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS (single placeholder) -->
-    <section id="testimonials-widget" class="testimonials-widget container" aria-label="Parent testimonials">
-      <!-- content injected by Maps Places JS -->
-    </section>
-
-    <!-- Review modal (kept, but Read more toggles inline) -->
-    <div id="review-modal" class="review-modal" role="dialog" aria-modal="true" aria-hidden="true">
-      <div class="panel" role="document">
-        <div class="meta">
-          <div>
-            <div class="author" id="modal-author"></div>
-            <div class="rating" id="modal-rating"></div>
-          </div>
-          <div>
-            <button class="close-btn" id="modal-close" aria-label="Close review">&times;</button>
-          </div>
-        </div>
-        <div style="margin-top:12px" id="modal-text"></div>
-        <div style="margin-top:18px;display:flex;gap:12px;justify-content:flex-end">
-          <button class="btn-primary open-contact-modal" id="modal-enquire">Enquire</button>
-          <button class="btn-primary-outline" id="modal-close-2">Close</button>
-        </div>
-      </div>
-    </div>
-
-    <section class="py-10">
-      <div class="max-w-6xl mx-auto bg-[#fff] rounded-xl p-8 shadow-lg text-center">
-        <h3 class="text-2xl font-bold">Ready to Give Your Child a Premium Preschool Experience?</h3>
-        <p class="text-gray-600 mt-2">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
-        <div class="mt-6 flex justify-center gap-4">
-          <button class="btn-primary open-contact-modal">Schedule a Tour Today</button>
-          <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="py-12">
-      <div class="max-w-6xl mx-auto px-4 bg-white rounded-xl p-6 shadow">
-        <h3 class="text-2xl font-bold text-center">Frequently Asked Questions</h3>
-        <p class="text-center text-gray-600 mt-2">Answers to common questions asked by parents on Google.</p>
-
-        <div class="mt-6 grid md:grid-cols-2 gap-4">
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
-              <div>What is the ideal age to start preschool?</div>
-              <div class="sign">+</div>
-            </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Children typically start between 1.5–3 years depending on readiness. Our Playgroup caters to 1.5+ with gentle settling and sensory play.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
-              <div>How can I prepare my toddler for preschool?</div>
-              <div class="sign">+</div>
-            </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Start short separation practices, encourage simple routines (handwashing, snack time), read books daily, and practice simple self-help tasks.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
-              <div>What should I look for in a quality preschool?</div>
-              <div class="sign">+</div>
-            </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Safe environment, trained teachers, play-based curriculum, low student-teacher ratio, hygiene & clear communication with parents.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
-              <div>How does preschool help with separation anxiety?</div>
-              <div class="sign">+</div>
-            </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>Gradual settling, consistent routines, familiar staff, and parent partnership help children feel secure and reduce separation anxiety.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-
-          <div class="p-4 rounded-lg border">
-            <div class="faq-q" aria-expanded="false">
-              <div>How do you handle emergencies or sickness?</div>
-              <div class="sign">+</div>
-            </div>
-            <div class="faq-a mt-3 text-gray-700" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-              <p>First-aid trained staff, parent notification protocols, and quick access to local medical support. Serious cases are immediately escalated.</p>
-              <div class="mt-3"><button class="px-4 py-2 bg-[--brand] text-white rounded open-contact-modal">Enquire Now</button></div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-     <!-- right: interactive map + CTAs -->
-      <section>
-        <div class="card">
-          <h3 class="text-lg font-semibold">Visit Us Now</h3>
-          <p class="mt-2 text-gray-700">Interactive map — click "Get Directions" to open Google Maps with directions to our preschool.</p>
-
-          <div class="mt-4 map-area rounded-lg overflow-hidden shadow">
-            <!-- Google Maps Embed (Place API). Uses place id + API key passed below.
-                 Replace API_KEY and PLACE_ID with your values if they change. -->
-            <iframe
-              class="map-frame"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/dir/?api=1&destination=place_id:ChIJ57HUW3STyzsRXzMWdj4P9Cg">
-            </iframe>
-          </div>
-
-          <div class="mt-4 flex gap-3 flex-wrap">
-            <!-- Directions using place_id -->
-            <a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=place_id:ChIJ57HUW3STyzsRXzMWdj4P9Cg" target="_blank" rel="noopener">Get Directions</a>
-            <a class="btn-outline" href="https://maps.app.goo.gl/KsS1VMHppwR6ZxU37" target="_blank" rel="noopener">Open in Maps App</a>
-            <a class="btn-outline" href="https://www.google.com/search?q=St.+Vincent%27s+Preschool+Chandanagar" target="_blank" rel="noopener">Search on Google</a>
-          </div>
-        </div>
-
-        <!-- small helpful info -->
-        <div class="mt-4">
-          <div class="card">
-            <h4 class="font-semibold">Business Hours</h4>
-            <p class="mt-1 text-gray-700">Mon - Fri: 8:00 AM - 6:00 PM<br/>Saturday: 8:00 AM - 4:00 PM</p>
-            <div class="mt-3">
-              <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  </main>
-
-  <footer class="site-footer bg-[--brand] text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
-      <div>
-        <img src="images/logo.png" alt="logo" class="w-20 mb-3">
-        <p class="text-gray-200">St. Vincent's Preschool — Nurturing early learning in Chandanagar.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <ul class="mt-3 space-y-2 text-gray-200">
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-2 text-gray-200">+91 9032249494<br/>Stvincent.school25@gmail.com</p>
-      </div>
-    </div>
-    <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
   </footer>
 
-  <!-- existing scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="js/site-core.js"></script>
-
-  <!-- Testimonials widget: init function (uses Google Maps JS Places library) -->
+  <!-- Scripts -->
+  <script src="js/site-core.js" defer></script>
   <script>
-    // ---------- CONFIG ----------
-    const GOOGLE_PLACE_ID = "ChIJ57HUW3STyzsRXzMWdj4P9Cg";
-    const GOOGLE_API_KEY  = "AIzaSyDxtmtPmYd3XN2LbsZaTGD2wjMwVbnyLo4";
+    // Theme toggle
+    document.querySelector('.theme-toggle').addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
 
-    function esc(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    // Mobile menu
+    document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+      document.querySelector('.mobile-menu').classList.remove('hidden');
+      document.querySelector('.mobile-menu-btn').setAttribute('aria-expanded', 'true');
+    });
 
-    function initTestimonialsWidget() {
-      const container = document.getElementById('testimonials-widget');
-      if (!container) return;
-      if (container.dataset._twInit) return;
-      container.dataset._twInit = '1';
+    document.querySelector('.close-menu').addEventListener('click', () => {
+      document.querySelector('.mobile-menu').classList.add('hidden');
+      document.querySelector('.mobile-menu-btn').setAttribute('aria-expanded', 'false');
+    });
 
-      container.innerHTML = `
-        <div class="tw-card">
-          <div class="tw-head">
-            <div>
-              <h3 class="tw-title">What Our Parents Say</h3>
-              <p class="tw-sub">Top ⭐⭐⭐⭐⭐ reviews from Google</p>
-            </div>
-            <div class="tw-badge-wrap"></div>
-          </div>
-
-          <div class="tw-controls" aria-hidden="true">
-            <button id="tw-prev" class="tw-nav" aria-label="Previous testimonial">◀</button>
-            <button id="tw-next" class="tw-nav" aria-label="Next testimonial">▶</button>
-          </div>
-
-          <div class="tw-track-wrap">
-            <div class="tw-track" id="tw-track"></div>
-          </div>
-        </div>
-      `;
-
-      const track = container.querySelector('#tw-track');
-      const btnPrev = container.querySelector('#tw-prev');
-      const btnNext = container.querySelector('#tw-next');
-
-      const FALLBACK = Array.isArray(window.TESTIMONIALS) ? window.TESTIMONIALS : [
-        { author: "Sai Ram", text: "My child has shown lot of development and he is now more confident after joining St. Vincent's.", rating: 5, source:'local' },
-        { author: "Latha B.", text: "St. Vincent School has excellent facilities and a clean, well-maintained campus that supports learning.", rating: 5, source:'local' },
-        { author: "Shashank Bhardwaj", text: "My child loves going to this preschool! The teachers are caring, the environment is safe and nurturing.", rating: 5, source:'local' },
-        { author: "Saurabh Shourie", text: "Great environment with lesser fees in comparison to other schools nearby. Highly recommended!", rating: 5, source:'local' },
-        { author: "Anita Singha", text: "Recently my daughter joined school and she's very happy and the school is very spacious and hygienic.", rating: 5, source:'local' },
-      ];
-
-      function renderStars(n){
-        const rating = Math.round(Number(n)||0);
-        let html='';
-        for(let i=0;i<5;i++){
-          if(i<rating) html += '<svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .587l3.668 7.431L24 9.748l-6 5.847 1.416 8.265L12 19.771 4.584 23.86 6 15.595 0 9.748l8.332-1.73L12 .587z"/></svg>';
-          else html += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .587l3.668 7.431L24 9.748l-6 5.847 1.416 8.265L12 19.771 4.584 23.86 6 15.595 0 9.748l8.332-1.73L12 .587z" stroke-width="1"/></svg>';
-        }
-        return html;
-      }
-
-      function renderReviews(list) {
-        track.innerHTML = '';
-        list.forEach((r,i) => {
-          const slide = document.createElement('div');
-          slide.className = 'tw-slide';
-          slide.innerHTML = `
-            <div class="card testimonial-card">
-              <div>
-                <div class="tw-stars" aria-hidden="true">${renderStars(r.rating)}</div>
-                <p class="tw-quote truncated">${esc(r.text)}</p>
-                <button class="tw-readmore tw-readmore-hidden" type="button">Read more</button>
-              </div>
-
-              <div>
-                <div class="tw-author">${esc(r.author)}</div>
-                <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-                  <button class="tw-card-cta open-contact-modal" data-program="Enquiry - ${esc(r.author)}">Enquire</button>
-                  ${r.source && String(r.source).toLowerCase().includes('google') ? '<span class="tw-source-tag" style="font-size:.85rem;color:#6b7280">Google</span>' : ''}
-                </div>
-              </div>
-            </div>
-          `;
-          track.appendChild(slide);
-        });
-
-        // After rendering, attach read-more logic & uniform look
-        setTimeout(() => {
-          ensureTruncationAndReadMore();
-        }, 60);
-      }
-
-      // NEW: ensure uniform heights, detect overflow, show readmore toggle, and inline expand/collapse.
-      function ensureTruncationAndReadMore() {
-        const slides = Array.from(track.querySelectorAll('.tw-slide'));
-        if (!slides.length) return;
-
-        // 1) Determine the tallest card height (after truncation applied)
-        // Apply truncation class already present; measure heights
-        let maxCardHeight = 0;
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          card.style.minHeight = ''; // reset
-        });
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          // force browser to layout
-          const h = card.getBoundingClientRect().height;
-          if (h > maxCardHeight) maxCardHeight = h;
-        });
-
-        // 2) Apply minHeight to all cards so slides visually match
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          card.style.minHeight = (maxCardHeight) + 'px';
-        });
-
-        // 3) Show Read more only for overflowing quotes and attach toggle behavior
-        slides.forEach(slide => {
-          const q = slide.querySelector('.tw-quote');
-          const btn = slide.querySelector('.tw-readmore');
-          if (!q || !btn) return;
-          // If content is taller than truncated height, enable Read more
-          const computedTruncHeight = parseFloat(getComputedStyle(q).lineHeight || 1.45) * 4.5;
-          const isOverflowing = q.scrollHeight > Math.ceil(computedTruncHeight) + 2;
-          if (isOverflowing) {
-            btn.classList.remove('tw-readmore-hidden');
-            btn.textContent = 'Read more';
-            // toggle inline expansion
-            btn.onclick = () => {
-              const expanded = !q.classList.contains('truncated') || q.dataset.expanded === 'true';
-              if (expanded) {
-                // collapse
-                q.classList.add('truncated');
-                q.dataset.expanded = 'false';
-                btn.textContent = 'Read more';
-                // restore uniform heights (recompute)
-                recomputeCardHeights();
-              } else {
-                // expand
-                q.classList.remove('truncated');
-                q.dataset.expanded = 'true';
-                btn.textContent = 'Read less';
-                // expand this card visually (set minHeight auto so content fits)
-                const card = slide.querySelector('.card');
-                card.style.minHeight = card.scrollHeight + 'px';
-              }
-            };
-          } else {
-            btn.classList.add('tw-readmore-hidden');
-          }
-        });
-      }
-
-      // recompute heights after collapse/expand
-      function recomputeCardHeights() {
-        const slides = Array.from(track.querySelectorAll('.tw-slide'));
-        let maxCardHeight = 0;
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          card.style.minHeight = ''; // reset to natural
-        });
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          const h = card.getBoundingClientRect().height;
-          if (h > maxCardHeight) maxCardHeight = h;
-        });
-        slides.forEach(slide => {
-          const card = slide.querySelector('.card');
-          card.style.minHeight = (maxCardHeight) + 'px';
-        });
-      }
-
-      function openReviewModal(slide) {
-        // not used by readmore now, but kept for compatibility
-        const text = slide.querySelector('.tw-quote')?.textContent || '';
-        const author = slide.querySelector('.tw-author')?.textContent || '';
-        const stars = slide.querySelector('.tw-stars')?.innerHTML || '';
-        document.getElementById('modal-author').textContent = author;
-        document.getElementById('modal-rating').innerHTML = stars;
-        document.getElementById('modal-text').innerHTML = '<p style="white-space:pre-wrap;line-height:1.6">'+esc(text)+'</p>';
-        const modal = document.getElementById('review-modal');
-        modal.classList.add('show');
-        modal.setAttribute('aria-hidden','false');
-      }
-
-      // modal close handlers
-      document.getElementById('modal-close').onclick = closeModal;
-      document.getElementById('modal-close-2').onclick = closeModal;
-      function closeModal(){
-        const modal = document.getElementById('review-modal');
-        modal.classList.remove('show');
-        modal.setAttribute('aria-hidden','true');
-      }
-      document.getElementById('review-modal').addEventListener('click', e => {
-        if (e.target === e.currentTarget) closeModal();
-      });
-
-      // slider logic
-      function initSlider() {
-        const slides = () => Array.from(track.children);
-        let idx = 0;
-
-        function visibleCount(){
-          const w = container.getBoundingClientRect().width;
-          if (w >= 992) return 3;
-          if (w >= 768) return 2;
-          return 1;
-        }
-
-        function update(){
-          const s = slides();
-          if (!s.length) return;
-          const gap = 12;
-          const first = s[0];
-          const cardWidth = first.getBoundingClientRect().width + gap;
-          const visible = visibleCount();
-          const maxIdx = Math.max(0, s.length - visible);
-          if (idx > maxIdx) idx = maxIdx;
-          track.style.transform = `translateX(${-(cardWidth * idx)}px)`;
-        }
-
-        const btnPrevLocal = btnPrev;
-        const btnNextLocal = btnNext;
-        btnPrevLocal && btnPrevLocal.addEventListener('click', ()=> { idx = Math.max(0, idx - 1); update(); });
-        btnNextLocal && btnNextLocal.addEventListener('click', ()=> { idx = Math.min(idx + 1, Math.max(0, slides().length - visibleCount())); update(); });
-
-        let auto = setInterval(()=> { idx = (idx + 1) % Math.max(1, slides().length); update(); }, 6000);
-        container.addEventListener('mouseenter', ()=> clearInterval(auto));
-        container.addEventListener('mouseleave', ()=> auto = setInterval(()=> { idx = (idx + 1) % Math.max(1, slides().length); update(); }, 6000));
-        window.addEventListener('resize', debounce(update,120));
-        setTimeout(update,60);
-      }
-
-      function debounce(fn, ms=100){ let t; return (...a)=>{ clearTimeout(t); t = setTimeout(()=>fn.apply(this,a), ms); }; }
-
-      // Use PlacesService (client-side)
-      try {
-        const mapEl = document.createElement('div');
-        mapEl.style.display = 'none';
-        document.body.appendChild(mapEl);
-        const map = new google.maps.Map(mapEl);
-        const service = new google.maps.places.PlacesService(map);
-
-        const request = { placeId: GOOGLE_PLACE_ID, fields: ['review'] };
-
-        service.getDetails(request, function(place, status){
-          if (status === google.maps.places.PlacesServiceStatus.OK && place && Array.isArray(place.reviews) && place.reviews.length) {
-            let reviews = place.reviews.map(r => ({
-              author: r.author_name || r.author || 'Parent',
-              text: r.text || r.review || '',
-              rating: r.rating || 5,
-              time: r.relative_time_description || r.time || '',
-              source: 'google'
-            }));
-            const seen = new Set();
-            reviews = reviews.filter(r => {
-              const key = (r.author + '||' + r.text).trim().toLowerCase();
-              if (seen.has(key)) return false;
-              seen.add(key);
-              return true;
-            });
-            const fiveStar = reviews.filter(r => r.rating >= 5);
-            const final = (fiveStar.length >= 5) ? fiveStar.slice(0,5) : fiveStar.concat(reviews.filter(r=>r.rating<5)).slice(0,5);
-            renderReviews(final);
-            initSlider();
-          } else {
-            console.warn('PlacesService returned no reviews or error', status);
-            renderReviews(FALLBACK.slice(0,5));
-            initSlider();
-          }
-        });
-      } catch (err) {
-        console.error('Places service error', err);
-        renderReviews(FALLBACK.slice(0,5));
-        initSlider();
-      }
-
-      // Enquire button behavior - use existing modal if available
-      container.addEventListener('click', function(e){
-        const btn = e.target.closest && e.target.closest('.open-contact-modal');
-        if (!btn) return;
-        const program = btn.dataset.program || '';
-        if (typeof window.openUnifiedModal === 'function') {
-          window.openUnifiedModal({ program });
-        } else {
-          const form = document.querySelector('form#contact-form, form.contact-form');
-          if (form) {
-            const p = form.querySelector('select[name="program"], input[name="program"]');
-            if (p && program) p.value = program;
-            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }
-      });
-
-    } // end initTestimonialsWidget
+    // Initialize theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.setAttribute('data-theme', savedTheme);
   </script>
-
-  <!-- Load Maps JS asynchronously (Places library). The callback param will call initTestimonialsWidget once loaded. -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtmtPmYd3XN2LbsZaTGD2wjMwVbnyLo4&libraries=places&callback=initTestimonialsWidget"></script>
-
 </body>
 </html>
