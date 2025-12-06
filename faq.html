@@ -1,80 +1,422 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>FAQ — St. Vincent's Preschool</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | St. Vincent's Preschool</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-  <!-- header -->
-  <header class="bg-white shadow fixed w-full z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3"><img src="images/logo.png" class="w-10 h-10" alt="logo"><div class="text-lg font-semibold">St. Vincent's</div></a>
-      <nav class="hidden md:flex gap-6 items-center"><a href="index.html" class="nav-link">Home</a><a href="programs.html" class="nav-link">Programs</a><a href="gallery.html" class="nav-link">Gallery</a><a href="faq.html" class="nav-link">FAQ</a></nav>
-      <div class="flex items-center gap-3"><button id="menu-btn" class="md:hidden p-2 rounded" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu"></button></div>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="index.html" class="py-2">Home</a>
-        <a href="programs.html" class="py-2">Programs</a>
-        <a href="gallery.html" class="py-2">Gallery</a>
-        <a href="faq.html" class="py-2">FAQ</a>
-        <a href="blogs.html" class="py-2">Blog</a>
-        <a href="contact.html" class="btn-primary-outline">Contact</a>
-      </div>
-    </div>
-  </header>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">SV</div>
+                    <div class="logo-text">
+                        <h1>St. Vincent's</h1>
+                        <p>Preschool</p>
+                    </div>
+                </a>
 
-  <main class="max-w-3xl mx-auto px-4 pt-28 pb-16">
-    <a href="index.html" class="inline-block mb-6 text-blue-600">← Back to Home</a>
-    <h1 class="text-4xl font-bold mb-8">Frequently Asked Questions</h1>
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="programs.html" class="nav-link">Programs</a>
+                    <a href="blogs.html" class="nav-link">Resources</a>
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                    <a href="faq.html" class="nav-link active">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
 
-    <div class="space-y-6">
-      <!-- 10 faq items, identical to premium-faq content -->
-      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">1. What is the ideal age to start preschool?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Most children begin preschool between 1.5–3 years. We offer playgroup for 1.5+ with gentle settling.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal" data-program="playgroup">Enquire Now</button></div></div></div>
+                <!-- Mobile Menu Button -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">2. What safety measures are provided?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>CCTV, controlled entry, trained staff, sanitized classrooms and first-aid trained personnel.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="programs.html" class="mobile-nav-link">Programs</a>
+            <a href="blogs.html" class="mobile-nav-link">Resources</a>
+            <a href="gallery.html" class="mobile-nav-link">Gallery</a>
+            <a href="faq.html" class="mobile-nav-link active">FAQ</a>
+            <a href="contact.html" class="mobile-nav-link">Contact</a>
+            <div class="mobile-contact">
+                <p><i class="fas fa-phone"></i> +91 9032249494</p>
+                        <p><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</p>
+            </div>
+        </div>
+    </nav>
 
-      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">5. What curriculum do you follow?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Play-based, activity-driven learning focusing on cognitive, motor, language & social development.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Frequently Asked Questions</h1>
+                    <p class="hero-subtitle">Find answers to common questions about our preschool</p>
+                    <div class="hero-buttons">
+                        <a href="#faq-list" class="btn btn-primary">Browse FAQs</a>
+                        <a href="contact.html" class="btn btn-outline">Ask a Question</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-question-circle"></i>
+                        <p>FAQ Hero Image</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">6. Can parents visit during school hours?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Scheduled observations are allowed; minimal disturbance policy ensures children’s routine.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
+    <!-- FAQ Search -->
+    <section class="section faq-search">
+        <div class="container">
+            <div class="search-container">
+                <h2>Find Answers Quickly</h2>
+                <p>Search our frequently asked questions</p>
+                <div class="search-box">
+                    <input type="text" id="faqSearch" placeholder="Type your question here...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">7. What are the school timings?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Playgroup & Nursery 9 AM–12 PM, Pre-Primary 9 AM–1 PM. Daycare extends to 7 PM.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
+    <!-- FAQ Categories -->
+    <section class="section faq-categories">
+        <div class="container">
+            <h2 class="section-title">Browse by Category</h2>
+            <p class="section-subtitle">Select a category to see related questions</p>
+            
+            <div class="category-grid">
+                <button class="category-btn active" data-category="all">
+                    <i class="fas fa-th-large"></i>
+                    <span>All Questions</span>
+                </button>
+                
+                <button class="category-btn" data-category="programs">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Programs</span>
+                </button>
+                
+                <button class="category-btn" data-category="admission">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Admission</span>
+                </button>
+                
+                <button class="category-btn" data-category="safety">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Safety</span>
+                </button>
+                
+                <button class="category-btn" data-category="curriculum">
+                    <i class="fas fa-book-open"></i>
+                    <span>Curriculum</span>
+                </button>
+                
+                <button class="category-btn" data-category="facilities">
+                    <i class="fas fa-school"></i>
+                    <span>Facilities</span>
+                </button>
+            </div>
+        </div>
+    </section>
 
-      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">8. How do you handle sickness?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Supervised resting area, parent notification, and access to immediate medical help when required.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
+    <!-- FAQ List -->
+    <section class="section faq-list" id="faq-list">
+        <div class="container">
+            <div class="faq-container">
+                <!-- Programs Category -->
+                <div class="faq-category" id="category-programs">
+                    <h3 class="faq-category-title"><i class="fas fa-graduation-cap"></i> Programs & Age Groups</h3>
+                    
+                    <div class="faq-item" data-category="programs">
+                        <button class="faq-question">
+                            <span>What age groups do you cater to?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We cater to children from 1.5 years to 6 years old. Our programs are:</p>
+                            <ul>
+                                <li><strong>Playgroup:</strong> 1.5 - 3 years</li>
+                                <li><strong>Nursery:</strong> 3 - 4 years</li>
+                                <li><strong>LKG:</strong> 4 - 5 years</li>
+                                <li><strong>UKG:</strong> 5 - 6 years</li>
+                                <li><strong>Day Care:</strong> 1.5+ years (flexible hours)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="programs">
+                        <button class="faq-question">
+                            <span>What is the ideal age to start preschool?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The ideal age to start preschool is between 2-3 years. At this age, children:</p>
+                            <ul>
+                                <li>Are ready for social interaction with peers</li>
+                                <li>Can communicate basic needs</li>
+                                <li>Can follow simple instructions</li>
+                                <li>Benefit from structured play and activities</li>
+                            </ul>
+                            <p>However, we assess each child individually and provide guidance based on their readiness.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="programs">
+                        <button class="faq-question">
+                            <span>What are your school timings?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Our regular school hours are:</p>
+                            <ul>
+                                <li><strong>Playgroup:</strong> 9:00 AM - 12:00 PM</li>
+                                <li><strong>Nursery:</strong> 9:00 AM - 12:30 PM</li>
+                                <li><strong>LKG:</strong> 9:00 AM - 1:00 PM</li>
+                                <li><strong>UKG:</strong> 9:00 AM - 1:30 PM</li>
+                                <li><strong>Day Care:</strong> 8:00 AM - 6:00 PM (flexible)</li>
+                            </ul>
+                            <p>We also offer extended hours and early drop-off options for working parents.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admission Category -->
+                <div class="faq-category" id="category-admission">
+                    <h3 class="faq-category-title"><i class="fas fa-file-alt"></i> Admission Process</h3>
+                    
+                    <div class="faq-item" data-category="admission">
+                        <button class="faq-question">
+                            <span>How do I enroll my child?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The enrollment process is simple:</p>
+                            <ol>
+                                <li>Schedule a school visit (in-person or virtual)</li>
+                                <li>Meet with our principal and teachers</li>
+                                <li>Complete the application form</li>
+                                <li>Submit required documents</li>
+                                <li>Pay the admission fee</li>
+                                <li>Attend orientation session</li>
+                            </ol>
+                            <p>You can start the process by <a href="contact.html">contacting us</a> or filling out our online inquiry form.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="admission">
+                        <button class="faq-question">
+                            <span>What documents are required for admission?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Required documents include:</p>
+                            <ul>
+                                <li>Birth certificate (original and photocopy)</li>
+                                <li>2 passport-size photographs of the child</li>
+                                <li>Immunization record</li>
+                                <li>Parents' ID proof (Aadhar card, passport, or driver's license)</li>
+                                <li>Address proof</li>
+                                <li>Previous school report (if applicable)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="admission">
+                        <button class="faq-question">
+                            <span>What is your admission policy?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Our admission policy ensures fairness and transparency:</p>
+                            <ul>
+                                <li>Admissions are open throughout the year, subject to availability</li>
+                                <li>We maintain age-appropriate class sizes</li>
+                                <li>No discrimination based on gender, religion, or background</li>
+                                <li>Siblings of current students get priority</li>
+                                <li>We conduct an informal interaction with the child (not a test)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Safety Category -->
+                <div class="faq-category" id="category-safety">
+                    <h3 class="faq-category-title"><i class="fas fa-shield-alt"></i> Safety & Hygiene</h3>
+                    
+                    <div class="faq-item" data-category="safety">
+                        <button class="faq-question">
+                            <span>What safety measures are in place?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Safety is our top priority. Our measures include:</p>
+                            <ul>
+                                <li>24/7 CCTV surveillance in all areas</li>
+                                <li>Secure entry/exit with access control</li>
+                                <li>First-aid trained staff</li>
+                                <li>Fire safety equipment and regular drills</li>
+                                <li>Child-proof furniture and equipment</li>
+                                <li>Regular safety audits</li>
+                                <li>Staff background verification</li>
+                                <li>Safe pick-up/drop-off procedures</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="safety">
+                        <button class="faq-question">
+                            <span>How is hygiene maintained?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We maintain strict hygiene protocols:</p>
+                            <ul>
+                                <li>Daily sanitization of classrooms and toys</li>
+                                <li>Regular deep cleaning of premises</li>
+                                <li>Handwashing stations and sanitizers throughout</li>
+                                <li>Clean, filtered drinking water</li>
+                                <li>Hygienic toilet facilities cleaned multiple times daily</li>
+                                <li>Staff training in hygiene practices</li>
+                                <li>Sick child policy to prevent spread of illness</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curriculum Category -->
+                <div class="faq-category" id="category-curriculum">
+                    <h3 class="faq-category-title"><i class="fas fa-book-open"></i> Curriculum & Teaching</h3>
+                    
+                    <div class="faq-item" data-category="curriculum">
+                        <button class="faq-question">
+                            <span>What is your teaching approach?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We follow a <strong>child-centered, play-based approach</strong> that includes:</p>
+                            <ul>
+                                <li><strong>Montessori-inspired:</strong> Hands-on learning with specialized materials</li>
+                                <li><strong>Play-based:</strong> Learning through structured play and exploration</li>
+                                <li><strong>Theme-based:</strong> Monthly themes integrating all learning areas</li>
+                                <li><strong>Holistic development:</strong> Focus on cognitive, social, emotional, and physical growth</li>
+                                <li><strong>Individualized attention:</strong> Catering to each child's unique learning style</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="curriculum">
+                        <button class="faq-question">
+                            <span>What activities are included in the daily schedule?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>A typical day includes:</p>
+                            <ul>
+                                <li><strong>Circle Time:</strong> Greetings, calendar, weather, sharing</li>
+                                <li><strong>Academic Time:</strong> Age-appropriate literacy and numeracy</li>
+                                <li><strong>Creative Arts:</strong> Drawing, painting, crafts, music</li>
+                                <li><strong>Physical Play:</strong> Outdoor/indoor games and exercises</li>
+                                <li><strong>Story Time:</strong> Reading, storytelling, puppetry</li>
+                                <li><strong>Skill Development:</strong> Fine and gross motor activities</li>
+                                <li><strong>Snack/Lunch Break:</strong> Nutritious meals in a social setting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">9. Are activities included?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Storytelling, phonics, art, music, dance, early science, clay modelling, sensory learning.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
+    <!-- Still Have Questions -->
+    <section class="section have-questions">
+        <div class="container">
+            <div class="question-cta">
+                <h2>Still Have Questions?</h2>
+                <p>We're here to help! Contact us for more information</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary btn-large">Contact Us</a>
+                    <a href="tel:+919032249494" class="btn btn-outline btn-large"><i class="fas fa-phone"></i> Call Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <div class="faq-item bg-white p-6 rounded-xl shadow"><button class="faq-q text-left w-full text-lg font-semibold" aria-expanded="false">10. How do I enrol my child?</button><div class="faq-a mt-3 text-gray-700" style="max-height:0; overflow:hidden; transition:max-height .35s ease;"><p>Fill the enquiry form; our team will contact you for a tour, fee details and admission steps.</p><div class="mt-4"><button class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg open-contact-modal">Enquire Now</button></div></div></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">St. Vincent's Preschool</div>
+                    <p class="footer-tagline">"Where Every Child Shines"</p>
+                    <p class="footer-address">
+                        <i class="fas fa-map-marker-alt"></i> Street 1, Plot 454, Aparna Hillpark Rd,<br>
+                        KSR Layout, PJR Layout, Chandanagar, Hyderabad
+                    </p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="blogs.html">Resources</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +91 9032249494</li>
+                        <li><i class="fas fa-envelope"></i> Stvincent.school25@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM</li>
+                        <li><i class="fas fa-clock"></i> Saturday: 8:00 AM - 4:00 PM</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 St. Vincent's Preschool. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-    </div>
-  </main>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919032249494?text=Hi%20St.%20Vincent's%20Preschool%20-%20I%20have%20a%20question" 
+       class="whatsapp-float" 
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-   <footer class="site-footer bg-[--brand] text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
-      <div>
-        <img src="images/logo.png" alt="logo" class="w-20 mb-3">
-        <p class="text-gray-200">St. Vincent's Preschool — Nurturing early learning in Chandanagar.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <ul class="mt-3 space-y-2 text-gray-200">
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-2 text-gray-200">+91 9032249494<br/>Stvincent.school25@gmail.com</p>
-      </div>
-    </div>
-    <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="js/site-core.js"></script>
+    <!-- Scripts -->
+    <script src="js/site-core.js"></script>
 </body>
 </html>
